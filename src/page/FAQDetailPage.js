@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import {useState} from "react";
-import {partString} from "../resource/string/partString";
+import {faqString} from "../resource/string/faqString";
 import {Outlet, useLocation} from "react-router-dom";
-import {FAQDetailPartButtonList} from "../component/FAQDetailPartButtonList";
+import {FAQCategoryChipList} from "../component/FAQCategoryChipList";
 
 export default function FAQDetailPage(){
   const location = useLocation();
   return(
     <>
       <FAQDetailBox>
-        <FAQDetailPartButtonList
+        <FAQCategoryChipList
           url={location.pathname}
         />
         <Outlet/>

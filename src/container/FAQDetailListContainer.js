@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {partString} from "../resource/string/partString";
+import {faqString} from "../resource/string/faqString";
 import faqList from "../resource/dummy/faqList";
 
 export function FAQDetailListContainer(){
     const location = useLocation();
-    const [pageInfo, setPageInfo] = useState(partString.find(v=>location.pathname === v.fullUrl));
+    const [pageInfo, setPageInfo] = useState(faqString.find(v=>location.pathname === v.fullUrl));
 
     useEffect(()=>{
-        setPageInfo(partString.find(v=>location.pathname === v.fullUrl))
+        setPageInfo(faqString.find(v=>location.pathname === v.fullUrl))
     },[location])
 
-    console.log(pageInfo, location, partString)
+    console.log(pageInfo, location, faqString)
     return(
         <>
             <h1>{pageInfo.partName}</h1>

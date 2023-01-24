@@ -19,7 +19,7 @@ const TitleTextBox = styled.h1`
           ${props=>props.theme.margin.pageTitleOutSide} 
           0 
           ${props=>props.theme.margin.pageTitleOutSide};
-  font-size: 70px;
+  font-size: 55px;
   font-weight: 700;
   color: ${props => props.theme.color.primary};
 `

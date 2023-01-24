@@ -3,7 +3,9 @@ import {viewWidthCalc} from "../../lib/viewportCalculate";
 const theme = {
     color:{
         primary: '#1773E0',
+        primaryLight: '#DAE9FA',
         secondary: '#FEC853',
+        black: '#000000',
         white: '#FFFFFF',
         gray: '#818181'
     },
