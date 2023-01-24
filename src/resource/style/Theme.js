@@ -9,6 +9,13 @@ const theme = {
     },
     padding:{
         navBarInside: viewWidthCalc(70),
+    },
+    margin:{
+        pageTitleOutSide: viewWidthCalc(100),
+        pageTitleTop: viewWidthCalc(50),
+    },
+    height:{
+        headerBarHeight: '70px',
     }
 }
 

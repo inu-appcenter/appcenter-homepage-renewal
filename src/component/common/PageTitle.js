@@ -10,10 +10,15 @@ export const PageTitle = ({title}) =>{
 
 const TitleTextWrap = styled.div`
   display: flex;
+  margin-top:${props => props.theme.margin.pageTitleTop}
 `
 
 const TitleTextBox = styled.h1`
-  margin-left: 100px;
+  margin: 
+          0 
+          ${props=>props.theme.margin.pageTitleOutSide} 
+          0 
+          ${props=>props.theme.margin.pageTitleOutSide};
   font-size: 70px;
   font-weight: 700;
   color: ${props => props.theme.color.primary};

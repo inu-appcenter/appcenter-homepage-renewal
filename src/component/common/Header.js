@@ -10,7 +10,7 @@ const Header = () => {
         <>
             <Box sx={{width: '100%'}}>
                 <AppBar>
-                    <Toolbar>
+                    <Toolbar sx={{height:'100%'}}>
                         <Logo to={'/home'}>
                             <img src={logo} alt='Inu App Center. logo'/>
                         </Logo>
@@ -34,6 +34,7 @@ export default Header;
 
 const AppBar = styled.div`
   position: sticky;
+  height: ${props => props.theme.height.headerBarHeight};
   padding-left:  ${props => props.theme.padding.navBarInside};
   padding-right: ${props => props.theme.padding.navBarInside};
   background: ${props => props.theme.color.primary};
@@ -52,7 +53,7 @@ const Logo = styled(Link)`
 `
 const NavBar = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-grow: 1;
   & .navbar__item {
     color: ${props => props.theme.color.white};
