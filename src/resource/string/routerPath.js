@@ -12,7 +12,7 @@ export const routerPath = {
         title: 'FAQ',
     },
     faqDetail:{
-        url: 'faq/detail',
+        url: 'faq',
         title: 'FAQ Detail',
         child:{
             common:{
