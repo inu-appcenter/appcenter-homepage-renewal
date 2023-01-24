@@ -4,7 +4,9 @@ import Header from "../component/common/Header";
 export default function MainPage() {
     return (
         <>
-            <Header/>
+            <nav>
+                <Header/>
+            </nav>
             <Outlet/>
         </>
     );

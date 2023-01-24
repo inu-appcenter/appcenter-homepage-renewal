@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Link, useLocation} from "react-router-dom";
-import {AppBar as MuiAppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import {Box, Toolbar} from "@mui/material";
 import {navBarInfoList} from "../../resource/string/navBarString";
 import logo from '../../resource/img/navbar_logo.svg'
 
@@ -8,37 +8,40 @@ const Header = () => {
     const location = useLocation();
     return (
         <>
-            <AppBar>
-                <Toolbar>
-                    <Logo>
-                        <img src={logo} alt='Inu App Center. logo'/>
-                    </Logo>
-                    <NavBar>
-                        {navBarInfoList.map((item) =>
-                            <Link
-                                key={item.id}
-                                className={item.url === location.pathname ? 'navbar__item active' : 'navbar__item'}
-                                to={item.url}
-                            >{item.title}</Link>
-                        )}
-                    </NavBar>
-                </Toolbar>
-            </AppBar>
+            <Box sx={{width: '100%'}}>
+                <AppBar>
+                    <Toolbar>
+                        <Logo to={'/home'}>
+                            <img src={logo} alt='Inu App Center. logo'/>
+                        </Logo>
+                        <NavBar>
+                            {navBarInfoList.map((item) =>
+                                <Link
+                                    key={item.id}
+                                    className={item.url === location.pathname ? 'navbar__item active' : 'navbar__item'}
+                                    to={item.url}
+                                >{item.title}</Link>
+                            )}
+                        </NavBar>
+                    </Toolbar>
+                </AppBar>
+            </Box>
         </>
     );
 }
 
 export default Header;
 
-const AppBar = styled(MuiAppBar)`
-  position: relative;
-  display: flex;
+const AppBar = styled.div`
+  position: sticky;
+  padding-left:  ${props => props.theme.padding.navBarInside};
+  padding-right: ${props => props.theme.padding.navBarInside};
   background: ${props => props.theme.color.primary};
   border-bottom-left-radius: 8rem;
   border-bottom-right-radius: 8rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
 `;
-const Logo = styled.div`
+const Logo = styled(Link)`
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -49,7 +52,7 @@ const Logo = styled.div`
 `
 const NavBar = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-grow: 1;
   & .navbar__item {
     color: ${props => props.theme.color.white};
