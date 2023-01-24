@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea/appcenter-homepage-renewal.iml
+/.idea/modules.xml
+/.idea/vcs.xml

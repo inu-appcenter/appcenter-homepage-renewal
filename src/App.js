@@ -1,18 +1,23 @@
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import HomePage from "./page/HomePage";
-import SubPage from "./page/SubPage";
 import FAQMainPage from "./page/FAQMainPage";
 import FAQDetailPage from "./page/FAQDetailPage";
 import JoinUsPage from "./page/JoinUsPage";
+import {FAQDetailListContainer} from "./container/FAQDetailListContainer";
+import {routerPath} from "./resource/string/routerPath";
+import MainPage from "./page/MainPage";
 
 function App() {
     return (
         <Routes>
-            <Route path='/' element={<HomePage/>}/>
-            <Route path='/sub' element={<SubPage/>}>
-                <Route path='join' element={<JoinUsPage/>}/>
-                <Route path='faq' element={<FAQMainPage/>}/>
-                <Route path='faq/detail' element={<FAQDetailPage/>}/>
+            <Route path='/' element={<Navigate to={'home'}/>}/>
+            <Route path='/' element={<MainPage/>}>
+                <Route path={routerPath.home.url} element={<HomePage/>}/>
+                <Route path={routerPath.join.url} element={<JoinUsPage/>}/>
+                <Route path={routerPath.faq.url} element={<FAQMainPage/>}/>
+                <Route path={routerPath.faqDetail.url} element={<FAQDetailPage/>}>
+                    <Route path=':part' element={<FAQDetailListContainer/>}/>
+                </Route>
             </Route>
         </Routes>
     );
