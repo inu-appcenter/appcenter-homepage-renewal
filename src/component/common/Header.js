@@ -40,7 +40,7 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1773E0;  // palette 설정 후 바꿀 것
+  background: ${props => props.theme.color.primary};  // palette 설정 후 바꿀 것
   border-bottom-left-radius: 8rem;
   border-bottom-right-radius: 8rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
@@ -54,12 +54,12 @@ const LogoContainer = styled(Link)`
 const NavBar = styled.div`
   display: flex;
   & .navbar__item {
-    color: #fff;
+    color:${props => props.theme.color.white};
     font-size: 1.125rem;
     font-weight: 600;
   }
   & .navbar__item.active {
-    color: #FEC853;
+    color: ${props => props.theme.color.secondary};
   }
   & .navbar__item + .navbar__item {
     margin-left: 100px;

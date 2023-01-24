@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Button} from "@mui/material";
 import {useState} from "react";
-import faqList from "../resource/FAQ/faqList";
+import faqList from "../resource/dummy/faqList";
 
 export default function FAQDetailPage(){
   const [currentTab, setCurrentTab] = useState('Common')
@@ -35,7 +35,7 @@ const FAQDetailBox = styled.div`
   h1 {
     font-size: 70px;
     font-weight: 700;
-    color: #1773E0;
+    color: ${props => props.theme.color.primary};
   }
 `;
 const ButtonGroup = styled.div`
@@ -44,7 +44,7 @@ const ButtonGroup = styled.div`
   margin: 0 20px 40px;
   Button {
     outline: none;
-    color: #818181;
+    color:  ${props => props.theme.color.gray};
     font-size: 1.5rem;
     font-weight: 700;
     padding: 0.625rem 30px;
@@ -53,8 +53,8 @@ const ButtonGroup = styled.div`
     text-transform: none;
   }
   Button.active {
-    color: #1773E0;
-    border: solid 1px #1773E0;
+    color: ${props => props.theme.color.primary};
+    border: solid 1px ${props => props.theme.color.primary};
     box-shadow: 0 4px 4px rgba(23, 115, 224, .25);  // 이렇게 해도 예쁜 것 같음
   }
 `;
@@ -97,15 +97,15 @@ const QnAContainer = styled.div`
   border-radius: 50px;
   background: rgba(23, 115, 224, 0.1);
   .question {
-    color: black;
+    color: ${props => props.theme.color.black};
     font-weight: 700;
     margin-bottom: 1rem;
     padding: 0.75rem 40px;
     border-radius: 999px;
-    background: white;
+    background: ${props => props.theme.color.white};
   }
   .answer {
-    color: #1773E0;
+    color: ${props => props.theme.color.primary};
     font-weight: 600;
     padding: 0 40px;
   }
