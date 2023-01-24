@@ -1,29 +1,22 @@
 import styled from "styled-components";
-import {Button} from "@mui/material";
 import {useState} from "react";
-import faqList from "../resource/dummy/faqList";
+import {partString} from "../resource/string/partString";
+import {Outlet, useLocation} from "react-router-dom";
+import {FAQDetailPartButtonList} from "../component/FAQDetailPartButtonList";
 
 export default function FAQDetailPage(){
-  const [currentTab, setCurrentTab] = useState('Common')
+  const location = useLocation();
   return(
     <>
       <FAQDetailBox>
-        <ButtonGroup>
-          {tabList.map((tabName) =>
-            <Button
-              key={tabName}
-              className={currentTab === tabName ? 'active' : ''}
-              onClick={e => setCurrentTab(tabName)}
-            >{tabName}</Button>
-          )}
-        </ButtonGroup>
-        <h1>{currentTab}</h1>
-        <QnAList currentTab={currentTab} />
+        <FAQDetailPartButtonList
+          url={location.pathname}
+        />
+        <Outlet/>
       </FAQDetailBox>
     </>
   );
 }
-const tabList = ['Common', 'Android', 'iOS', 'Server', 'Web', 'Design'];
 
 const FAQDetailBox = styled.div`
   margin: 0 auto;
@@ -38,75 +31,4 @@ const FAQDetailBox = styled.div`
     color: ${props => props.theme.color.primary};
   }
 `;
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 20px 40px;
-  Button {
-    outline: none;
-    color:  ${props => props.theme.color.gray};
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 0.625rem 30px;
-    border-radius: 999px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
-    text-transform: none;
-  }
-  Button.active {
-    color: ${props => props.theme.color.primary};
-    border: solid 1px ${props => props.theme.color.primary};
-    box-shadow: 0 4px 4px rgba(23, 115, 224, .25);  // 이렇게 해도 예쁜 것 같음
-  }
-`;
-const QnAList = (props) => {
-  let list;
-  switch (props.currentTab) {
-    case 'Common':
-      list = faqList.Common;
-      break;
-    case 'Android':
-      list = faqList.Android;
-      break;
-    case 'iOS':
-      list = faqList.iOS;
-      break;
-    case 'Server':
-      list = faqList.Server;
-      break;
-    case 'Web':
-      list = faqList.Web;
-      break;
-    case 'Design':
-      list = faqList.Design;
-      break;
-    default: break;
-  }
 
-  return (
-    list.map((qna) =>
-      <QnAContainer>
-        <p className="question">Q. {qna.question}</p>
-        <p className="answer">A. {qna.answer}</p>
-      </QnAContainer>
-    )
-  )
-}
-const QnAContainer = styled.div`
-  margin: 0 20px 30px;
-  padding: 20px 40px;
-  border-radius: 50px;
-  background: rgba(23, 115, 224, 0.1);
-  .question {
-    color: ${props => props.theme.color.black};
-    font-weight: 700;
-    margin-bottom: 1rem;
-    padding: 0.75rem 40px;
-    border-radius: 999px;
-    background: ${props => props.theme.color.white};
-  }
-  .answer {
-    color: ${props => props.theme.color.primary};
-    font-weight: 600;
-    padding: 0 40px;
-  }
-`;

@@ -1,37 +1,29 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useState} from "react";
+import {navBarInfoList} from "../../resource/string/navBarString";
 
 const Header = props => {
-  const initialPage = navItemList.filter(item => item.link === window.location.pathname);
-  const [currentPage, setPage] = useState(initialPage[0].text);
-  return (
-    <HeaderBox>
-      <LogoContainer to='/'>
-        <img src='../../img/logo720_128.png' alt='INU_APPCENTER' />
-      </LogoContainer>
-      <NavBar>
-        {navItemList.map((item) =>
-          <Link
-            key={item.text}
-            className={item.text === currentPage ? 'navbar__item active' : 'navbar__item'}
-            onClick={e => setPage(item.text)}
-            to={item.link}
-          >{item.text}</Link>
-        )}
-      </NavBar>
-    </HeaderBox>
-  );
+    const location = useLocation();
+    return (
+        <HeaderBox>
+            <LogoContainer to='/'>
+                <img src='../../img/logo720_128.png' alt='INU_APPCENTER'/>
+            </LogoContainer>
+            <NavBar>
+                {navBarInfoList.map((item) =>
+                    <Link
+                        key={item.id}
+                        className={item.url === location.pathname ? 'navbar__item active' : 'navbar__item'}
+                        to={item.url}
+                    >{item.title}</Link>
+                )}
+            </NavBar>
+        </HeaderBox>
+    );
 }
 
 export default Header;
-
-const navItemList = [
-  {link: '/', text: 'Home'},
-  {link: '/sub/join', text: 'Join Us'},
-  {link: '/sub/faq', text: 'FAQ'},
-  {link: '/sub/faq/detail', text: 'FAQ Detail'},
-];
 
 const HeaderBox = styled.div`
   height: 5rem;
@@ -40,27 +32,31 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${props => props.theme.color.primary};  // palette 설정 후 바꿀 것
+  background: ${props => props.theme.color.primary}; // palette 설정 후 바꿀 것
   border-bottom-left-radius: 8rem;
   border-bottom-right-radius: 8rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
 `;
 const LogoContainer = styled(Link)`
   margin-top: 10px;
+
   img {
     max-height: 3rem;
   }
 `;
 const NavBar = styled.div`
   display: flex;
+
   & .navbar__item {
-    color:${props => props.theme.color.white};
+    color: ${props => props.theme.color.white};
     font-size: 1.125rem;
     font-weight: 600;
   }
+
   & .navbar__item.active {
     color: ${props => props.theme.color.secondary};
   }
+
   & .navbar__item + .navbar__item {
     margin-left: 100px;
   }
