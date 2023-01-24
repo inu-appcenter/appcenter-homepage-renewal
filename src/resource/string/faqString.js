@@ -1,6 +1,6 @@
 import {fullPath, routerPath} from "./routerPath";
 
-export const partString = [
+export const faqString = [
     {id:0, partName: 'Common',url:routerPath.faqDetail.child.common.url,fullUrl:fullPath.common},
     {id:1, partName: 'Android',url:routerPath.faqDetail.child.android.url,fullUrl:fullPath.android},
     {id:2, partName: 'iOS',url:routerPath.faqDetail.child.ios.url,fullUrl:fullPath.ios},
