@@ -3,6 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import {Box, Toolbar} from "@mui/material";
 import {navBarInfoList} from "../../resource/string/navBarString";
 import logo from '../../resource/img/navbar_logo.svg'
+import {fullPath} from "../../resource/string/routerPath";
 
 const Header = () => {
     const location = useLocation();
@@ -11,7 +12,7 @@ const Header = () => {
             <Box sx={{width: '100%'}}>
                 <AppBar>
                     <Toolbar sx={{height:'100%'}}>
-                        <Logo to={'/home'}>
+                        <Logo to={fullPath.home}>
                             <img src={logo} alt='Inu App Center. logo'/>
                         </Logo>
                         <NavBar>
