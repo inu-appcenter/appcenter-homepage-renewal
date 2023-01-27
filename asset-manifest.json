@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/appcenter-homepage-renewal/static/js/main.5400288a.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.06e59d2a.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
     "static/media/temp-emoji.png": "/appcenter-homepage-renewal/static/media/temp-emoji.50c44e8694e20a480b16.png",
     "static/media/navbar_logo.svg": "/appcenter-homepage-renewal/static/media/navbar_logo.9ff94c86b7208bee4598f4bd5c1d3269.svg",
     "index.html": "/appcenter-homepage-renewal/index.html",
     "static/media/speech-bubble.svg": "/appcenter-homepage-renewal/static/media/speech-bubble.b9f65cd63c5afe535d128bde157e5ba1.svg",
-    "main.5400288a.js.map": "/appcenter-homepage-renewal/static/js/main.5400288a.js.map",
+    "main.06e59d2a.js.map": "/appcenter-homepage-renewal/static/js/main.06e59d2a.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.5400288a.js"
+    "static/js/main.06e59d2a.js"
   ]
 }
