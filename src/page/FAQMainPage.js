@@ -1,5 +1,6 @@
 import {PageTitle} from "../component/common/PageTitle";
 import FAQMainContainer from "../container/FAQMainContainer";
+import FAQSpeechBubble from "../component/FAQSpeechBubble";
 
 export default function FAQMainPage(){
     return(
@@ -7,6 +8,7 @@ export default function FAQMainPage(){
             <PageTitle
                 title="FAQ"
             />
+            <FAQSpeechBubble/>
             <FAQMainContainer/>
         </>
     );

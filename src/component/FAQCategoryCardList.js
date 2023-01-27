@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import {faqString} from "../resource/string/faqString";
 import {viewHeightCalc, viewWidthCalc} from "../lib/viewportCalculate";
 import {Link} from "react-router-dom";
 
-const FAQCategoryCardList = () =>{
+const FAQCategoryCardList = ({list}) =>{
     return(
         <>
             <CardWrap>
                 {
-                    faqString.map((item)=>
+                    list.map((item)=>
                         <Card to={item.url} key={item.id}>
                             <p className="title">{item.partName}</p>
                             <p></p>
