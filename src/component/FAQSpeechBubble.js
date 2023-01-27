@@ -25,6 +25,17 @@ const RowStack = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  animation: fadeLeft 1.5s;
+  @keyframes fadeLeft{
+    from{
+      opacity:0;
+      transform: translate3d(-30%, 0, 0);
+    }
+    to{
+      opacity:1;
+      transform: translateZ(0);
+    }
+  }
 `
 
 const Emoji = styled.img`

@@ -40,6 +40,17 @@ const Card = styled(Link)`
   grid-template-columns: 1fr 1fr;
   background-color: ${props => props.theme.color.primaryLight};
   border-radius: 50px;
+  animation: fadeBottom 1s;
+  @keyframes fadeBottom{
+    from{
+      opacity:0;
+      transform: translate3d(0, 30%, 0);
+    }
+    to{
+      opacity:1;
+      transform: translateZ(0);
+    }
+  }
   .title {
     display: inline-flex;
     justify-content: center;
