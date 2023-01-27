@@ -7,6 +7,9 @@ export default function MainPage() {
             <nav>
                 <Header/>
             </nav>
+            {/*<main>*/}
+            {/*    <Outlet/>*/}
+            {/*</main>*/}
             <Outlet/>
         </>
     );

@@ -12,11 +12,15 @@ const GlobalStyle = createGlobalStyle`
     top:0;
   }
   
+  main{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
   a {
     text-decoration: none;
   }
-  
-  
 `
 
 export default GlobalStyle;
