@@ -10,8 +10,8 @@ import MainPage from "./page/MainPage";
 function App() {
     return (
         <Routes>
-            <Route path='/' element={<Navigate to={'home'}/>}/>
-            <Route path='/' element={<MainPage/>}>
+            <Route path={routerPath.base.url} element={<Navigate to={'home'}/>}/>
+            <Route path={routerPath.base.url} element={<MainPage/>}>
                 <Route path={routerPath.home.url} element={<HomePage/>}/>
                 <Route path={routerPath.join.url} element={<JoinUsPage/>}/>
                 <Route path={routerPath.faq.url} element={<FAQMainPage/>}/>

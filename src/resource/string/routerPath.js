@@ -1,6 +1,10 @@
 export const routerPath = {
+    base:{
+        url:'appcenter-homepage-renewal',
+        title:'base',
+    },
     home: {
-        url: '/home',
+        url: 'home',
         title: 'Home',
     },
     join:{
@@ -44,15 +48,15 @@ export const routerPath = {
 };
 
 export const fullPath = {
-    home: routerPath.home.url,
-    join:`/${routerPath.join.url}`,
-    faq:`/${routerPath.faq.url}`,
-    faqDetail:`/${routerPath.faqDetail.url}`,
-    common:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.common.url}`,
-    android:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.android.url}`,
-    ios:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
-    server:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
-    web:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
-    design:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
+    home:`/${routerPath.base.url}/${routerPath.home.url}`,
+    join:`/${routerPath.base.url}/${routerPath.join.url}`,
+    faq:`/${routerPath.base.url}/${routerPath.faq.url}`,
+    faqDetail:`/${routerPath.base.url}/${routerPath.faqDetail.url}`,
+    common:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.common.url}`,
+    android:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.android.url}`,
+    ios:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
+    server:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
+    web:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
+    design:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
 }
 
