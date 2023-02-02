@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import {useState} from "react";
-import {faqString} from "../resource/string/faqString";
 import {Outlet, useLocation} from "react-router-dom";
 import {FAQCategoryChipList} from "../component/FAQCategoryChipList";
 
