@@ -1,9 +1,9 @@
-import {PageTitle} from "../component/common/PageTitle";
+import AboutUsContainer from "../container/AboutUsContainer";
 
 export default function HomePage() {
     return (
         <>
-            <PageTitle title={'홈페이지'}/>
+            <AboutUsContainer/>
         </>
     );
 }

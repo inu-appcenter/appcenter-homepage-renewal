@@ -10,7 +10,7 @@ export const PageTitle = ({title}) =>{
 
 const TitleTextWrap = styled.div`
   display: flex;
-  margin-top:${props => props.theme.margin.pageTitleTop}
+  margin-top:${props => props.theme.margin.pageTitleTop};
 `
 
 const TitleTextBox = styled.h1`
