@@ -17,7 +17,7 @@ export default function MainHeader(){
     return(
         <Box sx={{width: '100%'}}>
             <AppBar>
-                <Toolbar sx={{height:'100%'}}>
+                <Toolbar sx={{height:'5rem'}}>
                     <Logo to={fullPath.home}>
                         <img src={logo} alt='Inu App Center. logo'/>
                     </Logo>
@@ -72,7 +72,8 @@ export default function MainHeader(){
 const AppBar = styled.div`
     padding: 2rem ${props => props.theme.padding.navBarInside};
     background: ${props => props.theme.color.primary};
-    border-bottom-left-radius: 30rem;
+    border-bottom-left-radius: 50vh;
+    height: 100vh;
 `;
 const Logo = styled(Link)`
     display: flex;
