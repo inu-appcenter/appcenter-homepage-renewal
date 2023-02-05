@@ -6,14 +6,27 @@ import template from "../../resource/img/welcomeImages/mockup_template.png";
 import {navBarInfoList} from "../../resource/string/navBarString";
 import {Box, Toolbar} from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade } from "swiper";
 import "swiper/css";
-import "swiper/css/autoplay";
-import SwiperCore, {Autoplay} from "swiper";
+import "swiper/css/effect-fade";
 import {mainImages} from "../../resource/string/mainImages";
-
-SwiperCore.use([Autoplay]);
+import {useState, useEffect} from "react";
 
 export default function MainHeader(){
+    const [index, setIndex] = useState(0);
+    const [splashSwiper, setSplashSwiper] = useState(null);
+    const [logoSwiper, setLogoSwiper] = useState(null);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIndex((index + 1) % mainImages.length);
+            splashSwiper.slideTo(index);
+            logoSwiper.slideTo(index);
+            console.log(index);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [index, splashSwiper, logoSwiper]);
+
     return(
         <Box sx={{width: '100%'}}>
             <AppBar>
@@ -41,9 +54,11 @@ export default function MainHeader(){
                         <img className="splash-image-frame" src={template} alt="show" />
                         <div className="splash-image-template">
                             <Swiper
+                                modules={[EffectFade]}
+                                effect="fade"
                                 slidesPerView={1}
-                                autoplay={{delay: 2000}}
                                 loop={true}
+                                onSwiper={setSplashSwiper}
                             >
                                 {mainImages.map(el =>
                                     <SwiperSlide key={el.id}>
@@ -53,9 +68,11 @@ export default function MainHeader(){
                         </div>
                         <div className="logo-image-template">
                             <Swiper
+                                modules={[EffectFade]}
+                                effect="fade"
                                 slidesPerView={1}
-                                autoplay={{delay: 2000}}
                                 loop={true}
+                                onSwiper={setLogoSwiper}
                             >
                                 {mainImages.map(el =>
                                     <SwiperSlide key={el.id}>
