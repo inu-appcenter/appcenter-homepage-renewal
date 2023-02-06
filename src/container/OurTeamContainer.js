@@ -19,5 +19,4 @@ export default function OurTeamContainer(){
 }
 const OurTeamWrapper = styled.div`
   width: 100%;
-  height: 100vh;
 `;
