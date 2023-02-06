@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
-import {slogan} from "../../resource/string/aboutUs";
+import {slogan} from "../../resource/dummy/aboutUs";
 
 export default function Slogan() {
     return (
