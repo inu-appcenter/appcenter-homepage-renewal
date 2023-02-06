@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {PageTitle} from "../component/common/PageTitle";
-import {viewHeightCalc, viewWidthCalc} from "../lib/viewportCalculate";
-import TempAppImage from "../resource/dummy/temp_app_image.png"
+import {PageTitle} from "../../component/common/PageTitle";
+import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
+import TempAppImage from "../../resource/dummy/temp_app_image.png"
 
 export default function ProductContainer(){
     return(

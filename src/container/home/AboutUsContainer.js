@@ -1,8 +1,8 @@
-import {PageTitle} from "../component/common/PageTitle";
+import {PageTitle} from "../../component/common/PageTitle";
 import styled from "styled-components";
-import Slogan from "../component/aboutus/Slogan";
-import Interview from "../component/aboutus/Interview";
-import {viewHeightCalc} from "../lib/viewportCalculate";
+import Slogan from "../../component/aboutus/Slogan";
+import Interview from "../../component/aboutus/Interview";
+import {viewHeightCalc} from "../../lib/viewportCalculate";
 
 export default function AboutUsContainer(){
     return(
