@@ -3,7 +3,7 @@ import {viewWidthCalc} from "../../lib/viewportCalculate";
 const theme = {
     color:{
         primary: '#1773E0',
-        primaryLight: '#DAE9FA',
+        primaryLight: '#DCEAFA',
         secondary: '#FEC853',
         black: '#000000',
         white: '#FFFFFF',
@@ -13,7 +13,7 @@ const theme = {
         navBarInside: viewWidthCalc(70),
     },
     margin:{
-        pageTitleOutSide: viewWidthCalc(100),
+        pageTitleOutSide: viewWidthCalc(0),
         pageTitleTop: viewWidthCalc(50),
     },
     height:{

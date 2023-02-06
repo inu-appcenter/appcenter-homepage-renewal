@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
-import {slogan} from "../../resource/string/slogan";
+import {slogan} from "../../resource/string/aboutUs";
 
 export default function Slogan() {
     return (
@@ -14,8 +14,6 @@ export default function Slogan() {
 
 const SloganWrapper = styled.div`
   margin-top: 80px;
-  margin-left: ${viewWidthCalc(220)};
-  margin-right: ${viewWidthCalc(220)};
 `;
 
 const Text = styled.div`
