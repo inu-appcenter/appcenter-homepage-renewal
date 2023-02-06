@@ -9,10 +9,10 @@ export default function MainPage() {
                 <HeaderSwitcher/>
                 {/*<Header/>*/}
             </div>
-            {/*<main>*/}
-            {/*    <Outlet/>*/}
-            {/*</main>*/}
-            <Outlet/>
+            <main>
+                <Outlet/>
+            </main>
+            {/*<Outlet/>*/}
         </>
     );
 }

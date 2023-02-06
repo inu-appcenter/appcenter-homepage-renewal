@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    width: 70%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
   }

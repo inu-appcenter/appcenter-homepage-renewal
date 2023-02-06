@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {viewWidthCalc} from "../../lib/viewportCalculate";
 
 export const PageTitle = ({title}) =>{
     return(
