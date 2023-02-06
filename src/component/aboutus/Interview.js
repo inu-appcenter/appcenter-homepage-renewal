@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
-import {interviewAnswer, interViewQuestion} from "../../resource/string/aboutUs";
+import {interviewAnswer, interViewQuestion} from "../../resource/dummy/aboutUs";
 
 export default function Interview() {
 

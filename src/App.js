@@ -3,7 +3,7 @@ import HomePage from "./page/HomePage";
 import FAQMainPage from "./page/FAQMainPage";
 import FAQDetailPage from "./page/FAQDetailPage";
 import JoinUsPage from "./page/JoinUsPage";
-import {FAQDetailListContainer} from "./container/FAQDetailListContainer";
+import {FAQDetailListContainer} from "./container/faq/FAQDetailListContainer";
 import {routerPath} from "./resource/string/routerPath";
 import MainPage from "./page/MainPage";
 
