@@ -19,5 +19,4 @@ export default function AboutUsContainer(){
 const AboutUsWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  padding-top: ${viewHeightCalc(20)};
 `;
