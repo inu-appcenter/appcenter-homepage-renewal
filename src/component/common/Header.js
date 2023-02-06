@@ -60,6 +60,11 @@ const NavBar = styled.div`
     color: ${props => props.theme.color.white};
     font-size: 1.125rem;
     font-weight: 600;
+    transition: .5s;
+    // :hover {
+    //   color: ${props => props.theme.color.secondary};
+    //  
+    }
   }
 
   & .navbar__item.active {

@@ -1,5 +1,5 @@
 import Header from "../component/common/Header";
-import MainHeader from "../component/common/MainHeader";
+import MainHeader from "../component/home/MainHeader";
 import {useLocation} from "react-router-dom";
 import {fullPath} from "../resource/string/routerPath";
 
