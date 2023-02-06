@@ -4,7 +4,7 @@ import {fullPath} from "../../resource/string/routerPath";
 import logo from "../../resource/img/header_logo.svg";
 import template from "../../resource/img/welcomeImages/mockup_template.png";
 import {navBarInfoList} from "../../resource/string/navBarString";
-import {Box, Toolbar} from "@mui/material";
+import {Box, Toolbar as MuiToolbar} from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade } from "swiper";
 import "swiper/css";
@@ -87,11 +87,15 @@ export default function MainHeader(){
     )
 }
 const AppBar = styled.div`
-    padding: 2rem ${props => props.theme.padding.navBarInside};
     background: ${props => props.theme.color.primary};
     border-bottom-left-radius: 50vh;
     height: 100vh;
 `;
+
+const Toolbar = styled(MuiToolbar)`
+  padding: 2rem ${props => props.theme.padding.navBarInside} 0;
+`;
+
 const Logo = styled(Link)`
     display: flex;
     align-items: center;
