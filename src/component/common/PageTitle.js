@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import {viewWidthCalc} from "../../lib/viewportCalculate";
+import {viewHeightCalc} from "../../lib/viewportCalculate";
 
-export const PageTitle = ({title}) =>{
+export const PageTitle = ({title, topMargin=viewHeightCalc(100)}) =>{
     return(
-        <TitleTextWrap>
+        <TitleTextWrap topMargin={topMargin}>
             <TitleTextBox>{title}</TitleTextBox>
         </TitleTextWrap>
     )
@@ -11,7 +11,8 @@ export const PageTitle = ({title}) =>{
 
 const TitleTextWrap = styled.div`
   display: flex;
-  margin-top:${props => props.theme.margin.pageTitleTop};
+   margin-top:${props => props.topMargin};
+  text-transform: uppercase;
 `
 
 const TitleTextBox = styled.h1`
