@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
-import {interviewAnswer, interViewQuestion} from "../../resource/string/aboutUs";
+import {interviewAnswer, interViewQuestion} from "../../resource/dummy/aboutUs";
 
 export default function Interview() {
 
@@ -44,7 +44,7 @@ const QuestionText = styled.div`
   display: flex;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
-  font-size: ${viewHeightCalc(50)};
+  font-size: 50px;
   white-space: pre-line;
   margin-right: ${viewWidthCalc(60)};
 `

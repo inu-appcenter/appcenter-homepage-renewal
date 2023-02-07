@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
-import {slogan} from "../../resource/string/aboutUs";
+import {slogan} from "../../resource/dummy/aboutUs";
 
 export default function Slogan() {
     return (
@@ -24,7 +24,7 @@ const Text = styled.div`
   text-shadow: ${props => props.type === 'top' && `0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)`};
   color: ${props => props.type === 'title' ? '#FEC853' : '#1E4995'};
   font-weight: ${props => props.type === 'top' ? 600 : props.type === 'title' ? 700 : 400};
-  font-size: ${props => props.type === 'title' ? `${viewWidthCalc(64)}` : `${viewWidthCalc(16)}`};
+  font-size: ${props => props.type === 'title' ? `64px` : `16px`};
   margin-bottom: ${viewWidthCalc(24)};
   white-space: pre-line;
 `;

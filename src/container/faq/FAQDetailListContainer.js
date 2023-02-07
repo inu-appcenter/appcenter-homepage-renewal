@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {faqString} from "../resource/string/faqString";
-import faqList from "../resource/dummy/faqList";
+import {faqString} from "../../resource/string/faqString";
+import faqList from "../../resource/dummy/faqList";
 
 export function FAQDetailListContainer(){
     const location = useLocation();

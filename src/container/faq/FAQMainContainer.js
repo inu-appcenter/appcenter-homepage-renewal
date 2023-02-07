@@ -1,5 +1,5 @@
-import FAQCategoryCardList from "../component/FAQCategoryCardList";
-import {faqString} from "../resource/string/faqString";
+import FAQCategoryCardList from "../../component/FAQCategoryCardList";
+import {faqString} from "../../resource/string/faqString";
 
 export default function FAQMainContainer(){
     return(
