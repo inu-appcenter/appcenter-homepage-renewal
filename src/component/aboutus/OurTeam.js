@@ -48,11 +48,11 @@ const TextWrapper = styled.div`
   }
 
   .TeamName {
-    font-size: ${viewWidthCalc(50)};
+    font-size: 50px;
   }
 
   .TeamDescription {
-    font-size: ${viewWidthCalc(30)};
+    font-size: 30px;
     color: ${props => props.theme.color.gray};
   }
 `

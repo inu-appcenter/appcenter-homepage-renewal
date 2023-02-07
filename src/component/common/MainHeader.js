@@ -87,14 +87,14 @@ export default function MainHeader() {
     )
 }
 const AppBar = styled.div`
-  padding-inline: ${props => props.theme.padding.navBarInside};
+  // padding-inline: ${props => props.theme.padding.navBarInside};
   background: ${props => props.theme.color.primary};
   border-bottom-left-radius: 50vh;
   height: 100vh;
 `;
 
 const Toolbar = styled(MuiToolbar)`
-  padding: 2rem 0;
+  padding: 2rem ${props => props.theme.padding.navBarInside};
 `;
 
 const Logo = styled(Link)`

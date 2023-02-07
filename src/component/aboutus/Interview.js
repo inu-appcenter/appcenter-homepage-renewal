@@ -44,7 +44,7 @@ const QuestionText = styled.div`
   display: flex;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
-  font-size: ${viewHeightCalc(50)};
+  font-size: 50px;
   white-space: pre-line;
   margin-right: ${viewWidthCalc(60)};
 `
