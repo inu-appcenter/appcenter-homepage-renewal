@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/appcenter-homepage-renewal/static/css/main.882984d2.css",
-    "main.js": "/appcenter-homepage-renewal/static/js/main.bf67e12d.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.76093ed4.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
+    "static/media/appcenter_workshop.png": "/appcenter-homepage-renewal/static/media/appcenter_workshop.9d9239bcaf4cf5b98fe6.png",
     "static/media/temp_app_image.png": "/appcenter-homepage-renewal/static/media/temp_app_image.512e8bf5f59ded0cd904.png",
     "static/media/Pretendard-Medium.otf": "/appcenter-homepage-renewal/static/media/Pretendard-Medium.a8904df42c9b4f93a668.otf",
     "static/media/Pretendard-SemiBold.otf": "/appcenter-homepage-renewal/static/media/Pretendard-SemiBold.d8e6b49c5bbba3cd911b.otf",
@@ -11,8 +12,9 @@
     "static/media/mapus_splash.jpg": "/appcenter-homepage-renewal/static/media/mapus_splash.47e5e9ae9ad7e8e3a84a.jpg",
     "static/media/thisweather_splash.jpg": "/appcenter-homepage-renewal/static/media/thisweather_splash.faa57219f39d669430ad.jpg",
     "static/media/navbar_logo.svg": "/appcenter-homepage-renewal/static/media/navbar_logo.9ff94c86b7208bee4598f4bd5c1d3269.svg",
-    "static/media/header_logo.svg": "/appcenter-homepage-renewal/static/media/header_logo.3dab1a06cc7c890d56f9c71ff1094b8e.svg",
+    "static/media/navbar_logo_main.svg": "/appcenter-homepage-renewal/static/media/navbar_logo_main.3dab1a06cc7c890d56f9c71ff1094b8e.svg",
     "static/media/appcenter_splash.jpg": "/appcenter-homepage-renewal/static/media/appcenter_splash.fc7cb5021ee46e77c08d.jpg",
+    "static/media/navbar_logo_small.svg": "/appcenter-homepage-renewal/static/media/navbar_logo_small.de493d2b66b563fe1ced6b5172fcf0d1.svg",
     "static/media/mockup_template.png": "/appcenter-homepage-renewal/static/media/mockup_template.7b4bdffb57bd8d8f6908.png",
     "static/media/appcenter_icon.png": "/appcenter-homepage-renewal/static/media/appcenter_icon.4d465d3e29d6e329ef6c.png",
     "static/media/uniletter_splash.jpg": "/appcenter-homepage-renewal/static/media/uniletter_splash.d6f02e65dc3a63d0975b.jpg",
@@ -24,11 +26,11 @@
     "index.html": "/appcenter-homepage-renewal/index.html",
     "static/media/speech-bubble.svg": "/appcenter-homepage-renewal/static/media/speech-bubble.b9f65cd63c5afe535d128bde157e5ba1.svg",
     "main.882984d2.css.map": "/appcenter-homepage-renewal/static/css/main.882984d2.css.map",
-    "main.bf67e12d.js.map": "/appcenter-homepage-renewal/static/js/main.bf67e12d.js.map",
+    "main.76093ed4.js.map": "/appcenter-homepage-renewal/static/js/main.76093ed4.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.882984d2.css",
-    "static/js/main.bf67e12d.js"
+    "static/js/main.76093ed4.js"
   ]
 }
