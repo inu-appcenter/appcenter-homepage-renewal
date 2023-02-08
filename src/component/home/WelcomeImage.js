@@ -56,14 +56,18 @@ export default function WelcomeImage() {
     )
 }
 
+const CONTAINER_RATIO = .7115;
+const SPLASH_RATIO = .5;
+const LOGO_RATIO = 1;
+const calcHeight = h => h / 700 * 100;
+
 const SwiperContainer = styled.div`
     @media(max-width: 768px) {
         display: none;
     }
-    //flex-grow: 1;
     position: relative;
-    width: 370px;
-    height: 520px;
+    width: 370px;   // splash width(250px) + logo width(150px) - overlap(30px)
+    height: 520px;  // splash height(500px) + logo height(150px) - overlap(130px)
     .splash-image-frame {
         position: absolute;
         left: 0;
@@ -76,15 +80,16 @@ const SwiperContainer = styled.div`
         position: absolute;
         left: 5px;
         top: 5px;
-        width: 240px;
-        height: 490px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: calc(250px - 10px);  // assume bezel-width: 10px
+        height: calc(500px - 10px); // assume bezel-width: 10px
         border-radius: 30px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, .25);
         background: white;
         overflow: hidden;
+        .swiper, img {
+            width: 100%;
+            height: 100%;
+        }
     }
     .logo-image-template {
         position: absolute;
@@ -99,9 +104,27 @@ const SwiperContainer = styled.div`
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
         overflow: hidden;
         z-index: 3;
-        img {
+        .swiper, img {
             width: 100%;
             height: 100%;
+        }
+    }
+    @media(max-height: 700px) {
+        width: calc(${calcHeight(520)}vh * ${CONTAINER_RATIO});
+        height: ${calcHeight(520)}vh;
+        .splash-image-frame {
+            width: calc(${calcHeight(500)}vh * ${SPLASH_RATIO});
+            height: ${calcHeight(500)}vh;
+        }
+        .splash-image-template {
+            width: calc(${calcHeight(500)}vh * ${SPLASH_RATIO} - ${calcHeight(10)}vh);
+            height: calc(${calcHeight(500)}vh - ${calcHeight(10)}vh);
+            border-radius: ${calcHeight(30)}vh;
+        }
+        .logo-image-template {
+            width: calc(${calcHeight(150)}vh * ${LOGO_RATIO});
+            height: ${calcHeight(150)}vh;
+          border-radius: ${calcHeight(50)}vh;
         }
     }
 `;

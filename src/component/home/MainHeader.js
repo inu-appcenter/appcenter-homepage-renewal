@@ -42,10 +42,13 @@ export default function MainHeader(){
 }
 const AppBar = styled.div`
     background: ${props => props.theme.color.primary};
-    border-bottom-left-radius: 50vh;
     height: 100vh;
     box-sizing: border-box;
     padding: 2rem ${props => props.theme.padding.navBarInside} 0;
+    border-bottom-left-radius: 50vh;
+    @media(max-width: 768px) {
+        border-bottom-left-radius: 0;
+    }
 `;
 
 const Logo = styled(Link)`
@@ -68,6 +71,9 @@ const Logo = styled(Link)`
         @media(max-width: 768px) {
             display: inline;
         }
+        @media(max-width: 576px) {
+            width: 75px;
+        }
     }
 `
 const NavBar = styled.div`
@@ -84,24 +90,24 @@ const NavBar = styled.div`
         @media(max-width: 768px) {
             font-size: 1.25rem;
         }
+        @media(max-width: 576px) {
+            font-size: 1rem;
+        }
     }
-
     .navbar__item.active {
         color: ${props => props.theme.color.secondary};
     }
 `;
 const WelcomeBox = styled.div`
-    margin: 10vw auto;
-    width: 100%;
+    margin: 3rem auto;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
 `
 const WelcomeText = styled.div`
     flex-grow: 1;
-    @media(max-width: 768px) {
-        text-align: right;
-    }
+    min-width: 300px;
     h1 {
         font-size: 3.5rem;
         font-weight: 700;
