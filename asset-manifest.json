@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/appcenter-homepage-renewal/static/css/main.882984d2.css",
-    "main.js": "/appcenter-homepage-renewal/static/js/main.76093ed4.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.547b3de1.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
     "static/media/appcenter_workshop.png": "/appcenter-homepage-renewal/static/media/appcenter_workshop.9d9239bcaf4cf5b98fe6.png",
     "static/media/temp_app_image.png": "/appcenter-homepage-renewal/static/media/temp_app_image.512e8bf5f59ded0cd904.png",
@@ -26,11 +26,11 @@
     "index.html": "/appcenter-homepage-renewal/index.html",
     "static/media/speech-bubble.svg": "/appcenter-homepage-renewal/static/media/speech-bubble.b9f65cd63c5afe535d128bde157e5ba1.svg",
     "main.882984d2.css.map": "/appcenter-homepage-renewal/static/css/main.882984d2.css.map",
-    "main.76093ed4.js.map": "/appcenter-homepage-renewal/static/js/main.76093ed4.js.map",
+    "main.547b3de1.js.map": "/appcenter-homepage-renewal/static/js/main.547b3de1.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.882984d2.css",
-    "static/js/main.76093ed4.js"
+    "static/js/main.547b3de1.js"
   ]
 }
