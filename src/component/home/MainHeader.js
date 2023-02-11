@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {fullPath} from "../../resource/string/routerPath";
 import logo from "../../resource/img/navbar_logo_main.svg";
+import logo_medium from "../../resource/img/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo_small.svg";
 import {navBarInfoList} from "../../resource/string/navBarString";
 import {Box, Toolbar} from "@mui/material";
@@ -13,9 +14,10 @@ export default function MainHeader(){
     return(
         <Box sx={{width: '100%'}}>
             <AppBar>
-                <Toolbar sx={{height:'5rem'}}>
+                <StyledToolbar>
                     <Logo to={fullPath.home}>
                         <img className="logo" src={logo} alt='Inu App Center. logo'/>
+                        <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
                         <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>
                     </Logo>
                     <NavBar>
@@ -27,7 +29,7 @@ export default function MainHeader(){
                             >{item.title}</Link>
                         )}
                     </NavBar>
-                </Toolbar>
+                </StyledToolbar>
                 <WelcomeBox>
                     <WelcomeText>
                         <h2>안녕하세요!</h2>
@@ -47,10 +49,20 @@ const AppBar = styled.div`
     padding: 2rem ${props => props.theme.padding.navBarInside} 0;
     border-bottom-left-radius: 50vh;
     @media(max-width: 768px) {
-        border-bottom-left-radius: 0;
+        border-bottom-left-radius: 20vw;
+        border-bottom-right-radius: 20vw;
+    }
+    @media(max-width: 576px) {
+        height: 25rem;
     }
 `;
-
+const StyledToolbar = styled(Toolbar)`
+    height: 5rem;
+    @media(max-width: 576px) {
+        height: 8rem;
+        flex-direction: column;
+    }
+`;
 const Logo = styled(Link)`
     display: flex;
     align-items: center;
@@ -65,6 +77,13 @@ const Logo = styled(Link)`
             display: none;
         }
     }
+    .logo--medium {
+        display: none;
+        width: 100px;
+        @media(max-width: 576px) {
+            display: inline;
+        }
+    }
     .logo--small {
         display: none;
         width: 100px;
@@ -72,7 +91,7 @@ const Logo = styled(Link)`
             display: inline;
         }
         @media(max-width: 576px) {
-            width: 75px;
+            display: none;
         }
     }
 `
@@ -92,10 +111,14 @@ const NavBar = styled.div`
         }
         @media(max-width: 576px) {
             font-size: 1rem;
+            margin-top: 1rem;
         }
     }
     .navbar__item.active {
         color: ${props => props.theme.color.secondary};
+    }
+    @media(max-width: 576px) {
+        width: 100%;
     }
 `;
 const WelcomeBox = styled.div`
@@ -104,10 +127,14 @@ const WelcomeBox = styled.div`
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
-`
+    @media(max-width: 576px) {
+        margin: 1rem auto;
+    }
+`;
 const WelcomeText = styled.div`
-    flex-grow: 1;
+    width: 300px;
     min-width: 300px;
+    margin: 0 auto;
     h1 {
         font-size: 3.5rem;
         font-weight: 700;
@@ -122,5 +149,19 @@ const WelcomeText = styled.div`
     }
     span {
         color: ${props => props.theme.color.secondary};
+    }
+    @media(max-width: 768px) {
+        text-align: center;
+    }
+    @media(max-width: 576px) {
+        width: 220px;
+        min-width: 220px;
+        h1 {
+          font-size: 2.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
     }
 `;
