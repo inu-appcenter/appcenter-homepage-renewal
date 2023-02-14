@@ -3,11 +3,7 @@ import {partInfo} from "../resource/string/partInfo";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
-export function PartChip({url=partInfo[0].fullUrl}){
-    const navigate = useNavigate();
-    const handleButtonClick = (path) =>{
-        navigate(path);
-    }
+export function PartChip({url=partInfo[0].fullUrl, onButtonClick}){
     return(
         <>
             <ButtonGroup>
@@ -15,7 +11,7 @@ export function PartChip({url=partInfo[0].fullUrl}){
                     <Button
                         key={part.id}
                         className={url === part.fullUrl ? 'active' : ''}
-                        onClick={e=>handleButtonClick(part.url)}
+                        onClick={e=>onButtonClick(e, part.url)}
                     >{part.partName}</Button>
                 )}
             </ButtonGroup>

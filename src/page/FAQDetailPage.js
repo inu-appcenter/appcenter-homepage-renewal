@@ -1,19 +1,22 @@
 import styled from "styled-components";
-import {Outlet, useLocation} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {PartChip} from "../component/PartChip";
 
-export default function FAQDetailPage(){
-  const location = useLocation();
-  return(
-    <>
-      <FAQDetailBox>
-        <PartChip
-          url={location.pathname}
-        />
-        <Outlet/>
-      </FAQDetailBox>
-    </>
-  );
+export default function FAQDetailPage() {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    return (
+        <>
+            <FAQDetailBox>
+                <PartChip
+                    url={location.pathname}
+                    onButtonClick={(e, part) => navigate(part)}
+                />
+                <Outlet/>
+            </FAQDetailBox>
+        </>
+    );
 }
 
 const FAQDetailBox = styled.div`
@@ -23,6 +26,7 @@ const FAQDetailBox = styled.div`
   @media (max-width: 1400px) {
     margin: 0 100px;
   }
+
   h1 {
     font-size: 70px;
     font-weight: 700;
