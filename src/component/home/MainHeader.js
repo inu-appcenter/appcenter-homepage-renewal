@@ -1,35 +1,13 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import {fullPath} from "../../resource/string/routerPath";
-import logo from "../../resource/img/navbar_logo_main.svg";
-import logo_medium from "../../resource/img/navbar_logo_medium.svg";
-import logo_small from "../../resource/img/navbar_logo_small.svg";
-import {navBarInfoList} from "../../resource/string/navBarString";
-import {Box, Toolbar} from "@mui/material";
-import "swiper/css";
-import "swiper/css/effect-fade";
+import {Box} from "@mui/material";
 import WelcomeImage from "./WelcomeImage";
+import MainToolbar from "./MainToolbar";
 
 export default function MainHeader(){
     return(
         <Box sx={{width: '100%'}}>
             <AppBar>
-                <StyledToolbar>
-                    <Logo to={fullPath.home}>
-                        <img className="logo" src={logo} alt='Inu App Center. logo'/>
-                        <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
-                        <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>
-                    </Logo>
-                    <NavBar>
-                        {navBarInfoList.map((item) =>
-                            <Link
-                                key={item.id}
-                                className='navbar__item'
-                                to={item.url}
-                            >{item.title}</Link>
-                        )}
-                    </NavBar>
-                </StyledToolbar>
+                <MainToolbar />
                 <WelcomeBox>
                     <WelcomeText>
                         <h2>안녕하세요!</h2>
@@ -46,7 +24,7 @@ const AppBar = styled.div`
     background: ${props => props.theme.color.primary};
     height: 100vh;
     box-sizing: border-box;
-    padding: 2rem ${props => props.theme.padding.navBarInside} 0;
+    padding: 7rem ${props => props.theme.padding.navBarInside} 0;
     border-bottom-left-radius: 50vh;
     @media(max-width: 768px) {
         border-bottom-left-radius: 20vw;
@@ -54,71 +32,6 @@ const AppBar = styled.div`
     }
     @media(max-width: 576px) {
         height: 25rem;
-    }
-`;
-const StyledToolbar = styled(Toolbar)`
-    height: 5rem;
-    @media(max-width: 576px) {
-        height: 8rem;
-        flex-direction: column;
-    }
-`;
-const Logo = styled(Link)`
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    .logo {
-        object-fit: cover;
-        width: 400px;
-        @media(max-width: 992px) {
-            width: 300px;
-        }
-        @media(max-width: 768px) {
-            display: none;
-        }
-    }
-    .logo--medium {
-        display: none;
-        width: 100px;
-        @media(max-width: 576px) {
-            display: inline;
-        }
-    }
-    .logo--small {
-        display: none;
-        width: 100px;
-        @media(max-width: 768px) {
-            display: inline;
-        }
-        @media(max-width: 576px) {
-            display: none;
-        }
-    }
-`
-const NavBar = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    .navbar__item {
-        color: ${props => props.theme.color.white};
-        font-size: 1.25rem;
-        font-weight: 600;
-        @media(max-width: 992px) {
-            font-size: 1rem;
-        }
-        @media(max-width: 768px) {
-            font-size: 1.25rem;
-        }
-        @media(max-width: 576px) {
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-    }
-    .navbar__item.active {
-        color: ${props => props.theme.color.secondary};
-    }
-    @media(max-width: 576px) {
-        width: 100%;
     }
 `;
 const WelcomeBox = styled.div`
