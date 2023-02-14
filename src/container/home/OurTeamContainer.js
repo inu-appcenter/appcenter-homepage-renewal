@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {PageTitle} from "../../component/common/PageTitle";
-import {faqString} from "../../resource/string/faqString";
+import {partInfo} from "../../resource/string/partInfo";
 import OurTeam from "../../component/aboutus/OurTeam";
 
 export default function OurTeamContainer(){
@@ -10,7 +10,7 @@ export default function OurTeamContainer(){
                 <PageTitle
                     title="Our Team"
                     topMargin='0'
-                    subTitle={faqString[0].description}
+                    subTitle={partInfo[0].description}
                 />
                 <OurTeam/>
             </OurTeamWrapper>

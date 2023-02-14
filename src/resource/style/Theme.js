@@ -25,7 +25,7 @@ const theme = {
             title: '60px',
             subtitle: '50px',
             descriptionTitle: '30px',
-            planText: '30px',
+            plainText: '30px',
         }
     }
 }

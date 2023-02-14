@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import {faqString} from "../resource/string/faqString";
+import {partInfo} from "../resource/string/partInfo";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
-export function FAQCategoryChipList({url=faqString[0].fullUrl}){
+export function PartChip({url=partInfo[0].fullUrl}){
     const navigate = useNavigate();
     const handleButtonClick = (path) =>{
         navigate(path);
@@ -11,7 +11,7 @@ export function FAQCategoryChipList({url=faqString[0].fullUrl}){
     return(
         <>
             <ButtonGroup>
-                {faqString.map((part) =>
+                {partInfo.map((part) =>
                     <Button
                         key={part.id}
                         className={url === part.fullUrl ? 'active' : ''}

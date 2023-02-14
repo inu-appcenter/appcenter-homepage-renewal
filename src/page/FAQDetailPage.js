@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import {Outlet, useLocation} from "react-router-dom";
-import {FAQCategoryChipList} from "../component/FAQCategoryChipList";
+import {PartChip} from "../component/PartChip";
 
 export default function FAQDetailPage(){
   const location = useLocation();
   return(
     <>
       <FAQDetailBox>
-        <FAQCategoryChipList
+        <PartChip
           url={location.pathname}
         />
         <Outlet/>

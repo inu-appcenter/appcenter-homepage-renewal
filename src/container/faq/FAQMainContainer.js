@@ -1,11 +1,11 @@
 import FAQCategoryCardList from "../../component/FAQCategoryCardList";
-import {faqString} from "../../resource/string/faqString";
+import {partInfo} from "../../resource/string/partInfo";
 
 export default function FAQMainContainer(){
     return(
         <>
             <FAQCategoryCardList
-                list={faqString}
+                list={partInfo}
             />
         </>
     );

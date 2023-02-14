@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 
-export const PageTitle = ({title, topMargin = viewHeightCalc(100), subTitle = null}) => {
+export const
+    PageTitle = ({title, topMargin = viewHeightCalc(100), subTitle = null, bottomMargin='0px'}) => {
     return (
-        <TitleTextWrap topMargin={topMargin}>
+        <TitleTextWrap topMargin={topMargin} bottomMargin={bottomMargin}>
             <TitleTextBox>{title}</TitleTextBox>
             {
                 subTitle &&
@@ -17,11 +18,11 @@ export const PageTitle = ({title, topMargin = viewHeightCalc(100), subTitle = nu
 
 const TitleTextWrap = styled.div`
   margin-top: ${props => props.topMargin};
+  margin-bottom: ${props => props.bottomMargin};
   text-transform: uppercase;
 `
 
-const TitleTextBox = styled.h1`
-  margin: 0 ${props => props.theme.margin.pageTitleOutSide};
+const TitleTextBox = styled.span`
   font-size: ${props => props.theme.fontSize.default.title};
   font-weight: 700;
   color: ${props => props.theme.color.primary};

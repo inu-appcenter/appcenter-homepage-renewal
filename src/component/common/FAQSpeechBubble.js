@@ -1,7 +1,7 @@
-import speechBubble from '../resource/img/speech-bubble.svg'
-import emoji from '../resource/dummy/temp-emoji.png'
+import speechBubble from '../../resource/img/speech-bubble.svg'
+import emoji from '../../resource/dummy/temp-emoji.png'
 import styled from "styled-components";
-import {viewHeightCalc, viewWidthCalc} from "../lib/viewportCalculate";
+import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 
 export default function FAQSpeechBubble() {
     return (
