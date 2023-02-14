@@ -4,6 +4,8 @@ import {EffectFade} from "swiper";
 import {mainImages} from "../../resource/string/mainImages";
 import {useEffect, useState} from "react";
 import styled from "styled-components";
+import "swiper/css";
+import "swiper/css/effect-fade";
 
 export default function WelcomeImage() {
     const [index, setIndex] = useState(0);
