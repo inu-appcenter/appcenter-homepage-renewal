@@ -22,7 +22,7 @@ const TitleTextWrap = styled.div`
 
 const TitleTextBox = styled.h1`
   margin: 0 ${props => props.theme.margin.pageTitleOutSide};
-  font-size: 70px;
+  font-size: ${props => props.theme.fontSize.default.title};
   font-weight: 700;
   color: ${props => props.theme.color.primary};
 `

@@ -19,6 +19,14 @@ const theme = {
     },
     height:{
         headerBarHeight: '70px',
+    },
+    fontSize:{
+        default:{
+            title: '60px',
+            subtitle: '50px',
+            descriptionTitle: '30px',
+            planText: '30px',
+        }
     }
 }
 
