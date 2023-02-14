@@ -6,6 +6,7 @@ import JoinUsPage from "./page/JoinUsPage";
 import {FAQDetailListContainer} from "./container/faq/FAQDetailListContainer";
 import {routerPath} from "./resource/string/routerPath";
 import MainPage from "./page/MainPage";
+import OurTeamPage from "./page/OurTeamPage";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
             <Route path={routerPath.base.url} element={<Navigate to={'home'}/>}/>
             <Route path={routerPath.base.url} element={<MainPage/>}>
                 <Route path={routerPath.home.url} element={<HomePage/>}/>
+                <Route path={routerPath.ourTeam.url} element={<OurTeamPage/>}/>
                 <Route path={routerPath.join.url} element={<JoinUsPage/>}/>
                 <Route path={routerPath.faq.url} element={<FAQMainPage/>}/>
                 <Route path={routerPath.faqDetail.url} element={<FAQDetailPage/>}>
