@@ -1,7 +1,7 @@
 import {fullPath} from "../../resource/string/routerPath";
-import logo from "../../resource/img/navbar_logo_main.svg";
-import logo_medium from "../../resource/img/navbar_logo_medium.svg";
-import logo_small from "../../resource/img/navbar_logo_small.svg";
+import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
+import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
+import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
 import {navBarInfoList} from "../../resource/string/navBarString";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ import {Toolbar} from "@mui/material";
 import {useEffect, useState} from "react";
 import {debounce, throttle} from "lodash";
 
-export default function MainToolbar() {
+export default function Navbar() {
     const [prevY, setPrevY] = useState(0);
     const [navVisibility, setNavVisibility] = useState(true);
     const [isTop, setIsTop] = useState(true);
@@ -17,20 +17,19 @@ export default function MainToolbar() {
     const handleScroll = throttle(
         e => {
             const diff = window.scrollY - prevY;
-            if (diff < 0) { // going up
+            if (diff < 0 && !navVisibility) { // going up
                 setScrollDirection(true);
                 setNavVisibility(true);
-            } else if (diff > 0) {
+            } else if (diff > 0 && navVisibility) {
                 setScrollDirection(false);
                 setNavVisibility(false);
-                console.log('going down');
             }
             setPrevY(window.scrollY);
         }, 500
     );
     const stopScroll = debounce(
         e => {
-            if (window.scrollY === 0) {
+            if (window.scrollY < 50) {
                 setNavVisibility(true);
                 setIsTop(true);
             } else {
@@ -54,12 +53,12 @@ export default function MainToolbar() {
     
     return (
         <StyledToolbar className={navVisibility ? (isTop ? 'top' : '') : 'hide'}>
-            <Logo to={fullPath.home}>
+            <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
                 <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>
-            </Logo>
-            <NavBar>
+            </NavLogo>
+            <NavItems>
                 {navBarInfoList.map((item) =>
                     <Link
                         key={item.id}
@@ -67,7 +66,7 @@ export default function MainToolbar() {
                         to={item.url}
                     >{item.title}</Link>
                 )}
-            </NavBar>
+            </NavItems>
         </StyledToolbar>
     );
 }
@@ -97,7 +96,7 @@ const StyledToolbar = styled(Toolbar)`
         flex-direction: column;
     }
 `;
-const Logo = styled(Link)`
+const NavLogo = styled(Link)`
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -129,7 +128,7 @@ const Logo = styled(Link)`
         }
     }
 `
-const NavBar = styled.div`
+const NavItems = styled.div`
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
@@ -152,6 +151,6 @@ const NavBar = styled.div`
         color: ${props => props.theme.color.secondary};
     }
     @media(max-width: 576px) {
-        width: 100%;
+        width: 80%;
     }
 `;

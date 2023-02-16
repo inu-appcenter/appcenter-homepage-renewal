@@ -1,7 +1,9 @@
-import Header from "../../component/common/Header";
-import MainHeader from "../../component/home/MainHeader";
+// import Header from "../../component/common/Header";
+import Navbar from "../../component/common/Navbar";
 import {useLocation} from "react-router-dom";
 import {fullPath} from "../../resource/string/routerPath";
+import WelcomeContainer from "./WelcomeContainer";
+import styled from "styled-components";
 
 export default function HeaderSwitcher() {
     const location = useLocation();
@@ -9,9 +11,17 @@ export default function HeaderSwitcher() {
         <>
             {
                 location.pathname === fullPath.home
-                    ? <MainHeader/>
-                    : <Header/>
+                    ? <WelcomeContainer/>
+                    : <Spacer/>
             }
+            <Navbar/>
         </>
     )
 }
+
+const Spacer = styled.div`
+    height: 8.25rem;
+    @media(max-width: 576px) {
+        height: 9rem;
+    }
+`;

@@ -7,12 +7,10 @@ export default function MainPage() {
         <>
             <div>
                 <HeaderSwitcher/>
-                {/*<Header/>*/}
             </div>
             <main>
                 <Outlet/>
             </main>
-            {/*<Outlet/>*/}
         </>
     );
 }
