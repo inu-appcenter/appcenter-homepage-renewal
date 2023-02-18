@@ -3,13 +3,14 @@ import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
 import {navBarInfoList} from "../../resource/string/navBarString";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useLayoutEffect, useState} from "react";
 import {debounce, throttle} from "lodash";
 
 export default function Navbar() {
+    const location = useLocation();
     const [prevY, setPrevY] = useState(0);
     const [navVisibility, setNavVisibility] = useState(true);
     const [isTop, setIsTop] = useState(true);
@@ -38,13 +39,13 @@ export default function Navbar() {
             }
         }, 1500
     );
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
     }, [handleScroll, stopScroll]);
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.addEventListener('scroll', stopScroll);
         return () => {
             window.removeEventListener('scroll', stopScroll);
@@ -62,7 +63,7 @@ export default function Navbar() {
                 {navBarInfoList.map((item) =>
                     <Link
                         key={item.id}
-                        className='navbar__item'
+                        className={location.pathname===item.url ? 'navbar__item active' : 'navbar__item'}
                         to={item.url}
                     >{item.title}</Link>
                 )}
@@ -83,10 +84,12 @@ const StyledToolbar = styled(Toolbar)`
     box-sizing: border-box;
     box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
     transition: .5s;
+    transition-delay: .1s;
     z-index: 2000;
     &.hide {
         visibility: hidden;
-        opacity: 0;
+        //opacity: 0;
+        top: -9rem
     }
     &.top {
         box-shadow: none;

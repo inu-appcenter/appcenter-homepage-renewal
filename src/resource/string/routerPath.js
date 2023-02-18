@@ -7,6 +7,10 @@ export const routerPath = {
         url: 'home',
         title: 'Home',
     },
+    ourTeam: {
+        url: 'ourteam',
+        title: 'Our team',
+    },
     join:{
         url: 'join',
         title: 'Join Us',
@@ -49,6 +53,7 @@ export const routerPath = {
 
 export const fullPath = {
     home:`/${routerPath.base.url}/${routerPath.home.url}`,
+    ourTeam:`/${routerPath.base.url}/${routerPath.ourTeam.url}`,
     join:`/${routerPath.base.url}/${routerPath.join.url}`,
     faq:`/${routerPath.base.url}/${routerPath.faq.url}`,
     faqDetail:`/${routerPath.base.url}/${routerPath.faqDetail.url}`,
@@ -59,4 +64,3 @@ export const fullPath = {
     web:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
     design:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
 }
-
