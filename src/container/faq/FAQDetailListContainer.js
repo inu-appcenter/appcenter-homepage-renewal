@@ -12,7 +12,6 @@ export function FAQDetailListContainer(){
         setPageInfo(partInfo.find(v=>location.pathname === v.fullUrl))
     },[location])
 
-    console.log(pageInfo, location, partInfo)
     return(
         <>
             <h1>{pageInfo.partName}</h1>
