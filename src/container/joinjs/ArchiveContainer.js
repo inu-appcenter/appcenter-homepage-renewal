@@ -7,7 +7,7 @@ export default function ArchiveContainer(){
     return(
         <ArchiveContainerWrapper>
             <Subtitle
-                title='앱센터 1년'
+                title='앱센터의 1년'
             />
             <Archive/>
         </ArchiveContainerWrapper>
@@ -16,5 +16,4 @@ export default function ArchiveContainer(){
 
 const ArchiveContainerWrapper =  styled.div`
     margin-top: ${viewHeightCalc(70)};
-    
 `;
