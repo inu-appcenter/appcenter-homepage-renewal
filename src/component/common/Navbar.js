@@ -7,16 +7,16 @@ import {Link, useLocation} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
 import {useLayoutEffect, useState} from "react";
-import {debounce, throttle} from "lodash";
+import useThrottle from "../../lib/useThrottle";
+import useDebounce from "../../lib/useDebounce";
 
 export default function Navbar() {
     const location = useLocation();
     const [prevY, setPrevY] = useState(0);
     const [navVisibility, setNavVisibility] = useState(true);
-    const [isTop, setIsTop] = useState(true);
     const [scrollDirection, setScrollDirection] = useState(true)    //  true: going up, false: going down
-    const handleScroll = throttle(
-        e => {
+    const handleScroll = useThrottle(
+        () => {
             const diff = window.scrollY - prevY;
             if (diff < 0 && !navVisibility) { // going up
                 setScrollDirection(true);
@@ -26,18 +26,15 @@ export default function Navbar() {
                 setNavVisibility(false);
             }
             setPrevY(window.scrollY);
-        }, 500
+        }, 300
     );
-    const stopScroll = debounce(
-        e => {
-            if (window.scrollY < 50) {
+    const stopScroll = useDebounce(
+        () => {
+            if (window.scrollY < 50)
                 setNavVisibility(true);
-                setIsTop(true);
-            } else {
-                setIsTop(false);
+            else
                 scrollDirection ? setNavVisibility(true) : setNavVisibility(false);
-            }
-        }, 1500
+        }, 800
     );
     useLayoutEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -53,7 +50,7 @@ export default function Navbar() {
     })
     
     return (
-        <StyledToolbar className={navVisibility ? (isTop ? 'top' : '') : 'hide'}>
+        <StyledToolbar className={navVisibility ? '' : 'hide'}>
             <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
@@ -61,11 +58,21 @@ export default function Navbar() {
             </NavLogo>
             <NavItems>
                 {navBarInfoList.map((item) =>
-                    <Link
-                        key={item.id}
-                        className={location.pathname===item.url ? 'navbar__item active' : 'navbar__item'}
-                        to={item.url}
-                    >{item.title}</Link>
+                    <div className='navbar__item'>
+                        <Link
+                            key={item.id}
+                            className={location.pathname===item.url ? 'navbar__item_title active' : 'navbar__item_title'}
+                            to={item.url}
+                        >{item.title}</Link>
+                        <div className='navbar__item_child'>
+                            {item.child && item.child.map(sub =>
+                                <Link
+                                    key={sub.id}
+                                    to='#'
+                                >{sub.title}</Link>
+                            )}
+                        </div>
+                    </div>
                 )}
             </NavItems>
         </StyledToolbar>
@@ -82,7 +89,7 @@ const StyledToolbar = styled(Toolbar)`
     border-bottom-left-radius: 10vw;
     border-bottom-right-radius: 10vw;
     box-sizing: border-box;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+    box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
     transition: .5s;
     transition-delay: .1s;
     z-index: 2000;
@@ -90,9 +97,6 @@ const StyledToolbar = styled(Toolbar)`
         visibility: hidden;
         //opacity: 0;
         top: -9rem
-    }
-    &.top {
-        box-shadow: none;
     }
     @media(max-width: 576px) {
         height: 9rem;
@@ -134,24 +138,78 @@ const NavLogo = styled(Link)`
 const NavItems = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-grow: 1;
     .navbar__item {
-        color: ${props => props.theme.color.white};
-        font-size: 1.25rem;
-        font-weight: 600;
-        @media(max-width: 992px) {
-            font-size: 1rem;
-        }
-        @media(max-width: 768px) {
+        position: relative;
+        .navbar__item_title {
+            color: ${props => props.theme.color.white};
             font-size: 1.25rem;
+            font-weight: 600;
+            padding: 1rem 0;
+            @media(max-width: 992px) {
+                font-size: 1rem;
+            }
+            @media(max-width: 768px) {
+                font-size: 1.25rem;
+            }
+            @media(max-width: 576px) {
+                font-size: 1rem;
+                margin-top: 1rem;
+            }
         }
-        @media(max-width: 576px) {
-            font-size: 1rem;
-            margin-top: 1rem;
+        .navbar__item_title.active {
+            color: ${props => props.theme.color.secondary};
         }
-    }
-    .navbar__item.active {
-        color: ${props => props.theme.color.secondary};
+        .navbar__item_child {
+            width: 8rem;
+            position: absolute;
+            top: 2rem;
+            left: calc(50% - 4rem);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background: ${props => props.theme.color.primary};
+            border-bottom-right-radius: 1.5rem;
+            border-bottom-left-radius: 1.5rem;
+            box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
+            transition: opacity .5s;
+            visibility: hidden;
+            opacity: 0;
+            a {
+                color: ${props => props.theme.color.white};
+                font-size: 1.125rem;
+                text-align: center;
+                margin: 0.75rem 0;
+            }
+            @media (max-width: 992px) {
+                width: 6rem;
+                left: calc(50% - 3rem);
+                border-bottom-right-radius: 1rem;
+                border-bottom-left-radius: 1rem;
+                a {
+                    font-size: 1rem;
+                    margin: .5rem 0;
+                }
+            }
+            @media (max-width: 768px) and (min-width: 577px){
+                width: 8rem;
+                left: calc(50% - 4rem);
+                border-bottom-right-radius: 1.5rem;
+                border-bottom-left-radius: 1.5rem;
+                a {
+                    font-size: 1.125rem;
+                    margin: 0.75rem 0;
+                }
+            }
+        }
+        @media (hover: hover) and (pointer: fine) {
+            :hover .navbar__item_child {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+        
     }
     @media(max-width: 576px) {
         width: 80%;
