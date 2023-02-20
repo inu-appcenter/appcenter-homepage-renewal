@@ -16,4 +16,5 @@ export default function ArchiveContainer(){
 
 const ArchiveContainerWrapper =  styled.div`
     margin-top: ${viewHeightCalc(70)};
+    
 `;
