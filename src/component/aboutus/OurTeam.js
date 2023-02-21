@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {faqString} from "../../resource/string/faqString";
+import {partInfo} from "../../resource/string/partInfo";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import {Fab} from "@mui/material"
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
@@ -9,7 +9,7 @@ export default function OurTeam() {
         <>
             <TeamListWrapper>
                 {
-                    faqString.map((item) => (
+                    partInfo.map((item) => (
                         <TeamListItem>
                             <TextWrapper>
                                 <div className='TeamName'>{item.partName}</div>
