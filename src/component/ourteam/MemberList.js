@@ -1,13 +1,15 @@
 import * as React from 'react';
 import MemberItem from "./MemberItem";
 import styled from "styled-components";
+import {Skeleton} from "@mui/material";
+import MemberItemSkeleton from "./MemberItemSkeleton";
 
 
 export default function MemberList({data}) {
-    console.log(data)
     return (
         <MemberListWrapper>
             {
+                data ?
                 data.map((item, index) => (
                     <MemberItem
                         key={index}
@@ -17,6 +19,7 @@ export default function MemberList({data}) {
                         link={item.link}
                     />
                 ))
+                    : <MemberItemSkeleton/>
             }
         </MemberListWrapper>
     )

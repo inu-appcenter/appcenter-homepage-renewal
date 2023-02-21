@@ -4,10 +4,7 @@ import PartTitle from "../../component/ourteam/PartTitle";
 import {useGetTeamListQuery} from "../../apis/dataApi";
 
 export default function PartContainer({year= 2022, team= 'Android'}){
-    const {data, error, isLoading} = useGetTeamListQuery({year: year,team: team.toLowerCase()});
-
-    if(isLoading) return <div>로딩중</div>
-    if(error) return <div>에러</div>
+    const {data} = useGetTeamListQuery({year: year,team: team.toLowerCase()});
 
     return(
         <>
