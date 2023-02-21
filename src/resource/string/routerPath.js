@@ -64,4 +64,3 @@ export const fullPath = {
     web:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
     design:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
 }
-
