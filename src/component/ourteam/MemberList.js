@@ -1,14 +1,14 @@
 import * as React from 'react';
 import MemberItem from "./MemberItem";
-import appcenterMember from "../../resource/dummy/appcenterMember";
 import styled from "styled-components";
 
 
-export default function MemberList({part = 'Android'}) {
+export default function MemberList({data}) {
+    console.log(data)
     return (
         <MemberListWrapper>
             {
-                appcenterMember[part].map((item, index) => (
+                data.map((item, index) => (
                     <MemberItem
                         key={index}
                         image={item.image}

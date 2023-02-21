@@ -7,18 +7,32 @@ import {ThemeProvider} from "styled-components";
 import {BrowserRouter} from "react-router-dom";
 import theme from "./resource/style/Theme";
 import GlobalStyle from "./resource/style/GlobalStyle";
+import {Provider} from "react-redux";
+import {configureStore} from "@reduxjs/toolkit";
+import {dataApi} from "./apis/dataApi";
+import logger from 'redux-logger';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store = configureStore({
+    reducer: { [dataApi.reducerPath]: dataApi.reducer,},
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware().concat(dataApi.middleware, logger),
+    devTools: process.env.NODE_ENV !== 'production',
+});
+
 root.render(
   <React.StrictMode>
-      <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-              <GlobalStyle/>
-              <BrowserRouter>
-                  <App/>
-              </BrowserRouter>
-          </ThemeProvider>
-      </StyledEngineProvider>
+      <Provider store={store}>
+          <StyledEngineProvider injectFirst>
+              <ThemeProvider theme={theme}>
+                  <GlobalStyle/>
+                  <BrowserRouter>
+                      <App/>
+                  </BrowserRouter>
+              </ThemeProvider>
+          </StyledEngineProvider>
+      </Provider>
   </React.StrictMode>
 );
 

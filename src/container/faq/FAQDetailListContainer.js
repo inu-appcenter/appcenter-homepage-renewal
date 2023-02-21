@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {partInfo} from "../../resource/string/partInfo";
-import faqList from "../../resource/dummy/faqList";
+import faqList from "../../resource/data/faqList";
 
 export function FAQDetailListContainer(){
     const location = useLocation();
