@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {partInfo} from "../resource/string/partInfo";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {viewWidthCalc} from "../lib/viewportCalculate";
 
 export function PartChip({url=partInfo[0].fullUrl, onButtonClick}){
     return(
@@ -21,14 +22,17 @@ export function PartChip({url=partInfo[0].fullUrl, onButtonClick}){
 
 const ButtonGroup = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 20px 40px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   Button {
     outline: none;
     color:  ${props => props.theme.color.gray};
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 0.625rem 30px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px 40px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     border-radius: 999px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
     text-transform: none;
