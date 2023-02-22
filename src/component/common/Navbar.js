@@ -61,7 +61,7 @@ export default function Navbar() {
                     <div className='navbar__item'>
                         <Link
                             key={item.id}
-                            className={location.pathname===item.url ? 'navbar__item_title active' : 'navbar__item_title'}
+                            className={location.pathname.includes(item.url) ? 'navbar__item_title active' : 'navbar__item_title'}
                             to={item.url}
                         >{item.title}</Link>
                         <div className='navbar__item_child'>
@@ -91,7 +91,6 @@ const StyledToolbar = styled(Toolbar)`
     box-sizing: border-box;
     box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
     transition: .5s;
-    transition-delay: .1s;
     z-index: 2000;
     &.hide {
         visibility: hidden;
