@@ -19,7 +19,7 @@ export default function MemberItem({image, name, description, link=[]}) {
             }}
         >
             <Box sx={{position: 'relative'}}>
-                <AspectRatio ratio="4/3">
+                <AspectRatio ratio="4/4">
                     <figure>
                         {
                             image ? <img
