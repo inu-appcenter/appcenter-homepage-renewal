@@ -22,18 +22,14 @@ const store = configureStore({
 });
 
 root.render(
-  <React.StrictMode>
-      <Provider store={store}>
-          <StyledEngineProvider injectFirst>
-              <ThemeProvider theme={theme}>
-                  <GlobalStyle/>
-                  <BrowserRouter>
-                      <App/>
-                  </BrowserRouter>
-              </ThemeProvider>
-          </StyledEngineProvider>
-      </Provider>
-  </React.StrictMode>
+    <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </ThemeProvider>
+    </StyledEngineProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

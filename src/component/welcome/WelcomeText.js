@@ -13,7 +13,6 @@ export default function WelcomeText() {
 const TextWrapper = styled.div`
     width: 300px;
     min-width: 300px;
-    margin: 0 auto;
     h1 {
         font-size: 3.5rem;
         font-weight: 700;
@@ -31,6 +30,7 @@ const TextWrapper = styled.div`
     }
     @media(max-width: 768px) {
         text-align: center;
+        margin: 0 auto;
     }
     @media(max-width: 576px) {
         width: 220px;
