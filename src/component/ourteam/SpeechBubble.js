@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import speechBubble from "../../resource/img/speech-bubble.svg";
-import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import {partInfoByName} from "../../resource/string/partInfo";
 
 export default function SpeechBubble({partName = 'Android'}){
@@ -9,7 +8,9 @@ export default function SpeechBubble({partName = 'Android'}){
             <RowStack>
                 <Emoji src={partInfoByName[partName].emoji} alt='emoji'/>
                 <SpeechBubbleStyle>
-                    {partInfoByName[partName].speechBubble}
+                    <SpeechBubbleContent>
+                        {partInfoByName[partName].speechBubble}
+                    </SpeechBubbleContent>
                 </SpeechBubbleStyle>
             </RowStack>
         </>
@@ -35,9 +36,26 @@ const SpeechBubbleStyle = styled.div`
   align-items: center;
   background-image: url(${speechBubble});
   background-repeat: no-repeat;
-  background-size: auto 100%;
-  padding: 8px 16px 16px 16px;
-  width: ${viewWidthCalc(750)};
-  height: ${viewHeightCalc(170)};
+  padding-top: 8px;
+  padding-bottom: 16px;
+  max-width: 50%;
   font-size: ${props=>props.theme.fontSize.default.plainText};
+  @media(max-width: 1200px) {
+    font-size: 25px;
+  }
+  @media(max-width: 768px) {
+    font-size: 20px;
+  }
+  @media(max-width: 576px) {
+    font-size: 15px;
+  }
+`
+
+const SpeechBubbleContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 70%;
+  margin:16px;
 `

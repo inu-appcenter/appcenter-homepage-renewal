@@ -19,7 +19,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    width: 80%;
+    //width: 80%;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
