@@ -1,15 +1,12 @@
-import Card from "@mui/joy/Card";
 import Box from "@mui/joy/Box";
 import AspectRatio from "@mui/joy/AspectRatio";
+import {Skeleton} from "@mui/material";
 import CardCover from "@mui/joy/CardCover";
-import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import styled from "styled-components";
-import {linkToIcon, hostNameFirstWord} from "../../lib/linkToIcon";
-import {Avatar} from "@mui/joy";
-import {Skeleton} from "@mui/material";
+import Card from "@mui/joy/Card";
 
-export default function MemberItem({image, name, description, link=[]}) {
+export default function MemberItemSkeleton(){
     return (
         <StyledCard
             sx={{
@@ -19,17 +16,9 @@ export default function MemberItem({image, name, description, link=[]}) {
             }}
         >
             <Box sx={{position: 'relative'}}>
-                <AspectRatio ratio="4/4">
+                <AspectRatio ratio="4/3">
                     <figure>
-                        {
-                            image ? <img
-                                    src={image}
-                                    loading="lazy"
-                                    alt={`${name}의 사진`}
-                                />
-                                : <Skeleton variant="rectangular" width={'100%'} height={'100%'}/>
-                        }
-
+                        <Skeleton variant="rectangular" width={'100%'} height={'100%'}/>
                     </figure>
                 </AspectRatio>
                 <CardCover
@@ -47,29 +36,14 @@ export default function MemberItem({image, name, description, link=[]}) {
                 </CardCover>
             </Box>
             <Box sx={{display: 'flex', gap: 1, mt: 1.5, alignItems: 'center'}}>
-                <Typography sx={{fontSize: '30px', fontWeight: 'md'}}>
-                    {name}
-                </Typography>
+                <Skeleton variant="text" sx={{ fontSize: '30px' }} width={'70%'} />
             </Box>
             <Box sx={{display: 'flex', gap: 1, mt: 1.5, alignItems: 'center'}}>
-                <Typography sx={{fontSize: '20px', fontWeight: 'md'}}>
-                    {description}
-                </Typography>
+                <Skeleton variant="text" sx={{ fontSize: '20px' }} width={'100%'} />
             </Box>
             <Box sx={{display: 'flex', gap: 1, mt: 1.5, alignItems: 'center'}}>
-                {
-                    link.map(v => (
-                        <Avatar
-                            onClick={() => {
-                                window.open(v)
-                            }}
-                            sx={{bgcolor: `${linkToIcon(v) || '#DCEAFA'}`}}
-                            src={linkToIcon(v)}
-                            alt={`${name}의 웹사이트`}>
-                            {hostNameFirstWord(v)}
-                        </Avatar>
-                    ))
-                }
+                <Skeleton variant="circular" width={40} height={40} />
+                <Skeleton variant="circular" width={40} height={40} />
             </Box>
         </StyledCard>
     );

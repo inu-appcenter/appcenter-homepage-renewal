@@ -28,10 +28,30 @@ const TextWrapper = styled.div`
   .TeamName {
     font-size: 50px;
     margin-right: 40px;
+
+    @media(max-width: 1200px) {
+      font-size: 35px;
+    }
+    @media(max-width: 768px) {
+      font-size: 30px;
+    }
+    @media(max-width: 576px) {
+      font-size: 25px;
+    }
   }
 
   .TeamDescription {
     font-size: 30px;
     color: ${props => props.theme.color.gray};
+
+    @media(max-width: 1200px) {
+      font-size: 25px;
+    }
+    @media(max-width: 768px) {
+      font-size: 20px;
+    }
+    @media(max-width: 576px) {
+      font-size: 15px;
+    }
   }
 `

@@ -40,7 +40,7 @@ export const partInfo = [
         partName: 'iOS',
         question: '맥북 필수인가요?',
         description: '프론트엔드, ios 기반에 맞춰 앱을 구현합니다',
-        speechBubble: '안녕하세요 ios팀입니다\n함께 개발하며 즐거운 시간 보내면 좋을 것 같아요!',
+        speechBubble: '안녕하세요 앱센터 ios 입니다.',
         emoji: iosEmoji,
         url: routerPath.faqDetail.child.ios.url,
         fullUrl: fullPath.ios
@@ -50,7 +50,7 @@ export const partInfo = [
         partName: 'Server',
         question: 'Node, Spring중 어떤 것을 사용하나요?',
         description: '백엔드, 프로그램의 기반을 다집니다',
-        speechBubble: '안녕하세요 사랑이 넘치는 서버 입니다!\n',
+        speechBubble: '안녕하세요 앱센터 서버파트 입니다.\n',
         emoji: serverEmoji,
         url: routerPath.faqDetail.child.server.url,
         fullUrl: fullPath.server
@@ -60,7 +60,7 @@ export const partInfo = [
         partName: 'Web',
         question: 'React 할 줄 알아야 하나요?',
         description: '웹환경에 맞춘 서비스를 구현합니다',
-        speechBubble: '안녕하세요 사랑이 넘치는 웹 입니다!\n',
+        speechBubble: '안녕하세요 앱센터 웹파트 입니다.\n',
         emoji: webEmoji,
         url: routerPath.faqDetail.child.web.url,
         fullUrl: fullPath.web
