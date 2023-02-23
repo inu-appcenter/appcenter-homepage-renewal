@@ -18,7 +18,7 @@ const WelcomeWrapper = styled.div`
     background: ${props => props.theme.color.primary};
     height: 100vh;
     box-sizing: border-box;
-    padding: 7rem ${props => props.theme.padding.navBarInside} 0;
+    padding-top: 7rem;
     border-bottom-left-radius: 50vh;
     @media(max-width: 768px) {
         border-bottom-left-radius: 20vw;
@@ -29,11 +29,16 @@ const WelcomeWrapper = styled.div`
     }
 `;
 const ContentsWrapper = styled.div`
+    width: 750px;
     margin: 3rem auto;
-    width: 80%;
     display: flex;
     justify-content: space-between;
-    flex-grow: 1;
+    @media(min-height: 700px) {
+        margin-top: calc(40vh - ${7*.4}rem - ${520*.4}px);  // header 부분 제외한 화면 크기의 위에서 40% 위치
+    }
+    @media(max-width: 768px) {
+        width: unset;
+    }
     @media(max-width: 576px) {
         margin: 1rem auto;
     }
