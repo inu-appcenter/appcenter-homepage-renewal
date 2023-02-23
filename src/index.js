@@ -10,16 +10,14 @@ import GlobalStyle from "./resource/style/GlobalStyle";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-              <GlobalStyle/>
-              <BrowserRouter>
-                  <App/>
-              </BrowserRouter>
-          </ThemeProvider>
-      </StyledEngineProvider>
-  </React.StrictMode>
+    <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </ThemeProvider>
+    </StyledEngineProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
