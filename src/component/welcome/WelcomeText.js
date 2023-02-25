@@ -17,13 +17,13 @@ const TextWrapper = styled.div`
         font-size: 3.5rem;
         font-weight: 700;
         line-height: 0.5;
-        color: white;
+        color: ${props => props.theme.color.white};
     }
     h2 {
         font-size: 2.5rem;
         font-weight: 600;
         line-height: 2;
-        color: white;
+        color: ${props => props.theme.color.white};
     }
     span {
         color: ${props => props.theme.color.secondary};

@@ -101,7 +101,8 @@ const SwiperContainer = styled.div`
         height: 150px;
         display: flex;
         justify-content: center;
-        background: white;
+        align-items: center;
+        //background: white;
         border-radius: 50px;
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
         overflow: hidden;
