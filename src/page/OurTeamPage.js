@@ -1,4 +1,3 @@
-import PartContainer from "../container/ourteam/PartContainer";
 import {PageTitle} from "../component/common/PageTitle";
 import {PartChip} from "../component/common/PartChip";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
@@ -6,8 +5,6 @@ import YearDropBox from "../component/ourteam/YearDropBox";
 import Stack from '@mui/material/Stack';
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import dayjs from "dayjs";
-import {viewHeightCalc} from "../lib/viewportCalculate";
 import qs from "qs";
 
 export default function OurTeamPage() {
