@@ -14,7 +14,7 @@ const theme = {
     padding:{
         navBarInside: viewWidthCalc(70),
         bigDesktop:{
-            contentTop: '90px',
+            contentTop: '60px',
         },
         desktop:{
             contentTop: '40px',
@@ -34,7 +34,7 @@ const theme = {
             rowGap: '3rem',
         },
         desktop:{
-            rowGap: '2rem',
+            rowGap: '1.5rem',
         },
         tablet:{
             rowGap: '1.5rem',
@@ -79,12 +79,16 @@ const theme = {
             caption: '14px',
         },
         mobile:{
-            title: '30px',
+            title: '24px',
             subtitle: '20px',
             text: '14px',
             caption: '12px',
+        },
+        fold:{
+            title: '18px',
+            subtitle: '18px',
         }
-    }
+    },
 }
 
 export default theme;

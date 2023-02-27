@@ -3,7 +3,7 @@ import SpeechBubble from "../../component/ourteam/SpeechBubble";
 import PartTitle from "../../component/ourteam/PartTitle";
 import {useGetTeamListQuery} from "../../apis/dataApi";
 import {useLocation} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import qs from "qs";
 import styled from "styled-components";
 
@@ -17,14 +17,16 @@ export default function PartContainer(){
 
     useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
-    },[location.pathname])
+    },[location.pathname]);
 
     return(
         <>
             <PartAreaWrapper>
                 <PartTitle partName={part}/>
                 <SpeechBubble partName={part}/>
-                <MemberList data={data}/>
+                <MemberList
+                    data={data}
+                />
             </PartAreaWrapper>
         </>
     )

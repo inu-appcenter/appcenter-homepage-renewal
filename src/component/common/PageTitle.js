@@ -24,7 +24,7 @@ const TitleTextBox = styled.h1`
   font-weight: 700;
   margin:0;
   color: ${props => props.theme.color.primary};
-  font-size: ${props=>props.theme.fontSize.bigDesktop.title};
+  font-size: ${props=>props.theme.fontSize.desktop.title};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.title};
   }
@@ -36,6 +36,9 @@ const TitleTextBox = styled.h1`
   }
   @media(max-width: 576px) {
     font-size: ${props=>props.theme.fontSize.mobile.title};
+  }
+  @media (max-width: 280px) {
+    font-size: ${props => props.theme.fontSize.fold.title};
   }
 `
 
