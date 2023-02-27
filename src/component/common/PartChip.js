@@ -1,20 +1,22 @@
 import styled from "styled-components";
-import {partInfo} from "../resource/string/partInfo";
+import {partInfo} from "../../resource/string/partInfo";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {viewWidthCalc} from "../lib/viewportCalculate";
+import {viewWidthCalc} from "../../lib/viewportCalculate";
 
-export function PartChip({url=partInfo[0].fullUrl, onButtonClick}){
+export function PartChip({url=partInfo[0].fullUrl, onButtonClick,common=true}){
     return(
         <>
             <ButtonGroup>
-                {partInfo.map((part) =>
-                    <Button
-                        key={part.id}
-                        className={url === part.fullUrl ? 'active' : ''}
-                        onClick={e=>onButtonClick(e, part.url)}
-                    >{part.partName}</Button>
-                )}
+                {partInfo.map((part,index) =>(
+                    (!common && !index)
+                        ? null
+                        : <Button
+                            key={part.id}
+                            className={url === part.fullUrl ? 'active' : ''}
+                            onClick={e=>onButtonClick(e, part.url)}
+                        >{part.partName}</Button>
+                ))}
             </ButtonGroup>
         </>
     )
@@ -22,7 +24,7 @@ export function PartChip({url=partInfo[0].fullUrl, onButtonClick}){
 
 const ButtonGroup = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   Button {
     outline: none;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {PartChip} from "../component/PartChip";
+import {PartChip} from "../component/common/PartChip";
 
 export default function FAQDetailPage() {
     const location = useLocation();

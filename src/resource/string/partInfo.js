@@ -68,9 +68,9 @@ export const partInfo = [
 ];
 
 export const partInfoByName = {
-    Android: partInfo[1],
-    Server:partInfo[4],
-    iOS: partInfo[3],
-    Design: partInfo[2],
-    Web: partInfo[5]
+    android: partInfo[1],
+    server:partInfo[4],
+    ios: partInfo[3],
+    design: partInfo[2],
+    web: partInfo[5]
 }

@@ -1,35 +1,23 @@
 import PartContainer from "../container/ourteam/PartContainer";
 import {PageTitle} from "../component/common/PageTitle";
-import {PartChip} from "../component/PartChip";
+import {PartChip} from "../component/common/PartChip";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 
-export default function OurTeamPage(){
-    return(
+export default function OurTeamPage() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    return (
         <>
             <PageTitle
                 title="Our Team"
                 bottomMargin='36px'
             />
-            <PartChip/>
-            <PartContainer
-                year="2022"
-                team="Android"
+            <PartChip
+                common={false}
+                url={location.pathname}
+                onButtonClick={(e, part) => navigate(part)}
             />
-            <PartContainer
-                year="2022"
-                team="Design"
-            />
-            <PartContainer
-                year="2022"
-                team="iOS"
-            />
-            <PartContainer
-                year="2022"
-                team="Server"
-            />
-            <PartContainer
-                year="2022"
-                team="Web"
-            />
+            <Outlet/>
         </>
     )
 }
