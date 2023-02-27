@@ -19,10 +19,8 @@ export default function SpeechBubble({partName = 'Android'}){
 
 const RowStack = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 `
 
 const Emoji = styled.img`
@@ -38,16 +36,19 @@ const SpeechBubbleStyle = styled.div`
   background-repeat: no-repeat;
   padding-top: 8px;
   padding-bottom: 16px;
-  max-width: 50%;
-  font-size: ${props=>props.theme.fontSize.default.plainText};
+  max-width: 70%;
+  font-size: ${props=>props.theme.fontSize.bigDesktop.text};
+  @media(max-width: 1800px) {
+    font-size: ${props=>props.theme.fontSize.desktop.text};
+  }
   @media(max-width: 1200px) {
-    font-size: 25px;
+    font-size: ${props=>props.theme.fontSize.tablet.text};
   }
   @media(max-width: 768px) {
-    font-size: 20px;
+    font-size: ${props=>props.theme.fontSize.smallTablet.text};
   }
   @media(max-width: 576px) {
-    font-size: 15px;
+    font-size: ${props=>props.theme.fontSize.mobile.text};
   }
 `
 

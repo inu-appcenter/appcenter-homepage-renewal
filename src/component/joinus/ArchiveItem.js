@@ -2,13 +2,14 @@ import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import chipBackground from '../../resource/img/archive_chip.svg';
 
-const ArchiveItem = ({chipText='방학',
+const ArchiveItem = ({
+                         chipText = '방학',
                          pointText = '1월',
-                         lineText='팀별 프로젝트',
-                         listItem=null,
-    last=false
-}) =>{
-    return(
+                         lineText = '팀별 프로젝트',
+                         listItem = null,
+                         last = false
+                     }) => {
+    return (
         <ItemWrapper>
             <CenterBox>
                 <Point content={pointText}/>
@@ -55,28 +56,40 @@ const Point = styled.div`
   border-radius: 999px;
 
   &::after {
-    content:"${props=>props.content}";
+    content: "${props => props.content}";
     display: flex;
     justify-content: flex-start;
     position: relative;
     top: ${viewHeightCalc(50)};
-    color:${props=>props.theme.color.primary};
-    font-size: ${props=>props.theme.fontSize.default.plainText};
+    color: ${props => props.theme.color.primary};
     width: 4rem;
+    font-size: ${props => props.theme.fontSize.bigDesktop.text};
+    @media (max-width: 1800px) {
+      font-size: ${props => props.theme.fontSize.desktop.text};
+    }
+    @media (max-width: 1200px) {
+      font-size: ${props => props.theme.fontSize.tablet.text};
+    }
+    @media (max-width: 768px) {
+      font-size: ${props => props.theme.fontSize.smallTablet.text};
+    }
+    @media (max-width: 576px) {
+      font-size: ${props => props.theme.fontSize.mobile.text};
+    }
   }
 `
 
 const Hr = styled.div`
-  background-color: ${props=>props.theme.color.primary};
+  background-color: ${props => props.theme.color.primary};
   height: 2px;
   //flex-grow:1;
   width: ${viewWidthCalc(260)};
-  
-  &::before{
-    content:"${props=>props.beforeContent}";
+
+  &::before {
+    content: "${props => props.beforeContent}";
     border-radius: 34.5px;
-    background-image:url(${chipBackground}) ;
-    background-position:center;
+    background-image: url(${chipBackground});
+    background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     padding: 4px;
@@ -87,14 +100,14 @@ const Hr = styled.div`
     position: relative;
     bottom: ${viewHeightCalc(60)};
   }
-  
+
   &::after {
-    content:"${props=>props.content}";
+    content: "${props => props.content}";
     display: flex;
     justify-content: center;
     position: relative;
     top: ${viewHeightCalc(0)};
-    color:${props=>props.theme.color.primary};
+    color: ${props => props.theme.color.primary};
   }
 `
 

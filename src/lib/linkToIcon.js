@@ -6,7 +6,7 @@ export const linkToIcon = (link) =>{
     const hostNameMap = {
         'github.com': githubLogo,
         'velog.io': velogLogo,
-        'behance.net': behanceLogo,
+        'www.behance.net': behanceLogo,
     }
     const url = new URL(link);
 

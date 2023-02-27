@@ -29,7 +29,6 @@ const MemberListWrapper = styled.div`
   display: flex;
   overflow: scroll;
   white-space: nowrap;
-  margin-bottom: 60px;
   & > *{
     flex: 0 0 auto;
   }

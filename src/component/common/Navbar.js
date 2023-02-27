@@ -7,8 +7,8 @@ import {Link, useLocation} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
 import {useLayoutEffect, useState} from "react";
-import useThrottle from "../../lib/useThrottle";
-import useDebounce from "../../lib/useDebounce";
+import useThrottle from "../../lib/hooks/useThrottle";
+import useDebounce from "../../lib/hooks/useDebounce";
 
 export default function Navbar() {
     const location = useLocation();
@@ -48,7 +48,7 @@ export default function Navbar() {
             window.removeEventListener('scroll', stopScroll);
         }
     })
-    
+
     return (
         <StyledToolbar className={navVisibility ? '' : 'hide'}>
             <NavLogo to={fullPath.home}>

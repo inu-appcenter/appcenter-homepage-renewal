@@ -19,7 +19,7 @@ export default function MemberItem({image, name, description, link=[]}) {
             }}
         >
             <Box sx={{position: 'relative'}}>
-                <AspectRatio ratio="4/4">
+                <AspectRatio ratio="1/1">
                     <figure>
                         {
                             image ? <img
@@ -78,5 +78,4 @@ export default function MemberItem({image, name, description, link=[]}) {
 const StyledCard = styled(Card)`
   width: 300px;
   margin-right: 20px;
-  margin-top: 80px;
 `

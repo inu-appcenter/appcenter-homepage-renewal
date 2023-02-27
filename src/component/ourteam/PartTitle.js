@@ -20,7 +20,6 @@ const TextWrapper = styled.div`
   display:flex;
   align-items:center;
   font-weight: 600;
-  margin-top: 40px;
   .TeamName::first-letter {
     color: ${props => props.theme.color.primary};
   }

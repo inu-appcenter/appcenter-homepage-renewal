@@ -15,6 +15,7 @@ function App() {
             <Route path={routerPath.base.url} element={<Navigate to={'home'}/>}/>
             <Route path={routerPath.base.url} element={<MainPage/>}>
                 <Route path={routerPath.home.url} element={<HomePage/>}/>
+                <Route path={routerPath.ourTeam.url} element={<Navigate to={'android'}/>}/>
                 <Route path={routerPath.ourTeam.url} element={<OurTeamPage/>}>
                     <Route path=':part' element={<PartContainer/>}/>
                 </Route>

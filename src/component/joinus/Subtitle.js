@@ -15,9 +15,21 @@ const SubtitleWrapper = styled.div`
 
 const Text = styled.p`
   color:${props => props.theme.color.primary};
-  font-size: ${props=> props.theme.fontSize.default.subtitle};
   font-weight: 700;
   margin-bottom: 80px;
+  font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
+  @media(max-width: 1800px) {
+    font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  }
+  @media(max-width: 1200px) {
+    font-size: ${props=>props.theme.fontSize.tablet.subtitle};
+  }
+  @media(max-width: 768px) {
+    font-size: ${props=>props.theme.fontSize.smallTablet.subtitle};
+  }
+  @media(max-width: 576px) {
+    font-size: ${props=>props.theme.fontSize.mobile.subtitle};
+  }
   &::before{
     content:'•';
     margin-right: 4px;
