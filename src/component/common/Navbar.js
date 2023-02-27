@@ -26,7 +26,7 @@ export default function Navbar() {
                 setNavVisibility(false);
             }
             setPrevY(window.scrollY);
-        }, 300
+        }, 0
     );
     const stopScroll = useDebounce(
         () => {
@@ -34,7 +34,7 @@ export default function Navbar() {
                 setNavVisibility(true);
             else
                 scrollDirection ? setNavVisibility(true) : setNavVisibility(false);
-        }, 800
+        }, 0
     );
     useLayoutEffect(() => {
         window.addEventListener('scroll', handleScroll);

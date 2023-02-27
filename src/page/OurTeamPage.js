@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import qs from "qs";
+import dayjs from "dayjs";
 
 export default function OurTeamPage() {
     const location = useLocation();
@@ -14,7 +15,7 @@ export default function OurTeamPage() {
         ignoreQueryPrefix: true
     });
     const [part, setPart] = useState(location.pathname.split('/').at(-1))
-    const [year, setYear] = useState(query.year);
+    const [year, setYear] = useState(query.year||dayjs().get('year'));
 
     useEffect(()=>{
         navigate({pathname:part, search:`?year=${year}`});
