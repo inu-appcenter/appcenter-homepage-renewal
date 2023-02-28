@@ -19,22 +19,31 @@ export default function ContactContainer() {
     );
 }
 
-const ContactContainerWrapper =  styled.div`
-    margin-top: ${viewHeightCalc(70)};
+const ContactContainerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 const ContactList = styled.li`
-    width: ${viewWidthCalc(350)};
-    margin: 0 auto;
-    list-style: none;
-    ul {
-        text-align: left;
-        font-size: 1rem;
-        padding: 0;
-        a {
-            color: ${props=>props.theme.color.primary}
-        }
+  list-style: none;
+  ul {
+    padding: 0;
+    a {
+      color: ${props => props.theme.color.primary}
     }
-    ul + ul {
-        margin-top: 1.5rem;
-    }
+  }
+  font-size: ${props => props.theme.fontSize.bigDesktop.caption};
+  @media (max-width: 1800px) {
+    font-size: ${props => props.theme.fontSize.desktop.caption};
+  }
+  @media (max-width: 1200px) {
+    font-size: ${props => props.theme.fontSize.tablet.caption};
+  }
+  @media (max-width: 768px) {
+    font-size: ${props => props.theme.fontSize.smallTablet.caption};
+  }
+  @media (max-width: 576px) {
+    font-size: ${props => props.theme.fontSize.mobile.caption};
+  }
 `;

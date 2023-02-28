@@ -16,7 +16,6 @@ const SubtitleWrapper = styled.div`
 const Text = styled.p`
   color:${props => props.theme.color.primary};
   font-weight: 700;
-  margin-bottom: 80px;
   font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.subtitle};
