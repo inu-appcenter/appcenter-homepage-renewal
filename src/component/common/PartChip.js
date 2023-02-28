@@ -29,6 +29,10 @@ const ButtonGroup = styled.div`
   flex-wrap: wrap;
   align-items:center;
   gap: 8px;
+  @media (max-width: 576px) {
+    gap: 4px;
+    justify-content: center;
+  }
   Button {
     outline: none;
     color: ${props => props.theme.color.gray};
@@ -53,7 +57,7 @@ const ButtonGroup = styled.div`
     @media (max-width: 576px) {
       font-size: ${props => props.theme.fontSize.mobile.caption};
       padding: 4px 8px;
-      gap: 4px;
+      margin-top: 4px;
     }
   }
 

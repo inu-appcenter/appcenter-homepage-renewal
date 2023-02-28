@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 
 export const
-    PageTitle = ({title, subTitle = null,}) => {
+    PageTitle = ({title, subTitle = null}) => {
     return (
         <TitleTextWrap >
             <TitleTextBox>{title}</TitleTextBox>
@@ -24,7 +24,7 @@ const TitleTextBox = styled.h1`
   font-weight: 700;
   margin:0;
   color: ${props => props.theme.color.primary};
-  font-size: ${props=>props.theme.fontSize.desktop.title};
+  font-size: ${props=>props.theme.fontSize.bigDesktop.title};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.title};
   }
@@ -46,7 +46,7 @@ const SubTitle = styled.h2`
   font-weight: 600;
   margin:0;
   color: ${props => props.theme.color.gray};
-  font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.subtitle};
   }

@@ -8,29 +8,28 @@ export default function FAQDetailPage() {
 
     return (
         <>
-            <FAQDetailBox>
-                <PartChip
-                    url={location.pathname}
-                    onButtonClick={(e, part) => navigate(part)}
-                />
-                <Outlet/>
-            </FAQDetailBox>
+            <FAQDetailWrapper>
+                <ContentWrapepr>
+                    <PartChip
+                        url={location.pathname}
+                        onButtonClick={(e, part) => navigate(part)}
+                    />
+                    <Outlet/>
+                </ContentWrapepr>
+            </FAQDetailWrapper>
         </>
     );
 }
 
-const FAQDetailBox = styled.div`
-  margin: 0 auto;
-  padding-top: 100px;
-  max-width: 1200px;
-  @media (max-width: 1400px) {
-    margin: 0 100px;
-  }
+const FAQDetailWrapper = styled.div`
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 100%;
+  row-gap: 2rem;
+`
 
-  h1 {
-    font-size: 70px;
-    font-weight: 700;
-    color: ${props => props.theme.color.primary};
-  }
-`;
+const ContentWrapepr = styled.div`
+  padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
+
+`
 
