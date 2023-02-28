@@ -4,15 +4,22 @@ import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import YearDropBox from "../component/ourteam/YearDropBox";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import qs from "qs";
 import dayjs from "dayjs";
+import qs from "qs";
 
 export default function OurTeamPage() {
     const location = useLocation();
     const navigate = useNavigate();
+    const query = qs.parse(location.search, {
+        ignoreQueryPrefix: true
+    });
+    const [part, setPart] = useState(location.pathname.split('/').at(-1)||localStorage.getItem('part') || 'android')
+    const [year, setYear] = useState(localStorage.getItem('year') || dayjs().get('year')||2022);
 
-    const [part, setPart] = useState(localStorage.getItem('part') || 'android')
-    const [year, setYear] = useState(localStorage.getItem('year') || dayjs().get('year'));
+    useEffect(()=>{
+        setPart(location.pathname.split('/').at(-1));
+        setYear(query.year||localStorage.getItem('year')||dayjs().get('year'));
+    },[location]);
 
     useEffect(()=>{
         localStorage.setItem('part',part);
