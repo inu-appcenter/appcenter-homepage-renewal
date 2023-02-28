@@ -71,7 +71,6 @@ const InterViewBox = styled.div`
   flex-direction: column;
   border-radius: 40px;
   background-color: ${props => props.theme.color.primaryLight};
-  padding: ${viewWidthCalc(40)};
   margin-right: ${viewWidthCalc(20)};
   white-space: nowrap;
   .answer{
@@ -81,5 +80,24 @@ const InterViewBox = styled.div`
     color: ${props => props.theme.color.primary};
     font-weight: 600;
     margin-top: ${viewHeightCalc(18)}
+  }
+  padding: 40px;
+  @media(max-width: 1800px) {
+    padding: 30px;
+  }
+  @media(max-width: 1200px) {
+    padding: 28px;
+  }
+  @media(max-width: 768px) {
+    border-radius: 30px;
+    padding: 20px;
+  }
+  @media(max-width: 576px) {
+    border-radius: 20px;
+    padding: 16px;
+  }
+  @media (max-width: 280px) {
+    border-radius: 10px;
+    padding: 8px;
   }
 `
