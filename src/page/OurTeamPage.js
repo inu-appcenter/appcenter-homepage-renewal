@@ -10,13 +10,13 @@ import dayjs from "dayjs";
 export default function OurTeamPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const query = qs.parse(location.search, {
-        ignoreQueryPrefix: true
-    });
-    const [part, setPart] = useState(location.pathname.split('/').at(-1))
-    const [year, setYear] = useState(query.year||dayjs().get('year'));
+
+    const [part, setPart] = useState(localStorage.getItem('part') || 'android')
+    const [year, setYear] = useState(localStorage.getItem('year') || dayjs().get('year'));
 
     useEffect(()=>{
+        localStorage.setItem('part',part);
+        localStorage.setItem('year',year);
         navigate({pathname:part, search:`?year=${year}`});
     },[part, year])
 
@@ -77,11 +77,12 @@ const TitleAreaWrapper = styled.div`
 
 const Stack = styled.div`
   display: flex;
-  gap:10px;
+  gap:1rem;
   align-items: center;
   align-content: space-between;
   @media(max-width: 768px) {
     justify-content: space-between;
+    margin-bottom: 1rem;
   }
   @media(max-width: 576px) {
     margin-bottom: 1rem;
