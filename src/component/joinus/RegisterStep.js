@@ -11,9 +11,7 @@ export default function RegisterStep(){
                 registerStep.map((item)=>(
                     <Card key={item.key}>
                         <p className="title">{item.step}</p>
-                        <p></p>
                         <p className="question">{item.content}</p>
-                        <p></p>
                     </Card>
                 ))
             }
@@ -24,18 +22,18 @@ export default function RegisterStep(){
 const CardWrap = styled.div`
   color: ${props => props.theme.color.black};
   display: grid;
-  grid-auto-flow: dense;
   grid-template-columns: 1fr 1fr;
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
-  column-gap: ${viewWidthCalc(70)};
   row-gap: ${viewHeightCalc(30)};
+  column-gap: ${viewWidthCalc(20)};
 `;
 
-const Card = styled(Link)`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+const Card = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   background-color: ${props => props.theme.color.primaryLight};
   border-radius: 30px;
   font-size: 20px;
@@ -43,21 +41,16 @@ const Card = styled(Link)`
     font-size: 16px;
   }
   .title {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
-    padding: 8px 16px 8px 16px;
-    width:100px;
+    margin: 12px 20px 0;
+    padding: 8px 16px;
     color: ${props => props.theme.color.primary};
     font-weight: 700;
     border-radius: 24px;
     background: ${props => props.theme.color.white};
   }
   .question {
-    grid-column: 1 / 3;
     color: ${props => props.theme.color.black};
     font-weight: 600;
-    margin: 0 40px;
+    margin: 20px 40px 30px;
   }
 `

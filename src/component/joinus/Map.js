@@ -14,7 +14,7 @@ export default function Map() {
         center: APP_CENTER_LOCATION,
         zoom: 15
     };
-    
+
     return (
         <MapWrapper>
             <GoogleMapReact
@@ -25,13 +25,13 @@ export default function Map() {
                 <Marker
                     lat={APP_CENTER_LOCATION.lat}
                     lng={APP_CENTER_LOCATION.lng}
-                    text="인천대학교 앱센터" />
+                    text="인천대학교 앱센터"/>
             </GoogleMapReact>
         </MapWrapper>
     )
 }
 
-const Marker = ({ text }) => <div style={MarkerStyle}><RoomIcon/>{text}</div>;
+const Marker = ({text}) => <div style={MarkerStyle}><RoomIcon/>{text}</div>;
 const MarkerStyle = {
     color: theme.color.primary,
     textAlign: "right",
@@ -40,7 +40,19 @@ const MarkerStyle = {
     textShadow: "2px 0px 2px white, 0px 2px 2px white, -2px 0px 2px white, 0px -2px 2px white"
 }
 const MapWrapper = styled.div`
-    width: ${viewWidthCalc(550)};
-    height: ${viewHeightCalc(350)};
-    margin: 0 auto 3rem;
+  width: ${viewWidthCalc(550)};
+  height: ${viewHeightCalc(400)};
+  margin: 0 auto 3rem;
+  @media(max-width:1200px){
+    width: 60%;
+  }
+  @media(max-width:768px){
+    width: 70%;
+  }
+  @media(max-width:576px){
+    width: 80%;
+  }
+  @media(max-width:300px){
+    width: 90%;
+  }
 `;
