@@ -25,7 +25,7 @@ const FAQPageWrapper = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 2rem;
+  row-gap: 1rem;
 `
 const TitleWrapper = styled.div`
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
@@ -33,12 +33,8 @@ const TitleWrapper = styled.div`
     padding-top: ${props=>props.theme.padding.desktop.contentTop};
     grid-template-columns: 1fr;
   }
-  @media(max-width: 1600px) {
-    grid-template-columns: 1fr 1.3fr;
-  }
   @media(max-width: 1200px) {
     padding-top: ${props=>props.theme.padding.tablet.contentTop};
-    grid-template-columns: 1fr 1.3fr;
   }
   @media(max-width: 1000px) {
     grid-template-columns: 1fr;
