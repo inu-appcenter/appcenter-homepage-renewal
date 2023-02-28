@@ -1,5 +1,5 @@
 import MemberList from "../../component/ourteam/MemberList";
-import SpeechBubble from "../../component/ourteam/SpeechBubble";
+import SpeechBubble from "../../component/common/SpeechBubble";
 import PartTitle from "../../component/ourteam/PartTitle";
 import {useGetTeamListQuery} from "../../apis/dataApi";
 import {useLocation} from "react-router-dom";

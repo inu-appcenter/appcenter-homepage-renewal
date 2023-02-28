@@ -22,7 +22,7 @@ export default function OurTeamPage() {
 
     return (
         <OurTeamPageWrapper>
-            <TitleAreaWrapper>
+            <TitleWrapper>
                 <Stack>
                     <PageTitle
                         title="Our Team"
@@ -37,7 +37,7 @@ export default function OurTeamPage() {
                     url={location.pathname}
                     onButtonClick={(e, part) => setPart(part)}
                 />
-            </TitleAreaWrapper>
+            </TitleWrapper>
             <Outlet/>
         </OurTeamPageWrapper>
     )
@@ -50,7 +50,7 @@ const OurTeamPageWrapper = styled.div`
   row-gap: 2rem;
 `
 
-const TitleAreaWrapper = styled.div`
+const TitleWrapper = styled.div`
   display: grid;
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
   @media(max-width: 1800px) {
