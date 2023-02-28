@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/appcenter-homepage-renewal/static/css/main.882984d2.css",
-    "main.js": "/appcenter-homepage-renewal/static/js/main.62f3cc94.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.7545c417.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
-    "static/media/appcenter_workshop.png": "/appcenter-homepage-renewal/static/media/appcenter_workshop.9d9239bcaf4cf5b98fe6.png",
     "static/media/temp_app_image.png": "/appcenter-homepage-renewal/static/media/temp_app_image.512e8bf5f59ded0cd904.png",
     "static/media/Pretendard-Medium.otf": "/appcenter-homepage-renewal/static/media/Pretendard-Medium.a8904df42c9b4f93a668.otf",
     "static/media/Pretendard-SemiBold.otf": "/appcenter-homepage-renewal/static/media/Pretendard-SemiBold.d8e6b49c5bbba3cd911b.otf",
     "static/media/Pretendard-Bold.otf": "/appcenter-homepage-renewal/static/media/Pretendard-Bold.3ec32cdae5bc0c0026a6.otf",
+    "static/media/appcenter_workshop.png": "/appcenter-homepage-renewal/static/media/appcenter_workshop.37057199714ff8d20509.png",
     "static/media/web-emoji.png": "/appcenter-homepage-renewal/static/media/web-emoji.f607225e4cb4d6b76484.png",
     "static/media/ios-emoji.png": "/appcenter-homepage-renewal/static/media/ios-emoji.df85155cf882b0f6532d.png",
     "static/media/server-emoji.png": "/appcenter-homepage-renewal/static/media/server-emoji.514231dea5d4c2fcf9d7.png",
@@ -32,11 +32,11 @@
     "static/media/speech-bubble.svg": "/appcenter-homepage-renewal/static/media/speech-bubble.b9f65cd63c5afe535d128bde157e5ba1.svg",
     "static/media/archive_chip.svg": "/appcenter-homepage-renewal/static/media/archive_chip.af7cea5d7856d966bfbd81b407920b75.svg",
     "main.882984d2.css.map": "/appcenter-homepage-renewal/static/css/main.882984d2.css.map",
-    "main.62f3cc94.js.map": "/appcenter-homepage-renewal/static/js/main.62f3cc94.js.map",
+    "main.7545c417.js.map": "/appcenter-homepage-renewal/static/js/main.7545c417.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.882984d2.css",
-    "static/js/main.62f3cc94.js"
+    "static/js/main.7545c417.js"
   ]
 }
