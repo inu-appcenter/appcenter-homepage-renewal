@@ -40,4 +40,7 @@ const Img = styled.img`
   @media(max-width: 576px) {
     width: 300px;
   }
+  @media(max-width: 280px) {
+    width: 200px;
+  }
 `
