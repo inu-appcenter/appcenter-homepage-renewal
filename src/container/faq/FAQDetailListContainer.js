@@ -14,43 +14,50 @@ export function FAQDetailListContainer(){
     },[location])
 
     return(
-        <FAQContainerWrapper>
+        <>
             <TitleWrapper>
                 <PageTitle
                     title={pageInfo.partName}
                 />
             </TitleWrapper>
-            {
-                faqList[pageInfo.partName].map((item,index) =>
-                    <FAQDetailList key={index}>
-                        <p className="question">Q. {item.question}</p>
-                        <p className="answer">A. {item.answer}</p>
-                    </FAQDetailList>
-                )
-            }
-        </FAQContainerWrapper>
+            <FAQDetailListBox>
+                {
+                    faqList[pageInfo.partName].map((item,index) =>
+                        <FAQDetailListItem key={index}>
+                            <p className="question">Q. {item.question}</p>
+                            <p className="answer">A. {item.answer}</p>
+                        </FAQDetailListItem>
+                    )
+                }
+            </FAQDetailListBox>
+        </>
     );
 }
 
-const FAQContainerWrapper = styled.div`
+const TitleWrapper = styled.div`
+  padding: 30px 0;
+`
+
+const FAQDetailListBox = styled.div`
   display: grid;
-  row-gap: 3rem;
+  row-gap: 2rem;
+  column-gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  @media(max-width: 1800px) {
+    grid-template-columns: 1fr;
+  }
   @media(max-width: 768px) {
-    row-gap: 1rem;
+    gap: 1rem;
   }
 `
 
-const TitleWrapper = styled.div`
-  padding-top: 30px;
-`
-
-const FAQDetailList = styled.div`
+const FAQDetailListItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
   border-radius: 50px;
   background: rgba(23, 115, 224, 0.1);
-  padding: 30px;
+  padding: 40px;
   .question {
     color: ${props => props.theme.color.black};
     font-weight: 700;
@@ -65,9 +72,10 @@ const FAQDetailList = styled.div`
     padding: 0 20px;
     margin:0;
   }
-  font-size: ${props=>props.theme.fontSize.bigDesktop.text};
+  font-size: ${props=>props.theme.fontSize.desktop.text};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.text};
+    padding: 30px;
   }
   @media(max-width: 1200px) {
     font-size: ${props=>props.theme.fontSize.tablet.text};
