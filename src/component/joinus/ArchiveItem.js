@@ -24,7 +24,6 @@ const ArchiveItem = ({
                     <li>{listItem}</li>
                 </ListBox>
             }
-
         </ItemWrapper>
     )
 }
@@ -32,7 +31,6 @@ const ArchiveItem = ({
 const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 `
 
 const CenterBox = styled.div`
@@ -45,7 +43,7 @@ const ListBox = styled.ul`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  margin-top: 54px;
+  margin-top: 60px;
   -webkit-padding-start: 1rem;
 `
 
@@ -60,7 +58,7 @@ const Point = styled.div`
     display: flex;
     justify-content: flex-start;
     position: relative;
-    top: ${viewHeightCalc(50)};
+    top: 50px;
     color: ${props => props.theme.color.primary};
     width: 4rem;
     font-size: ${props => props.theme.fontSize.bigDesktop.text};
@@ -82,7 +80,7 @@ const Point = styled.div`
 const Hr = styled.div`
   background-color: ${props => props.theme.color.primary};
   height: 2px;
-  //flex-grow:1;
+  max-width: 240px;
   width: ${viewWidthCalc(260)};
 
   &::before {
@@ -105,8 +103,6 @@ const Hr = styled.div`
     content: "${props => props.content}";
     display: flex;
     justify-content: center;
-    position: relative;
-    top: ${viewHeightCalc(0)};
     color: ${props => props.theme.color.primary};
   }
 `

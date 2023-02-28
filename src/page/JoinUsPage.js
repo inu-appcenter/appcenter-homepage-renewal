@@ -23,11 +23,16 @@ export default function JoinUsPage(){
 const JoinUsPageWrapper = styled.div`
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 100%;
-  row-gap: 2rem;
+  grid-template-columns: 1fr;
+  row-gap: 5rem;
+  @media (max-width: 1800px){
+    row-gap: 10rem;
+  }
+  @media (max-width: 768px){
+    row-gap: 2rem;
+  }
 `
 
 const TitleWrapper = styled.div`
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
-
 `
