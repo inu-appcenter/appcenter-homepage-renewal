@@ -15,7 +15,7 @@ export default function HomePage() {
 
 const HomePageWrapper = styled.div`
   display: grid;
-  row-gap: 2rem;
+  row-gap: 8rem;
   grid-template-columns: 100%;
   padding: 0 2rem;
 `;

@@ -43,8 +43,23 @@ const TitleTextBox = styled.h1`
 `
 
 const SubTitle = styled.h2`
-  font-size: 30px;
   font-weight: 600;
   margin:0;
-  color: ${props => props.theme.color.gray}
+  color: ${props => props.theme.color.gray};
+  font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  @media(max-width: 1800px) {
+    font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  }
+  @media(max-width: 1200px) {
+    font-size: ${props=>props.theme.fontSize.tablet.subtitle};
+  }
+  @media(max-width: 768px) {
+    font-size: ${props=>props.theme.fontSize.smallTablet.subtitle};
+  }
+  @media(max-width: 576px) {
+    font-size: ${props=>props.theme.fontSize.mobile.subtitle};
+  }
+  @media (max-width: 280px) {
+    font-size: ${props => props.theme.fontSize.fold.subtitle};
+  }
 `

@@ -44,9 +44,24 @@ const QuestionText = styled.div`
   display: flex;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
-  font-size: 40px;
   white-space: pre-line;
   margin-right: ${viewWidthCalc(60)};
+  font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  @media(max-width: 1800px) {
+    font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  }
+  @media(max-width: 1200px) {
+    font-size: ${props=>props.theme.fontSize.tablet.subtitle};
+  }
+  @media(max-width: 768px) {
+    font-size: ${props=>props.theme.fontSize.smallTablet.subtitle};
+  }
+  @media(max-width: 576px) {
+    font-size: ${props=>props.theme.fontSize.mobile.subtitle};
+  }
+  @media (max-width: 280px) {
+    font-size: ${props => props.theme.fontSize.fold.subtitle};
+  }
 `
 
 const InterViewBox = styled.div`
