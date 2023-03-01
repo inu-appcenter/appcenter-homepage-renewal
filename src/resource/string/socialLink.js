@@ -1,5 +1,6 @@
 import facebook_icon from "../../resource/img/facebook_icon.svg"
 import kakaotalk_icon from "../../resource/img/kakaotalk_icon.svg"
+import gmail_icon from "../../resource/img/gmail_icon.svg"
 
 export const socialLink = {
     facebook: {
@@ -11,6 +12,7 @@ export const socialLink = {
         address: "https://pf.kakao.com/_xgxaSLd",
     },
     email: {
+        icon: gmail_icon,
         address: "mailto:inuappcenter@gmail.com",
     },
 }
