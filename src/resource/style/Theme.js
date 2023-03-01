@@ -56,7 +56,7 @@ const theme = {
     fontSize:{
         bigDesktop:{
             title: '60px',
-            subtitle: '50px',
+            subtitle: '40px',
             text: '30px',
             caption: '20px',
         },
