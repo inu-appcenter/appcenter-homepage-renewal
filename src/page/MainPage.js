@@ -1,6 +1,7 @@
 import {Outlet} from "react-router-dom";
 // import Header from "../component/common/Header";
 import HeaderSwitcher from "../container/home/HeaderSwitcher";
+import Footer from "../component/common/Footer";
 
 export default function MainPage() {
     return (
@@ -11,6 +12,7 @@ export default function MainPage() {
             <main>
                 <Outlet/>
             </main>
+            <Footer/>
         </>
     );
 }

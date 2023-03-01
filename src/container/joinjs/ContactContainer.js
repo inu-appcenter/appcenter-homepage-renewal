@@ -2,6 +2,7 @@ import Subtitle from "../../component/joinus/Subtitle";
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import Map from "../../component/joinus/Map";
+import {socialLink} from "../../resource/string/socialLink";
 
 export default function ContactContainer() {
     return (
@@ -11,9 +12,9 @@ export default function ContactContainer() {
             />
             <Map/>
             <ContactList>
-                <ul>카카오 플러스 친구: <a href="https://pf.kakao.com/_xgxaSLd">@인천대앱센터</a></ul>
-                <ul>페이스북: <a href="https://www.facebook.com/INUAppCenter">앱센터 페이스북</a></ul>
-                <ul>이메일: <a href="mailto:inuappcenter@gmail.com">inuappcenter@gmail.com</a></ul>
+                <ul>카카오 플러스 친구: <a href={socialLink.kakaotalk.address}>@인천대앱센터</a></ul>
+                <ul>페이스북: <a href={socialLink.facebook.address}>앱센터 페이스북</a></ul>
+                <ul>이메일: <a href={socialLink.email.address}>inuappcenter@gmail.com</a></ul>
             </ContactList>
         </ContactContainerWrapper>
     );
