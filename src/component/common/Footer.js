@@ -16,7 +16,7 @@ export default function Footer() {
 }
 
 const FooterWrapper = styled.div`
-    width: 300px;
+    width: 400px;
     margin: 100px auto;
 `;
 const SocialIcons = styled.div`
@@ -33,6 +33,6 @@ const SocialIcons = styled.div`
 const Copyright = styled.div`
     color: ${props=>props.theme.color.black};
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
 `;
