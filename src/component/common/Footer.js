@@ -6,8 +6,9 @@ export default function Footer() {
     return(
         <FooterWrapper>
             <SocialIcons>
-                <a href={socialLink.facebook.address}><img src={socialLink.facebook.icon} /></a>
-                <a href={socialLink.kakaotalk.address}><img src={socialLink.kakaotalk.icon} /></a>
+                <a href={socialLink.email.address}><img src={socialLink.email.icon} alt="인천대앱센터 이메일"/></a>
+                <a href={socialLink.facebook.address}><img src={socialLink.facebook.icon} alt="인천대앱센터 페이스북"/></a>
+                <a href={socialLink.kakaotalk.address}><img src={socialLink.kakaotalk.icon} alt="카카오톡 플러스친구 @인천대앱센터"/></a>
             </SocialIcons>
             <Copyright>© 2023 INU Appcenter. All rights reserved.</Copyright>
         </FooterWrapper>
@@ -15,36 +16,23 @@ export default function Footer() {
 }
 
 const FooterWrapper = styled.div`
-    width: ${viewWidthCalc(450)};
-    margin: ${viewHeightCalc(100)} auto;
+    width: 400px;
+    margin: 100px auto;
 `;
 const SocialIcons = styled.div`
     display: flex;
-    margin: 0 auto ${viewHeightCalc(30)};
+    margin: 0 auto 18px;
     justify-content: space-between;
-    width: ${viewWidthCalc(110)};
-    height: ${viewHeightCalc(40)};
+    width: 90px;
+    height: 24px;
     img {
-        width: ${viewWidthCalc(40)};
+        width: 24px;
     }
 `;
 
 const Copyright = styled.div`
     color: ${props=>props.theme.color.black};
     text-align: center;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 500;
 `;
-// font-size: ${props => props.theme.fontSize.bigDesktop.caption};
-//     // @media (max-width: 1800px) {
-//     //     font-size: ${props => props.theme.fontSize.desktop.caption};
-//     // }
-//     // @media (max-width: 1200px) {
-//     //     font-size: ${props => props.theme.fontSize.tablet.caption};
-//     // }
-//     // @media (max-width: 768px) {
-//     //     font-size: ${props => props.theme.fontSize.smallTablet.caption};
-//     // }
-//     // @media (max-width: 576px) {
-//     //     font-size: ${props => props.theme.fontSize.mobile.caption};
-//     // }
