@@ -60,7 +60,7 @@ const RegisterTextWrapper = styled.div`
   background: ${props => props.theme.color.white};
   border: 1px solid ${props => props.theme.color.yellow};
   color: ${props => props.theme.color.yellow};
-  padding: 0 20px;
+  padding: 6px 18px;
 
   &:hover {
     background: rgba(254, 200, 83, 0.1);
