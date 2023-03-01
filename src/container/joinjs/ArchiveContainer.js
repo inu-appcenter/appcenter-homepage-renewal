@@ -1,19 +1,20 @@
 import Subtitle from "../../component/joinus/Subtitle";
 import Archive from "../../component/joinus/Archive";
 import styled from "styled-components";
-import {viewHeightCalc} from "../../lib/viewportCalculate";
 
 export default function ArchiveContainer(){
     return(
-        <ArchiveContainerWrapper>
-            <Subtitle
-                title='앱센터의 1년'
-            />
+        <>
+            <SubtitleWrapper>
+                <Subtitle
+                    title='앱센터의 1년'
+                />
+            </SubtitleWrapper>
             <Archive/>
-        </ArchiveContainerWrapper>
+        </>
     )
 }
 
-const ArchiveContainerWrapper =  styled.div`
-    margin-top: ${viewHeightCalc(70)};
+const SubtitleWrapper =  styled.div`
+    padding-bottom: 10px;
 `;

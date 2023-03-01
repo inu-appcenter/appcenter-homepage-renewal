@@ -2,8 +2,8 @@ import styled from "styled-components";
 import speechBubble from "../../resource/img/speech-bubble.svg";
 import {partInfoByName} from "../../resource/string/partInfo";
 
-export default function SpeechBubble({partName = 'Android'}){
-    return(
+export default function SpeechBubble({partName = 'Android'}) {
+    return (
         <>
             <RowStack>
                 <Emoji src={partInfoByName[partName].emoji} alt='emoji'/>
@@ -19,10 +19,11 @@ export default function SpeechBubble({partName = 'Android'}){
 
 const RowStack = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `
 
 const Emoji = styled.img`
@@ -38,16 +39,18 @@ const SpeechBubbleStyle = styled.div`
   background-repeat: no-repeat;
   padding-top: 8px;
   padding-bottom: 16px;
-  max-width: 50%;
-  font-size: ${props=>props.theme.fontSize.default.plainText};
-  @media(max-width: 1200px) {
-    font-size: 25px;
+  font-size: ${props => props.theme.fontSize.bigDesktop.text};
+  @media (max-width: 1800px) {
+    font-size: ${props => props.theme.fontSize.desktop.text};
   }
-  @media(max-width: 768px) {
-    font-size: 20px;
+  @media (max-width: 1200px) {
+    font-size: ${props => props.theme.fontSize.tablet.text};
   }
-  @media(max-width: 576px) {
-    font-size: 15px;
+  @media (max-width: 768px) {
+    font-size: ${props => props.theme.fontSize.smallTablet.text};
+  }
+  @media (max-width: 576px) {
+    font-size: ${props => props.theme.fontSize.mobile.text};
   }
 `
 
@@ -55,7 +58,8 @@ const SpeechBubbleContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
   width: 80%;
   height: 70%;
-  margin:16px;
+  margin: 16px;
 `

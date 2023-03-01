@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
 import {slogan} from "../../resource/data/aboutUs";
 
@@ -24,7 +24,34 @@ const Text = styled.div`
   text-shadow: ${props => props.type === 'top' && `0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)`};
   color: ${props => props.type === 'title' ? '#FEC853' : '#1E4995'};
   font-weight: ${props => props.type === 'top' ? 600 : props.type === 'title' ? 700 : 400};
-  font-size: ${props => props.type === 'title' ? `60px` : `16px`};
   margin-bottom: ${viewWidthCalc(24)};
   white-space: pre-line;
+  ${props => props.type === 'title' ?
+          css`font-size: ${props => props.theme.fontSize.bigDesktop.title};
+            @media (max-width: 1800px) {
+              font-size: ${props => props.theme.fontSize.desktop.title};
+            }
+            @media (max-width: 1200px) {
+              font-size: ${props => props.theme.fontSize.tablet.title};
+            }
+            @media (max-width: 768px) {
+              font-size: ${props => props.theme.fontSize.smallTablet.title};
+            }
+            @media (max-width: 576px) {
+              font-size: ${props => props.theme.fontSize.mobile.title};
+            }`
+          : css`font-size: ${props => props.theme.fontSize.bigDesktop.caption};
+            @media (max-width: 1800px) {
+              font-size: ${props => props.theme.fontSize.desktop.caption};
+            }
+            @media (max-width: 1200px) {
+              font-size: ${props => props.theme.fontSize.tablet.caption};
+            }
+            @media (max-width: 768px) {
+              font-size: ${props => props.theme.fontSize.smallTablet.caption};
+            }
+            @media (max-width: 576px) {
+              font-size: ${props => props.theme.fontSize.mobile.caption};
+            }`
+  }
 `;

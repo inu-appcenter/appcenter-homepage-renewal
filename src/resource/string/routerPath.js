@@ -10,6 +10,28 @@ export const routerPath = {
     ourTeam: {
         url: 'ourteam',
         title: 'Our team',
+        child:{
+            android:{
+                url: 'android',
+                title: 'Android',
+            },
+            design:{
+                url: 'design',
+                title: 'Design',
+            },
+            ios:{
+                url: 'ios',
+                title: 'IOS',
+            },
+            server:{
+                url: 'server',
+                title: 'Server',
+            },
+            web:{
+                url: 'web',
+                title: 'Web',
+            },
+        },
     },
     join:{
         url: 'join',
@@ -31,6 +53,10 @@ export const routerPath = {
                 url: 'android',
                 title: 'Android',
             },
+            design:{
+                url: 'design',
+                title: 'Design',
+            },
             ios:{
                 url: 'ios',
                 title: 'IOS',
@@ -43,11 +69,7 @@ export const routerPath = {
                 url: 'web',
                 title: 'Web',
             },
-            design:{
-                url: 'design',
-                title: 'Design',
-            },
-        }
+        },
     },
 };
 

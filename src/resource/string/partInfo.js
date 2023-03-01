@@ -11,7 +11,10 @@ export const partInfo = [
         partName: 'Common',
         question: '앱센터는 어떻게 들어오나요?',
         description: '다른 분야가 모여 하나의 목표를 향해 나아갑니다',
-        speechBubble: '안녕하세요 앱센터 입니다!',
+        speechBubble: '이곳은 앱센터에 관련된 질문이 있는 공간입니다!\n' +
+            '공통질문과 각 파트별 질문이 나눠져 있으니\n' +
+            '더보기를 눌러 확인해보세요!',
+        emoji: androidEmoji,
         url: routerPath.faqDetail.child.common.url,
         fullUrl: fullPath.common
     },
@@ -68,9 +71,10 @@ export const partInfo = [
 ];
 
 export const partInfoByName = {
-    Android: partInfo[1],
-    Server:partInfo[4],
-    iOS: partInfo[3],
-    Design: partInfo[2],
-    Web: partInfo[5]
+    common: partInfo[0],
+    android: partInfo[1],
+    server:partInfo[4],
+    ios: partInfo[3],
+    design: partInfo[2],
+    web: partInfo[5]
 }

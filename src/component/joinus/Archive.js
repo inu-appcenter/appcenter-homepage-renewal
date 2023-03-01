@@ -30,4 +30,8 @@ export default function Archive(){
 
 const FlexBox = styled.div`
   display: flex;
+  justify-content: center;
+  @media (max-width: 768px){
+    display:none;
+  }
 `

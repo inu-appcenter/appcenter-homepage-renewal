@@ -7,9 +7,6 @@ import {PageTitle} from "../../component/common/PageTitle";
 export default function JoinUsMainContainer(){
     return(
         <>
-            <PageTitle
-                title="Join Us!"
-            />
             <JoinUsMainWrapper>
                 <RegisterInfo/>
                 <Img src={AppCenterWorkshopImage} alt='appcenter workshop image'/>
@@ -19,13 +16,31 @@ export default function JoinUsMainContainer(){
 }
 
 const JoinUsMainWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: ${viewHeightCalc(44)};
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media(max-width: 576px) {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+  justify-items: center;
 `
 
 const Img = styled.img`
   object-fit: contain;
-  width: ${viewWidthCalc(525)};
+  width: 500px;
+  @media(max-width: 1800px) {
+    width: 450px;
+  }
+  @media(max-width: 1200px) {
+    width: 400px;
+  }
+  @media(max-width: 768px) {
+    width: 300px;
+  }
+  @media(max-width: 576px) {
+    width: 300px;
+  }
+  @media(max-width: 280px) {
+    width: 200px;
+  }
 `

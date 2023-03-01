@@ -8,7 +8,9 @@ export default function AboutUsContainer(){
     return(
         <>
             <AboutUsWrapper>
-                <PageTitle title="About Us"/>
+                <PageTitleWrapper>
+                    <PageTitle title="About Us"/>
+                </PageTitleWrapper>
                 <Slogan/>
                 <Interview/>
             </AboutUsWrapper>
@@ -17,6 +19,12 @@ export default function AboutUsContainer(){
 }
 
 const AboutUsWrapper = styled.div`
-  width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const PageTitleWrapper = styled.div`
+  padding-top: 100px;
 `;

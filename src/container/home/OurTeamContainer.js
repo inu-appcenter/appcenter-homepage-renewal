@@ -9,7 +9,6 @@ export default function OurTeamContainer(){
             <OurTeamWrapper>
                 <PageTitle
                     title="Our Team"
-                    topMargin='0'
                     subTitle={partInfo[0].description}
                 />
                 <OurTeam/>
@@ -19,4 +18,5 @@ export default function OurTeamContainer(){
 }
 const OurTeamWrapper = styled.div`
   width: 100%;
+  padding-bottom: 30px;
 `;
