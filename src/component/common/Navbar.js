@@ -9,6 +9,7 @@ import {Toolbar} from "@mui/material";
 import {useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
+import {viewWidthCalc} from "../../lib/viewportCalculate";
 
 export default function Navbar() {
     const location = useLocation();
@@ -86,7 +87,7 @@ const StyledToolbar = styled(Toolbar)`
   left: 0;
   right: 0;
   background: ${props => props.theme.color.primary};
-  padding: 1rem ${props => props.theme.padding.navBarInside};
+  padding: 1rem ${viewWidthCalc(150)};
   border-bottom-left-radius: 10vw;
   border-bottom-right-radius: 10vw;
   box-sizing: border-box;
@@ -99,7 +100,10 @@ const StyledToolbar = styled(Toolbar)`
     //opacity: 0;
     top: -9rem
   }
-
+  
+  @media (max-width: 1200px) {
+    padding: 1rem ${props => props.theme.padding.navBarInside};
+  }
   @media (max-width: 576px) {
     height: 9rem;
     flex-direction: column;
@@ -109,7 +113,9 @@ const NavLogo = styled(Link)`
   display: flex;
   align-items: center;
   flex-grow: 1;
-
+  position: relative;
+  top: -5px;
+  
   .logo {
     object-fit: cover;
     width: 400px;
@@ -142,6 +148,7 @@ const NavLogo = styled(Link)`
 `
 const NavItems = styled.div`
   display: flex;
+  max-width: 500px;
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
