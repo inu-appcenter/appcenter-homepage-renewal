@@ -8,10 +8,9 @@ export default function Interview() {
     useEffect(() => {
         const intervalId = setInterval(() => {
             interviewRef.current.scrollTo({
-                left: interviewRef.current.scrollLeft + (interviewRef.current.offsetWidth),
+                left: interviewRef.current.scrollLeft > 2000 ? 0 : interviewRef.current.scrollLeft + (interviewRef.current.offsetWidth),
                 behavior: 'smooth',
             })
-            console.log(interviewRef.current.scrollLeft, interviewRef.current.offsetWidth);
         }, 1000);
         return () => {
             clearInterval(intervalId);
