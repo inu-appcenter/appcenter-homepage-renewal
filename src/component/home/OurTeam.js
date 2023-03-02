@@ -49,27 +49,7 @@ const TextWrapper = styled.div`
 
   .TeamName {
     margin: 4px 0;
-    font-size: ${props => props.theme.fontSize.desktop.title};
-    @media (max-width: 1800px) {
-      font-size: ${props => props.theme.fontSize.desktop.title};
-    }
-    @media (max-width: 1200px) {
-      font-size: ${props => props.theme.fontSize.tablet.title};
-    }
-    @media (max-width: 768px) {
-      font-size: ${props => props.theme.fontSize.smallTablet.title};
-    }
-    @media (max-width: 576px) {
-      font-size: ${props => props.theme.fontSize.mobile.title};
-    }
-    @media (max-width: 280px) {
-      font-size: ${props => props.theme.fontSize.fold.title};
-    }
-  }
-
-  .TeamDescription {
-    color: ${props => props.theme.color.gray};
-    font-size: ${props => props.theme.fontSize.desktop.subtitle};
+    font-size: ${props => props.theme.fontSize.bigDesktop.subtitle};
     @media (max-width: 1800px) {
       font-size: ${props => props.theme.fontSize.desktop.subtitle};
     }
@@ -84,6 +64,26 @@ const TextWrapper = styled.div`
     }
     @media (max-width: 280px) {
       font-size: ${props => props.theme.fontSize.fold.subtitle};
+    }
+  }
+
+  .TeamDescription {
+    color: ${props => props.theme.color.gray};
+    font-size: ${props => props.theme.fontSize.bigDesktop.text};
+    @media (max-width: 1800px) {
+      font-size: ${props => props.theme.fontSize.desktop.text};
+    }
+    @media (max-width: 1200px) {
+      font-size: ${props => props.theme.fontSize.tablet.text};
+    }
+    @media (max-width: 768px) {
+      font-size: ${props => props.theme.fontSize.smallTablet.text};
+    }
+    @media (max-width: 576px) {
+      font-size: ${props => props.theme.fontSize.mobile.text};
+    }
+    @media (max-width: 280px) {
+      font-size: ${props => props.theme.fontSize.fold.text};
     }
   }
 `

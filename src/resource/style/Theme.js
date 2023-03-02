@@ -63,7 +63,7 @@ const theme = {
     fontSize:{
         bigDesktop:{
             title: '60px',
-            subtitle: '50px',
+            subtitle: '40px',
             text: '30px',
             caption: '20px',
         },
@@ -75,7 +75,7 @@ const theme = {
         },
         tablet:{
             title: '45px',
-            subtitle: '36px',
+            subtitle: '35px',
             text: '20px',
             caption: '16px',
         },

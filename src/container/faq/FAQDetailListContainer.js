@@ -61,15 +61,15 @@ const FAQDetailListItem = styled.div`
   .question {
     color: ${props => props.theme.color.black};
     font-weight: 700;
-    padding: 4px 20px;
+    padding: 12px 20px;
     border-radius: 999px;
     background: ${props => props.theme.color.white};
     margin:0;
   }
   .answer {
     color: ${props => props.theme.color.primary};
-    font-weight: 600;
-    padding: 0 20px;
+    font-weight: 500;
+    padding: 4px 20px;
     margin:0;
   }
   font-size: ${props=>props.theme.fontSize.desktop.text};

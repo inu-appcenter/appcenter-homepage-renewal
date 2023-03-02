@@ -19,13 +19,18 @@ export default function RegisterInfo() {
 const RegisterTextWrapper = styled.div`
   display: grid;
   justify-items: center;
-  row-gap: 16px;
+  align-content: center;
+  row-gap: 2.5rem;
   color: ${props => props.theme.color.yellow};
   padding: 12px 0;
+  @media (max-width: 768px) {
+    row-gap: 1rem;
+  }
 
   .top {
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
     text-transform: uppercase;
   }
 
@@ -55,7 +60,7 @@ const RegisterTextWrapper = styled.div`
   background: ${props => props.theme.color.white};
   border: 1px solid ${props => props.theme.color.yellow};
   color: ${props => props.theme.color.yellow};
-  padding: 0 8px;
+  padding: 6px 18px;
 
   &:hover {
     background: rgba(254, 200, 83, 0.1);

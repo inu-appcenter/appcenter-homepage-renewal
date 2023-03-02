@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import registerStep from "../../resource/string/registerStep";
 
