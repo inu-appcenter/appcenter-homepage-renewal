@@ -75,7 +75,7 @@ const theme = {
         },
         tablet:{
             title: '45px',
-            subtitle: '36px',
+            subtitle: '35px',
             text: '20px',
             caption: '16px',
         },

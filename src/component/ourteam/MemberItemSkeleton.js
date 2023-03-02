@@ -16,7 +16,7 @@ export default function MemberItemSkeleton(){
             }}
         >
             <Box sx={{position: 'relative'}}>
-                <AspectRatio ratio="4/3">
+                <AspectRatio ratio="1">
                     <figure>
                         <Skeleton variant="rectangular" width={'100%'} height={'100%'}/>
                     </figure>
