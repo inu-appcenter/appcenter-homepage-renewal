@@ -62,6 +62,7 @@ export default function Production() {
 const ProductionLayout = styled.div`
   display: flex;
   overflow: scroll;
+  margin-top: 50px;
 `;
 
 const StoreImageBox = styled.div`
