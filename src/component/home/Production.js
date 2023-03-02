@@ -11,6 +11,10 @@ import AppStore from '../../resource/img/product/app_store_logo.svg';
 import GooglePlay from '../../resource/img/product/google_play_logo.svg';
 import styled from "styled-components";
 
+import SwiperCore, {Autoplay} from 'swiper';
+import {Swiper, SwiperSlide} from "swiper/react";
+
+
 const productImageIcon = [
     {key: 0, image: INUIT, store: [GooglePlay]},
     {key: 1, image: UniLetter, store: [GooglePlay, AppStore]},
@@ -21,49 +25,67 @@ const productImageIcon = [
     {key: 6, image: InuBus, store: [GooglePlay]},
 ];
 export default function Production() {
+    SwiperCore.use([Autoplay]);
 
     return (
-        <ProductionLayout>
-            {
-                productImageIcon.map((item) => (
-                    <Box key={item.key} >
-                        <Card sx={{minHeight: '150px', width: 200}}>
-                            <AspectRatio ratio={'1'}>
-                                <figure>
-                                    <img
-                                        src={item.image}
-                                        loading="lazy"
-                                        alt=""
-                                    />
-                                </figure>
-                            </AspectRatio>
-                            <StoreImageBox>
-                                {
-                                    item.store.map((value) => (
-                                        <div className='div-border-01-basic'>
-                                            <img
-                                                src={value}
-                                                loading="lazy"
-                                                alt="store logo"
-                                            />
-                                        </div>
-                                    ))
-                                }
-                            </StoreImageBox>
-                        </Card>
-                    </Box>
-
-                ))
-            }
+        <ProductionLayout
+        >
+            <Swiper
+                loop={true}
+                autoplay={{
+                    delay: 500,
+                    disableOnInteraction: false
+                }}
+            >
+                <SwiperSlide>
+                    <ProductionListBox>
+                        {
+                            productImageIcon.map((item) => (
+                                <Box key={item.key}>
+                                    <Card sx={{minHeight: '150px', width: 200}}>
+                                        <AspectRatio ratio={'1'}>
+                                            <figure>
+                                                <img
+                                                    src={item.image}
+                                                    loading="lazy"
+                                                    alt=""
+                                                />
+                                            </figure>
+                                        </AspectRatio>
+                                        <StoreImageBox>
+                                            {
+                                                item.store.map((value) => (
+                                                    <div className='div-border-01-basic'>
+                                                        <img
+                                                            src={value}
+                                                            loading="lazy"
+                                                            alt="store logo"
+                                                        />
+                                                    </div>
+                                                ))
+                                            }
+                                        </StoreImageBox>
+                                    </Card>
+                                </Box>
+                            ))
+                        }
+                    </ProductionListBox>
+                </SwiperSlide>
+            </Swiper>
         </ProductionLayout>
     );
 }
 
 const ProductionLayout = styled.div`
   display: flex;
-  overflow: scroll;
+  //overflow: scroll;
   margin-top: 50px;
 `;
+
+const ProductionListBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`
 
 const StoreImageBox = styled.div`
   margin-top: 12px;
