@@ -29,8 +29,8 @@ export default function ArchiveVertical() {
 
 const FlexBox = styled.div`
     display: none;
+    width: 60vw;
     flex-direction: column;
-    justify-content: left;
     @media (max-width: 768px) {
         display: flex;
     }

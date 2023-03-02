@@ -15,17 +15,20 @@ const ArchiveItemVertical = ({
         <ItemWrapper>
             <CenterBox>
                 <Point content={pointText} color={chipColor}/>
-                {/*<Hr beforeContent={chipText} content={lineText}/>*/}
+                <VerticalLine>
+                    {listItem &&
+                        <ul className="listBox">
+                            <li>{listItem}</li>
+                        </ul>
+                    }
+                    <div className="chipText">{chipText}</div>
+                    <div className="lineText">{lineText}</div>
+                </VerticalLine>
                 {
                     last &&
                     <Point content={'12월'} color={theme.color.cyan[4]}/>
                 }
             </CenterBox>
-            {/*{listItem &&*/}
-            {/*    <ListBox>*/}
-            {/*        <li>{listItem}</li>*/}
-            {/*    </ListBox>*/}
-            {/*}*/}
         </ItemWrapper>
     );
 }
@@ -42,13 +45,6 @@ const CenterBox = styled.div`
   align-items: center;
 `
 
-const ListBox = styled.ul`
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 60px;
-  -webkit-padding-start: 1rem;
-`
-
 const Point = styled.div`
   background-color: ${props => props.color};
   width: 32px;
@@ -57,10 +53,8 @@ const Point = styled.div`
 
   &::after {
     content: "${props => props.content}";
-    display: flex;
-    justify-content: flex-start;
     position: relative;
-    top: 6px;
+    top: 7px;
     right: -36px;
     color: ${props => props.theme.color.primary};
     font-size: ${props => props.theme.fontSize.bigDesktop.text};
@@ -79,34 +73,40 @@ const Point = styled.div`
   }
 `
 
-const Hr = styled.div`
+const VerticalLine = styled.div`
   background-color: ${props => props.theme.color.primary};
   width: 2px;
   max-height: 180px;
-  height: ${viewHeightCalc(260)};
-
-  &::before {
-    content: "${props => props.beforeContent}";
-    border-radius: 34.5px;
+  height: ${viewHeightCalc(180)};
+  .listBox {
+    display: block;
+    position: relative;
+    right: -2.5rem;
+    width: 200px;
+    padding-left: 0;
+    font-size: .75rem;
+  }
+  .chipText {
+    position: relative;
+    right: -1.5rem;
+    width: 80px;
+    height: 1.5rem;
+    text-align: center;
+    color: ${props=>props.theme.color.secondary};
+    margin-top: .25rem;
+    padding-top: .25rem;
     background-image: url(${chipBackground});
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    padding: 4px;
-    color: ${props => props.theme.color.yellow};
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    bottom: ${viewHeightCalc(60)};
   }
-
-  &::after {
-    content: "${props => props.content}";
-    display: flex;
-    justify-content: center;
-    color: ${props => props.theme.color.primary};
+  .lineText {
+    position: relative;
+    right: -1.5rem;
+    width: 150px;
+    font-size: .875rem;
+    margin-top: .75rem;
+    color: ${props=>props.theme.color.cyan[4]};
   }
 `
-
 export default ArchiveItemVertical;
