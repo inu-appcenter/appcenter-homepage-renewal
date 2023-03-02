@@ -11,7 +11,7 @@ export default function OurTeam() {
         <>
             <TeamListWrapper>
                 {
-                    partInfo.map((item) => (
+                    partInfo.slice(1).map((item) => (
                         <TeamListItem>
                             <TextWrapper>
                                 <div className='TeamName'>{item.partName}</div>
@@ -92,7 +92,20 @@ const Button = styled(Fab)`
   background: ${props => props.theme.color.yellow};
   color: ${props => props.theme.color.white};
   box-shadow: none;
+  width: 56px;
+  height: 56px;
   &:hover{
     background: ${props => props.theme.color.primary};
+  }
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    margin-left: 1rem;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 `
