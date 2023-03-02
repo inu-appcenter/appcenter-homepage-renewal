@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/appcenter-homepage-renewal/static/css/main.882984d2.css",
-    "main.js": "/appcenter-homepage-renewal/static/js/main.a7f7aeb3.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.e4c193e3.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
     "static/media/Pretendard-Medium.otf": "/appcenter-homepage-renewal/static/media/Pretendard-Medium.a8904df42c9b4f93a668.otf",
     "static/media/Pretendard-SemiBold.otf": "/appcenter-homepage-renewal/static/media/Pretendard-SemiBold.d8e6b49c5bbba3cd911b.otf",
@@ -12,29 +12,41 @@
     "static/media/server-emoji.png": "/appcenter-homepage-renewal/static/media/server-emoji.514231dea5d4c2fcf9d7.png",
     "static/media/android-emoji.png": "/appcenter-homepage-renewal/static/media/android-emoji.af5e05ce86540b856451.png",
     "static/media/design-emoji.png": "/appcenter-homepage-renewal/static/media/design-emoji.46504c1dd2dc51d4d4cd.png",
+    "static/media/gmail_icon.svg": "/appcenter-homepage-renewal/static/media/gmail_icon.012598f3d81e30dae42e200cdfc3ad44.svg",
+    "static/media/google_play_logo.svg": "/appcenter-homepage-renewal/static/media/google_play_logo.292e213d497bc306710f8d51c7778764.svg",
     "static/media/mapus_splash.jpg": "/appcenter-homepage-renewal/static/media/mapus_splash.47e5e9ae9ad7e8e3a84a.jpg",
     "static/media/thisweather_splash.jpg": "/appcenter-homepage-renewal/static/media/thisweather_splash.faa57219f39d669430ad.jpg",
+    "static/media/image_4.png": "/appcenter-homepage-renewal/static/media/image_4.69ab8271617f2d7be2ce.png",
     "static/media/navbar_logo_medium.svg": "/appcenter-homepage-renewal/static/media/navbar_logo_medium.6c4cf7287aea2511214ba9a2e69a6405.svg",
     "static/media/navbar_logo.svg": "/appcenter-homepage-renewal/static/media/navbar_logo.3dab1a06cc7c890d56f9c71ff1094b8e.svg",
     "static/media/appcenter_splash.jpg": "/appcenter-homepage-renewal/static/media/appcenter_splash.fc7cb5021ee46e77c08d.jpg",
+    "static/media/image_5.png": "/appcenter-homepage-renewal/static/media/image_5.3c04a08b458eebfe8523.png",
+    "static/media/app_store_logo.svg": "/appcenter-homepage-renewal/static/media/app_store_logo.62a7e724049dccf8ff3baa79325faa08.svg",
     "static/media/navbar_logo_small.svg": "/appcenter-homepage-renewal/static/media/navbar_logo_small.de493d2b66b563fe1ced6b5172fcf0d1.svg",
     "static/media/mockup_template.png": "/appcenter-homepage-renewal/static/media/mockup_template.7b4bdffb57bd8d8f6908.png",
+    "static/media/image_7.png": "/appcenter-homepage-renewal/static/media/image_7.934424a4cd5a8641fd7c.png",
     "static/media/appcenter_icon.png": "/appcenter-homepage-renewal/static/media/appcenter_icon.a5301ef8c27e55759b6a.png",
     "static/media/uniletter_splash.jpg": "/appcenter-homepage-renewal/static/media/uniletter_splash.d6f02e65dc3a63d0975b.jpg",
     "static/media/noticealarm_splash.jpg": "/appcenter-homepage-renewal/static/media/noticealarm_splash.6407666d62845ec72bff.jpg",
     "static/media/inuit_splash.jpg": "/appcenter-homepage-renewal/static/media/inuit_splash.6dfa9f7d24e1b5679fa8.jpg",
+    "static/media/image_3.png": "/appcenter-homepage-renewal/static/media/image_3.ebc179c3b09b3695082c.png",
     "static/media/inubus_splash.jpg": "/appcenter-homepage-renewal/static/media/inubus_splash.708da229d5d298762ca2.jpg",
+    "static/media/image_2.png": "/appcenter-homepage-renewal/static/media/image_2.ccb736359cc5e7725e70.png",
+    "static/media/image_8.png": "/appcenter-homepage-renewal/static/media/image_8.9f5cf4631566755fee10.png",
     "static/media/inucafeteria_splash.jpg": "/appcenter-homepage-renewal/static/media/inucafeteria_splash.7baf429bb279dc76d3c7.jpg",
     "static/media/thisweather_icon.png": "/appcenter-homepage-renewal/static/media/thisweather_icon.6fdcc4e828bdd5c1fffb.png",
+    "static/media/image_1.png": "/appcenter-homepage-renewal/static/media/image_1.440251f84ab82abc8ea9.png",
+    "static/media/facebook_icon.svg": "/appcenter-homepage-renewal/static/media/facebook_icon.91f29f068567e319cb0e7696f4506ffc.svg",
+    "static/media/kakaotalk_icon.svg": "/appcenter-homepage-renewal/static/media/kakaotalk_icon.6a0927a6c14e053fbee2f34a631857a0.svg",
     "index.html": "/appcenter-homepage-renewal/index.html",
     "static/media/speech-bubble.svg": "/appcenter-homepage-renewal/static/media/speech-bubble.b9f65cd63c5afe535d128bde157e5ba1.svg",
     "static/media/archive_chip.svg": "/appcenter-homepage-renewal/static/media/archive_chip.af7cea5d7856d966bfbd81b407920b75.svg",
     "main.882984d2.css.map": "/appcenter-homepage-renewal/static/css/main.882984d2.css.map",
-    "main.a7f7aeb3.js.map": "/appcenter-homepage-renewal/static/js/main.a7f7aeb3.js.map",
+    "main.e4c193e3.js.map": "/appcenter-homepage-renewal/static/js/main.e4c193e3.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.882984d2.css",
-    "static/js/main.a7f7aeb3.js"
+    "static/js/main.e4c193e3.js"
   ]
 }
