@@ -1,16 +1,30 @@
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
+import {useEffect, useRef} from "react";
 
 export default function Interview() {
-
+    const interviewRef = useRef(null);
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            interviewRef.current.scrollTo({
+                left: interviewRef.current.scrollLeft + (interviewRef.current.offsetWidth),
+                behavior: 'smooth',
+            })
+            console.log(interviewRef.current.scrollLeft, interviewRef.current.offsetWidth);
+        }, 1000);
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [])
+    
     return (
         <InterViewWrapper>
             <QuestionText>
                 <div>Q.</div>
                 {interViewQuestion}
             </QuestionText>
-            <InterViewScrollBox>
+            <InterViewScrollBox ref={interviewRef}>
                 {
                     interviewAnswer.map((item) =>
                         <InterViewBox key={item.key}>
