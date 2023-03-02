@@ -78,11 +78,15 @@ const VerticalLine = styled.div`
   width: 2px;
   max-height: 180px;
   height: ${viewHeightCalc(180)};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .listBox {
     display: block;
     position: relative;
     right: -2.5rem;
     width: 200px;
+    margin-block-start: 0;
     padding-left: 0;
     font-size: .75rem;
   }
