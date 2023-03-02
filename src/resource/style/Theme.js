@@ -9,7 +9,14 @@ const theme = {
         secondary: '#FEC853',
         black: '#000000',
         white: '#FFFFFF',
-        gray: '#818181'
+        gray: '#818181',
+        cyan: [
+            '#BADAFF',
+            '#5E9DE7',
+            '#1773E0',
+            '#175CAE',
+            '#0A4892',
+        ],
     },
     padding:{
         navBarInside: viewWidthCalc(70),

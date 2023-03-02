@@ -1,6 +1,7 @@
 import Subtitle from "../../component/joinus/Subtitle";
 import Archive from "../../component/joinus/Archive";
 import styled from "styled-components";
+import ArchiveVertical from "../../component/joinus/ArchiveVertical";
 
 export default function ArchiveContainer(){
     return(
@@ -11,6 +12,7 @@ export default function ArchiveContainer(){
                 />
             </SubtitleWrapper>
             <Archive/>
+            <ArchiveVertical/>
         </>
     )
 }
