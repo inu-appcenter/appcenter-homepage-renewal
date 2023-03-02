@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import chipBackground from '../../resource/img/archive_chip.svg';
+import theme from "../../resource/style/Theme";
 
 const ArchiveItem = ({
                          chipText = '방학',
+                         chipColor = theme.color.primary,
                          pointText = '1월',
                          lineText = '팀별 프로젝트',
                          listItem = null,
@@ -12,11 +14,11 @@ const ArchiveItem = ({
     return (
         <ItemWrapper>
             <CenterBox>
-                <Point content={pointText}/>
+                <Point content={pointText} color={chipColor}/>
                 <Hr beforeContent={chipText} content={lineText}/>
                 {
                     last &&
-                    <Point content={'12월'}/>
+                    <Point content={'12월'} color={theme.color.cyan[4]}/>
                 }
             </CenterBox>
             {listItem &&
@@ -48,7 +50,7 @@ const ListBox = styled.ul`
 `
 
 const Point = styled.div`
-  background-color: ${props => props.theme.color.primary};
+  background-color: ${props => props.color};
   width: 32px;
   height: 32px;
   border-radius: 999px;
@@ -103,7 +105,7 @@ const Hr = styled.div`
     content: "${props => props.content}";
     display: flex;
     justify-content: center;
-    color: ${props => props.theme.color.primary};
+    color: ${props => props.theme.color.cyan[4]};
   }
 `
 
