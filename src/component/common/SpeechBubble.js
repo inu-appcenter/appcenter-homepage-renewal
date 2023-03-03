@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import speechBubble from "../../resource/img/speech-bubble.svg";
+import speechBubbleTail from "../../resource/img/speech-bubble-tail.svg"
 import {partInfoByName} from "../../resource/string/partInfo";
 
 export default function SpeechBubble({partName = 'Android'}) {
@@ -20,7 +20,7 @@ export default function SpeechBubble({partName = 'Android'}) {
 const RowStack = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   @media (max-width: 576px) {
     display: none;
   }
@@ -29,20 +29,38 @@ const RowStack = styled.div`
 const Emoji = styled.img`
   width: 10rem;
   margin-right: 70px;
+  margin-top: 30px;
 `
 
 const SpeechBubbleStyle = styled.div`
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
-  background-image: url(${speechBubble});
-  background-repeat: no-repeat;
-  padding-top: 8px;
-  padding-bottom: 16px;
-  font-size: ${props => props.theme.fontSize.bigDesktop.text};
-  @media (max-width: 1800px) {
-    font-size: ${props => props.theme.fontSize.desktop.text};
+  background: rgba(254, 200, 83, .4);
+  border-radius: 30px;
+  &::before {
+    content:"";
+    position: absolute;
+    bottom: -10px;
+    left: -30px;
+    width: 90px;
+    height: 60px;
+    background-image: url(${speechBubbleTail});
+    background-repeat: no-repeat;
   }
+`
+
+const SpeechBubbleContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  word-break: keep-all;
+  width: 80%;
+  min-width: 250px;
+  height: 70%;
+  font-size: ${props => props.theme.fontSize.desktop.text};
   @media (max-width: 1200px) {
     font-size: ${props => props.theme.fontSize.tablet.text};
   }
@@ -52,14 +70,4 @@ const SpeechBubbleStyle = styled.div`
   @media (max-width: 576px) {
     font-size: ${props => props.theme.fontSize.mobile.text};
   }
-`
-
-const SpeechBubbleContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  width: 80%;
-  height: 70%;
-  margin: 16px;
 `
