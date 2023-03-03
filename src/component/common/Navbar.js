@@ -14,6 +14,7 @@ import {viewWidthCalc} from "../../lib/viewportCalculate";
 export default function Navbar() {
     const location = useLocation();
     const [prevY, setPrevY] = useState(0);
+    const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
     const [scrollDirection, setScrollDirection] = useState(true)    //  true: going up, false: going down
     const handleScroll = useThrottle(
@@ -26,6 +27,7 @@ export default function Navbar() {
                 setScrollDirection(false);
                 setNavVisibility(false);
             }
+            setNavOpaque(false);
             setPrevY(window.scrollY);
         }, 0
     );
@@ -35,7 +37,8 @@ export default function Navbar() {
                 setNavVisibility(true);
             else
                 scrollDirection ? setNavVisibility(true) : setNavVisibility(false);
-        }, 0
+            setNavOpaque(true);
+        }, 500
     );
     useLayoutEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -51,7 +54,7 @@ export default function Navbar() {
     })
 
     return (
-        <StyledToolbar className={navVisibility ? '' : 'hide'}>
+        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque}>
             <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
@@ -94,6 +97,7 @@ const StyledToolbar = styled(Toolbar)`
   box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
   transition: .5s;
   z-index: 2000;
+  opacity: ${props=>props.opaque ? 1 : .5};
 
   &.hide {
     visibility: hidden;
