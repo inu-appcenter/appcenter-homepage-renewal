@@ -54,7 +54,7 @@ export default function Navbar() {
     })
 
     return (
-        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque.toString()}>
+        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque}>
             <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
@@ -101,7 +101,6 @@ const StyledToolbar = styled(Toolbar)`
 
   &.hide {
     visibility: hidden;
-    //opacity: 0;
     top: -9rem
   }
   
