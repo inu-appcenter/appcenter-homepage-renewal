@@ -4,6 +4,7 @@ import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {Fab} from "@mui/material"
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {useNavigate} from "react-router-dom";
+import dayjs from "dayjs";
 
 export default function OurTeam() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function OurTeam() {
                                 <div className='TeamName'>{item.partName}</div>
                                 <div className='TeamDescription'>{item.description}</div>
                             </TextWrapper>
-                            <Button onClick={()=>navigate(`../faq/${item.partName.toLowerCase()}`)}>
+                            <Button onClick={()=>navigate(`../ourteam/${item.partName.toLowerCase()}?year=${dayjs().get('year')}`)}>
                                 <KeyboardDoubleArrowRightIcon fontSize="large"/>
                             </Button>
                         </TeamListItem>
