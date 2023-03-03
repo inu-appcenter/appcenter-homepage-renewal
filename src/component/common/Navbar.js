@@ -54,7 +54,7 @@ export default function Navbar() {
     })
 
     return (
-        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque}>
+        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque.toString()}>
             <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
@@ -62,7 +62,7 @@ export default function Navbar() {
             </NavLogo>
             <NavItems>
                 {navBarInfoList.map((item) =>
-                    <div className='navbar__item'>
+                    <div className='navbar__item' key={item.id}>
                         <Link
                             key={item.id}
                             className={location.pathname.includes(item.url) ? 'navbar__item_title active' : 'navbar__item_title'}
