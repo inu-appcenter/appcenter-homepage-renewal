@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import {partInfo} from "../../resource/string/partInfo";
 import {Button} from "@mui/material";
-import {useNavigate} from "react-router-dom";
-import {viewWidthCalc} from "../../lib/viewportCalculate";
 
 
 export function PartChip({url = partInfo[0].fullUrl, onButtonClick, common = true}) {
@@ -14,7 +12,7 @@ export function PartChip({url = partInfo[0].fullUrl, onButtonClick, common = tru
                         ? null
                         : <Button
                             key={part.id}
-                            className={url === part.fullUrl ? 'active' : ''}
+                            className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
                             onClick={e => onButtonClick(e, part.url)}
                         >{part.partName}</Button>
                 ))}
