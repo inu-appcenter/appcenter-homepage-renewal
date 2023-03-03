@@ -40,7 +40,6 @@ const TeamListItem = styled.div`
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  line-height: ${viewHeightCalc(60)};
 `
 
 const TextWrapper = styled.div`
@@ -69,6 +68,7 @@ const TextWrapper = styled.div`
   }
 
   .TeamDescription {
+    margin-top: 16px;
     color: ${props => props.theme.color.gray};
     font-size: ${props => props.theme.fontSize.bigDesktop.text};
     @media (max-width: 1800px) {
