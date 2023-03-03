@@ -13,7 +13,7 @@ export default function OurTeam() {
             <TeamListWrapper>
                 {
                     partInfo.slice(1).map((item) => (
-                        <TeamListItem>
+                        <TeamListItem key={item.id}>
                             <TextWrapper>
                                 <div className='TeamName'>{item.partName}</div>
                                 <div className='TeamDescription'>{item.description}</div>

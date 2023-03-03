@@ -1,80 +1,117 @@
 import styled from "styled-components";
-import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
+import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
 import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
-import "swiper/css";
 import "swiper/css/effect-cards";
 
-import {FreeMode, Pagination, Autoplay } from "swiper";
+import {Pagination, Autoplay,EffectCards} from "swiper";
 
 
 export default function Interview() {
 
     return (
-        <InterViewWrapper>
+        <InterViewLayout>
             <QuestionText>
-                <div>Q.</div>
                 {interViewQuestion}
             </QuestionText>
             <InterViewScrollBox>
                 <Swiper
-                    slidesPerView={"auto"}
+                    effect="cards"
+                    slidesPerView={1}
                     pagination={{
                         clickable: true,
                     }}
-                    spaceBetween={20}
-                    freeMode={true}
                     grabCursor={true}
                     loop={true}
-                    navigation={true}
-                    modules={[FreeMode, Pagination,Autoplay]}
+                    modules={[Pagination,Autoplay,EffectCards]}
                     autoplay={{
-                        delay: 5000,
+                        delay: 500,
                         disableOnInteraction: false,
                     }}
                 >
                     {
                         interviewAnswer.map((item) =>
-                            <SwiperSlide>
-                                <InterViewBox key={item.key}>
-                                    <div className="answer">{item.answer}</div>
-                                    <div className="name">{item.name}</div>
-                                </InterViewBox>
+                            <SwiperSlide key={item.key}>
+                                <div className="answer">{item.answer}</div>
+                                <div className="name">{item.name}</div>
                             </SwiperSlide>
                         )
                     }
                 </Swiper>
             </InterViewScrollBox>
-        </InterViewWrapper>
+        </InterViewLayout>
     );
 }
 
-const InterViewWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: ${viewHeightCalc(144)};
+const InterViewLayout = styled.div`
+  display: grid;
+  //grid-template-columns: 1.2fr 2fr;
+  grid-template-columns: repeat(2, minmax(100px, auto));
+  column-gap: 3rem;
+  justify-items: center;
+  @media(max-width: 950px) {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 `
 
 const InterViewScrollBox = styled.div`
-  flex-basis: 60%;
-  white-space: nowrap;
-  &::-webkit-scrollbar{
-    display: none;
+  .swiper{
+    padding: 0 70px 20px 40px;
+    width: 500px;
+    @media(max-width: 1200px) {
+      width: 400px;
+    }
+    @media(max-width: 576px) {
+      width: 200px;
+      padding: 0 70px 20px 50px;
+    }
+    @media(max-width: 280px) {
+      width: 150px;
+    }
   }
   .swiper-slide {
-    width: 70%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    background-color: ${props => props.theme.color.primaryLight};
+    white-space: nowrap;
+    .answer{
+      white-space: pre-line;
+    }
+    .name {
+      color: ${props => props.theme.color.primary};
+      font-weight: 600;
+      margin-top: ${viewHeightCalc(18)}
+    }
+    padding: 40px;
+    @media(max-width: 1800px) {
+      padding: 30px;
+    }
+    @media(max-width: 1200px) {
+      padding: 28px;
+    }
+    @media(max-width: 768px) {
+      border-radius: 30px;
+      padding: 20px;
+    }
+    @media(max-width: 576px) {
+      border-radius: 20px;
+      padding: 16px;
+    }
+    @media (max-width: 280px) {
+      padding: 12px;
+    }
   }
 `
 
-const QuestionText = styled.div`
-  flex-basis: 40%;
-  display: flex;
+const QuestionText = styled.p`
+  margin:0;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
   white-space: pre-line;
-  margin-right: ${viewWidthCalc(60)};
   font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.subtitle};
@@ -85,45 +122,8 @@ const QuestionText = styled.div`
   @media(max-width: 768px) {
     font-size: ${props=>props.theme.fontSize.smallTablet.subtitle};
   }
-  @media(max-width: 576px) {
-    font-size: ${props=>props.theme.fontSize.mobile.subtitle};
-  }
-  @media (max-width: 280px) {
-    font-size: ${props => props.theme.fontSize.fold.subtitle};
-  }
-`
-
-const InterViewBox = styled.div`
-  flex-basis: 10%;
-  align-items: flex-start;
-  border-radius: 40px;
-  background-color: ${props => props.theme.color.primaryLight};
-  white-space: nowrap;
-  .answer{
-    white-space: pre-line;
-  }
-  .name {
-    color: ${props => props.theme.color.primary};
-    font-weight: 600;
-    margin-top: ${viewHeightCalc(18)}
-  }
-  padding: 40px;
-  @media(max-width: 1800px) {
-    padding: 30px;
-  }
-  @media(max-width: 1200px) {
-    padding: 28px;
-  }
-  @media(max-width: 768px) {
-    border-radius: 30px;
-    padding: 20px;
-  }
-  @media(max-width: 576px) {
-    border-radius: 20px;
-    padding: 16px;
-  }
-  @media (max-width: 280px) {
-    border-radius: 10px;
-    padding: 8px;
+  &::before{
+    content:"Q.";
+    position: relative;
   }
 `
