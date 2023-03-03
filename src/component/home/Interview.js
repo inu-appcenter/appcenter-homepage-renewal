@@ -1,37 +1,51 @@
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
-import {useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
+import {Swiper, SwiperSlide} from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
+
+import {FreeMode, Pagination, Mousewheel, Autoplay } from "swiper";
+
 
 export default function Interview() {
-    const interviewRef = useRef(null);
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            interviewRef.current.scrollTo({
-                left: interviewRef.current.scrollLeft > 2000 ? 0 : interviewRef.current.scrollLeft + (interviewRef.current.offsetWidth),
-                behavior: 'smooth',
-            })
-        }, 1000);
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, [])
-    
+
     return (
         <InterViewWrapper>
             <QuestionText>
                 <div>Q.</div>
                 {interViewQuestion}
             </QuestionText>
-            <InterViewScrollBox ref={interviewRef}>
-                {
-                    interviewAnswer.map((item) =>
-                        <InterViewBox key={item.key}>
-                            <div className="answer">{item.answer}</div>
-                            <div className="name">{item.name}</div>
-                        </InterViewBox>
-                    )
-                }
+            <InterViewScrollBox>
+                <Swiper
+                    slidesPerView={"auto"}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    spaceBetween={20}
+                    freeMode={true}
+                    grabCursor={true}
+                    loop={true}
+                    navigation={true}
+                    modules={[FreeMode, Pagination,Autoplay]}
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }}
+                >
+                    {
+                        interviewAnswer.map((item) =>
+                            <SwiperSlide>
+                                <InterViewBox key={item.key}>
+                                    <div className="answer">{item.answer}</div>
+                                    <div className="name">{item.name}</div>
+                                </InterViewBox>
+                            </SwiperSlide>
+                        )
+                    }
+                </Swiper>
             </InterViewScrollBox>
         </InterViewWrapper>
     );
@@ -45,10 +59,12 @@ const InterViewWrapper = styled.div`
 
 const InterViewScrollBox = styled.div`
   flex-basis: 60%;
-  overflow: scroll;
   white-space: nowrap;
   &::-webkit-scrollbar{
     display: none;
+  }
+  .swiper-slide {
+    width: 70%;
   }
 `
 
@@ -59,7 +75,7 @@ const QuestionText = styled.div`
   font-weight: 600;
   white-space: pre-line;
   margin-right: ${viewWidthCalc(60)};
-  font-size: ${props=>props.theme.fontSize.desktop.subtitle};
+  font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.subtitle};
   }
@@ -79,12 +95,9 @@ const QuestionText = styled.div`
 
 const InterViewBox = styled.div`
   flex-basis: 10%;
-  display: inline-flex;
   align-items: flex-start;
-  flex-direction: column;
   border-radius: 40px;
   background-color: ${props => props.theme.color.primaryLight};
-  margin-right: ${viewWidthCalc(20)};
   white-space: nowrap;
   .answer{
     white-space: pre-line;
