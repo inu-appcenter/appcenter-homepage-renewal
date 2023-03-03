@@ -24,7 +24,7 @@ export default function YearDropBox({year, handleYearChange}) {
                 >
                     {
                         yearList.map((year, i) => (
-                            <MenuItem key={i} value={year}>{year}</MenuItem>
+                            <MenuItem key={i} value={year} sx={{justifyContent: "center"}}>{year}</MenuItem>
                         ))
                     }
                 </DropBox>
@@ -35,6 +35,7 @@ export default function YearDropBox({year, handleYearChange}) {
 
 const DropBox = styled(Select)`
   border-radius: 15px;
+  text-align: center;
   width: auto;
 
   & > *:first-child {
@@ -47,7 +48,7 @@ const DropBox = styled(Select)`
       padding: 4px 8px;
     }
   }
-
+  
   font-size: ${props => props.theme.fontSize.bigDesktop.caption};
   @media (max-width: 1800px) {
     font-size: ${props => props.theme.fontSize.desktop.caption};
