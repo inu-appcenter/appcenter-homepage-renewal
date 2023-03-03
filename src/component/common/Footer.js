@@ -16,7 +16,6 @@ export default function Footer() {
 }
 
 const FooterWrapper = styled.div`
-    width: 400px;
     margin: 100px auto;
 `;
 const SocialIcons = styled.div`
