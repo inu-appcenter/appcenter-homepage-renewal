@@ -33,7 +33,7 @@ const PageTitleWrapper = styled.div`
 `;
 
 const SloganBox = styled.div`
-  height: auto;
+  height: 40vh;
   @media (max-width: 1800px){
     height: 90vh;
   }
@@ -43,8 +43,10 @@ const SloganBox = styled.div`
 `
 
 const InterviewBox = styled.div`
-  height: auto;
+  height: 40vh;
+  padding-top: 30vh;
   @media (max-width: 1800px){
+    padding-top: 20vh;
     height: 70vh;
   }
   @media (max-width: 576px){
