@@ -3,6 +3,8 @@ import {PageTitle} from "../../component/common/PageTitle";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 import ProductionDesktop from "../../component/home/ProductionDesktop";
 import ProductionMobile from "../../component/home/ProductionMobile";
+import "swiper/css/pagination";
+
 
 export default function ProductContainer(){
     return(

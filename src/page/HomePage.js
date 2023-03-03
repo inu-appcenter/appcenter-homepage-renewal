@@ -8,7 +8,7 @@ export default function HomePage() {
         <HomePageWrapper>
             <AboutUsContainer/>
             <OurTeamContainer/>
-            {/*<ProductContainer/>*/}
+            <ProductContainer/>
         </HomePageWrapper>
     );
 }

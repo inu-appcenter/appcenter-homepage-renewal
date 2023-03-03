@@ -1,33 +1,12 @@
-import {Box, Card, CardContent, CardOverflow} from "@mui/joy";
 import AspectRatio from "@mui/joy/AspectRatio";
-import INUIT from '../../resource/img/product/image_1.png';
-import UniLetter from '../../resource/img/product/image_2.png';
-import Idorm from '../../resource/img/product/image_3.png';
-import CafeTeria from '../../resource/img/product/image_4.png';
-import INUM from '../../resource/img/product/image_5.png';
-import Image7 from '../../resource/img/product/image_7.png';
-import InuBus from '../../resource/img/product/image_8.png';
-import AppStore from '../../resource/img/product/app_store_logo.svg';
-import GooglePlay from '../../resource/img/product/google_play_logo.svg';
 import styled from "styled-components";
 
-import React, {useState} from "react";
+import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {EffectFlip, Autoplay, Pagination, Navigation} from "swiper";
-import "swiper/css/navigation";
 import "swiper/css/effect-flip";
-import "swiper/css";
-import "swiper/css/pagination";
+import productList from "../../resource/string/productList";
 
-const productImageIcon = [
-    {key: 123, image: INUIT, store: [GooglePlay]},
-    {key: 124, image: UniLetter, store: [GooglePlay, AppStore]},
-    {key: 125, image: Idorm, store: [GooglePlay]},
-    {key: 126, image: CafeTeria, store: [GooglePlay, AppStore]},
-    {key: 127, image: INUM, store: [AppStore]},
-    {key: 128, image: Image7, store: [GooglePlay]},
-    {key: 129, image: InuBus, store: [GooglePlay]},
-];
 export default function ProductionMobile() {
     return (
         <ProductionLayout>
@@ -43,38 +22,35 @@ export default function ProductionMobile() {
                 centeredSlides={true}
                 pagination={true}
                 navigation={true}
-                freeMode={true}
             >
                 {
-                    productImageIcon.map((item) => (
-                        <div key={item.key}>
-                            <SwiperSlide>
-                                <div className='card'>
-                                    <AspectRatio ratio={'1'}>
-                                        <figure>
-                                            <img
-                                                src={item.image}
-                                                loading="lazy"
-                                                alt=""
-                                            />
-                                        </figure>
-                                    </AspectRatio>
-                                    <StoreImageBox>
-                                        {
-                                            item.store.map((value) => (
-                                                <div className='div-border-01-basic'>
-                                                    <img
-                                                        src={value}
-                                                        loading="lazy"
-                                                        alt="store logo"
-                                                    />
-                                                </div>
-                                            ))
-                                        }
-                                    </StoreImageBox>
-                                </div>
-                            </SwiperSlide>
-                        </div>
+                    productList.map((item) => (
+                        <SwiperSlide key={item.key}>
+                            <div className='card'>
+                                <AspectRatio ratio={'1'}>
+                                    <figure>
+                                        <img
+                                            src={item.image}
+                                            loading="lazy"
+                                            alt=""
+                                        />
+                                    </figure>
+                                </AspectRatio>
+                                <StoreImageBox>
+                                    {
+                                        item.store.map((value) => (
+                                            <div key={value.key} className='div-border-01-basic'>
+                                                <img
+                                                    src={value.image}
+                                                    loading="lazy"
+                                                    alt="store logo"
+                                                />
+                                            </div>
+                                        ))
+                                    }
+                                </StoreImageBox>
+                            </div>
+                        </SwiperSlide>
 
                     ))
                 }
@@ -85,14 +61,21 @@ export default function ProductionMobile() {
 
 const ProductionLayout = styled.div`
   display: flex;
+  margin-top: 30px;
 
   .card {
     width: 250px;
+    @media (max-width: 300px){
+      width: 200px;
+    }
   }
 
   .swiper {
     width: 250px;
-    padding: 60px;
+    padding-bottom: 30px;
+    @media (max-width: 300px){
+      width: 200px;
+    }
   }
 
   .swiper-slide {
