@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import {PageTitle} from "../../component/common/PageTitle";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
-import Production from "../../component/home/Production";
+import ProductionDesktop from "../../component/home/ProductionDesktop";
+import ProductionMobile from "../../component/home/ProductionMobile";
 
 export default function ProductContainer(){
     return(
@@ -11,7 +12,12 @@ export default function ProductContainer(){
                 topMargin={viewHeightCalc(50)}
                 subTitle='앱센터에서 만든 앱들을 소개합니다'
             />
-            <Production/>
+            <DesktopSizeBox>
+                <ProductionDesktop/>
+            </DesktopSizeBox>
+            <MobileSizeBox>
+                <ProductionMobile/>
+            </MobileSizeBox>
         </ProductWrapper>
     );
 }
@@ -21,3 +27,14 @@ const ProductWrapper = styled.div`
   height: 100vh;
 `;
 
+const DesktopSizeBox = styled.div`
+  @media(max-width:680px){
+    display: none;
+  }
+`
+
+const MobileSizeBox = styled.div`
+  @media(min-width:680px){
+    display: none;
+  }
+`
