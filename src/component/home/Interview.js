@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
-import "swiper/css";
 import "swiper/css/effect-cards";
 
-import {FreeMode, Pagination, Autoplay,EffectCards} from "swiper";
+import {Pagination, Autoplay,EffectCards} from "swiper";
 
 
 export default function Interview() {
+    const [interViewSwiper, setInterviewSwiper] = useState(null);
+
 
     return (
         <InterViewLayout>
@@ -19,18 +20,18 @@ export default function Interview() {
             </QuestionText>
             <InterViewScrollBox>
                 <Swiper
-                    effect={"cards"}
+                    effect="cards"
                     slidesPerView={1}
                     pagination={true}
-                    spaceBetween={20}
                     grabCursor={true}
                     loop={true}
-                    navigation={true}
-                    modules={[FreeMode, Pagination,Autoplay,EffectCards]}
+                    navigation={false}
+                    modules={[Pagination,Autoplay,EffectCards]}
                     autoplay={{
                         delay: 500,
                         disableOnInteraction: false,
                     }}
+                    onSwiper={setInterviewSwiper}
                 >
                     {
                         interviewAnswer.map((item) =>
