@@ -54,7 +54,7 @@ export default function Navbar() {
     })
 
     return (
-        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque}>
+        <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque ? '_' : ''}>
             <NavLogo to={fullPath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
