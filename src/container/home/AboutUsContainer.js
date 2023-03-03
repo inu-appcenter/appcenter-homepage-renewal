@@ -7,24 +7,47 @@ import {viewHeightCalc} from "../../lib/viewportCalculate";
 export default function AboutUsContainer(){
     return(
         <>
-            <AboutUsWrapper>
-                <PageTitleWrapper>
-                    <PageTitle title="About Us"/>
-                </PageTitleWrapper>
-                <Slogan/>
-                <Interview/>
-            </AboutUsWrapper>
+            <AboutUsContainerBox>
+                <SloganBox>
+                    <PageTitleWrapper>
+                        <PageTitle title="About Us"/>
+                    </PageTitleWrapper>
+                    <Slogan/>
+                </SloganBox>
+                <InterviewBox>
+                    <Interview/>
+                </InterviewBox>
+            </AboutUsContainerBox>
         </>
     );
 }
 
-const AboutUsWrapper = styled.div`
-  height: 100vh;
+const AboutUsContainerBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
 const PageTitleWrapper = styled.div`
-  padding-top: 100px;
+  padding: 100px 0;
 `;
+
+const SloganBox = styled.div`
+  height: auto;
+  @media (max-width: 1800px){
+    height: 90vh;
+  }
+  @media (max-width: 576px){
+    height: auto;
+  }
+`
+
+const InterviewBox = styled.div`
+  height: auto;
+  @media (max-width: 1800px){
+    height: 70vh;
+  }
+  @media (max-width: 576px){
+    height: auto;
+  }
+`
