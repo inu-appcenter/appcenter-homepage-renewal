@@ -80,6 +80,12 @@ const InterViewScrollBox = styled.div`
     white-space: nowrap;
     .answer{
       white-space: pre-line;
+      @media(max-width: 768px) {
+        font-size: ${props=>props.theme.fontSize.smallTablet.text};
+      }
+      @media(max-width: 576px) {
+        font-size: ${props=>props.theme.fontSize.mobile.text};
+      }
     }
     .name {
       color: ${props => props.theme.color.primary};

@@ -88,7 +88,7 @@ const theme = {
         mobile:{
             title: '24px',
             subtitle: '20px',
-            text: '14px',
+            text: '12px',
             caption: '12px',
         },
         fold:{
