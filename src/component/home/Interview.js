@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import "swiper/css/effect-cards";
@@ -10,8 +10,6 @@ import {Pagination, Autoplay,EffectCards} from "swiper";
 
 
 export default function Interview() {
-    const [interViewSwiper, setInterviewSwiper] = useState(null);
-
 
     return (
         <InterViewLayout>
@@ -22,16 +20,16 @@ export default function Interview() {
                 <Swiper
                     effect="cards"
                     slidesPerView={1}
-                    pagination={true}
+                    pagination={{
+                        clickable: true,
+                    }}
                     grabCursor={true}
                     loop={true}
-                    navigation={false}
                     modules={[Pagination,Autoplay,EffectCards]}
                     autoplay={{
                         delay: 500,
                         disableOnInteraction: false,
                     }}
-                    onSwiper={setInterviewSwiper}
                 >
                     {
                         interviewAnswer.map((item) =>
@@ -49,7 +47,8 @@ export default function Interview() {
 
 const InterViewLayout = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 2fr;
+  //grid-template-columns: 1.2fr 2fr;
+  grid-template-columns: repeat(2, minmax(100px, auto));
   column-gap: 3rem;
   justify-items: center;
   @media(max-width: 950px) {
@@ -60,9 +59,17 @@ const InterViewLayout = styled.div`
 
 const InterViewScrollBox = styled.div`
   .swiper{
+    padding: 0 70px 20px 40px;
     width: 500px;
     @media(max-width: 1200px) {
       width: 400px;
+    }
+    @media(max-width: 576px) {
+      width: 200px;
+      padding: 0 70px 20px 50px;
+    }
+    @media(max-width: 280px) {
+      width: 150px;
     }
   }
   .swiper-slide {
@@ -95,8 +102,7 @@ const InterViewScrollBox = styled.div`
       padding: 16px;
     }
     @media (max-width: 280px) {
-      border-radius: 10px;
-      padding: 8px;
+      padding: 12px;
     }
   }
 `
