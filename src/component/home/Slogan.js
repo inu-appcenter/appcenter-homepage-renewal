@@ -1,13 +1,32 @@
 import styled,{css} from "styled-components";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
 import {slogan} from "../../resource/data/aboutUs";
+import {useEffect, useState} from "react";
 
 export default function Slogan() {
+    const [text, setText] = useState(slogan.description.text);
+
+    const handleResize = () =>{
+        console.log(window.innerWidth);
+        if(window.innerWidth < 576){
+            setText(slogan.description.mobileText);
+        }else{
+            setText(slogan.description.text);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return()=>{
+            window.removeEventListener('resize', handleResize);
+        }
+    },[]);
+
     return (
         <SloganWrapper>
             <Text type='top'>{slogan.top.text}</Text>
             <Text type='title'>{slogan.title.text}</Text>
-            <Text type='description'>{slogan.description.text}</Text>
+            <Text type='description'>{text}</Text>
         </SloganWrapper>
     )
 }
