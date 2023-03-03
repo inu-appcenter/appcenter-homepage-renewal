@@ -7,7 +7,6 @@ export default function Slogan() {
     const [text, setText] = useState(slogan.description.text);
 
     const handleResize = () =>{
-        console.log(window.innerWidth);
         if(window.innerWidth < 576){
             setText(slogan.description.mobileText);
         }else{
