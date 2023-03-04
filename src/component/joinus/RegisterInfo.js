@@ -15,7 +15,7 @@ export default function RegisterInfo() {
                 }
             >
                 지원 방법 바로가기
-                <ArrowRightAltIcon sx={{fontSize: 40}}/>
+                <ArrowRightAltIcon/>
             </Button>
         </RegisterTextWrapper>
     );
@@ -30,6 +30,15 @@ const RegisterTextWrapper = styled.div`
   padding: 12px 0;
   @media (max-width: 768px) {
     row-gap: 1rem;
+  }
+  svg {
+    font-size: 40px;
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+    @media (max-width: 576px) {
+      font-size: 25px;
+    }
   }
 
   .top {
@@ -65,7 +74,7 @@ const RegisterTextWrapper = styled.div`
   background: ${props => props.theme.color.white};
   border: 1px solid ${props => props.theme.color.yellow};
   color: ${props => props.theme.color.yellow};
-  padding: 6px 18px;
+  padding: 6px 1em;
 
   &:hover {
     background: rgba(254, 200, 83, 0.1);
