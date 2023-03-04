@@ -120,6 +120,7 @@ const QuestionText = styled.p`
   font-weight: 600;
   white-space: pre-line;
   font-size: ${props=>props.theme.fontSize.bigDesktop.subtitle};
+  text-indent: -1em;
   @media(max-width: 1800px) {
     font-size: ${props=>props.theme.fontSize.desktop.subtitle};
   }
