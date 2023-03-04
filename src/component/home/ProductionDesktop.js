@@ -56,12 +56,14 @@ export default function ProductionDesktop() {
                                 <StoreImageBox>
                                     {
                                         item.store.map((value) => (
-                                            <div key={uuidv4()} className='div-border-01-basic'>
-                                                <img
-                                                    src={value.image}
-                                                    loading="lazy"
-                                                    alt="store logo"
-                                                />
+                                            <div key={value.key} className='div-border-01-basic'>
+                                                <a href={value.url} target="_blank">
+                                                    <img
+                                                        src={value.image}
+                                                        loading="lazy"
+                                                        alt="store logo"
+                                                    />
+                                                </a>
                                             </div>
                                         ))
                                     }

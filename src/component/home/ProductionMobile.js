@@ -40,11 +40,13 @@ export default function ProductionMobile() {
                                     {
                                         item.store.map((value) => (
                                             <div key={value.key} className='div-border-01-basic'>
-                                                <img
-                                                    src={value.image}
-                                                    loading="lazy"
-                                                    alt="store logo"
-                                                />
+                                                <a href={value.url} target="_blank">
+                                                    <img
+                                                        src={value.image}
+                                                        loading="lazy"
+                                                        alt="store logo"
+                                                    />
+                                                </a>
                                             </div>
                                         ))
                                     }
