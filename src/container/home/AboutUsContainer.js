@@ -2,7 +2,6 @@ import {PageTitle} from "../../component/common/PageTitle";
 import styled from "styled-components";
 import Slogan from "../../component/home/Slogan";
 import Interview from "../../component/home/Interview";
-import {viewHeightCalc} from "../../lib/viewportCalculate";
 
 export default function AboutUsContainer({mref}){
     return(

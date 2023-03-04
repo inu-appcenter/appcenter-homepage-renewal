@@ -24,9 +24,9 @@ const JoinUsPageWrapper = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 5rem;
+  row-gap: 4rem;
   @media (max-width: 1800px){
-    row-gap: 10rem;
+    row-gap: 9rem;
   }
   @media (max-width: 768px){
     row-gap: 2rem;
@@ -35,4 +35,20 @@ const JoinUsPageWrapper = styled.div`
 
 const TitleWrapper = styled.div`
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
+  @media(max-width: 1800px) {
+    padding-top: ${props=>props.theme.padding.desktop.contentTop};
+    grid-template-columns: 1fr;
+  }
+  @media(max-width: 1200px) {
+    padding-top: ${props=>props.theme.padding.tablet.contentTop};
+  }
+  @media(max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+  @media(max-width: 768px) {
+    padding-top: ${props=>props.theme.padding.smallTablet.contentTop};
+  }
+  @media(max-width: 576px) {
+    padding-top: ${props=>props.theme.padding.mobile.contentTop};
+  }
 `
