@@ -17,16 +17,14 @@ export function PartChip({
                         ? null
                         : (!web && part.partName === 'Web')
                             ? null
-                            :<>
-                                <Button
-                                    key={part.id}
-                                    className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
-                                    onClick={e => onButtonClick(e, part.partName.toLowerCase())}
-                                >
-                                    {part.partName}
-                                    {part.partName === "Common" && <Divider/>}
-                                </Button>
-                            </>
+                            : <Button
+                                key={part.id}
+                                className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
+                                onClick={e => onButtonClick(e, part.partName.toLowerCase())}
+                            >
+                                {part.partName}
+                                {part.partName === "Common" && <Divider/>}
+                            </Button>
                 ))}
             </ButtonGroup>
         </>

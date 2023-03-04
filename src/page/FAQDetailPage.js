@@ -9,13 +9,13 @@ export default function FAQDetailPage() {
     return (
         <>
             <FAQDetailWrapper>
-                <ContentWrapepr>
+                <ContentWrapper>
                     <PartChip
                         url={location.pathname}
                         onButtonClick={(e, part) => navigate(part)}
                     />
                     <Outlet/>
-                </ContentWrapepr>
+                </ContentWrapper>
             </FAQDetailWrapper>
         </>
     );
@@ -28,7 +28,7 @@ const FAQDetailWrapper = styled.div`
   row-gap: 2rem;
 `
 
-const ContentWrapepr = styled.div`
+const ContentWrapper = styled.div`
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
 
 `
