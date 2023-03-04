@@ -24,6 +24,7 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
+    "shx": "^0.3.4",
     "styled-components": "^5.3.6",
     "swiper": "^9.0.1",
     "uuid": "^9.0.0",
@@ -34,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build && shx cp build/index.html build/404.html",
     "predeploy": "npm run build"
   },
   "eslintConfig": {
