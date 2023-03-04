@@ -3,7 +3,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import {Button} from "@mui/material";
 
 export default function RegisterInfo() {
-    const text = 'Ready To get\nstarted?'
+    const text = 'Ready to get\nstarted?'
     return (
         <RegisterTextWrapper>
             <div className='top'>app center</div>
