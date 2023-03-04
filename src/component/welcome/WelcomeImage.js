@@ -85,6 +85,10 @@ const SwiperContainer = styled.div`
         width: calc(250px - 10px);  // assume bezel-width: 10px
         height: calc(500px - 10px); // assume bezel-width: 10px
         border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, .25);
         background: white;
         overflow: hidden;
