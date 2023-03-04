@@ -6,6 +6,8 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {EffectFlip, Autoplay, Pagination, Navigation} from "swiper";
 import "swiper/css/effect-flip";
 import productList from "../../resource/string/productList";
+import {v4 as uuidv4} from "uuid";
+import {Button} from "@mui/material";
 
 export default function ProductionMobile() {
     return (
@@ -39,15 +41,18 @@ export default function ProductionMobile() {
                                 <StoreImageBox>
                                     {
                                         item.store.map((value) => (
-                                            <div key={value.key} className='div-border-01-basic'>
-                                                <a href={value.url} target="_blank" rel="noreferrer">
-                                                    <img
-                                                        src={value.image}
-                                                        loading="lazy"
-                                                        alt="store logo"
-                                                    />
-                                                </a>
-                                            </div>
+                                            <StoreButton
+                                                href={value.url}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                key={uuidv4()}
+                                            >
+                                                <img
+                                                    src={value.image}
+                                                    loading="lazy"
+                                                    alt="store logo"
+                                                />
+                                            </StoreButton>
                                         ))
                                     }
                                 </StoreImageBox>
@@ -91,13 +96,13 @@ const StoreImageBox = styled.div`
   flex-direction: column;
   gap: 10px;
   height: fit-content;
-
-  .div-border-01-basic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid ${props => props.theme.color.primary};
-    border-radius: 27.5px;
-    padding: 10px 20px;
-  }
 `
+
+const StoreButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${props => props.theme.color.primary};
+  border-radius: 27.5px;
+  padding: 10px 20px;
+`;
