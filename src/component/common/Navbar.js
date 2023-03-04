@@ -33,13 +33,19 @@ export default function Navbar() {
     );
     const stopScroll = useDebounce(
         () => {
-            if (window.scrollY < 50)
+            if (window.scrollY < 50) {
                 setNavVisibility(true);
+                setNavOpaque(true);
+            }
             else
                 scrollDirection ? setNavVisibility(true) : setNavVisibility(false);
-            setNavOpaque(true);
-        }, 500
+        }, 0
     );
+    const stopScrollDelay = useDebounce(
+        () => {
+            setNavOpaque(true);
+        }, 300
+    )
     useLayoutEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -51,7 +57,13 @@ export default function Navbar() {
         return () => {
             window.removeEventListener('scroll', stopScroll);
         }
-    })
+    });
+    useLayoutEffect(() => {
+        window.addEventListener('scroll', stopScrollDelay);
+        return () => {
+            window.removeEventListener('scroll', stopScrollDelay);
+        }
+    });
 
     return (
         <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque ? '_' : ''}>
