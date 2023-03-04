@@ -41,7 +41,7 @@ export default function ProductionDesktop() {
                 speed={2000}
             >
                 {
-                    productList.concat().map((item) => (
+                    productList.concat(productList).map((item) => (
                         <SwiperSlide key={uuidv4()}>
                             <div className='card'>
                                 <AspectRatio ratio={'1'}>
