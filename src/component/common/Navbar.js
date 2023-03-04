@@ -135,11 +135,7 @@ const StyledToolbar = styled(Toolbar)`
   @media (max-width: 576px) {
     height: 9rem;
     flex-direction: column;
-    min-width: 364px;
-  }
-  @media (max-width: 280px) {
-    min-width: 264px;
-  }
+    padding: 0;
 `;
 const NavLogo = styled(Link)`
   display: flex;
