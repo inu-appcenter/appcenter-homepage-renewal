@@ -10,9 +10,12 @@ import {useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
+import {useDispatch} from "react-redux";
+import {setCurrent} from "../../modules/homeSlice";
 
 export default function Navbar() {
     const location = useLocation();
+    const dispatch = useDispatch();
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
@@ -82,11 +85,20 @@ export default function Navbar() {
                         >{item.title}</Link>
                         <div className='navbar__item_child'>
                             {item.child && item.child.map(sub =>
-                                <ChildLink
-                                    key={sub.id}
-                                    to={sub.url}
-                                    point={location.pathname === sub.url ? 1 : 0}
-                                >{sub.title}</ChildLink>
+                                (
+                                    item.title === 'Home'
+                                        ?
+                                        <ChildLink
+                                            key={sub.id}
+                                            onClick={(e)=>dispatch(setCurrent(sub.title))}
+                                            point={location.pathname === sub.url ? 1 : 0}
+                                        >{sub.title}</ChildLink>
+                                        : <ChildLink
+                                            key={sub.id}
+                                            to={sub.url}
+                                            point={location.pathname === sub.url ? 1 : 0}
+                                        >{sub.title}</ChildLink>
+                                )
                             )}
                         </div>
                     </div>
@@ -109,13 +121,13 @@ const StyledToolbar = styled(Toolbar)`
   box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
   transition: .5s;
   z-index: 2000;
-  opacity: ${props=>props.opaque ? 1 : .5};
+  opacity: ${props => props.opaque ? 1 : .5};
 
   &.hide {
     visibility: hidden;
     top: -9rem
   }
-  
+
   @media (max-width: 1200px) {
     padding: 1rem ${props => props.theme.padding.navBarInside};
   }
@@ -130,7 +142,7 @@ const NavLogo = styled(Link)`
   flex-grow: 1;
   position: relative;
   top: -5px;
-  
+
   .logo {
     object-fit: cover;
     width: 400px;
@@ -251,7 +263,8 @@ const NavItems = styled.div`
 `;
 
 const ChildLink = styled(Link)`
-  color: ${props=>props.point===1 ? props.theme.color.yellow : props.theme.color.white};
+  color: ${props => props.point === 1 ? props.theme.color.yellow : props.theme.color.white};
+
   &:hover {
     color: ${props => props.theme.color.yellow};
   }

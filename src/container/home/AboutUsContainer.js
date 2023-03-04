@@ -4,21 +4,19 @@ import Slogan from "../../component/home/Slogan";
 import Interview from "../../component/home/Interview";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 
-export default function AboutUsContainer(){
+export default function AboutUsContainer({mref}){
     return(
-        <>
-            <AboutUsContainerBox>
-                <SloganBox>
-                    <PageTitleWrapper>
-                        <PageTitle title="About Us"/>
-                    </PageTitleWrapper>
-                    <Slogan/>
-                </SloganBox>
-                <InterviewBox>
-                    <Interview/>
-                </InterviewBox>
-            </AboutUsContainerBox>
-        </>
+        <AboutUsContainerBox ref={mref}>
+            <SloganBox>
+                <PageTitleWrapper>
+                    <PageTitle title="About Us"/>
+                </PageTitleWrapper>
+                <Slogan/>
+            </SloganBox>
+            <InterviewBox>
+                <Interview/>
+            </InterviewBox>
+        </AboutUsContainerBox>
     );
 }
 
