@@ -25,6 +25,7 @@ const WelcomeWrapper = styled.div`
         border-bottom-right-radius: 20vw;
     }
     @media(max-width: 576px) {
+        padding-top: 8.5rem;
         height: 25rem;
     }
 `;
