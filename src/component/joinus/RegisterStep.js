@@ -19,9 +19,13 @@ export default function RegisterStep(){
 }
 
 const CardWrap = styled.div`
+  padding: 0 6rem;
   color: ${props => props.theme.color.black};
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media (max-width: 1200px) {
+    padding: 0 3rem;
+  }
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -31,11 +35,13 @@ const CardWrap = styled.div`
 
 const Card = styled.div`
   display: flex;
+  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   background-color: ${props => props.theme.color.primaryLight};
   border-radius: 30px;
   font-size: 20px;
+  height:150px;
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -51,5 +57,6 @@ const Card = styled.div`
     color: ${props => props.theme.color.black};
     font-weight: 600;
     margin: 20px 40px 30px;
+    word-break: keep-all;
   }
 `
