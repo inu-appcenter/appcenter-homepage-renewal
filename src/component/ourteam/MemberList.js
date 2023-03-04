@@ -1,9 +1,10 @@
 import * as React from 'react';
 import MemberItem from "./MemberItem";
 import styled from "styled-components";
-import {Button, Skeleton} from "@mui/material";
 import MemberItemSkeleton from "./MemberItemSkeleton";
 import {useEffect, useRef} from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 export default function MemberList({data}) {
@@ -28,9 +29,9 @@ export default function MemberList({data}) {
             >
                 {
                     data ?
-                        data.map((item, index) => (
+                        data.map((item) => (
                             <MemberItem
-                                key={index}
+                                key={uuidv4()}
                                 image={item.image}
                                 name={item.name}
                                 description={item.description}

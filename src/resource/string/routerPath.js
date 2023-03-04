@@ -65,10 +65,6 @@ export const routerPath = {
                 url: 'server',
                 title: 'Server',
             },
-            web:{
-                url: 'web',
-                title: 'Web',
-            },
         },
     },
 };
@@ -83,6 +79,5 @@ export const fullPath = {
     android:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.android.url}`,
     ios:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
     server:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
-    web:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
     design:`/${routerPath.base.url}/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
 }
