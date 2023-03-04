@@ -25,7 +25,7 @@ export default function OurTeamPage() {
         localStorage.setItem('part',part);
         localStorage.setItem('year',year);
         navigate({pathname:part, search:`?year=${year}`});
-    },[part, year])
+    },[part, year]);
 
     return (
         <OurTeamPageWrapper>
@@ -40,6 +40,7 @@ export default function OurTeamPage() {
                     />
                 </Stack>
                 <PartChip
+                    web={(year === '2022')}
                     common={false}
                     url={location.pathname}
                     onButtonClick={(e, part) => setPart(part)}

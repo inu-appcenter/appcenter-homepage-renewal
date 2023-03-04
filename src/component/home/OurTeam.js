@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {partInfo} from "../../resource/string/partInfo";
-import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {Fab} from "@mui/material"
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {useNavigate} from "react-router-dom";

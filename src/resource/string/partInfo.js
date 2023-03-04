@@ -65,8 +65,6 @@ export const partInfo = [
         description: '웹환경에 맞춘 서비스를 구현합니다',
         speechBubble: '안녕하세요 앱센터 웹파트 입니다.\n',
         emoji: webEmoji,
-        url: routerPath.faqDetail.child.web.url,
-        fullUrl: fullPath.web
     },
 ];
 

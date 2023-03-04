@@ -9,6 +9,8 @@ import {Avatar} from "@mui/joy";
 import {Fab, Skeleton} from "@mui/material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function MemberItem({image, name, description, link = [], leftArrowPress, rightArrowPress}) {
     return (
@@ -44,10 +46,10 @@ export default function MemberItem({image, name, description, link = [], leftArr
                 >
                     <ArrowButtonWrapepr>
                         <Fab size="small" onClick={leftArrowPress}>
-                            <ArrowBackIosIcon />
+                            <ArrowBackIosIcon/>
                         </Fab>
                         <Fab size="small" onClick={rightArrowPress}>
-                            <ArrowForwardIosIcon />
+                            <ArrowForwardIosIcon/>
                         </Fab>
                     </ArrowButtonWrapepr>
                 </StyledCardCover>
@@ -60,6 +62,7 @@ export default function MemberItem({image, name, description, link = [], leftArr
                 {
                     link.map(v => (
                         <Avatar
+                            key={uuidv4()}
                             onClick={() => {
                                 window.open(v)
                             }}
@@ -85,7 +88,7 @@ const StyledCard = styled(Card)`
   @media (max-width: 576px) {
     width: 100%;
     overflow: hidden;
-    touch-action:none;
+    touch-action: none;
   }
 `
 
@@ -105,16 +108,18 @@ const TextWrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   gap: 4px;
-  margin-top:4px;
-  >.name {
+  margin-top: 4px;
+
+  > .name {
     font-size: 28px;
-    margin:0;
+    margin: 0;
   }
-  >.description {
+
+  > .description {
     font-size: 14px;
     width: 150px;
     white-space: pre-line;
     height: 30px;
-    margin:0;
+    margin: 0;
   }
 `

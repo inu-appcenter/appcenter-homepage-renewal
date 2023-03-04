@@ -3,18 +3,25 @@ import {partInfo} from "../../resource/string/partInfo";
 import {Button} from "@mui/material";
 
 
-export function PartChip({url = partInfo[0].fullUrl, onButtonClick, common = true}) {
+export function PartChip({
+                             url = partInfo[0].fullUrl,
+                             onButtonClick,
+                             common = true,
+                                web=false
+}) {
     return (
         <>
             <ButtonGroup>
                 {partInfo.map((part, index) => (
-                    (!common && !index)
+                    (!common && part.partName === 'Common')
                         ? null
-                        : <Button
-                            key={part.id}
-                            className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
-                            onClick={e => onButtonClick(e, part.url)}
-                        >{part.partName}</Button>
+                        : (!web && part.partName === 'Web')
+                            ? null
+                            :<Button
+                                key={part.id}
+                                className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
+                                onClick={e => onButtonClick(e, part.partName.toLowerCase())}
+                            >{part.partName}</Button>
                 ))}
             </ButtonGroup>
         </>

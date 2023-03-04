@@ -7,7 +7,7 @@ const FAQCategoryCardList = ({list}) =>{
             <CardWrap>
                 {
                     list.map((item)=>
-                        <Card to={item.url} key={item.id}>
+                        <Card to={item.url} key={item.id} partName={item.partName}>
                             <p className="title">{item.partName}</p>
                             <p className="question">{item.question}</p>
                             <button>더보기</button>
@@ -32,7 +32,8 @@ const CardWrap = styled.div`
 
 const Card = styled(Link)`
   display: grid;
-  background-color: ${props => props.theme.color.primaryLight};
+  // background-color: ${props => props.theme.color.primaryLight};
+  background-color: ${props=>props.partName!=='Web' ? props.theme.color.primaryLight : 'rgba(128,128,128,0.4)'};
   border-radius: 30px;
   font-size: 20px;
   padding: 16px 20px;
