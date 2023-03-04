@@ -85,7 +85,7 @@ const VerticalLine = styled.div`
     display: block;
     position: relative;
     right: -2.5rem;
-    width: 200px;
+    width: 120px;
     margin-block-start: 0;
     padding-left: 0;
     font-size: .75rem;
@@ -107,7 +107,7 @@ const VerticalLine = styled.div`
   .lineText {
     position: relative;
     right: -1.5rem;
-    width: 150px;
+    width: 120px;
     font-size: .875rem;
     margin-top: .75rem;
     color: ${props=>props.theme.color.cyan[4]};
