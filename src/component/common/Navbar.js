@@ -113,13 +113,14 @@ const StyledToolbar = styled(Toolbar)`
   top: 0;
   left: 0;
   right: 0;
+  width: 100vw;
   background: ${props => props.theme.color.primary};
   padding: 1rem ${viewWidthCalc(150)};
   border-bottom-left-radius: 10vw;
   border-bottom-right-radius: 10vw;
   box-sizing: border-box;
   box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
-  transition: .5s;
+  transition: top .5s, opacity .5s, visibility .5s;
   z-index: 2000;
   opacity: ${props => props.opaque ? 1 : .5};
 
@@ -134,6 +135,10 @@ const StyledToolbar = styled(Toolbar)`
   @media (max-width: 576px) {
     height: 9rem;
     flex-direction: column;
+    min-width: 364px;
+  }
+  @media (max-width: 280px) {
+    min-width: 264px;
   }
 `;
 const NavLogo = styled(Link)`

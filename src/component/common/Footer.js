@@ -17,6 +17,8 @@ export default function Footer() {
 
 const FooterWrapper = styled.div`
     margin: 100px auto;
+    padding: 0 32px;
+    min-width: 200px;
 `;
 const SocialIcons = styled.div`
     display: flex;
