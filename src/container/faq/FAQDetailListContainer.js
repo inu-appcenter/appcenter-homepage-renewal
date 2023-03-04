@@ -43,11 +43,11 @@ const FAQDetailListBox = styled.div`
   row-gap: 2rem;
   column-gap: 2rem;
   grid-template-columns: 1fr 1fr;
-  @media(max-width: 1800px) {
-    grid-template-columns: 1fr;
-  }
   @media(max-width: 768px) {
     gap: 1rem;
+  }
+  @media(max-width: 576px) {
+    grid-template-columns: 1fr;
   }
 `
 
