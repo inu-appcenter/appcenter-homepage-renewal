@@ -71,6 +71,7 @@ const FAQDetailListItem = styled.div`
     font-weight: 500;
     padding: 4px 20px;
     margin:0;
+    line-height: 1.5;
   }
   font-size: ${props=>props.theme.fontSize.desktop.text};
   @media(max-width: 1800px) {
