@@ -5,6 +5,7 @@ import ContactContainer from "../container/joinjs/ContactContainer";
 import styled from "styled-components";
 import {PageTitle} from "../component/common/PageTitle";
 import RegisterButton from "../component/joinus/RegisterButton";
+import {viewWidthCalc} from "../lib/viewportCalculate";
 
 export default function JoinUsPage(){
     return(
