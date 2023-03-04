@@ -17,7 +17,7 @@ export default function OurTeam() {
                                 <div className='TeamName'>{item.partName}</div>
                                 <div className='TeamDescription'>{item.description}</div>
                             </TextWrapper>
-                            <Button onClick={()=>navigate(`../ourteam/${item.partName.toLowerCase()}?year=${dayjs().get('year')}`)}>
+                            <Button onClick={()=>navigate(`../ourteam/${item.partName.toLowerCase()}`)}>
                                 <KeyboardDoubleArrowRightIcon fontSize="large"/>
                             </Button>
                         </TeamListItem>
