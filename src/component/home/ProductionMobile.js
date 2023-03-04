@@ -16,14 +16,14 @@ export default function ProductionMobile() {
                 effect={"flip"}
                 slidesPerView={1}
                 loop={true}
-                modules={[EffectFlip, Autoplay, Pagination, Navigation]}
+                modules={[EffectFlip, Autoplay, Pagination]}
                 autoplay={{
                     delay: 2000,
                     disableOnInteraction: false,
                 }}
                 centeredSlides={true}
                 pagination={true}
-                navigation={true}
+                navigation={false}
             >
                 {
                     productList.map((item) => (

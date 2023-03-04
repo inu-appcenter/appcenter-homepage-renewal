@@ -8,7 +8,6 @@ import productList from "../../resource/string/productList";
 import 'swiper/css/virtual';
 import { v4 as uuidv4 } from 'uuid';
 import {Button} from "@mui/material";
-import {Store} from "@mui/icons-material";
 
 
 export default function ProductionDesktop() {
