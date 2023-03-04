@@ -23,7 +23,7 @@ export function PartChip({
                                 onClick={e => onButtonClick(e, part.partName.toLowerCase())}
                             >
                                 {part.partName}
-                                {part.partName === "Common" && <Divider/>}
+                                {/*{part.partName === "Common" && <Divider/>}*/}
                             </Button>
                 ))}
             </ButtonGroup>
@@ -33,10 +33,10 @@ export function PartChip({
 
 const ButtonGroup = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   align-items:center;
-  gap: 8px;
+  gap: 30px;
   @media (max-width: 576px) {
     gap: 4px;
     justify-content: center;
