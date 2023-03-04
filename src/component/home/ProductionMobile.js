@@ -40,7 +40,7 @@ export default function ProductionMobile() {
                                     {
                                         item.store.map((value) => (
                                             <div key={value.key} className='div-border-01-basic'>
-                                                <a href={value.url} target="_blank">
+                                                <a href={value.url} target="_blank" rel="noreferrer">
                                                     <img
                                                         src={value.image}
                                                         loading="lazy"
