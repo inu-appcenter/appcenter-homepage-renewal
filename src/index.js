@@ -11,11 +11,15 @@ import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import {dataApi} from "./apis/dataApi";
 import logger from 'redux-logger';
+import {homeSlice} from "./modules/homeSlice";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = configureStore({
-    reducer: { [dataApi.reducerPath]: dataApi.reducer,},
+    reducer: {
+        home: homeSlice.reducer,
+        [dataApi.reducerPath]: dataApi.reducer,
+    },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(dataApi.middleware, logger),
     devTools: process.env.NODE_ENV !== 'production',

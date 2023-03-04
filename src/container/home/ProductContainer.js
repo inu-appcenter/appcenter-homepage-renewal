@@ -6,9 +6,9 @@ import ProductionMobile from "../../component/home/ProductionMobile";
 import "swiper/css/pagination";
 
 
-export default function ProductContainer(){
+export default function ProductContainer({mref}){
     return(
-        <ProductWrapper>
+        <ProductWrapper ref={mref}>
             <PageTitle
                 title="Product"
                 topMargin={viewHeightCalc(50)}
