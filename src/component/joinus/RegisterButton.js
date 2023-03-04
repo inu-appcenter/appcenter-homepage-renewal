@@ -11,7 +11,7 @@ export default function RegisterButton() {
                 target="_blank"
             >
                 지원하러 가기
-                <ArrowRightAltIcon sx={{fontSize: 40}}/>
+                <ArrowRightAltIcon/>
             </Button>
         </ButtonWrapper>
     );
@@ -25,7 +25,7 @@ const ButtonWrapper = styled.div`
       font-weight: 600;
       background: ${props => props.theme.color.white};
       margin: 2rem auto 0;
-      padding: 6px 18px;
+      padding: 6px 2rem 6px 2.5rem;
       border: 1px solid ${props => props.theme.color.primary};
       border-radius: 999px;
     
@@ -38,6 +38,16 @@ const ButtonWrapper = styled.div`
       }
       @media (max-width: 768px) {
         font-size: ${props => props.theme.fontSize.smallTablet.text};
+      }
+      
+      svg {
+        font-size: 40px;
+        @media (max-width: 768px) {
+          font-size: 30px;
+        }
+        @media (max-width: 576px) {
+          font-size: 25px;
+        }
       }
     }
 `;
