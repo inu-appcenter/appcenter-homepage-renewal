@@ -8,7 +8,12 @@ export default function RegisterInfo() {
         <RegisterTextWrapper>
             <div className='top'>app center</div>
             <div className='middle'>{text}</div>
-            <Button variant='outlined'>
+            <Button
+                variant='outlined'
+                onClick={() =>
+                    document.getElementById('registerStep').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+                }
+            >
                 지원 방법 바로가기
                 <ArrowRightAltIcon sx={{fontSize: 40}}/>
             </Button>

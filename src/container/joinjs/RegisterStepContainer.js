@@ -6,9 +6,9 @@ import RegisterStep from "../../component/joinus/RegisterStep";
 export default function RegisterStepContainer(){
     return(
         <RegisterStepContainerWrapper>
-            <Subtitle
+            <div id='registerStep'><Subtitle
                 title='지원 방법'
-            />
+            /></div>
             <RegisterStep/>
         </RegisterStepContainerWrapper>
     )
