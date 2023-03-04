@@ -17,11 +17,16 @@ export function PartChip({
                         ? null
                         : (!web && part.partName === 'Web')
                             ? null
-                            :<Button
-                                key={part.id}
-                                className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
-                                onClick={e => onButtonClick(e, part.partName.toLowerCase())}
-                            >{part.partName}</Button>
+                            :<>
+                                <Button
+                                    key={part.id}
+                                    className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
+                                    onClick={e => onButtonClick(e, part.partName.toLowerCase())}
+                                >
+                                    {part.partName}
+                                    {part.partName === "Common" && <Divider/>}
+                                </Button>
+                            </>
                 ))}
             </ButtonGroup>
         </>
@@ -70,5 +75,27 @@ const ButtonGroup = styled.div`
     color: ${props => props.theme.color.primary};
     border: solid 1px ${props => props.theme.color.primary};
     box-shadow: 0 4px 4px rgba(23, 115, 224, .15); // 이렇게 해도 예쁜 것 같음
+  }
+`;
+const Divider = styled.div`
+  position: absolute;
+  right: -50px;
+  height: 59px;
+  width: 0;
+  border-right: 2px solid rgba(0,0,0,.15);
+  @media (max-width: 1800px) {
+    right: -80px;
+    height: 47.5px;
+  }
+  @media (max-width: 1200px) {
+    right: calc((540.2px - 100vw) / 8);
+    height: 44px;
+  }
+  @media (max-width: 768px) {
+    right: calc((440.6px - 100vw) / 8);
+    height: 32.5px;
+  }
+  @media (max-width: 576px) {
+    display: none;
   }
 `;
