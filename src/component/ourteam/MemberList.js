@@ -2,58 +2,65 @@ import * as React from 'react';
 import MemberItem from "./MemberItem";
 import styled from "styled-components";
 import MemberItemSkeleton from "./MemberItemSkeleton";
-import {useEffect, useRef} from "react";
 import { v4 as uuidv4 } from 'uuid';
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation, Pagination} from "swiper";
 
+import "swiper/css/navigation";
 
 
 export default function MemberList({data}) {
-    const imageRef = useRef();
-
-    const handleLeftScroll = () =>{
-        imageRef.current.scrollTo({
-            left: imageRef.current.scrollLeft - (imageRef.current.offsetWidth + 20),
-            behavior: 'smooth',
-        })
-    }
-    const handleRightScroll = () =>{
-        imageRef.current.scrollTo({
-            left: imageRef.current.scrollLeft + imageRef.current.offsetWidth + 20,
-            behavior: 'smooth',
-        })
-    }
     return (
-        <>
-            <MemberListWrapper
-                ref={imageRef}
+        <MemberListWrapper>
+            <Swiper
+                slidesPerView={'auto'}
+                modules={[Pagination,Navigation]}
+                pagination={{
+                    clickable: true,
+                }}
+                navigation={true}
+                spaceBetween={30}
             >
                 {
                     data ?
                         data.map((item) => (
-                            <MemberItem
-                                key={uuidv4()}
-                                image={item.image}
-                                name={item.name}
-                                description={item.description}
-                                link={item.link}
-                                leftArrowPress={handleLeftScroll}
-                                rightArrowPress={handleRightScroll}
-                            />
+                            <SwiperSlide key={uuidv4()}>
+                                <MemberItem
+                                    image={item.image}
+                                    name={item.name}
+                                    description={item.description}
+                                    link={item.link}
+                                />
+                            </SwiperSlide>
                         ))
                         : <MemberItemSkeleton/>
                 }
-
-            </MemberListWrapper>
-        </>
+            </Swiper>
+        </MemberListWrapper>
 
     )
 }
 
 const MemberListWrapper = styled.div`
-  display: flex;
-  overflow: scroll;
-  white-space: nowrap;
-  & > *{
-    flex: 0 0 auto;
+  overflow: hidden;
+  .swiper-slide{
+    padding: 0 0 50px;
+    width: 300px;
+    @media (max-height: 1000px) {
+      width: 150px;
+    }
+    @media (max-width: 576px) {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+  .swiper-button-next, .swiper-button-prev{
+    top: 150px;
+    @media (max-height: 1000px) {
+      top: 75px;
+    }
+    @media (max-width: 576px) {
+      top: calc(calc(100% - 119.5px)/2)
+    }
   }
 `

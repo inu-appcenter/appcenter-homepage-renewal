@@ -7,32 +7,27 @@ import styled from "styled-components";
 import {linkToIcon, hostNameFirstWord} from "../../lib/linkToIcon";
 import {Avatar} from "@mui/joy";
 import {Fab, Skeleton} from "@mui/material";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { v4 as uuidv4 } from 'uuid';
 
-
-export default function MemberItem({image, name, description, link = [], leftArrowPress, rightArrowPress}) {
+export default function MemberItem({image, name, description, link = []}) {
     return (
         <StyledCard
             sx={{
                 '--Card-padding': '0px',
             }}
         >
-            <Box sx={{position: 'relative'}}>
+            <Box sx={{position:'relative'}}>
                 <AspectRatio ratio={'1'}>
-                    <figure>
-                        {
-                            image ? <img
-                                    src={image}
-                                    loading="lazy"
-                                    alt={`${name}의 사진`}
-                                />
-                                : <Skeleton variant="rectangular" animation={false} width={'100%'} height={'100%'}/>
-                        }
-                    </figure>
+                    {
+                        image ? <img
+                                src={image}
+                                loading="lazy"
+                                alt={`${name}의 사진`}
+                            />
+                            : <Skeleton variant="rectangular" animation={false} width={'100%'} height={'100%'}/>
+                    }
                 </AspectRatio>
-                <StyledCardCover
+                <CardCover
                     className="gradient-cover"
                     sx={{
                         '&:hover, &:focus-within': {
@@ -44,15 +39,7 @@ export default function MemberItem({image, name, description, link = [], leftArr
                             'linear-gradient(180deg, transparent 32%, rgba(0,0,0,0.00345888) 63.94%, rgba(0,0,0,0.014204) 65.89%, rgba(0,0,0,0.0326639) 67.83%, rgba(0,0,0,0.0589645) 69.78%, rgba(0,0,0,0.0927099) 71.72%, rgba(0,0,0,0.132754) 73.67%, rgba(0,0,0,0.177076) 75.61%, rgba(0,0,0,0.222924) 77.56%, rgba(0,0,0,0.267246) 79.5%, rgba(0,0,0,0.30729) 81.44%, rgba(0,0,0,0.341035) 83.39%, rgba(0,0,0,0.367336) 85.33%, rgba(0,0,0,0.385796) 87.28%, rgba(0,0,0,0.396541) 89.22%, rgba(0,0,0,0.4) 91.17%)',
                     }}
                 >
-                    <ArrowButtonWrapepr>
-                        <Fab size="small" onClick={leftArrowPress}>
-                            <ArrowBackIosIcon/>
-                        </Fab>
-                        <Fab size="small" onClick={rightArrowPress}>
-                            <ArrowForwardIosIcon/>
-                        </Fab>
-                    </ArrowButtonWrapepr>
-                </StyledCardCover>
+                </CardCover>
             </Box>
             <TextWrapper>
                 <p className={'name'}>{name}</p>
@@ -88,19 +75,7 @@ const StyledCard = styled(Card)`
   @media (max-width: 576px) {
     width: 100%;
     overflow: hidden;
-    touch-action: none;
   }
-`
-
-const StyledCardCover = styled(CardCover)`
-  @media (max-width: 576px) {
-    opacity: 1;
-  }
-`
-
-const ArrowButtonWrapepr = styled.div`
-  display: flex;
-  gap: 70%;
 `
 
 const TextWrapper = styled.div`

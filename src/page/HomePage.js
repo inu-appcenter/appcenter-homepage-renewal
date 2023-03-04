@@ -2,11 +2,13 @@ import AboutUsContainer from "../container/home/AboutUsContainer";
 import OurTeamContainer from "../container/home/OurTeamContainer";
 import ProductContainer from "../container/home/ProductContainer";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef} from "react";
+import {setCurrent} from "../modules/homeSlice";
 
 export default function HomePage() {
     const current = useSelector(state=>state.home.current);
+    const dispatch = useDispatch();
     const scrollRef = useRef([]);
 
     useEffect(() =>{
@@ -19,6 +21,7 @@ export default function HomePage() {
         if(current === 'Product'){
             scrollRef.current[2].scrollIntoView({behavior:'smooth'});
         }
+        return () => dispatch(setCurrent(null))
     },[current]);
 
     return (
