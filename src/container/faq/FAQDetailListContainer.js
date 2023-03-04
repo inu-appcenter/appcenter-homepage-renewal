@@ -24,8 +24,8 @@ export function FAQDetailListContainer(){
                 {
                     faqList[pageInfo.partName].map((item,index) =>
                         <FAQDetailListItem key={index}>
-                            <p className="question">Q. {item.question}</p>
-                            <p className="answer">A. {item.answer}</p>
+                            <p className="question">{item.question}</p>
+                            <p className="answer">{item.answer}</p>
                         </FAQDetailListItem>
                     )
                 }
@@ -58,20 +58,29 @@ const FAQDetailListItem = styled.div`
   border-radius: 50px;
   background: rgba(23, 115, 224, 0.1);
   padding: 40px;
+  text-indent: -1em;
   .question {
     color: ${props => props.theme.color.black};
     font-weight: 700;
-    padding: 12px 20px;
+    padding: 12px 3rem;
     border-radius: 999px;
     background: ${props => props.theme.color.white};
     margin:0;
+    &::before {
+      content:'Q. ';
+      position: relative;
+    }
   }
   .answer {
     color: ${props => props.theme.color.primary};
     font-weight: 500;
-    padding: 4px 20px;
+    padding: 4px 3rem;
     margin:0;
     line-height: 1.5;
+    &::before {
+      content:'A. ';
+      position: relative;
+    }
   }
   font-size: ${props=>props.theme.fontSize.desktop.text};
   @media(max-width: 1800px) {
