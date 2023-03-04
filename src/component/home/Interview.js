@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import "swiper/css/effect-cards";
@@ -27,8 +27,9 @@ export default function Interview() {
                     loop={true}
                     modules={[Pagination,Autoplay,EffectCards]}
                     autoplay={{
-                        delay: 500,
+                        delay: 5000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
                     }}
                 >
                     {
