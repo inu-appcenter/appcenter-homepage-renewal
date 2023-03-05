@@ -14,7 +14,6 @@ import {NavItem} from "./NavItem";
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const location = useLocation();
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);

@@ -17,7 +17,13 @@ export const NavItem = (
     const [toggle, setToggle] = useState(touchUrl===item.url);
     const location = useLocation();
     const dispatch = useDispatch();
+
     const handleTouch = (url) => {
+        onTouch(url);
+    }
+
+    const handleClickNav = (url) =>{
+        dispatch(setCurrent('Home'));
         onTouch(url);
     }
 
@@ -28,7 +34,6 @@ export const NavItem = (
     useEffect(() => {
         visibillity || setToggle(false);
     }, [visibillity]);
-
 
 
     return (
@@ -43,7 +48,7 @@ export const NavItem = (
                     <Link
                         className={location.pathname.includes(item.url) ? 'title active' : 'title'}
                         to={item.url}
-                        onClick={e=>dispatch(setCurrent('Home'))}
+                        onClick={(e)=>handleClickNav(item.url)}
                     >{item.title}</Link>
             }
             <div className={toggle ? 'child toggle' : 'child'}>
