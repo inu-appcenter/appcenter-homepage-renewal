@@ -5,21 +5,34 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef} from "react";
 import {setCurrent} from "../modules/homeSlice";
+import {useLocation} from "react-router-dom";
 
 export default function HomePage() {
     const current = useSelector(state=>state.home.current);
     const dispatch = useDispatch();
+    const location = useLocation();
     const scrollRef = useRef([]);
 
+    useEffect(()=>{
+        dispatch(setCurrent(location.state?.title));
+    },[])
+
     useEffect(() =>{
-        if(current === 'About Us'){
-            scrollRef.current[0].scrollIntoView({behavior:'smooth'});
-        }
-        if(current === 'Our Team'){
-            scrollRef.current[1].scrollIntoView({behavior:'smooth'});
-        }
-        if(current === 'Product'){
-            scrollRef.current[2].scrollIntoView({behavior:'smooth'});
+        switch(current){
+            case 'Home':
+                window.scrollTo(0, 0);
+                break;
+            case 'About Us':
+                scrollRef.current[0].scrollIntoView({behavior:'smooth'});
+                break;
+            case 'Our Team':
+                scrollRef.current[1].scrollIntoView({behavior:'smooth'});
+                break;
+            case 'Product':
+                scrollRef.current[2].scrollIntoView({behavior:'smooth'});
+                break;
+            default:
+                break;
         }
         return () => dispatch(setCurrent(null))
     },[current]);
