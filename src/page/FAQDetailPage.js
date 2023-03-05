@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {PartChip} from "../component/common/PartChip";
+import {FAQCategoryChip} from "../component/FAQCategoryChip";
 
 export default function FAQDetailPage() {
     const location = useLocation();
@@ -10,7 +10,7 @@ export default function FAQDetailPage() {
         <>
             <FAQDetailWrapper>
                 <ContentWrapper>
-                    <PartChip
+                    <FAQCategoryChip
                         url={location.pathname}
                         onButtonClick={(e, part) => navigate(part)}
                     />
