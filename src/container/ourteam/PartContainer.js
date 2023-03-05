@@ -16,25 +16,27 @@ export default function PartContainer(){
         ignoreQueryPrefix: true
     });
     const [part, setPart] = useState(location.pathname.split('/').at(-1)||'android');
-    const [year, setYear] = useState(localStorage.getItem('year') || dayjs().get('year')||2022);
+    const [year, setYear] = useState( dayjs().get('year')||2022);
     const {data} = useGetTeamListQuery({year: year,team: part});
 
     useEffect(()=>{
         if(part === 'web'){
             setYear(2022);
         }
-    },[])
+    },[]);
+
+    useEffect(()=>{
+        if(part === 'web' && year !== 2022){
+            setPart('android');
+        }
+    },[year]);
 
 
     useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
-        setYear(query.year||localStorage.getItem('year')||dayjs().get('year'));
+        setYear(query.year||dayjs().get('year'));
     },[location]);
 
-    useEffect(()=>{
-        localStorage.setItem('part',part);
-        localStorage.setItem('year',year);
-    },[part, year]);
 
     return(
         <>

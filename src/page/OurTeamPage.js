@@ -13,19 +13,23 @@ export default function OurTeamPage() {
     const query = qs.parse(location.search, {
         ignoreQueryPrefix: true
     });
-    const [part, setPart] = useState(location.pathname.split('/').at(-1)||localStorage.getItem('part') || 'android')
-    const [year, setYear] = useState(localStorage.getItem('year') || dayjs().get('year')||2022);
+    const [part, setPart] = useState(location.pathname.split('/').at(-1) || 'android')
+    const [year, setYear] = useState( dayjs().get('year')||2022);
 
     useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
-        setYear(query.year||localStorage.getItem('year')||dayjs().get('year'));
+        setYear(query.year||dayjs().get('year'));
     },[location]);
 
     useEffect(()=>{
-        localStorage.setItem('part',part);
-        localStorage.setItem('year',year);
         navigate({pathname:part, search:`?year=${year}`});
     },[part, year]);
+
+    useEffect(()=>{
+        if(part === 'web' && year !== 2022){
+            navigate('android');
+        }
+    },[year]);
 
     return (
         <OurTeamPageWrapper>
