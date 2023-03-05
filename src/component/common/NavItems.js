@@ -27,7 +27,7 @@ export default function NavItems({visibility}) {
     return (
         <ItemGroup>
             {navBarInfoList.map(item =>
-                <ItemWrapper>
+                <ItemWrapper key={item.id}>
                     {
                         isTouch && item.child ?
                             <span
