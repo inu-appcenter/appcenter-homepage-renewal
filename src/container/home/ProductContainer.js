@@ -9,11 +9,13 @@ import "swiper/css/pagination";
 export default function ProductContainer({mref}){
     return(
         <ProductWrapper ref={mref}>
-            <PageTitle
-                title="Product"
-                topMargin={viewHeightCalc(50)}
-                subTitle='앱센터에서 만든 앱들을 소개합니다'
-            />
+            <PageTitleBox>
+                <PageTitle
+                    title="Product"
+                    topMargin={viewHeightCalc(50)}
+                    subTitle='앱센터에서 만든 앱들을 소개합니다'
+                />
+            </PageTitleBox>
             <DesktopSizeBox>
                 <ProductionDesktop/>
             </DesktopSizeBox>
@@ -27,6 +29,13 @@ export default function ProductContainer({mref}){
 const ProductWrapper = styled.div`
   width: 100%;
   height: 100vh;
+`;
+
+const PageTitleBox = styled.div`
+   padding-top: 150px;
+  @media(max-width: 1800px) {
+    padding-top: 100px;
+  }
 `;
 
 const DesktopSizeBox = styled.div`

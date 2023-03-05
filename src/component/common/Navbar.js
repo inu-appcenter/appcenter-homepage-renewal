@@ -82,23 +82,17 @@ export default function Navbar() {
                             key={item.id}
                             className={location.pathname.includes(item.url) ? 'navbar__item_title active' : 'navbar__item_title'}
                             to={item.url}
+                            onClick={e=>dispatch(setCurrent('Home'))}
                         >{item.title}</Link>
                         <div className='navbar__item_child'>
                             {item.child && item.child.map(sub =>
-                                (
-                                    item.title === 'Home'
-                                        ?
-                                        <ChildLink
-                                            key={sub.id}
-                                            onClick={(e)=>dispatch(setCurrent(sub.title))}
-                                            point={location.pathname === sub.url ? 1 : 0}
-                                        >{sub.title}</ChildLink>
-                                        : <ChildLink
-                                            key={sub.id}
-                                            to={sub.url}
-                                            point={location.pathname === sub.url ? 1 : 0}
-                                        >{sub.title}</ChildLink>
-                                )
+                                <ChildLink
+                                    key={sub.id}
+                                    to={sub.url || 'home'}
+                                    state={{title: sub.title}}
+                                    onClick={e=>dispatch(setCurrent(sub.title))}
+                                    point={location.pathname === sub.url ? 1 : 0}
+                                >{sub.title}</ChildLink>
                             )}
                         </div>
                     </div>

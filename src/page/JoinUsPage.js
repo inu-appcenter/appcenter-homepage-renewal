@@ -34,6 +34,9 @@ const JoinUsPageWrapper = styled.div`
   @media (max-width: 768px){
     row-gap: 2rem;
   }
+  @media (max-width: 350px){
+    padding: 0 1rem;
+  }
 `
 
 const TitleWrapper = styled.div`

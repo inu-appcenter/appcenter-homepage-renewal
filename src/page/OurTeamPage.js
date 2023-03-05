@@ -56,6 +56,9 @@ const OurTeamPageWrapper = styled.div`
   display: grid;
   grid-template-columns: 100%;
   row-gap: 2rem;
+  @media (max-width: 350px){
+    padding: 0 1rem;
+  }
 `
 
 const TitleWrapper = styled.div`

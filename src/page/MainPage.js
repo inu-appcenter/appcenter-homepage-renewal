@@ -5,9 +5,11 @@ import {useEffect} from "react";
 
 export default function MainPage() {
     const { pathname } = useLocation();
-    
+
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if(pathname !== '/appcenter-homepage-renewal/home') {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
     return (
         <>

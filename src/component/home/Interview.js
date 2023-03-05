@@ -48,7 +48,6 @@ export default function Interview() {
 
 const InterViewLayout = styled.div`
   display: grid;
-  //grid-template-columns: 1.2fr 2fr;
   grid-template-columns: repeat(2, minmax(100px, auto));
   column-gap: 3rem;
   justify-items: center;
@@ -60,7 +59,7 @@ const InterViewLayout = styled.div`
 
 const InterViewScrollBox = styled.div`
   .swiper{
-    padding: 0 70px 20px 40px;
+    padding: 0 120px 20px 40px;
     width: 500px;
     @media(max-width: 1200px) {
       width: 400px;
@@ -69,7 +68,7 @@ const InterViewScrollBox = styled.div`
       width: 200px;
       padding: 0 70px 20px 50px;
     }
-    @media(max-width: 280px) {
+    @media(max-width: 320px) {
       width: 150px;
     }
   }
@@ -115,7 +114,7 @@ const InterViewScrollBox = styled.div`
 `
 
 const QuestionText = styled.p`
-  margin:0;
+  margin:0 0 0 2rem;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
   white-space: pre-line;

@@ -5,16 +5,25 @@ import OurTeam from "../../component/home/OurTeam";
 
 export default function OurTeamContainer({mref}){
     return(
-        <OurTeamWrapper ref={mref}>
-            <PageTitle
-                title="Our Team"
-                subTitle={partInfo[0].description}
-            />
+        <OurTeamContainerLayout ref={mref}>
+            <PageTitleBox>
+                <PageTitle
+                    title="Our Team"
+                    subTitle={partInfo[0].description}
+                />
+            </PageTitleBox>
             <OurTeam/>
-        </OurTeamWrapper>
+        </OurTeamContainerLayout>
     );
 }
-const OurTeamWrapper = styled.div`
+const OurTeamContainerLayout = styled.div`
   width: 100%;
   padding-bottom: 30px;
+`;
+
+const PageTitleBox = styled.div`
+   padding-top: 150px;
+  @media(max-width: 1800px) {
+    padding-top: 50px;
+  }
 `;
