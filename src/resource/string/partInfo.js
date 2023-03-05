@@ -22,8 +22,8 @@ export const partInfo = [
         id: 1,
         partName: 'Android',
         question: 'Java 와 Kotlin 중 어떤 언어를 쓰나요?',
-        description: '프론트엔드, 안드로이드 기반에 맞춰 앱을 구현합니다',
-        speechBubble: '안녕하세요! 안드로이드 입니다.',
+        description: '안드로이드 운영체제에서 작동하는 앱을 구현합니다',
+        speechBubble: '안녕하세요! 안드로이드 파트 입니다.',
         emoji: androidEmoji,
         url: routerPath.faqDetail.child.android.url,
         fullUrl: fullPath.android
@@ -42,8 +42,8 @@ export const partInfo = [
         id: 2,
         partName: 'iOS',
         question: '맥북 필수인가요?',
-        description: '프론트엔드, ios 기반에 맞춰 앱을 구현합니다',
-        speechBubble: '안녕하세요 앱센터 ios 입니다.',
+        description: 'IOS 운영체제에서 작동하는 앱을 구현합니다',
+        speechBubble: '안녕하세요 ios 파트 입니다.',
         emoji: iosEmoji,
         url: routerPath.faqDetail.child.ios.url,
         fullUrl: fullPath.ios
@@ -52,8 +52,8 @@ export const partInfo = [
         id: 3,
         partName: 'Server',
         question: 'Node, Spring중 어떤 것을 사용하나요?',
-        description: '백엔드, 프로그램의 기반을 다집니다',
-        speechBubble: '안녕하세요 앱센터 서버파트 입니다.\n',
+        description: '서버를 구현합니다.',
+        speechBubble: '안녕하세요 서버 파트 입니다.\n',
         emoji: serverEmoji,
         url: routerPath.faqDetail.child.server.url,
         fullUrl: fullPath.server
@@ -63,7 +63,7 @@ export const partInfo = [
         partName: 'Web',
         question: 'React 할 줄 알아야 하나요?',
         description: '웹환경에 맞춘 서비스를 구현합니다',
-        speechBubble: '안녕하세요 앱센터 웹파트 입니다.\n',
+        speechBubble: '안녕하세요 웹 파트 입니다.\n',
         emoji: webEmoji,
     },
 ];
