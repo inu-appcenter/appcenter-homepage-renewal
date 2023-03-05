@@ -2,23 +2,20 @@ import {fullPath} from "../../resource/string/routerPath";
 import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
-import {navBarInfoList} from "../../resource/string/navBarString";
-import {Link, useLocation, useNavigate, useNavigation} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
-import {NavItem} from "./NavItem";
+import NavItems from "./NavItems";
 
 export default function Navbar() {
-    const navigate = useNavigate();
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
     const [scrollDirection, setScrollDirection] = useState(true);    //  true: going up, false: going down
-    const [prevTouchUrl, setPrevTouchUrl] = useState(null);
     const handleScroll = useThrottle(
         () => {
             const diff = window.scrollY - prevY;
@@ -67,12 +64,6 @@ export default function Navbar() {
         }
     });
 
-    const handleOnTouch = (url) =>{
-        url === prevTouchUrl
-            ? navigate(url)
-            : setPrevTouchUrl(url);
-    }
-
     return (
         <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque ? '_' : ''}>
             <NavLogo to={fullPath.home}>
@@ -80,17 +71,8 @@ export default function Navbar() {
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
                 <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>
             </NavLogo>
-            <NavItems>
-                {navBarInfoList.map((item) =>
-                    <NavItem
-                        key={item.id}
-                        item={item}
-                        visibillity={navVisibility}
-                        touchUrl={prevTouchUrl}
-                        onTouch={(title)=>handleOnTouch(title)}
-                    />
-                )}
-            </NavItems>
+            <NavItems visibility={navVisibility}/>
+            
         </StyledToolbar>
     );
 }
@@ -161,14 +143,3 @@ const NavLogo = styled(Link)`
     }
   }
 `
-const NavItems = styled.div`
-  display: flex;
-  max-width: 500px;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 576px) {
-    width: 80%;
-  }
-`;

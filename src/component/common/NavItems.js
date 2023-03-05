@@ -1,77 +1,80 @@
-import styled, {css} from "styled-components";
+import styled from "styled-components";
+import {navBarInfoList} from "../../resource/string/navBarString";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {setCurrent} from "../../modules/homeSlice";
-import {useDispatch} from "react-redux";
 import {KeyboardArrowUp} from "@mui/icons-material";
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 
-export const NavItem = (
-    {
-        item,
-        visibillity,
-        touchUrl,
-        onTouch
-    }
-) => {
+export default function NavItems({visibility}) {
     const isTouch = 'ontouchstart' in window;
-    const [toggle, setToggle] = useState(touchUrl===item.url);
+    const [toggle, setToggle] = useState('');
     const location = useLocation();
     const dispatch = useDispatch();
-
-    const handleTouch = (url) => {
-        onTouch(url);
+    const navigate = useNavigate();
+    const handleTouch = (e, title, url) => {
+        toggle === title ?
+            navigate(url):
+            setToggle(title);
     }
-
-    const handleClickNav = (url) =>{
-        dispatch(setCurrent('Home'));
-        onTouch(url);
-    }
-
     useEffect(() => {
-        setToggle(touchUrl === item.url)
-    },[touchUrl]);
-
+        visibility || setToggle('');
+    }, [visibility])
     useEffect(() => {
-        visibillity || setToggle(false);
-    }, [visibillity]);
-
-
+        setToggle('');
+    }, [location])
+    
     return (
-        <ItemWrapper>
-            {
-                isTouch && item.child ?
-                    <span
-                        className={location.pathname.includes(item.url) ? 'title active' : 'title'}
-                        onTouchEnd={e=>handleTouch(item.url)}
-                    >{item.title}</span>
-                    :
-                    <Link
-                        className={location.pathname.includes(item.url) ? 'title active' : 'title'}
-                        to={item.url}
-                        onClick={(e)=>handleClickNav(item.url)}
-                    >{item.title}</Link>
-            }
-            <div className={toggle ? 'child toggle' : 'child'}>
-                {item.child && item.child.map(sub =>
-                    <ChildLink
-                        key={sub.id}
-                        to={sub.url || 'home'}
-                        state={{title: sub.title}}
-                        onClick={e=>dispatch(setCurrent(sub.title))}
-                        point={location.pathname === sub.url ? 1 : 0}
-                    >{sub.title}</ChildLink>
-                )}
-                {item.child && isTouch && (
-                    <KeyboardArrowUp onClick={e => setToggle(false)}/>
-                )}
-            </div>
-        </ItemWrapper>
+        <ItemGroup>
+            {navBarInfoList.map(item =>
+                <ItemWrapper>
+                    {
+                        isTouch && item.child ?
+                            <span
+                                className={location.pathname.includes(item.url) ? 'title active' : 'title'}
+                                onTouchEnd={e=>handleTouch(e, item.title, item.url)}
+                            >{item.title}</span>
+                            :
+                            <Link
+                                className={location.pathname.includes(item.url) ? 'title active' : 'title'}
+                                to={item.url}
+                            >{item.title}</Link>
+                    }
+                    <div className={toggle===item.title ? 'child toggle' : 'child'}>
+                        {item.child && item.child.map(sub =>
+                            <ChildLink
+                                key={sub.id}
+                                to={sub.url || 'home'}
+                                state={{title: sub.title}}
+                                onClick={e=>dispatch(setCurrent(sub.title))}
+                                point={location.pathname === sub.url ? 1 : 0}
+                            >{sub.title}</ChildLink>
+                        )}
+                        {item.child && isTouch && (
+                            <KeyboardArrowUp onClick={e => setToggle('')}/>
+                        )}
+                    </div>
+                </ItemWrapper>
+            )}
+        </ItemGroup>
     );
 }
 
+const ItemGroup = styled.div`
+  display: flex;
+  max-width: 500px;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 576px) {
+    width: 80%;
+  }
+`;
+
 const ItemWrapper = styled.div`
   position: relative;
-    
+  
   .title {
     color: ${props => props.theme.color.white};
     font-size: 1.25rem;
@@ -88,11 +91,11 @@ const ItemWrapper = styled.div`
       margin-top: 1rem;
     }
   }
-    
+  
   .title.active {
     color: ${props => props.theme.color.secondary};
   }
-    
+  
   .child {
     width: 8rem;
     position: absolute;
