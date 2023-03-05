@@ -7,7 +7,7 @@ export default function RegisterButton() {
         <ButtonWrapper>
             <Button
                 variant='outlined'
-                href=""
+                onClick={()=>window.open('https://forms.gle/ag9rEsdgteameKUt5')}
                 target="_blank"
             >
                 지원하러 가기
