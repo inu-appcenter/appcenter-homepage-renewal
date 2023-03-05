@@ -76,7 +76,7 @@ export default function Navbar() {
             </NavLogo>
             <NavItems>
                 {navBarInfoList.map((item) =>
-                    <NavItem key={item.id} item={item}/>
+                    <NavItem key={item.id} item={item} visibillity={navVisibility}/>
                 )}
             </NavItems>
         </StyledToolbar>
