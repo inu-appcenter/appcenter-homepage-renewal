@@ -3,19 +3,18 @@ import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
 import {navBarInfoList} from "../../resource/string/navBarString";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
 import {useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
+import {NavItem} from "./NavItem";
 import {useDispatch} from "react-redux";
 import {setCurrent} from "../../modules/homeSlice";
 
 export default function Navbar() {
-    const location = useLocation();
-    const dispatch = useDispatch();
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
@@ -77,25 +76,7 @@ export default function Navbar() {
             </NavLogo>
             <NavItems>
                 {navBarInfoList.map((item) =>
-                    <div className='navbar__item' key={item.id}>
-                        <Link
-                            key={item.id}
-                            className={location.pathname.includes(item.url) ? 'navbar__item_title active' : 'navbar__item_title'}
-                            to={item.url}
-                            onClick={e=>dispatch(setCurrent('Home'))}
-                        >{item.title}</Link>
-                        <div className='navbar__item_child'>
-                            {item.child && item.child.map(sub =>
-                                <ChildLink
-                                    key={sub.id}
-                                    to={sub.url || 'home'}
-                                    state={{title: sub.title}}
-                                    onClick={e=>dispatch(setCurrent(sub.title))}
-                                    point={location.pathname === sub.url ? 1 : 0}
-                                >{sub.title}</ChildLink>
-                            )}
-                        </div>
-                    </div>
+                    <NavItem key={item.id} item={item}/>
                 )}
             </NavItems>
         </StyledToolbar>
@@ -175,92 +156,7 @@ const NavItems = styled.div`
   align-items: center;
   flex-grow: 1;
 
-  .navbar__item {
-    position: relative;
-
-    .navbar__item_title {
-      color: ${props => props.theme.color.white};
-      font-size: 1.25rem;
-      font-weight: 600;
-      padding: 1rem 0;
-      @media (max-width: 992px) {
-        font-size: 1rem;
-      }
-      @media (max-width: 768px) {
-        font-size: 1.25rem;
-      }
-      @media (max-width: 576px) {
-        font-size: 1rem;
-        margin-top: 1rem;
-      }
-    }
-
-    .navbar__item_title.active {
-      color: ${props => props.theme.color.secondary};
-    }
-
-    .navbar__item_child {
-      width: 8rem;
-      position: absolute;
-      top: 2rem;
-      left: calc(50% - 4rem);
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      background: ${props => props.theme.color.primary};
-      border-bottom-right-radius: 1.5rem;
-      border-bottom-left-radius: 1.5rem;
-      box-shadow: 0 4px 4px rgba(54, 113, 217, .25);
-      transition: opacity .5s;
-      visibility: hidden;
-      opacity: 0;
-
-      a {
-        font-size: 1.125rem;
-        text-align: center;
-        margin: 0.75rem 0;
-      }
-
-      @media (max-width: 992px) {
-        width: 6rem;
-        left: calc(50% - 3rem);
-        border-bottom-right-radius: 1rem;
-        border-bottom-left-radius: 1rem;
-        a {
-          font-size: 1rem;
-          margin: .5rem 0;
-        }
-      }
-      @media (max-width: 768px) and (min-width: 577px) {
-        width: 8rem;
-        left: calc(50% - 4rem);
-        border-bottom-right-radius: 1.5rem;
-        border-bottom-left-radius: 1.5rem;
-        a {
-          font-size: 1.125rem;
-          margin: 0.75rem 0;
-        }
-      }
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      :hover .navbar__item_child {
-        visibility: visible;
-        opacity: 1;
-      }
-    }
-
-  }
-
   @media (max-width: 576px) {
     width: 80%;
-  }
-`;
-
-const ChildLink = styled(Link)`
-  color: ${props => props.point === 1 ? props.theme.color.yellow : props.theme.color.white};
-
-  &:hover {
-    color: ${props => props.theme.color.yellow};
   }
 `;
