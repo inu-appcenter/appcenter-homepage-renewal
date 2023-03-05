@@ -19,7 +19,9 @@ export default function MainPage() {
             <main>
                 <Outlet/>
             </main>
-            <Footer/>
+            <footer>
+                <Footer/>
+            </footer>
         </>
     );
 }

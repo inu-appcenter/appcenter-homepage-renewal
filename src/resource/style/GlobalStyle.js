@@ -24,6 +24,11 @@ const GlobalStyle = createGlobalStyle`
     margin-left: auto;
     margin-right: auto;
   }
+  
+  footer{
+    position: relative;
+    bottom:0;
+  }
 
   a {
     text-decoration: none;

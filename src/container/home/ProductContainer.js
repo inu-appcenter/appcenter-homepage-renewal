@@ -28,7 +28,7 @@ export default function ProductContainer({mref}){
 
 const ProductWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  margin-bottom: 20px;
 `;
 
 const PageTitleBox = styled.div`
