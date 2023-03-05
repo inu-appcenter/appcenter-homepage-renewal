@@ -59,18 +59,21 @@ const InterViewLayout = styled.div`
 
 const InterViewScrollBox = styled.div`
   .swiper{
-    padding: 0 120px 20px 40px;
+    padding: 0 120px 40px 40px;
     width: 500px;
     @media(max-width: 1200px) {
       width: 400px;
     }
     @media(max-width: 576px) {
       width: 200px;
-      padding: 0 70px 20px 50px;
+      padding: 0 70px 40px 50px;
     }
     @media(max-width: 320px) {
       width: 150px;
     }
+  }
+  .swiper-pagination{
+    left: 10px;
   }
   .swiper-slide {
     display: flex;
@@ -78,6 +81,7 @@ const InterViewScrollBox = styled.div`
     border-radius: 40px;
     background-color: ${props => props.theme.color.primaryLight};
     white-space: nowrap;
+    padding: 40px;
     .answer{
       white-space: pre-line;
       @media(max-width: 768px) {
@@ -92,7 +96,6 @@ const InterViewScrollBox = styled.div`
       font-weight: 600;
       margin-top: ${viewHeightCalc(18)}
     }
-    padding: 40px;
     @media(max-width: 1800px) {
       padding: 30px;
     }
