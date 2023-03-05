@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/appcenter-homepage-renewal/static/css/main.4dd7699a.css",
-    "main.js": "/appcenter-homepage-renewal/static/js/main.240db62a.js",
+    "main.js": "/appcenter-homepage-renewal/static/js/main.4b8082e0.js",
     "static/js/787.7ae4a7cc.chunk.js": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js",
     "static/media/Pretendard-Medium.otf": "/appcenter-homepage-renewal/static/media/Pretendard-Medium.a8904df42c9b4f93a668.otf",
     "static/media/Pretendard-SemiBold.otf": "/appcenter-homepage-renewal/static/media/Pretendard-SemiBold.d8e6b49c5bbba3cd911b.otf",
@@ -43,11 +43,11 @@
     "static/media/speech-bubble-tail.svg": "/appcenter-homepage-renewal/static/media/speech-bubble-tail.471e10f3e2b3d12f68b5d3666bc0e9de.svg",
     "static/media/archive_chip.svg": "/appcenter-homepage-renewal/static/media/archive_chip.af7cea5d7856d966bfbd81b407920b75.svg",
     "main.4dd7699a.css.map": "/appcenter-homepage-renewal/static/css/main.4dd7699a.css.map",
-    "main.240db62a.js.map": "/appcenter-homepage-renewal/static/js/main.240db62a.js.map",
+    "main.4b8082e0.js.map": "/appcenter-homepage-renewal/static/js/main.4b8082e0.js.map",
     "787.7ae4a7cc.chunk.js.map": "/appcenter-homepage-renewal/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4dd7699a.css",
-    "static/js/main.240db62a.js"
+    "static/js/main.4b8082e0.js"
   ]
 }
