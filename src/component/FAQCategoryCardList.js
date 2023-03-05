@@ -8,9 +8,9 @@ const FAQCategoryCardList = ({list}) =>{
                 {
                     list.map((item)=>
                         <Card to={item.url} key={item.id} partName={item.partName}>
-                            <p className="title">{item.partName}</p>
-                            <p className="question">{item.question}</p>
-                            <button>더보기</button>
+                            <TitleText partName={item.partName}>{item.partName}</TitleText>
+                            <QuestionText partName={item.partName}>{item.question}</QuestionText>
+                            <PlusButton  partName={item.partName}>더보기</PlusButton>
                         </Card>
                     )
                 }
@@ -32,7 +32,6 @@ const CardWrap = styled.div`
 
 const Card = styled(Link)`
   display: grid;
-  // background-color: ${props => props.theme.color.primaryLight};
   background-color: ${props=>props.partName!=='Web' ? props.theme.color.primaryLight : 'rgba(128,128,128,0.4)'};
   border-radius: 30px;
   font-size: 20px;
@@ -52,31 +51,33 @@ const Card = styled(Link)`
       transform: translateZ(0);
     }
   }
-  .title {
-    justify-self: flex-start;
-    padding: 8px 16px;
-    margin:0;
-    color: ${props => props.theme.color.primary};
-    font-weight: 700;
-    border-radius: 24px;
-    background: ${props => props.theme.color.white};
-  }
-  .question {
-    justify-self: center;
-    margin:0;
-    color: ${props => props.theme.color.black};
-    font-weight: 600;
-  }
-  button {
-    justify-self: flex-end;
-    color: ${props => props.theme.color.primary};
-    font-weight: 700;
-    border-radius: 27px;
-    border: none;
-    background: ${props => props.theme.color.white};
-    padding: 4px 8px;
-  }
 `
 
+const TitleText = styled.p`
+  justify-self: flex-start;
+  padding: 8px 16px;
+  margin:0;
+  color: ${props=>props.partName!=='Web' ? props.theme.color.primary : 'rgba(128,128,128,0.8)'};
+  font-weight: 700;
+  border-radius: 24px;
+  background: ${props => props.theme.color.white};
+`
+
+const QuestionText = styled.p`
+  justify-self: center;
+  margin:0;
+  color: ${props=>props.partName!=='Web' ? 'black' : '#898989'};
+  font-weight: 600;
+`
+
+const PlusButton = styled.button`
+  justify-self: flex-end;
+  color: ${props=>props.partName!=='Web' ? props.theme.color.primary : 'rgba(128,128,128,0.8)'};
+  font-weight: 700;
+  border-radius: 27px;
+  border: none;
+  background: ${props => props.theme.color.white};
+  padding: 4px 8px;
+`
 
 export default FAQCategoryCardList
