@@ -21,7 +21,7 @@ const store = configureStore({
         [dataApi.reducerPath]: dataApi.reducer,
     },
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(dataApi.middleware, logger),
+        getDefaultMiddleware().concat(dataApi.middleware),
     devTools: process.env.NODE_ENV !== 'production',
 });
 

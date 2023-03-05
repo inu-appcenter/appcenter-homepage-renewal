@@ -5,22 +5,31 @@ import {useDispatch} from "react-redux";
 import {KeyboardArrowUp} from "@mui/icons-material";
 import {useEffect, useState} from "react";
 
-export const NavItem = (props) => {
+export const NavItem = (
+    {
+        item,
+        visibillity,
+        touchUrl,
+        onTouch
+    }
+) => {
     const isTouch = 'ontouchstart' in window;
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(touchUrl===item.url);
     const location = useLocation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const item = props.item;
-    const handleTouch = (e) => {
-        toggle ?
-            navigate(item.url)
-            : setToggle(true);
-        console.log(toggle);
+    const handleTouch = (url) => {
+        onTouch(url);
     }
+
     useEffect(() => {
-        props.visibillity || setToggle(false);
-    }, [props.visibillity]);
+        setToggle(touchUrl === item.url)
+    },[touchUrl]);
+
+    useEffect(() => {
+        visibillity || setToggle(false);
+    }, [visibillity]);
+
+
 
     return (
         <ItemWrapper>
@@ -28,7 +37,7 @@ export const NavItem = (props) => {
                 isTouch && item.child ?
                     <span
                         className={location.pathname.includes(item.url) ? 'title active' : 'title'}
-                        onTouchEnd={handleTouch}
+                        onTouchEnd={e=>handleTouch(item.url)}
                     >{item.title}</span>
                     :
                     <Link

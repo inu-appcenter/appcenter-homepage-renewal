@@ -3,22 +3,23 @@ import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
 import {navBarInfoList} from "../../resource/string/navBarString";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate, useNavigation} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
-import {useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
 import {NavItem} from "./NavItem";
-import {useDispatch} from "react-redux";
-import {setCurrent} from "../../modules/homeSlice";
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
     const [scrollDirection, setScrollDirection] = useState(true);    //  true: going up, false: going down
+    const [prevTouchUrl, setPrevTouchUrl] = useState(null);
     const handleScroll = useThrottle(
         () => {
             const diff = window.scrollY - prevY;
@@ -67,6 +68,12 @@ export default function Navbar() {
         }
     });
 
+    const handleOnTouch = (url) =>{
+        url === prevTouchUrl
+            ? navigate(url)
+            : setPrevTouchUrl(url);
+    }
+
     return (
         <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque ? '_' : ''}>
             <NavLogo to={fullPath.home}>
@@ -76,7 +83,13 @@ export default function Navbar() {
             </NavLogo>
             <NavItems>
                 {navBarInfoList.map((item) =>
-                    <NavItem key={item.id} item={item} visibillity={navVisibility}/>
+                    <NavItem
+                        key={item.id}
+                        item={item}
+                        visibillity={navVisibility}
+                        touchUrl={prevTouchUrl}
+                        onTouch={(title)=>handleOnTouch(title)}
+                    />
                 )}
             </NavItems>
         </StyledToolbar>
