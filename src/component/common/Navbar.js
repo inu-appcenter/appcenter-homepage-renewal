@@ -18,7 +18,7 @@ export default function Navbar() {
     const [prevY, setPrevY] = useState(0);
     const [navOpaque, setNavOpaque] = useState(true);
     const [navVisibility, setNavVisibility] = useState(true);
-    const [scrollDirection, setScrollDirection] = useState(true)    //  true: going up, false: going down
+    const [scrollDirection, setScrollDirection] = useState(true);    //  true: going up, false: going down
     const handleScroll = useThrottle(
         () => {
             const diff = window.scrollY - prevY;

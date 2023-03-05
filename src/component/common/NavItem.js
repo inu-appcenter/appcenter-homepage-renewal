@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {setCurrent} from "../../modules/homeSlice";
 import {useDispatch} from "react-redux";
 import {KeyboardArrowUp} from "@mui/icons-material";
@@ -10,17 +10,18 @@ export const NavItem = (props) => {
     const [toggle, setToggle] = useState(false);
     const location = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const item = props.item;
     const handleTouch = (e) => {
         toggle ?
-            window.location.href = item.url
+            navigate(item.url)
             : setToggle(true);
         console.log(toggle);
     }
     useEffect(() => {
         props.visibillity || setToggle(false);
     }, [props.visibillity]);
-    
+
     return (
         <ItemWrapper>
             {
