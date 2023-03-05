@@ -23,6 +23,7 @@ const CardWrap = styled.div`
   color: ${props => props.theme.color.black};
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   @media (max-width: 1200px) {
     padding: 0 3rem;
   }
@@ -35,18 +36,16 @@ const CardWrap = styled.div`
 
 const Card = styled.div`
   display: flex;
-  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   background-color: ${props => props.theme.color.primaryLight};
   border-radius: 30px;
   font-size: 20px;
-  height:150px;
   @media (max-width: 768px) {
     font-size: 16px;
   }
   .title {
-    margin: 12px 20px 0;
+    margin: 12px 20px 0 ;
     padding: 8px 16px;
     color: ${props => props.theme.color.primary};
     font-weight: 700;
