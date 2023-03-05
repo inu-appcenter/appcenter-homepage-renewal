@@ -35,8 +35,10 @@ export default function Interview() {
                     {
                         interviewAnswer.map((item) =>
                             <SwiperSlide key={item.key}>
-                                <div className="answer">{item.answer}</div>
-                                <div className="name">{item.name}</div>
+                                <div>
+                                    <div className="answer">{item.answer}</div>
+                                    <div className="name">{item.name}</div>
+                                </div>
                             </SwiperSlide>
                         )
                     }
