@@ -48,7 +48,6 @@ export default function Interview() {
 
 const InterViewLayout = styled.div`
   display: grid;
-  //grid-template-columns: 1.2fr 2fr;
   grid-template-columns: repeat(2, minmax(100px, auto));
   column-gap: 3rem;
   justify-items: center;
@@ -115,7 +114,7 @@ const InterViewScrollBox = styled.div`
 `
 
 const QuestionText = styled.p`
-  margin:0;
+  margin:0 0 0 2rem;
   color: ${props => props.theme.color.primary};
   font-weight: 600;
   white-space: pre-line;
