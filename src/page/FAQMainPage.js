@@ -26,6 +26,9 @@ const FAQPageWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1rem;
+  @media (max-width: 350px){
+    padding: 0 1rem;
+  }
 `
 const TitleWrapper = styled.div`
   padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};

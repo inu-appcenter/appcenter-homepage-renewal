@@ -68,7 +68,7 @@ const InterViewScrollBox = styled.div`
       width: 200px;
       padding: 0 70px 20px 50px;
     }
-    @media(max-width: 280px) {
+    @media(max-width: 320px) {
       width: 150px;
     }
   }

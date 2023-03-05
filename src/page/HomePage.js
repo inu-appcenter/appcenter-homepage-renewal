@@ -51,4 +51,7 @@ const HomePageWrapper = styled.div`
   row-gap: 8rem;
   grid-template-columns: 100%;
   padding: 0 2rem;
+  @media (max-width: 350px){
+    padding: 0 1rem;
+  }
 `;
