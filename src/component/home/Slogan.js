@@ -31,7 +31,7 @@ export default function Slogan() {
 }
 
 const SloganWrapper = styled.div`
-  margin-top: 80px;
+    
 `;
 
 const Text = styled.div`
@@ -43,6 +43,7 @@ const Text = styled.div`
   font-weight: ${props => props.type === 'top' ? 600 : props.type === 'title' ? 700 : 400};
   margin-bottom: ${viewWidthCalc(24)};
   white-space: pre-line;
+  word-break: keep-all;
   ${props => props.type === 'title' ?
           css`font-size: ${props => props.theme.fontSize.bigDesktop.title};
             @media (max-width: 1800px) {
