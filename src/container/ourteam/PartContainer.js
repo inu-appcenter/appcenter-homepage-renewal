@@ -20,6 +20,13 @@ export default function PartContainer(){
     const {data} = useGetTeamListQuery({year: year,team: part});
 
     useEffect(()=>{
+        if(part === 'web'){
+            setYear(2022);
+        }
+    },[])
+
+
+    useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
         setYear(query.year||localStorage.getItem('year')||dayjs().get('year'));
     },[location]);

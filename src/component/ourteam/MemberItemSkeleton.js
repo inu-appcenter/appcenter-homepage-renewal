@@ -52,5 +52,11 @@ export default function MemberItemSkeleton(){
 const StyledCard = styled(Card)`
   width: 300px;
   margin-right: 20px;
-  margin-top: 80px;
+  @media (max-height: 1000px) {
+    width: 150px;
+  }
+  @media (max-width: 576px) {
+    width: 100%;
+    overflow: hidden;
+  }
 `
