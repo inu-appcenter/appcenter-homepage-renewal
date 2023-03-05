@@ -60,7 +60,7 @@ const InterViewLayout = styled.div`
 
 const InterViewScrollBox = styled.div`
   .swiper{
-    padding: 0 70px 20px 40px;
+    padding: 0 120px 20px 40px;
     width: 500px;
     @media(max-width: 1200px) {
       width: 400px;
