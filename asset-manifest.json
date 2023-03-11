@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4dd7699a.css",
-    "main.js": "/static/js/main.c4249f3f.js",
+    "main.js": "/static/js/main.ce2aa9f7.js",
     "static/js/787.7ae4a7cc.chunk.js": "/static/js/787.7ae4a7cc.chunk.js",
     "static/media/Pretendard-Medium.otf": "/static/media/Pretendard-Medium.a8904df42c9b4f93a668.otf",
     "static/media/Pretendard-SemiBold.otf": "/static/media/Pretendard-SemiBold.d8e6b49c5bbba3cd911b.otf",
@@ -43,11 +43,11 @@
     "static/media/speech-bubble-tail.svg": "/static/media/speech-bubble-tail.471e10f3e2b3d12f68b5d3666bc0e9de.svg",
     "static/media/archive_chip.svg": "/static/media/archive_chip.af7cea5d7856d966bfbd81b407920b75.svg",
     "main.4dd7699a.css.map": "/static/css/main.4dd7699a.css.map",
-    "main.c4249f3f.js.map": "/static/js/main.c4249f3f.js.map",
+    "main.ce2aa9f7.js.map": "/static/js/main.ce2aa9f7.js.map",
     "787.7ae4a7cc.chunk.js.map": "/static/js/787.7ae4a7cc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4dd7699a.css",
-    "static/js/main.c4249f3f.js"
+    "static/js/main.ce2aa9f7.js"
   ]
 }
