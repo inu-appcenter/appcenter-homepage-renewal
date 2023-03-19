@@ -3,12 +3,12 @@ name: ci
 on:
   push:
     branches:
-      - 'main'
+      - 'production'
     tags:
       - 'v*'
   pull_request:
     branches:
-      - 'main'
+      - 'production'
 
 jobs:
   docker:
