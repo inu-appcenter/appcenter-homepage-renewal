@@ -33,7 +33,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            milk717/react-test
+            ${{ secrets.DOCKER_USERNAME }}/home-inu
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
