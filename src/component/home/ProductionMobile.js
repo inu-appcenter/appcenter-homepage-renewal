@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {EffectFlip, Autoplay, Pagination, Navigation} from "swiper";
+import {Autoplay, EffectFlip, Pagination} from "swiper";
 import "swiper/css/effect-flip";
 import productList from "../../resource/string/productList";
 import {v4 as uuidv4} from "uuid";

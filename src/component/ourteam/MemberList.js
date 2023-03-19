@@ -2,7 +2,7 @@ import * as React from 'react';
 import MemberItem from "./MemberItem";
 import styled from "styled-components";
 import MemberItemSkeleton from "./MemberItemSkeleton";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
 

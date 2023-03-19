@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import {socialLink} from "../../resource/string/socialLink";
 
 export default function Footer() {

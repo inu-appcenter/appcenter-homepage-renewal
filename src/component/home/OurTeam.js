@@ -3,7 +3,6 @@ import {partInfo} from "../../resource/string/partInfo";
 import {Fab} from "@mui/material"
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {useNavigate} from "react-router-dom";
-import dayjs from "dayjs";
 
 export default function OurTeam() {
     const navigate = useNavigate();

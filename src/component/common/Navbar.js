@@ -2,7 +2,7 @@ import {fullPath} from "../../resource/string/routerPath";
 import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
 import {useLayoutEffect, useState} from "react";
@@ -72,7 +72,7 @@ export default function Navbar() {
                 <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>
             </NavLogo>
             <NavItems visibility={navVisibility}/>
-            
+
         </StyledToolbar>
     );
 }

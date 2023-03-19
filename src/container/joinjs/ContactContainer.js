@@ -1,6 +1,5 @@
 import Subtitle from "../../component/joinus/Subtitle";
 import styled from "styled-components";
-import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 import Map from "../../component/joinus/Map";
 import {socialLink} from "../../resource/string/socialLink";
 

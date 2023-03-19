@@ -6,7 +6,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay} from "swiper";
 import productList from "../../resource/string/productList";
 import 'swiper/css/virtual';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {Button} from "@mui/material";
 
 

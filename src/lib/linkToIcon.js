@@ -2,6 +2,7 @@ import behanceLogo from '../resource/img/ourteam_logo/behance_logo.png';
 import githubLogo from '../resource/img/ourteam_logo/github_logo.png';
 import tistoryLogo from '../resource/img/ourteam_logo/tistory_logo.png';
 import velogLogo from '../resource/img/ourteam_logo/velog_logo.png';
+
 export const linkToIcon = (link) =>{
     const hostNameMap = {
         'github.com': githubLogo,

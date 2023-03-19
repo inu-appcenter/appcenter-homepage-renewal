@@ -4,10 +4,10 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import CardCover from "@mui/joy/CardCover";
 import * as React from "react";
 import styled from "styled-components";
-import {linkToIcon, hostNameFirstWord} from "../../lib/linkToIcon";
+import {hostNameFirstWord, linkToIcon} from "../../lib/linkToIcon";
 import {Avatar} from "@mui/joy";
-import {Fab, Skeleton} from "@mui/material";
-import { v4 as uuidv4 } from 'uuid';
+import {Skeleton} from "@mui/material";
+import {v4 as uuidv4} from 'uuid';
 
 export default function MemberItem({image, name, description, link = []}) {
     return (

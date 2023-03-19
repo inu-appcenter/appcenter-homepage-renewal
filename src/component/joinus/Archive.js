@@ -1,6 +1,7 @@
 import ArchiveItem from "./ArchiveItem";
 import styled from "styled-components";
 import {archiveList} from "../../resource/string/archiveList";
+
 export default function Archive(){
     return(
         <FlexBox>

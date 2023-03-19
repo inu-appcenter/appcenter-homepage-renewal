@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {viewHeightCalc} from "../../lib/viewportCalculate";
 import {interviewAnswer, interViewQuestion} from "../../resource/data/aboutUs";
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import "swiper/css/effect-cards";
 
-import {Pagination, Autoplay,EffectCards} from "swiper";
+import {Autoplay, EffectCards, Pagination} from "swiper";
 
 
 export default function Interview() {

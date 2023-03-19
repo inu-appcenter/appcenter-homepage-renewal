@@ -1,8 +1,6 @@
 import RegisterInfo from "../../component/joinus/RegisterInfo";
 import styled from "styled-components";
 import AppCenterWorkshopImage from "../../resource/img/appcenter_workshop.png"
-import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
-import {PageTitle} from "../../component/common/PageTitle";
 
 export default function JoinUsMainContainer(){
     return(

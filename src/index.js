@@ -10,7 +10,6 @@ import GlobalStyle from "./resource/style/GlobalStyle";
 import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import {dataApi} from "./apis/dataApi";
-import logger from 'redux-logger';
 import {homeSlice} from "./modules/homeSlice";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

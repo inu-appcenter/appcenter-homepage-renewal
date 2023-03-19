@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {viewHeightCalc} from "../../lib/viewportCalculate";
 
 export const
     PageTitle = ({title, subTitle = null}) => {

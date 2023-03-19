@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import {viewHeightCalc} from "../../lib/viewportCalculate";
-import {Fab} from "@mui/material";
-import {partInfo, partInfoByName} from "../../resource/string/partInfo";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import {partInfoByName} from "../../resource/string/partInfo";
 
 export default function PartTitle({partName = 'Android'}) {
     return (
