@@ -15,7 +15,7 @@ export default function HomePage() {
 
     useEffect(()=>{
         dispatch(setCurrent(location.state?.title));
-    },[])
+    },[dispatch, location.state?.title])
 
     useEffect(() =>{
         switch(current){
@@ -35,7 +35,7 @@ export default function HomePage() {
                 break;
         }
         return () => dispatch(setCurrent(null))
-    },[current]);
+    },[current, dispatch]);
 
     return (
         <HomePageWrapper>

@@ -2,7 +2,7 @@ import MemberList from "../../component/ourteam/MemberList";
 import SpeechBubble from "../../component/common/SpeechBubble";
 import PartTitle from "../../component/ourteam/PartTitle";
 import {useGetTeamListQuery} from "../../apis/dataApi";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import qs from "qs";
 import styled from "styled-components";
@@ -10,7 +10,6 @@ import dayjs from "dayjs";
 
 export default function PartContainer(){
     const location = useLocation();
-    const navigate = useNavigate();
 
     const query = qs.parse(location.search, {
         ignoreQueryPrefix: true
@@ -23,19 +22,19 @@ export default function PartContainer(){
         if(part === 'web'){
             setYear(2022);
         }
-    },[]);
+    },[part]);
 
     useEffect(()=>{
         if(part === 'web' && year !== 2022){
             setPart('android');
         }
-    },[year]);
+    },[part, year]);
 
 
     useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
         setYear(query.year||dayjs().get('year'));
-    },[location]);
+    },[location, query.year]);
 
 
     return(

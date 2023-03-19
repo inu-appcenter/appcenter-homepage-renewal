@@ -19,17 +19,17 @@ export default function OurTeamPage() {
     useEffect(()=>{
         setPart(location.pathname.split('/').at(-1));
         setYear(query.year||dayjs().get('year'));
-    },[location]);
+    },[location, query.year]);
 
     useEffect(()=>{
         navigate({pathname:part, search:`?year=${year}`});
-    },[part, year]);
+    },[navigate, part, year]);
 
     useEffect(()=>{
         if(part === 'web' && year !== 2022){
             navigate('android');
         }
-    },[year]);
+    },[navigate, part, year]);
 
     return (
         <OurTeamPageWrapper>
