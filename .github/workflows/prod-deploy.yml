@@ -1,4 +1,4 @@
-name: ci
+name: Docker CD
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ secrets.DOCKER_USERNAME }}/home-inu
+            ${{ secrets.DOCKER_USERNAME }}/home-appcenter
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
