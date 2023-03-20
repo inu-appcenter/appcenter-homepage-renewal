@@ -4,7 +4,7 @@ import FAQMainPage from "./page/FAQMainPage";
 import FAQDetailPage from "./page/FAQDetailPage";
 import JoinUsPage from "./page/JoinUsPage";
 import {FAQDetailListContainer} from "./container/faq/FAQDetailListContainer";
-import {fullPath, routerPath} from "./resource/string/routerPath";
+import {routerPath} from "./resource/string/routerPath";
 import MainPage from "./page/MainPage";
 import OurTeamPage from "./page/OurTeamPage";
 import PartContainer from "./container/ourteam/PartContainer";
