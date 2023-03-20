@@ -12,9 +12,8 @@ import PartContainer from "./container/ourteam/PartContainer";
 function App() {
     return (
         <Routes>
-            <Route path={routerPath.base.url} element={<Navigate to={'home'}/>}/>
-            <Route path='/' element={<Navigate to={fullPath.home}/>}/>
-            <Route path={routerPath.base.url} element={<MainPage/>}>
+            <Route path='/' element={<Navigate to={'home'}/>}/>
+            <Route path='/' element={<MainPage/>}>
                 <Route path={routerPath.home.url} element={<HomePage/>}/>
                 <Route path={routerPath.ourTeam.url} element={<Navigate to={'android'}/>}/>
                 <Route path={routerPath.ourTeam.url} element={<OurTeamPage/>}>
