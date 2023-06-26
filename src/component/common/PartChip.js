@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 
 
 export function PartChip({
-                             url = partInfo[0].fullUrl,
+                            activePart= 'android',
                              onButtonClick,
                              common = true,
                                 web=false
@@ -19,11 +19,10 @@ export function PartChip({
                             ? null
                             : <Button
                                 key={part.id}
-                                className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
+                                className={activePart === part.partName.toLowerCase() ? 'active' : ''}
                                 onClick={e => onButtonClick(e, part.partName.toLowerCase())}
                             >
                                 {part.partName}
-                                {/*{part.partName === "Common" && <Divider/>}*/}
                             </Button>
                 ))}
             </ButtonGroup>

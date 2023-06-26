@@ -3,6 +3,9 @@ import {partInfo} from "../resource/string/partInfo";
 import {Button} from "@mui/material";
 
 
+/**
+ * @deprecated
+ */
 export function FAQCategoryChip({
                              url = partInfo[0].fullUrl,
                              onButtonClick,
