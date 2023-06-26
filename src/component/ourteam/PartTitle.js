@@ -41,7 +41,6 @@ const TextWrapper = styled.div`
   }
 
   .TeamDescription {
-    font-size: 30px;
     color: ${props => props.theme.color.gray};
 
     font-size: ${props => props.theme.fontSize.bigDesktop.text};

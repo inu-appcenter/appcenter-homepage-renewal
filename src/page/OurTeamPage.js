@@ -26,7 +26,7 @@ export default function OurTeamPage() {
     },[navigate, part, year]);
 
     useEffect(()=>{
-        if(part === 'web' && year !== 2022){
+        if(part === 'web' && year !== '2022'){
             navigate('android');
         }
     },[navigate, part, year]);
