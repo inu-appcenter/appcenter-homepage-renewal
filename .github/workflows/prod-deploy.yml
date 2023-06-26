@@ -22,6 +22,13 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Make env
+        run: |
+          touch ./.env
+          echo "${{ secrets.ENV }}" > ./.env
+          echo .env
+        shell: sh
+
       - name: Install dependencies
         run: yarn
 
