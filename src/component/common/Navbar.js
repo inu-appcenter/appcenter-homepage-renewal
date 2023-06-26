@@ -1,11 +1,11 @@
-import {fullPath} from "../../resource/string/routerPath";
+import {AbsolutePath} from "../../resource/string/routerPath";
 import logo from "../../resource/img/navbar_logo/navbar_logo.svg";
 import logo_medium from "../../resource/img/navbar_logo/navbar_logo_medium.svg";
 import logo_small from "../../resource/img/navbar_logo/navbar_logo_small.svg";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Toolbar} from "@mui/material";
-import {useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import useThrottle from "../../lib/hooks/useThrottle";
 import useDebounce from "../../lib/hooks/useDebounce";
 import {viewWidthCalc} from "../../lib/viewportCalculate";
@@ -51,13 +51,13 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         }
     }, [handleScroll, stopScroll]);
-    useLayoutEffect(() => {
+    useEffect(() => {
         window.addEventListener('scroll', stopScroll);
         return () => {
             window.removeEventListener('scroll', stopScroll);
         }
     });
-    useLayoutEffect(() => {
+    useEffect(() => {
         window.addEventListener('scroll', stopScrollDelay);
         return () => {
             window.removeEventListener('scroll', stopScrollDelay);
@@ -66,7 +66,7 @@ export default function Navbar() {
 
     return (
         <StyledToolbar className={navVisibility ? '' : 'hide'} opaque={navOpaque ? '_' : ''}>
-            <NavLogo to={fullPath.home}>
+            <NavLogo to={AbsolutePath.home}>
                 <img className="logo" src={logo} alt='Inu App Center. logo'/>
                 <img className="logo--medium" src={logo_medium} alt='Inu App Center. logo'/>
                 <img className="logo--small" src={logo_small} alt='Inu App Center. logo'/>

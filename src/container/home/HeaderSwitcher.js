@@ -1,7 +1,7 @@
 // import Header from "../../component/common/Header";
 import Navbar from "../../component/common/Navbar";
 import {useLocation} from "react-router-dom";
-import {fullPath} from "../../resource/string/routerPath";
+import {AbsolutePath} from "../../resource/string/routerPath";
 import WelcomeContainer from "./WelcomeContainer";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ export default function HeaderSwitcher() {
     return (
         <>
             {
-                location.pathname === fullPath.home
+                location.pathname === AbsolutePath.home
                     ? <WelcomeContainer/>
                     : <Spacer/>
             }

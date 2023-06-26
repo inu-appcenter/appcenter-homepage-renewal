@@ -1,4 +1,4 @@
-import {fullPath, routerPath} from "./routerPath";
+import {AbsolutePath, routerPath} from "./routerPath";
 import androidEmoji from '../img/emoji/android-emoji.png';
 import iosEmoji from '../img/emoji/ios-emoji.png';
 import serverEmoji from '../img/emoji/server-emoji.png';
@@ -16,7 +16,7 @@ export const partInfo = [
             '더보기를 눌러 확인해보세요!',
         emoji: androidEmoji,
         url: routerPath.faqDetail.child.common.url,
-        fullUrl: fullPath.common
+        fullUrl: AbsolutePath.common
     },
     {
         id: 1,
@@ -26,7 +26,7 @@ export const partInfo = [
         speechBubble: '안녕하세요! 안드로이드 파트 입니다.',
         emoji: androidEmoji,
         url: routerPath.faqDetail.child.android.url,
-        fullUrl: fullPath.android
+        fullUrl: AbsolutePath.android
     },
     {
         id: 5,
@@ -36,7 +36,7 @@ export const partInfo = [
         speechBubble: '안녕하세요! 아이디어가 넘치는 디자인 입니다!\n함께 배우며 함께 성장하는 디자인팀으로 오세요!',
         emoji: designEmoji,
         url: routerPath.faqDetail.child.design.url,
-        fullUrl: fullPath.design
+        fullUrl: AbsolutePath.design
     },
     {
         id: 2,
@@ -46,7 +46,7 @@ export const partInfo = [
         speechBubble: '안녕하세요 ios 파트 입니다.',
         emoji: iosEmoji,
         url: routerPath.faqDetail.child.ios.url,
-        fullUrl: fullPath.ios
+        fullUrl: AbsolutePath.ios
     },
     {
         id: 3,
@@ -56,7 +56,7 @@ export const partInfo = [
         speechBubble: '안녕하세요 서버 파트 입니다.\n',
         emoji: serverEmoji,
         url: routerPath.faqDetail.child.server.url,
-        fullUrl: fullPath.server
+        fullUrl: AbsolutePath.server
     },
     {
         id: 4,

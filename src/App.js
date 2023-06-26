@@ -15,7 +15,7 @@ function App() {
             <Route path='/' element={<Navigate to={'home'}/>}/>
             <Route path='/' element={<MainPage/>}>
                 <Route path={routerPath.home.url} element={<HomePage/>}/>
-                <Route path={routerPath.ourTeam.url} element={<Navigate to={'android'}/>}/>
+                {/*<Route path={routerPath.ourTeam.url} element={<Navigate to={'android'}/>}/>*/}
                 <Route path={routerPath.ourTeam.url} element={<OurTeamPage/>}>
                     <Route path=':part' element={<PartContainer/>}/>
                 </Route>
