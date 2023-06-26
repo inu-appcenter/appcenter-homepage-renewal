@@ -59,6 +59,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            docker stop inu-hompage
+            docker rm inu-hompage
             docker pull ${{ steps.meta.outputs.tags }}
-            docker run -d -p 3000:3000 ${{ steps.meta.outputs.tags }}
+            docker run -d --name inu-hompage -p 3000:3000 ${{ steps.meta.outputs.tags }}
 #            docker image prune -f
