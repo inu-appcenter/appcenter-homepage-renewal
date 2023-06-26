@@ -68,6 +68,6 @@ jobs:
           script: |
             docker stop inu-hompage
             docker rm inu-hompage
-            docker pull ${{ steps.meta.outputs.tags }}
-            docker run -d --name inu-hompage -p 3000:3000 ${{ steps.meta.outputs.tags }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/home-appcenter:production
+            docker run -d --name inu-hompage -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/home-appcenter:production
 #            docker image prune -f
