@@ -3,6 +3,8 @@ import { partInfo } from '../../resource/string/partInfo';
 import { Fab } from '@mui/material';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { useNavigate } from 'react-router-dom';
+import { SubTitleStyle, PlainTextStyle } from '../../resource/style/TextStyle';
+import theme from '../../resource/style/Theme';
 
 export default function OurTeam() {
     const navigate = useNavigate();
@@ -12,10 +14,12 @@ export default function OurTeam() {
                 {partInfo.slice(1).map((item) => (
                     <TeamListItem key={item.id}>
                         <TextWrapper>
-                            <div className='TeamName'>{item.partName}</div>
-                            <div className='TeamDescription'>
+                            <SubTitleStyle firstLetterAccent={true}>
+                                {item.partName}
+                            </SubTitleStyle>
+                            <PlainTextStyle fontColor={theme.color.gray}>
                                 {item.description}
-                            </div>
+                            </PlainTextStyle>
                         </TextWrapper>
                         <Button
                             onClick={() =>
@@ -47,50 +51,9 @@ const TeamListItem = styled.div`
 `;
 
 const TextWrapper = styled.div`
-    .TeamName::first-letter {
-        color: ${(props) => props.theme.color.primary};
-    }
-
-    .TeamName {
-        margin: 4px 0;
-        font-size: ${(props) => props.theme.fontSize.bigDesktop.subtitle};
-        @media (max-width: 1800px) {
-            font-size: ${(props) => props.theme.fontSize.desktop.subtitle};
-        }
-        @media (max-width: 1200px) {
-            font-size: ${(props) => props.theme.fontSize.tablet.subtitle};
-        }
-        @media (max-width: 768px) {
-            font-size: ${(props) => props.theme.fontSize.smallTablet.subtitle};
-        }
-        @media (max-width: 576px) {
-            font-size: ${(props) => props.theme.fontSize.mobile.subtitle};
-        }
-        @media (max-width: 280px) {
-            font-size: ${(props) => props.theme.fontSize.fold.subtitle};
-        }
-    }
-
-    .TeamDescription {
-        margin-top: 16px;
-        color: ${(props) => props.theme.color.gray};
-        font-size: ${(props) => props.theme.fontSize.bigDesktop.text};
-        @media (max-width: 1800px) {
-            font-size: ${(props) => props.theme.fontSize.desktop.text};
-        }
-        @media (max-width: 1200px) {
-            font-size: ${(props) => props.theme.fontSize.tablet.text};
-        }
-        @media (max-width: 768px) {
-            font-size: ${(props) => props.theme.fontSize.smallTablet.text};
-        }
-        @media (max-width: 576px) {
-            font-size: ${(props) => props.theme.fontSize.mobile.text};
-        }
-        @media (max-width: 280px) {
-            font-size: ${(props) => props.theme.fontSize.fold.text};
-        }
-    }
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
 `;
 
 const Button = styled(Fab)`
