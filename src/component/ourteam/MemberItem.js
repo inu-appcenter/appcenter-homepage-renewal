@@ -11,11 +11,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export default function MemberItem({image, name, description, link = []}) {
     return (
-        <StyledCard
-            sx={{
-                '--Card-padding': '0px',
-            }}
-        >
+        <StyledCard>
             <Box sx={{position:'relative'}}>
                 <AspectRatio ratio={'1'}>
                     {
@@ -69,6 +65,7 @@ const StyledCard = styled(Card)`
   margin-right: 20px;
   padding: 0;
   width: 300px;
+  box-shadow: none;
   @media (max-height: 1000px) {
     width: 150px;
   }
