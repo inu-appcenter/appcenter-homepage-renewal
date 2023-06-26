@@ -5,7 +5,7 @@ import theme from "../../resource/style/Theme";
 import {viewHeightCalc, viewWidthCalc} from "../../lib/viewportCalculate";
 
 export default function Map() {
-    const API_KEY = "AIzaSyDglNjC5zkNJaDFQNiLyvkkQixbFvzDjoU";
+    const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
     const APP_CENTER_LOCATION = {
         lat: 37.3765039,
         lng: 126.6358189,
