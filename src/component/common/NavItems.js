@@ -5,6 +5,8 @@ import {setCurrent} from "../../modules/homeSlice";
 import {KeyboardArrowUp} from "@mui/icons-material";
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
+import {routerPath} from "../../resource/string/routerPath";
+import {setPart} from "../../modules/ourTeamSlice";
 
 export default function NavItems({visibility}) {
     const isTouch = 'ontouchstart' in window;
@@ -23,7 +25,14 @@ export default function NavItems({visibility}) {
     useEffect(() => {
         setToggle('');
     }, [location])
-    
+    const handleChildClick = (e, parent, title) => {
+        if(parent === routerPath.home.title){
+            dispatch(setCurrent(title));
+        }else if(parent === routerPath.ourTeam.title){
+            dispatch(setPart(title.toLowerCase()));
+        }
+    }
+
     return (
         <ItemGroup>
             {navBarInfoList.map(item =>
@@ -46,7 +55,7 @@ export default function NavItems({visibility}) {
                                 key={sub.id}
                                 to={sub.url || 'home'}
                                 state={{title: sub.title}}
-                                onClick={e=>dispatch(setCurrent(sub.title))}
+                                onClick={e=>handleChildClick(e, item.title, sub.title)}
                                 point={location.pathname === sub.url ? 1 : 0}
                             >{sub.title}</ChildLink>
                         )}

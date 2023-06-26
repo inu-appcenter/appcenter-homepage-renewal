@@ -18,7 +18,7 @@ export default function OurTeamPage() {
             navigate('android');
         }
         navigate({pathname:part, search:`?year=${year}`})
-    },[navigate, part, year]);
+    },[navigate,part, year]);
 
     return (
         <OurTeamPageWrapper>
