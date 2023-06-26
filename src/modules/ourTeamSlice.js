@@ -11,7 +11,6 @@ export const ourTeamSlice = createSlice({
     initialState,
     reducers:{
         setPart: (state, action)=>{
-            console.log(action)
             state.part = action.payload;
         },
         setYear: (state, action)=>{

@@ -1,18 +1,28 @@
 import styled from "styled-components";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {FAQCategoryChip} from "../component/FAQCategoryChip";
+import {Outlet, useNavigate} from "react-router-dom";
+import {PartChip} from "../component/common/PartChip";
+import {useDispatch, useSelector} from "react-redux";
+import {setPart} from "../modules/faqSlice";
+import {useEffect} from "react";
 
 export default function FAQDetailPage() {
-    const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const part = useSelector(state=>state.faq.part);
+
+    useEffect(()=>{
+        navigate(part)
+    },[navigate, part]);
 
     return (
         <>
             <FAQDetailWrapper>
                 <ContentWrapper>
-                    <FAQCategoryChip
-                        url={location.pathname}
-                        onButtonClick={(e, part) => navigate(part)}
+                    <PartChip
+                        activePart={part}
+                        onButtonClick={(e, part) => dispatch(setPart(part))}
+                        common = {true}
+                        web = {false}
                     />
                     <Outlet/>
                 </ContentWrapper>

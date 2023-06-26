@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {partInfo} from "../../resource/string/partInfo";
 import {Button} from "@mui/material";
+import {Divider} from "@mui/joy";
 
 
 export function PartChip({
@@ -17,14 +18,17 @@ export function PartChip({
                         ? null
                         : (!web && part.partName === 'Web')
                             ? null
-                            : <Button
-                                key={part.id}
-                                className={activePart === part.partName.toLowerCase() ? 'active' : ''}
-                                onClick={e => onButtonClick(e, part.partName.toLowerCase())}
-                            >
-                                {part.partName}
-                            </Button>
-                ))}
+                            : <>
+                                <Button
+                                    key={part.id}
+                                    className={activePart === part.partName.toLowerCase() ? 'active' : ''}
+                                    onClick={e => onButtonClick(e, part.partName.toLowerCase())}
+                                >
+                                    {part.partName}
+                                </Button>
+                                {part.partName === 'Common' && <Divider orientation="vertical"/>}
+                            </>
+                ))}합
             </ButtonGroup>
         </>
     )
