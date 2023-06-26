@@ -29,7 +29,7 @@ export default function ProductionMobile() {
                     productList.map((item) => (
                         <SwiperSlide key={item.key}>
                             <div className='card'>
-                                <AspectRatio ratio={'1'}>
+                                <TransparentAspectRatio ratio={'1'}>
                                     <figure>
                                         <img
                                             src={item.image}
@@ -37,7 +37,7 @@ export default function ProductionMobile() {
                                             alt=""
                                         />
                                     </figure>
-                                </AspectRatio>
+                                </TransparentAspectRatio>
                                 <StoreImageBox>
                                     {
                                         item.store.map((value) => (
@@ -105,4 +105,10 @@ const StoreButton = styled(Button)`
   border: 1px solid ${props => props.theme.color.primary};
   border-radius: 27.5px;
   padding: 10px 20px;
+`;
+const TransparentAspectRatio = styled(AspectRatio)`
+  background-color: transparent;
+  .MuiAspectRatio-content{
+    background-color: transparent;
+  }
 `;

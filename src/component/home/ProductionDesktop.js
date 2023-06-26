@@ -1,6 +1,5 @@
 import AspectRatio from "@mui/joy/AspectRatio";
 import styled from "styled-components";
-
 import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay} from "swiper";
@@ -45,7 +44,7 @@ export default function ProductionDesktop() {
                     productList.concat(productList).map((item) => (
                         <SwiperSlide key={uuidv4()}>
                             <div className='card'>
-                                <AspectRatio ratio={'1'}>
+                                <TransparentAspectRatio ratio={'1'} >
                                     <figure>
                                         <img
                                             src={item.image}
@@ -53,7 +52,7 @@ export default function ProductionDesktop() {
                                             alt=""
                                         />
                                     </figure>
-                                </AspectRatio>
+                                </TransparentAspectRatio>
                                 <StoreImageBox>
                                     {
                                         item.store.map((value) => (
@@ -94,7 +93,6 @@ const ProductionLayout = styled.div`
     overflow: hidden;
   }
 `;
-
 const StoreImageBox = styled.div`
   margin-top: 12px;
   display: flex;
@@ -109,4 +107,10 @@ const StoreButton = styled(Button)`
   border: 1px solid ${props => props.theme.color.primary};
   border-radius: 27.5px;
   padding: 10px 20px;
+`;
+const TransparentAspectRatio = styled(AspectRatio)`
+  background-color: transparent;
+  .MuiAspectRatio-content{
+    background-color: transparent;
+  }
 `;
