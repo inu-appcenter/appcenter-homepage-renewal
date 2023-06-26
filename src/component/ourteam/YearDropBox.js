@@ -5,6 +5,10 @@ import Select from '@mui/material/Select';
 import dayjs from "dayjs";
 import styled from "styled-components";
 
+/**
+ * 2022년부터 현재 년도까지 리스트를 생성
+ * @type {year[]}
+ */
 const yearList = new Array(dayjs().get('year') - 2022 + 1).fill(0).map((_, i) => 2022 + i);
 export default function YearDropBox({year, handleYearChange}) {
 

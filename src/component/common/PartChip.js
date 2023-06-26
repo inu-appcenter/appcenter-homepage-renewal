@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import {partInfo} from "../../resource/string/partInfo";
 import {Button} from "@mui/material";
+import {Divider} from "@mui/joy";
 
 
 export function PartChip({
-                             url = partInfo[0].fullUrl,
+                            activePart= 'android',
                              onButtonClick,
                              common = true,
                                 web=false
@@ -17,14 +18,16 @@ export function PartChip({
                         ? null
                         : (!web && part.partName === 'Web')
                             ? null
-                            : <Button
-                                key={part.id}
-                                className={url.split('/').at(-1) === part.partName.toLowerCase() ? 'active' : ''}
-                                onClick={e => onButtonClick(e, part.partName.toLowerCase())}
-                            >
-                                {part.partName}
-                                {/*{part.partName === "Common" && <Divider/>}*/}
-                            </Button>
+                            : <>
+                                <Button
+                                    key={part.id}
+                                    className={activePart === part.partName.toLowerCase() ? 'active' : ''}
+                                    onClick={e => onButtonClick(e, part.partName.toLowerCase())}
+                                >
+                                    {part.partName}
+                                </Button>
+                                {part.partName === 'Common' && <Divider orientation="vertical"/>}
+                            </>
                 ))}
             </ButtonGroup>
         </>

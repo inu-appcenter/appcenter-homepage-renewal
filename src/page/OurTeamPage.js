@@ -1,34 +1,23 @@
 import {PageTitle} from "../component/common/PageTitle";
 import {PartChip} from "../component/common/PartChip";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import YearDropBox from "../component/ourteam/YearDropBox";
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import dayjs from "dayjs";
-import qs from "qs";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setPart, setYear} from "../modules/ourTeamSlice";
 
 export default function OurTeamPage() {
-    const location = useLocation();
     const navigate = useNavigate();
-    const query = qs.parse(location.search, {
-        ignoreQueryPrefix: true
-    });
-    const [part, setPart] = useState(location.pathname.split('/').at(-1) || 'android')
-    const [year, setYear] = useState( dayjs().get('year')||2022);
+    const dispatch = useDispatch();
+    const part = useSelector(state=>state.ourTeam.part);
+    const year = useSelector(state=>state.ourTeam.year);
 
     useEffect(()=>{
-        setPart(location.pathname.split('/').at(-1));
-        setYear(query.year||dayjs().get('year'));
-    },[location, query.year]);
-
-    useEffect(()=>{
-        navigate({pathname:part, search:`?year=${year}`});
-    },[navigate, part, year]);
-
-    useEffect(()=>{
-        if(part === 'web' && year !== '2022'){
+        if(part === 'web' && year !== 2022){
             navigate('android');
         }
+        navigate({pathname:part, search:`?year=${year}`})
     },[navigate, part, year]);
 
     return (
@@ -40,14 +29,14 @@ export default function OurTeamPage() {
                     />
                     <YearDropBox
                         year={year}
-                        handleYearChange={(year)=> setYear(year)}
+                        handleYearChange={(year)=> dispatch(setYear(year))}
                     />
                 </Stack>
                 <PartChip
-                    web={(year === '2022')}
+                    activePart={part}
+                    web={(year === 2022)}
                     common={false}
-                    url={location.pathname}
-                    onButtonClick={(e, part) => setPart(part)}
+                    onButtonClick={(e, part) =>  dispatch(setPart(part))}
                 />
             </TitleWrapper>
             <Outlet/>
