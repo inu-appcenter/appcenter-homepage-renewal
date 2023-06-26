@@ -1,14 +1,14 @@
-import {createGlobalStyle} from "styled-components";
-import PretendardMedium from '../fonts/Pretendard-Medium.otf'
-import PretendardSemiBold from '../fonts/Pretendard-SemiBold.otf'
-import PretendardBold from '../fonts/Pretendard-Bold.otf'
+import { createGlobalStyle } from 'styled-components';
+import PretendardMedium from '../fonts/Pretendard-Medium.otf';
+import PretendardSemiBold from '../fonts/Pretendard-SemiBold.otf';
+import PretendardBold from '../fonts/Pretendard-Bold.otf';
 
 const GlobalStyle = createGlobalStyle`
   //이 안에 전체 프로젝트에 적용될 css를 작성하면 됩니다~!
-  *{
+  * {
     font-family: 'Pretendard', sans-serif;
   }
-  
+
   body {
     margin: 0;
   }
@@ -24,10 +24,10 @@ const GlobalStyle = createGlobalStyle`
     margin-left: auto;
     margin-right: auto;
   }
-  
-  footer{
+
+  footer {
     position: relative;
-    bottom:0;
+    bottom: 0;
   }
 
   a {
@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     font-style: normal;
   }
-  
-`
+
+`;
 
 export default GlobalStyle;

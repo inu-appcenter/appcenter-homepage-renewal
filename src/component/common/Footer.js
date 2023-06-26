@@ -1,13 +1,28 @@
-import styled from "styled-components";
-import {socialLink} from "../../resource/string/socialLink";
+import styled from 'styled-components';
+import { socialLink } from '../../resource/string/socialLink';
 
 export default function Footer() {
-    return(
+    return (
         <FooterWrapper>
             <SocialIcons>
-                <a href={socialLink.email.address}><img src={socialLink.email.icon} alt="인천대앱센터 이메일"/></a>
-                <a href={socialLink.facebook.address}><img src={socialLink.facebook.icon} alt="인천대앱센터 페이스북"/></a>
-                <a href={socialLink.kakaotalk.address}><img src={socialLink.kakaotalk.icon} alt="카카오톡 플러스친구 @인천대앱센터"/></a>
+                <a href={socialLink.email.address}>
+                    <img
+                        src={socialLink.email.icon}
+                        alt='인천대앱센터 이메일'
+                    />
+                </a>
+                <a href={socialLink.facebook.address}>
+                    <img
+                        src={socialLink.facebook.icon}
+                        alt='인천대앱센터 페이스북'
+                    />
+                </a>
+                <a href={socialLink.kakaotalk.address}>
+                    <img
+                        src={socialLink.kakaotalk.icon}
+                        alt='카카오톡 플러스친구 @인천대앱센터'
+                    />
+                </a>
             </SocialIcons>
             <Copyright>© 2023 INU Appcenter. All rights reserved.</Copyright>
         </FooterWrapper>
@@ -25,13 +40,14 @@ const SocialIcons = styled.div`
     justify-content: space-between;
     width: 90px;
     height: 24px;
+
     img {
         width: 24px;
     }
 `;
 
 const Copyright = styled.div`
-    color: ${props=>props.theme.color.black};
+    color: ${(props) => props.theme.color.black};
     text-align: center;
     font-size: 16px;
     font-weight: 500;

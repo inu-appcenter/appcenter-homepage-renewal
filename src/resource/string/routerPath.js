@@ -1,4 +1,3 @@
-
 export const routerPath = {
     home: {
         url: 'home',
@@ -77,4 +76,4 @@ export const AbsolutePath = {
     ios: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
     server: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
     design: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
-}
+};

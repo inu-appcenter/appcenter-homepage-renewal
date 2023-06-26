@@ -1,18 +1,18 @@
-import styled from "styled-components";
-import {Outlet, useNavigate} from "react-router-dom";
-import {PartChip} from "../component/common/PartChip";
-import {useDispatch, useSelector} from "react-redux";
-import {setPart} from "../modules/faqSlice";
-import {useEffect} from "react";
+import styled from 'styled-components';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { PartChip } from '../component/common/PartChip';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPart } from '../modules/faqSlice';
+import { useEffect } from 'react';
 
 export default function FAQDetailPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const part = useSelector(state=>state.faq.part);
+    const part = useSelector((state) => state.faq.part);
 
-    useEffect(()=>{
-        navigate(part)
-    },[navigate, part]);
+    useEffect(() => {
+        navigate(part);
+    }, [navigate, part]);
 
     return (
         <>
@@ -21,10 +21,10 @@ export default function FAQDetailPage() {
                     <PartChip
                         activePart={part}
                         onButtonClick={(e, part) => dispatch(setPart(part))}
-                        common = {true}
-                        web = {false}
+                        common={true}
+                        web={false}
                     />
-                    <Outlet/>
+                    <Outlet />
                 </ContentWrapper>
             </FAQDetailWrapper>
         </>
@@ -32,14 +32,12 @@ export default function FAQDetailPage() {
 }
 
 const FAQDetailWrapper = styled.div`
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: 100%;
-  row-gap: 2rem;
-`
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 2rem;
+`;
 
 const ContentWrapper = styled.div`
-  padding-top: ${props=>props.theme.padding.bigDesktop.contentTop};
-
-`
-
+    padding-top: ${(props) => props.theme.padding.bigDesktop.contentTop};
+`;

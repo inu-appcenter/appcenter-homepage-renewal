@@ -1,17 +1,17 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     part: 'android',
 };
 
 export const faqSlice = createSlice({
-    name:'faq',
+    name: 'faq',
     initialState,
-    reducers:{
-        setPart: (state, action)=>{
+    reducers: {
+        setPart: (state, action) => {
             state.part = action.payload;
         },
-    }
+    },
 });
 
-export const {setPart}= faqSlice.actions;
+export const { setPart } = faqSlice.actions;
