@@ -28,7 +28,7 @@ export function PartChip({
                                 </Button>
                                 {part.partName === 'Common' && <Divider orientation="vertical"/>}
                             </>
-                ))}합
+                ))}
             </ButtonGroup>
         </>
     )
