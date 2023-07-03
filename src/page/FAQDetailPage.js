@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { PartChip } from '../component/common/PartChip';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPart } from '../modules/faqSlice';
@@ -7,8 +7,13 @@ import { useEffect } from 'react';
 
 export default function FAQDetailPage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const part = useSelector((state) => state.faq.part);
+
+    useEffect(() => {
+        dispatch(setPart(location?.pathname?.split('/').at(-1)));
+    }, [location]);
 
     useEffect(() => {
         navigate(part);
