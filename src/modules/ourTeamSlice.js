@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import dayjs from "dayjs";
+import { createSlice } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 const initialState = {
     part: 'android',
@@ -7,16 +7,16 @@ const initialState = {
 };
 
 export const ourTeamSlice = createSlice({
-    name:'ourTeam',
+    name: 'ourTeam',
     initialState,
-    reducers:{
-        setPart: (state, action)=>{
+    reducers: {
+        setPart: (state, action) => {
             state.part = action.payload;
         },
-        setYear: (state, action)=>{
+        setYear: (state, action) => {
             state.year = action.payload;
-        }
-    }
+        },
+    },
 });
 
-export const {setPart, setYear}= ourTeamSlice.actions;
+export const { setPart, setYear } = ourTeamSlice.actions;

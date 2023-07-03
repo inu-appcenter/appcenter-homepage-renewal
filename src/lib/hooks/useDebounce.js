@@ -1,17 +1,20 @@
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useDebounce(callback, delay) {
     const [timeoutId, setTimeoutId] = useState(null);
 
-    const debouncedCallback = useCallback((...args) => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-        }
-        const newTimeoutId = setTimeout(() => {
-            callback(...args);
-        }, delay);
-        setTimeoutId(newTimeoutId);
-    }, [callback, delay, timeoutId]);
+    const debouncedCallback = useCallback(
+        (...args) => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            const newTimeoutId = setTimeout(() => {
+                callback(...args);
+            }, delay);
+            setTimeoutId(newTimeoutId);
+        },
+        [callback, delay, timeoutId]
+    );
 
     useEffect(() => {
         return () => {

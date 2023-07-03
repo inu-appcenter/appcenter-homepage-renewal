@@ -1,12 +1,10 @@
-import FAQCategoryCardList from "../../component/FAQCategoryCardList";
-import {partInfo} from "../../resource/string/partInfo";
+import FAQCategoryCardList from '../../component/FAQCategoryCardList';
+import { partInfo } from '../../resource/string/partInfo';
 
-export default function FAQMainContainer(){
-    return(
+export default function FAQMainContainer() {
+    return (
         <>
-            <FAQCategoryCardList
-                list={partInfo}
-            />
+            <FAQCategoryCardList list={partInfo} />
         </>
     );
 }

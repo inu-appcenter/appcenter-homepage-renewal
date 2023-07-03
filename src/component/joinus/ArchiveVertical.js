@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import ArchiveItemVertical from "./ArchiveItemVertical";
-import {archiveList} from "../../resource/string/archiveList";
+import styled from 'styled-components';
+import ArchiveItemVertical from './ArchiveItemVertical';
+import { archiveList } from '../../resource/string/archiveList';
 
 export default function ArchiveVertical() {
     return (
         <FlexBox>
-            {archiveList.map(item =>
+            {archiveList.map((item) => (
                 <ArchiveItemVertical
                     key={item.key}
                     chipText={item.chipText}
@@ -15,7 +15,7 @@ export default function ArchiveVertical() {
                     listItem={item.listItem}
                     last={item.last}
                 />
-            )}
+            ))}
         </FlexBox>
     );
 }
@@ -27,4 +27,4 @@ const FlexBox = styled.div`
     @media (max-width: 768px) {
         display: flex;
     }
-`
+`;

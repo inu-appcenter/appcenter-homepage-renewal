@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {StyledEngineProvider} from "@mui/material";
-import {ThemeProvider} from "styled-components";
-import {BrowserRouter} from "react-router-dom";
-import theme from "./resource/style/Theme";
-import GlobalStyle from "./resource/style/GlobalStyle";
-import {Provider} from "react-redux";
-import {configureStore} from "@reduxjs/toolkit";
-import {dataApi} from "./apis/dataApi";
-import rootReducer from "./modules/rootReducer";
+import { StyledEngineProvider } from '@mui/material';
+import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
+import theme from './resource/style/Theme';
+import GlobalStyle from './resource/style/GlobalStyle';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { dataApi } from './apis/dataApi';
+import rootReducer from './modules/rootReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,9 +28,9 @@ root.render(
     <Provider store={store}>
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
-                <GlobalStyle/>
+                <GlobalStyle />
                 <BrowserRouter>
-                    <App/>
+                    <App />
                 </BrowserRouter>
             </ThemeProvider>
         </StyledEngineProvider>

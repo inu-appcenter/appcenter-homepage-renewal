@@ -1,5 +1,4 @@
 export const routerPath = {
-
     home: {
         url: 'home',
         title: 'Home',
@@ -7,58 +6,58 @@ export const routerPath = {
     ourTeam: {
         url: 'ourteam',
         title: 'Our team',
-        child:{
-            android:{
+        child: {
+            android: {
                 url: 'android',
                 title: 'Android',
             },
-            design:{
+            design: {
                 url: 'design',
                 title: 'Design',
             },
-            ios:{
+            ios: {
                 url: 'ios',
                 title: 'IOS',
             },
-            server:{
+            server: {
                 url: 'server',
                 title: 'Server',
             },
-            web:{
+            web: {
                 url: 'web',
                 title: 'Web',
             },
         },
     },
-    join:{
+    join: {
         url: 'join',
         title: 'Join Us',
     },
-    faq:{
+    faq: {
         url: 'faq',
         title: 'FAQ',
     },
-    faqDetail:{
+    faqDetail: {
         url: 'faq',
         title: 'FAQ Detail',
-        child:{
-            common:{
+        child: {
+            common: {
                 url: 'common',
                 title: 'Common',
             },
-            android:{
+            android: {
                 url: 'android',
                 title: 'Android',
             },
-            design:{
+            design: {
                 url: 'design',
                 title: 'Design',
             },
-            ios:{
+            ios: {
                 url: 'ios',
                 title: 'IOS',
             },
-            server:{
+            server: {
                 url: 'server',
                 title: 'Server',
             },
@@ -66,15 +65,15 @@ export const routerPath = {
     },
 };
 
-export const fullPath = {
-    home:`/${routerPath.home.url}`,
-    ourTeam:`/${routerPath.ourTeam.url}`,
-    join:`/${routerPath.join.url}`,
-    faq:`/${routerPath.faq.url}`,
-    faqDetail:`/${routerPath.faqDetail.url}`,
-    common:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.common.url}`,
-    android:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.android.url}`,
-    ios:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
-    server:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
-    design:`/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
-}
+export const AbsolutePath = {
+    home: `/${routerPath.home.url}`,
+    ourTeam: `/${routerPath.ourTeam.url}`,
+    join: `/${routerPath.join.url}`,
+    faq: `/${routerPath.faq.url}`,
+    faqDetail: `/${routerPath.faqDetail.url}`,
+    common: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.common.url}`,
+    android: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.android.url}`,
+    ios: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
+    server: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
+    design: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
+};

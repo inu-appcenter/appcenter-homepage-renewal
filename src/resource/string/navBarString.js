@@ -1,22 +1,48 @@
-import {fullPath, routerPath} from "./routerPath";
+import { AbsolutePath, routerPath } from './routerPath';
 
 export const navBarInfoList = [
-    {id:0, title:routerPath.home.title ,url:fullPath.home,
+    {
+        id: 0,
+        title: routerPath.home.title,
+        url: AbsolutePath.home,
         child: [
-            {id: 4 ,title: 'About Us'},
-            {id: 5 ,title: 'Our Team'},
-            {id: 6 ,title: 'Product'},
-        ]
+            { id: 4, title: 'About Us' },
+            { id: 5, title: 'Our Team' },
+            { id: 6, title: 'Product' },
+        ],
     },
-    {id:1, title:routerPath.ourTeam.title ,url:fullPath.ourTeam,
+    {
+        id: 1,
+        title: routerPath.ourTeam.title,
+        url: AbsolutePath.ourTeam,
         child: [
-            {id: 7 ,title: 'Android',url: `${fullPath.ourTeam}/android`},
-            {id: 8 ,title: 'Design',url: `${fullPath.ourTeam}/design`},
-            {id: 9 ,title: 'IOS',url: `${fullPath.ourTeam}/ios`},
-            {id: 10 ,title: 'Server',url: `${fullPath.ourTeam}/server`},
-            {id: 11,title: 'Web',url: `${fullPath.ourTeam}/web`},
-        ]
+            {
+                id: 7,
+                title: routerPath.ourTeam.child.android.title,
+                url: `${AbsolutePath.ourTeam}/android`,
+            },
+            {
+                id: 8,
+                title: routerPath.ourTeam.child.design.title,
+                url: `${AbsolutePath.ourTeam}/design`,
+            },
+            {
+                id: 9,
+                title: routerPath.ourTeam.child.ios.title,
+                url: `${AbsolutePath.ourTeam}/ios`,
+            },
+            {
+                id: 10,
+                title: routerPath.ourTeam.child.server.title,
+                url: `${AbsolutePath.ourTeam}/server`,
+            },
+            {
+                id: 11,
+                title: routerPath.ourTeam.child.web.title,
+                url: `${AbsolutePath.ourTeam}/web`,
+            },
+        ],
     },
-    {id:2, title:routerPath.join.title ,url:fullPath.join},
-    {id:3, title:routerPath.faq.title ,url:fullPath.faq},
-]
+    { id: 2, title: routerPath.join.title, url: AbsolutePath.join },
+    { id: 3, title: routerPath.faq.title, url: AbsolutePath.faq },
+];
