@@ -15,8 +15,12 @@ export default function OurTeamPage() {
     const year = useSelector((state) => state.ourTeam.year);
 
     useEffect(() => {
-        dispatch(setPart(location?.pathname?.split('/').at(-1)));
-    }, []);
+        console.log(location?.state?.part);
+        if (location?.state?.part) {
+            console.log(location?.state?.part);
+            dispatch(setPart(location?.state?.part));
+        }
+    }, [location]);
 
     useEffect(() => {
         if (part === 'web' && year !== 2022) {

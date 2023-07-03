@@ -24,7 +24,12 @@ export default function OurTeam() {
                         <Button
                             onClick={() =>
                                 navigate(
-                                    `../ourteam/${item.partName.toLowerCase()}`
+                                    `../ourteam/${item.partName.toLowerCase()}`,
+                                    {
+                                        state: {
+                                            part: item.partName.toLowerCase(),
+                                        },
+                                    }
                                 )
                             }
                         >
