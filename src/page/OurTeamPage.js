@@ -1,6 +1,6 @@
 import { PageTitle } from '../component/common/PageTitle';
 import { PartChip } from '../component/common/PartChip';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import YearDropBox from '../component/ourteam/YearDropBox';
 import styled from 'styled-components';
 import { useEffect } from 'react';
@@ -9,13 +9,18 @@ import { setPart, setYear } from '../modules/ourTeamSlice';
 
 export default function OurTeamPage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const part = useSelector((state) => state.ourTeam.part);
     const year = useSelector((state) => state.ourTeam.year);
 
     useEffect(() => {
+        dispatch(setPart(location?.pathname?.split('/').at(-1)));
+    }, []);
+
+    useEffect(() => {
         if (part === 'web' && year !== 2022) {
-            navigate('android');
+            dispatch(setYear(2022));
         }
         navigate({ pathname: part, search: `?year=${year}` });
     }, [navigate, part, year]);
