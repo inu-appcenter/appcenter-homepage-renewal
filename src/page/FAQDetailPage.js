@@ -13,7 +13,7 @@ export default function FAQDetailPage() {
 
     useEffect(() => {
         dispatch(setPart(location?.pathname?.split('/').at(-1)));
-    }, [location]);
+    }, [dispatch, location]);
 
     useEffect(() => {
         navigate(part);
