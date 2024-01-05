@@ -29,6 +29,34 @@ export const routerPath = {
             },
         },
     },
+    product2: {
+        url: 'product',
+        title: 'Product',
+    },
+    dashboard: {
+        url:'admin',
+        title:'Admin',
+    },
+    detail: {
+        url: 'detail',
+        title: 'Detail'
+    },
+    manage: {
+        url: 'manage',
+        title: 'Manage',
+    },
+    generation: {
+        url: 'generation',
+        title: 'Generation',
+    },
+    role: {
+        url: 'role',
+        title: 'Role',
+    },
+    center: {
+        url: 'center',
+        title: 'Center',
+    },  
     join: {
         url: 'join',
         title: 'Join Us',
@@ -67,6 +95,13 @@ export const routerPath = {
 
 export const AbsolutePath = {
     home: `/${routerPath.home.url}`,
+    product2: `/${routerPath.product2.url}`,
+    dashboard: `/${routerPath.dashboard.url}`,
+    center: `/${routerPath.center.url}`,
+    manage: `/${routerPath.center.url}/${routerPath.manage.url}`,
+    detail: `/${routerPath.detail.url}`,
+    generation: `/${routerPath.generation.url}`,
+    role: `/${routerPath.role.url}`,
     ourTeam: `/${routerPath.ourTeam.url}`,
     join: `/${routerPath.join.url}`,
     faq: `/${routerPath.faq.url}`,

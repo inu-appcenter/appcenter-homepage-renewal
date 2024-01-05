@@ -60,7 +60,7 @@ const OurTeamPageWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-    display: grid;
+    display: grid;  
     padding-top: ${(props) => props.theme.padding.bigDesktop.contentTop};
     @media (max-width: 1800px) {
         padding-top: ${(props) => props.theme.padding.desktop.contentTop};
