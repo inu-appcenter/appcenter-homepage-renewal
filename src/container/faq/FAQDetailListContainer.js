@@ -14,6 +14,13 @@ export function FAQDetailListContainer() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        const logIn = async () => {
+            const loginData = await axios.post('https://server.inuappcenter.kr/sign/sign-in?id=appcenter&password=1q2w3e4r%21Appcenter').then(res => {
+                console.log(res);
+            })
+    }}, []);
+
+    useEffect(() => {
         const fetchData = async () => {
           const viewData = await axios.get('https://server.inuappcenter.kr/faqs/all-faq-boards').then(res => {
                setData(res.data.filter((item) => item.part === pageInfo.partName));

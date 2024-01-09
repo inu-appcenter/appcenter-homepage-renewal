@@ -1,13 +1,23 @@
 import styled, { css } from 'styled-components';
 import { HiBars3 } from "react-icons/hi2";
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+
+axios.defaults.baseURL = "https://server.inuappcenter.kr/";
+axios.defaults.withCredentials = true;
+
+const onClick = async () => {
+    const response = await axios.post("https://server.inuappcenter.kr/sign/sign-in?id=appcenter&password=1q2w3e4r%21Appcenter");
+
+    console.log(response);  
+}
 
 export default function AdminPage() {
     return (
       <>
         <NavBar>
             <span className='logo'>흑백 로고</span>
-            <HiBars3 className='menu' size={"24px"} />
+            <button className='menu' onClick={onClick}>로그인</button>
         </NavBar>
         <IntroBox>
             <Text type='title'>{'앱센터 동아리원 관리'}</Text>
@@ -87,6 +97,9 @@ const NavBar = styled.div`
     
     .menu {
         margin-left: auto;
+        border: none;
+        background-color: #fff;
+        size: 1.5rem;
     }
 `;
 

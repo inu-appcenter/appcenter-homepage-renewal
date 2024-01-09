@@ -18,7 +18,7 @@ export default function ManageGenPage() {
   });
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
-  const [selectedMemberId, setSelectedMemberId] = useState(null);
+  const [selectedGroupId, setSelectedGroupId] = useState(null);
   const contextMenuRef = useRef(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   
@@ -46,19 +46,19 @@ export default function ManageGenPage() {
     setCurrentPage(pageNumber);
   };
 
-  const openEditModal = (selectedMemberId) => {
+  const openEditModal = (selectedGroupId) => {
     // 수정할 때 해당 memberId의 데이터를 가져와서 모달에 미리 채워넣을 수 있습니다.
     setContextMenuVisible(false);
     setEditModalOpen(true);
   };
 
   useEffect(() => {
-    const memberToEdit = data.find((item) => item.member_id === selectedMemberId);
+    const memberToEdit = data.find((item) => item.group_id === selectedGroupId);
     if (memberToEdit) {
       setEditedRole(memberToEdit.role);
       setEditedGen(memberToEdit.generation);
     }
-  },[selectedMemberId]);
+  },[selectedGroupId]);
 
   const closeEditModal = () => {
     setEditModalOpen(false);
@@ -66,7 +66,7 @@ export default function ManageGenPage() {
 
   const addData = async () => {
     try {
-      const result = await axios.post('https://server.inuappcenter.kr/groups?member_id=1&role_id=1', 
+      const result = await axios.post(`https://server.inuappcenter.kr/groups?member_id=${newRole.member_id}&role_id=${newRole.role_id}`, 
         newRole
       );
       console.log('Success:', result.data);
@@ -78,7 +78,7 @@ export default function ManageGenPage() {
         role_id: '',
         member_id: '',
         part: '',
-        year: 14,
+        year: 16,
       });
     } catch (error) {
       console.error("Error adding data:", error);
@@ -87,11 +87,11 @@ export default function ManageGenPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const viewData = await axios.get('https://server.inuappcenter.kr/groups/all-groups-members').then(res => {
+      const viewData = await axios.get('https://server.inuappcenter.kr/groups/public/all-groups-members').then(res => {
           setData(res.data);
         });
     }
-    fetchData();
+    fetchData(); 
   }, []);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function ManageGenPage() {
   }, []);
 
   const handleEdit = async () => {
-    if (selectedMemberId === null) {
+    if (selectedGroupId === null) {
       return; // 선택된 항목이 없으면 무시
     }
   
@@ -122,17 +122,17 @@ export default function ManageGenPage() {
     };
   
     try {
-      // member_id를 사용하여 수정 요청을 보냅니다.
+      // group_id를 사용하여 수정 요청을 보냅니다.
       const response = await axios.patch(
-        `https://server.inuappcenter.kr/roles?id=${selectedMemberId}`,
+        `https://server.inuappcenter.kr/groups?id=${selectedGroupId}`,
         updatedData
       );
-      console.log("Member with ID", selectedMemberId, "has been updated.");
+      console.log("Member with ID", selectedGroupId, "has been updated.");
       console.log(response);
       // 업데이트된 데이터를 data 상태에서 업데이트합니다.
       setData((prevData) =>
         prevData.map((item) =>
-          item.member_id === selectedMemberId ? { ...item, ...updatedData } : item
+          item.group_id=== selectedGroupId ? { ...item, ...updatedData } : item
         )
       );
       
@@ -144,81 +144,23 @@ export default function ManageGenPage() {
   };
 
   const handleDelete = async () => {
-    if (selectedMemberId === null) {
+    if (selectedGroupId === null) {
       return; // 선택된 항목이 없으면 무시
     }
   
     try {
       // member_id를 사용하여 삭제 요청을 보냅니다.
-      await axios.delete(`https://server.inuappcenter.kr/members?id=${selectedMemberId}`);
-      console.log("Member with ID", selectedMemberId, "has been deleted.");
+      await axios.delete(`https://server.inuappcenter.kr/groups?${selectedGroupId}`);
+      console.log("Member with ID", selectedGroupId, "has been deleted.");
   
       // 삭제한 데이터를 data 상태에서 제거합니다.
-      setData((prevData) => prevData.filter((item) => item.member_id !== selectedMemberId));
+      setData((prevData) => prevData.filter((item) => item.group_id !== selectedGroupId));
     } catch (error) {
       console.error("Error deleting member:", error);
     }
   
     setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
   };
-
-  /** 여러개 post 할 때 사용합니다 */
-   /* useEffect(() => {
-    const dummyData = async () => {
-      try {
-        const newMember = {
-          name: '홍정우',
-          description: '사람이다',
-          profileImage: '홍정우 사진',
-          blogLink: 'www.inu.ac.kr',
-          email: 'ghost1434@naver.com',
-          gitRepositoryLink: '123',
-        }
-        for (let i = 0; i < 10; i++) {
-          const result = await axios.post('https://server.inuappcenter.kr/members', 
-          newMember
-        );
-        console.log('Success:', result.data);
-  
-        // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가합니다.
-        setData([...data, result.data]);
-  
-        setNewMember({
-          member_id: '',
-          name: '',
-          description: '',
-          profileImage: '',
-          blogLink: '',
-          email: '',
-          gitRepositoryLink: '',
-        });
-        }
-      } catch (error) {
-        console.error("Error adding data:", error);
-      }
-    }
-
-    dummyData();
-  }, []);  */
-
-
-  /**  여러개 delete 할 때 사용합니다. */
-  /* useEffect(() => {
-    const deleteData = async () => {
-      try {
-        let max = 322;
-        for (let i = 300; i < max; i++) {
-          const result = await axios.delete(`https://server.inuappcenter.kr/members?id=${i}`); 
-          console.log(result.data);
-        }
-  
-      } catch (error) {
-        console.error("Error deliting data:", error);
-      }
-    }
-
-    deleteData();
-  }, []); */
 
     return (
     <>
@@ -236,16 +178,16 @@ export default function ManageGenPage() {
       <MemberTable>
         <tbody>
         {getCurrentPageData().map((content) => (
-            <tr key={content.member_id}
+            <tr key={content.group_id}
             onContextMenu={(e) => {
               e.preventDefault();
-              setSelectedMemberId(content.member_id);
+              setSelectedGroupId(content.group_id);
               setContextMenuPosition({ x: e.clientX, y: e.clientY });
               setContextMenuVisible(true);
-              console.log(content.member_id);
+              console.log(content.group_id);
             }}
             >
-              <td>{content.member_id}</td>
+              <td>{content.group_id}</td>
               <td>{content.generation}</td>
               <td>{content.name}</td>
               <td>
@@ -259,7 +201,7 @@ export default function ManageGenPage() {
                 </a>
               </td>
               <td>{content.profileImage}</td>
-              <td>{content.description}</td>
+              <td>{content.part}</td>
             </tr>
           ))}
         </tbody>
@@ -336,7 +278,11 @@ export default function ManageGenPage() {
           value={editedRole}
           onChange={(e) => setEditedRole(e.target.value)}
         />
-        
+        <ModalInput
+          type="number"
+          value={editedGen}
+          onChange={(e) => setEditedGen(e.target.value)}
+        />
         <ModalButtonWrapper>
           <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
           <ModalButton onClick={closeEditModal}>취소</ModalButton>
