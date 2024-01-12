@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 import { HiBars3 } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
-
+import logo from '../resource/img/navbar_logo/logo_black.png';
 
 export default function AdminPage() {
     return (
       <>
         <NavBar>
-            <span className='logo'>흑백 로고</span>
+            <img src={logo} alt="logo" />
             <HiBars3 className='menu' size={"24px"} />
         </NavBar>
         <IntroBox>
@@ -70,7 +70,7 @@ const MenuBox = styled.div`
     width: 600px;
     height: 8rem;
     background-color: #F2F2F2;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1.5rem auto;
     top: 20px;
     border-radius: 20px;
     align-items: center;
@@ -87,7 +87,7 @@ const NavBar = styled.div`
     position: relative;
     height: 25px;
     width: 730px;
-    margin: 45px auto 0 auto;
+    margin: 55px auto 10px auto;
     
     .menu {
         margin-left: auto;

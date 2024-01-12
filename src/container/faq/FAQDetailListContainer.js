@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { partInfo } from '../../resource/string/partInfo';
-import faqList from '../../resource/data/faqList';
 import { PageTitle } from '../../component/common/PageTitle';
 
 export function FAQDetailListContainer() {
@@ -14,15 +13,8 @@ export function FAQDetailListContainer() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const logIn = async () => {
-            const loginData = await axios.post('https://server.inuappcenter.kr/sign/sign-in?id=appcenter&password=1q2w3e4r%21Appcenter').then(res => {
-                console.log(res);
-            })
-    }}, []);
-
-    useEffect(() => {
         const fetchData = async () => {
-          const viewData = await axios.get('https://server.inuappcenter.kr/faqs/all-faq-boards').then(res => {
+          const viewData = await axios.get('https://server.inuappcenter.kr/faqs/public/all-faq-boards').then(res => {
                setData(res.data.filter((item) => item.part === pageInfo.partName));
             })
         }

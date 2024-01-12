@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from "react-modal"; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-
+import logo from '../resource/img/navbar_logo/logo_black.png';
 
 export default function ManagePage() {
   const [data, setData] = useState([]);
@@ -25,7 +25,8 @@ export default function ManagePage() {
   const [selectedMemberId, setSelectedMemberId] = useState(null);
   const contextMenuRef = useRef(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  
+  const [token, setToken] = useState('');
+
   //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
   const [editedName, setEditedName] = useState("");
   const [editedDescription, setEditedDescription] = useState("");
@@ -59,6 +60,15 @@ export default function ManagePage() {
     setContextMenuVisible(false);
     setEditModalOpen(true);
   };
+
+//   const onClick = async () => {
+//     const response = await axios.post("https://server.inuappcenter.kr/sign/sign-in",{
+//         "id": "appcenter",
+//         "password": "1q2w3e4r!Appcenter",
+//     });
+//     setToken(response.data.token);
+//     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// }   
 
   useEffect(() => {
     const memberToEdit = data.find((item) => item.member_id === selectedMemberId);
@@ -244,7 +254,7 @@ export default function ManagePage() {
     return (
     <>
       <NavBar>
-        <span className='logo'>흑백 로고</span>
+        <img src={logo} alt="logo" />
         <HiBars3 className='menu' size={'24px'} />
       </NavBar>
       <IntroBox>

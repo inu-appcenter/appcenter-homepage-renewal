@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from "react-modal"; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
+import logo from '../resource/img/navbar_logo/logo_black.png';
 
 export default function ManageRolePage() {
   const [data, setData] = useState([]);
@@ -220,7 +221,7 @@ export default function ManageRolePage() {
     return (
     <>
       <NavBar>
-        <span className='logo'>흑백 로고</span>
+        <img src={logo} alt="logo" />
         <HiBars3 className='menu' size={'24px'} />
       </NavBar>
       <IntroBox>
