@@ -15,7 +15,7 @@ import DetailPage from './page/DetailPage';
 import ManageGenPage from './page/ManageGenPage';
 import ManageRolePage from './page/ManageRolePage';
 import ProductPage from './page/ProductPage';
-
+import QnAPage from './page/QnAPage';
 
 function App() {
     return (
@@ -24,7 +24,7 @@ function App() {
             <Route path='/' element={<MainPage />}>
                 <Route path={routerPath.home.url} element={<HomePage />} />
                 {/*<Route path={routerPath.ourTeam.url} element={<Navigate to={'android'}/>}/>*/}
-                <Route path={routerPath.ourTeam.url} element={<OurTeamPage />}> 
+                <Route path={routerPath.ourTeam.url} element={<OurTeamPage />}>
                     <Route path=':part' element={<PartContainer />} />
                 </Route>
                 <Route path={routerPath.join.url} element={<JoinUsPage />} />
@@ -34,13 +34,17 @@ function App() {
                     element={<FAQDetailPage />}
                 >
                     <Route path=':part' element={<FAQDetailListContainer />} />
-            </Route>
+                </Route>
             </Route>
             <Route path={routerPath.dashboard.url} element={<AdminPage />} />
             <Route path={routerPath.center.url} element={<CenterPage />} />
             <Route path={routerPath.detail.url} element={<DetailPage />} />
             <Route path={routerPath.manage.url} element={<ManagePage />} />
-            <Route path={routerPath.generation.url} element={<ManageGenPage />} />
+            <Route path={routerPath.qna.url} element={<QnAPage />} />
+            <Route
+                path={routerPath.generation.url}
+                element={<ManageGenPage />}
+            />
             <Route path={routerPath.role.url} element={<ManageRolePage />} />
             <Route path={routerPath.product2.url} element={<ProductPage />} />
         </Routes>

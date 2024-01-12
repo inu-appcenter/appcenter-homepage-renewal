@@ -34,12 +34,12 @@ export const routerPath = {
         title: 'Product',
     },
     dashboard: {
-        url:'admin',
-        title:'Admin',
+        url: 'admin',
+        title: 'Admin',
     },
     detail: {
         url: 'detail',
-        title: 'Detail'
+        title: 'Detail',
     },
     manage: {
         url: 'manage',
@@ -56,7 +56,11 @@ export const routerPath = {
     center: {
         url: 'center',
         title: 'Center',
-    },  
+    },
+    qna: {
+        url: 'qna',
+        title: 'QnA',
+    },
     join: {
         url: 'join',
         title: 'Join Us',
@@ -95,6 +99,7 @@ export const routerPath = {
 
 export const AbsolutePath = {
     home: `/${routerPath.home.url}`,
+    qna: `/${routerPath.qna.url}`,
     product2: `/${routerPath.product2.url}`,
     dashboard: `/${routerPath.dashboard.url}`,
     center: `/${routerPath.center.url}`,

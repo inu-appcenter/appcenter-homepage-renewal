@@ -14,12 +14,25 @@ export function FAQDetailListContainer() {
 
     useEffect(() => {
         const fetchData = async () => {
-          const viewData = await axios.get('https://server.inuappcenter.kr/faqs/public/all-faq-boards').then(res => {
-               setData(res.data.filter((item) => item.part === pageInfo.partName));
-            })
-        }
+            const viewData = await axios
+                .get(
+                    'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
+                )
+                .then((res) => {
+                    setData(
+                        res.data.filter(
+                            (item) => item.part === pageInfo.partName
+                        )
+                    );
+                    console.log(
+                        res.data.filter(
+                            (item) => item.part === pageInfo.partName
+                        )
+                    );
+                });
+        };
         fetchData();
-      }, [location]);
+    }, [location]);
 
     useEffect(() => {
         setPageInfo(partInfo.find((v) => location.pathname === v.fullUrl));
@@ -31,12 +44,13 @@ export function FAQDetailListContainer() {
                 <PageTitle title={pageInfo.partName} />
             </TitleWrapper>
             <FAQDetailListBox>
-                {data && data.map((item, index) => (
-                    <FAQDetailListItem key={index}>
-                        <p className='question'>{item.question}</p>
-                        <p className='answer'>{item.answer}</p>
-                    </FAQDetailListItem>
-                ))}
+                {data &&
+                    data.map((item, index) => (
+                        <FAQDetailListItem key={index}>
+                            <p className='question'>{item.question}</p>
+                            <p className='answer'>{item.answer}</p>
+                        </FAQDetailListItem>
+                    ))}
             </FAQDetailListBox>
         </>
     );

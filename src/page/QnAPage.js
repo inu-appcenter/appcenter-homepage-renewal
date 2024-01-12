@@ -6,27 +6,30 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
 import logo from '../resource/img/navbar_logo/logo_black.png';
 
-export default function ManageRolePage() {
+export default function QnAPage() {
     const [data, setData] = useState([]);
+    const [loading, isLoading] = useState(false);
 
     // 새 멤버를 추가할 때 사용합니다.
-    const [newRole, setNewRole] = useState({
-        role_id: '',
-        role_name: '',
-        description: '',
+    const [newQna, setNewQna] = useState({
+        id: 0,
+        part: '',
+        question: '',
+        answer: '',
     });
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
         y: 0,
     });
-    const [selectedRoleId, setSelectedRoleId] = useState(null);
+    const [selectedQnaId, setSelectedQnaId] = useState(null);
     const contextMenuRef = useRef(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
     //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
-    const [editedRoleName, setEditedRoleName] = useState('');
-    const [editedDesc, setEditedDesc] = useState('');
+    const [editedPart, setEditedPart] = useState('');
+    const [editedQuestion, setEditedQuestion] = useState('');
+    const [editedAnswer, setEditedAnswer] = useState('');
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,19 +51,20 @@ export default function ManageRolePage() {
         setCurrentPage(pageNumber);
     };
 
-    const openEditModal = (selectedRoleId) => {
+    const openEditModal = (selectedQnaId) => {
         // 수정할 때 해당 memberId의 데이터를 가져와서 모달에 미리 채워넣을 수 있습니다.
         setContextMenuVisible(false);
         setEditModalOpen(true);
     };
 
     useEffect(() => {
-        const RoleToEdit = data.find((item) => item.role_id === selectedRoleId);
-        if (RoleToEdit) {
-            setEditedRoleName(RoleToEdit.role_name);
-            setEditedDesc(RoleToEdit.description);
+        const QnaToEdit = data.find((item) => item.id === selectedQnaId);
+        if (QnaToEdit) {
+            setEditedPart(QnaToEdit.part);
+            setEditedQuestion(QnaToEdit.question);
+            setEditedAnswer(QnaToEdit.answer);
         }
-    }, [selectedRoleId]);
+    }, [selectedQnaId]);
 
     const closeEditModal = () => {
         setEditModalOpen(false);
@@ -69,18 +73,19 @@ export default function ManageRolePage() {
     const addData = async () => {
         try {
             const result = await axios.post(
-                'https://server.inuappcenter.kr/roles',
-                newRole
+                'https://server.inuappcenter.kr/faqs',
+                newQna
             );
             console.log('Success:', result.data);
 
-            // POST 요청 성공 시, 새로운 역할을 data 상태 변수에 추가합니다.
+            // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가합니다.
             setData([...data, result.data]);
 
-            setNewRole({
-                role_id: '',
-                role_name: '',
-                description: '',
+            setNewQna({
+                id: 0,
+                part: '',
+                question: '',
+                answer: '',
             });
         } catch (error) {
             console.error('Error adding data:', error);
@@ -89,9 +94,13 @@ export default function ManageRolePage() {
 
     useEffect(() => {
         const fetchData = async () => {
+            isLoading(true);
             const viewData = await axios
-                .get('https://server.inuappcenter.kr/roles/all-roles')
+                .get(
+                    'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
+                )
                 .then((res) => {
+                    isLoading(false);
                     setData(res.data);
                 });
         };
@@ -118,28 +127,29 @@ export default function ManageRolePage() {
     }, []);
 
     const handleEdit = async () => {
-        if (selectedRoleId === null) {
+        if (selectedQnaId === null) {
             return; // 선택된 항목이 없으면 무시
         }
 
         // 수정할 데이터를 가져옵니다.
         const updatedData = {
-            role_name: editedRoleName,
-            description: editedDesc,
+            part: editedPart,
+            question: editedQuestion,
+            answer: editedAnswer,
         };
 
         try {
             // member_id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/roles?id=${selectedRoleId}`,
+                `https://server.inuappcenter.kr/faqs?id=${selectedQnaId}`,
                 updatedData
             );
-            console.log('Member with ID', selectedRoleId, 'has been updated.');
+            console.log('Qna with ID', selectedQnaId, 'has been updated.');
             console.log(response);
             // 업데이트된 데이터를 data 상태에서 업데이트합니다.
             setData((prevData) =>
                 prevData.map((item) =>
-                    item.member_id === selectedRoleId
+                    item.id === selectedQnaId
                         ? { ...item, ...updatedData }
                         : item
                 )
@@ -152,20 +162,20 @@ export default function ManageRolePage() {
     };
 
     const handleDelete = async () => {
-        if (selectedRoleId === null) {
+        if (selectedQnaId === null) {
             return; // 선택된 항목이 없으면 무시
         }
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/roles/${selectedRoleId} `
+                `https://server.inuappcenter.kr/faqs/${selectedQnaId}`
             );
-            console.log('Member with ID', selectedRoleId, 'has been deleted.');
+            console.log('Member with ID', selectedQnaId, 'has been deleted.');
 
             // 삭제한 데이터를 data 상태에서 제거합니다.
             setData((prevData) =>
-                prevData.filter((item) => item.role_id !== selectedRoleId)
+                prevData.filter((item) => item.id !== selectedQnaId)
             );
         } catch (error) {
             console.error('Error deleting member:', error);
@@ -173,7 +183,6 @@ export default function ManageRolePage() {
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
-
     return (
         <>
             <NavBar>
@@ -181,28 +190,32 @@ export default function ManageRolePage() {
                 <HiBars3 className='menu' size={'24px'} />
             </NavBar>
             <IntroBox>
-                <Text type='title'>{'역할 관리'}</Text>
-                <Text type='top'>{'역할 추가, 삭제, 수정을 할 수 있어요'}</Text>
+                <Text type='title'>{'질문 관리'}</Text>
+                <Text type='top'>
+                    {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
+                </Text>
             </IntroBox>
-            <MemberList>역할 목록</MemberList>
+            <MemberList>질문 및 답변 목록</MemberList>
             <MemberTable>
+                {loading && <div>loading...</div>}
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
-                            key={content.role_id}
+                            key={content.id}
                             onContextMenu={(e) => {
                                 e.preventDefault();
-                                setSelectedRoleId(content.role_id);
+                                setSelectedQnaId(content.id);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
-                                console.log(content.role_id);
+                                console.log(content.id);
                             }}
                         >
-                            <td>{content.role_id}</td>
-                            <td>{content.role_name}</td>
+                            <td>{content.part}</td>
+                            <td>{content.question}</td>
+                            <td>{content.answer}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -216,23 +229,33 @@ export default function ManageRolePage() {
                     onPageChange={handlePageChange}
                 />
             </PaginationContainer>
-            <Addtitle>역할 추가</Addtitle>
+            <Addtitle>질문 및 답변 추가</Addtitle>
             <AddList>
                 {/* 사용자 입력을 받을 UI 요소들 */}
                 <AddMember
                     type='text'
-                    placeholder='역할'
-                    value={newRole.role_name}
+                    placeholder='파트'
+                    value={newQna.part}
                     onChange={(e) =>
-                        setNewRole({ ...newRole, role_name: e.target.value })
+                        setNewQna({ ...newQna, part: e.target.value })
                     }
                 />
+
                 <AddMember
                     type='text'
-                    placeholder='설명'
-                    value={newRole.description}
+                    placeholder='질문'
+                    value={newQna.question}
                     onChange={(e) =>
-                        setNewRole({ ...newRole, description: e.target.value })
+                        setNewQna({ ...newQna, question: e.target.value })
+                    }
+                />
+
+                <AddMember
+                    type='text'
+                    placeholder='답변'
+                    value={newQna.answer}
+                    onChange={(e) =>
+                        setNewQna({ ...newQna, answer: e.target.value })
                     }
                 />
                 <Regisbutton onClick={addData}>등록</Regisbutton>
@@ -257,19 +280,26 @@ export default function ManageRolePage() {
                 onRequestClose={closeEditModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>역할 수정</ModalTitle>
-                <ModalLabel>역할</ModalLabel>
+                <ModalTitle>QnA 수정</ModalTitle>
+                <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
-                    value={editedRoleName}
-                    onChange={(e) => setEditedRoleName(e.target.value)}
+                    value={editedPart}
+                    onChange={(e) => setEditedPart(e.target.value)}
                 />
-                <ModalLabel>설명</ModalLabel>
+                <ModalLabel>질문</ModalLabel>
                 <ModalInput
                     type='text'
-                    value={editedDesc}
-                    onChange={(e) => setEditedDesc(e.target.value)}
+                    value={editedQuestion}
+                    onChange={(e) => setEditedQuestion(e.target.value)}
                 />
+                <ModalLabel>답변</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedAnswer}
+                    onChange={(e) => setEditedAnswer(e.target.value)}
+                />
+
                 <ModalButtonWrapper>
                     <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
@@ -278,29 +308,6 @@ export default function ManageRolePage() {
         </>
     );
 }
-
-const AddBox = styled.div`
-    display: flex;
-    font-size: 13px;
-    margin: 0 auto;
-
-    width: 340px;
-    height: 40px;
-
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-`;
-
-const AddInfo = styled.div`
-    padding-right: 4.5rem;
-    padding-left: 5rem;
-
-    :nth-child(2) {
-        padding-left: 4rem;
-    }
-`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -393,10 +400,7 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 1rem 0 0 auto;
-    position: absolute;
-    left: 29rem;
-    top: 2rem;
+    margin: 1rem 3.5rem 0 auto;
 
     &:hover {
         transition: 0.1s ease-in;
@@ -410,16 +414,16 @@ const AddMember = styled.input`
     height: 22px;
 
     :first-child {
-        margin-right: 0.5rem;
-        width: 100px;
+        margin-right: 5px;
+        width: 50px;
     }
 
     :nth-child(2) {
         width: 200px;
     }
-
-    & + & {
-        margin-right: 10px;
+    :nth-child(3) {
+        width: 350px;
+        margin-left: 5px;
     }
 
     ::placeholder {
@@ -436,6 +440,14 @@ const MemberTable = styled.table`
     td {
         padding: 5px;
         text-align: center;
+
+        :nth-child(2) {
+            width: 200px;
+        }
+
+        :nth-child(3) {
+            width: 400px;
+        }
     }
 
     th {
@@ -449,10 +461,10 @@ const MemberTable = styled.table`
 
     tr {
         border-radius: 20%;
-    }
 
-    tr:hover {
-        background-color: #f2f2f2;
+        &:hover {
+            background-color: #f2f2f2;
+        }
     }
 `;
 
@@ -461,12 +473,10 @@ const AddList = styled.div`
     position: relative;
     flex-wrap: wrap;
     height: 25px;
-    width: 400px;
-    justify-content: center;
+    width: 730px;
     margin: 0 auto;
-
     font-size: 1.6rem;
-    padding-left: 3.9rem;
+    padding-left: 2.5rem;
 
     .menu {
         margin-left: auto;

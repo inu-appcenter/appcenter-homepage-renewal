@@ -15,13 +15,17 @@ export default function MemberList({ data }) {
 
     useEffect(() => {
         const fetchData = async () => {
-          const viewData = await axios.get('https://server.inuappcenter.kr/groups/public/all-groups-members').then(res => {
-                setGroup(res.data);
-                console.log(res.data);
-            })
-        }
+            const viewData = await axios
+                .get(
+                    'https://server.inuappcenter.kr/groups/public/all-groups-members'
+                )
+                .then((res) => {
+                    setGroup(res.data);
+                    console.log(res.data);
+                });
+        };
         fetchData();
-      }, [group]);
+    }, [group]);
 
     return (
         <MemberListWrapper>
@@ -38,9 +42,9 @@ export default function MemberList({ data }) {
                     data.map((item) => (
                         <SwiperSlide key={uuidv4()}>
                             <MemberItem
-                                image={item.image}
-                                name={item.name}
-                                description={item.description}
+                                image={item.profileImage}
+                                name={item.member}
+                                description={item.role}
                                 link={item.link}
                             />
                         </SwiperSlide>
