@@ -7,6 +7,8 @@ import productList from '../../resource/string/productList';
 import 'swiper/css/virtual';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function ProductionDesktop() {
     const breakPoint = {
@@ -24,6 +26,22 @@ export default function ProductionDesktop() {
         },
     };
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const viewData = await axios
+                .get(
+                    'https://server.inuappcenter.kr/introduction-board/public/all-boards-contents'
+                )
+                .then((res) => {
+                    setData(res.data);
+                    console.log(data);
+                });
+        };
+        fetchData();
+    }, [data.length]);
+
     return (
         <ProductionLayout>
             <Swiper
@@ -38,37 +56,31 @@ export default function ProductionDesktop() {
                 }}
                 speed={2000}
             >
-                {productList.concat(productList).map((item) => (
-                    <SwiperSlide key={uuidv4()}>
-                        <div className='card'>
-                            <TransparentAspectRatio ratio={'1'}>
-                                <figure>
-                                    <img
-                                        src={item.image}
-                                        loading='lazy'
-                                        alt=''
-                                    />
-                                </figure>
-                            </TransparentAspectRatio>
-                            <StoreImageBox>
-                                {item.store.map((value) => (
+                {data &&
+                    data.map((item) => (
+                        <SwiperSlide key={uuidv4()}>
+                            <div className='card'>
+                                <TransparentAspectRatio ratio={'1'}>
+                                    <figure>
+                                        <img
+                                            src={item.images[0]}
+                                            loading='lazy'
+                                            alt=''
+                                        />
+                                    </figure>
+                                </TransparentAspectRatio>
+                                <StoreImageBox>
                                     <StoreButton
-                                        href={value.url}
                                         target='_blank'
                                         rel='noreferrer'
                                         key={uuidv4()}
                                     >
-                                        <img
-                                            src={value.image}
-                                            loading='lazy'
-                                            alt='store logo'
-                                        />
+                                        자세히 보기
                                     </StoreButton>
-                                ))}
-                            </StoreImageBox>
-                        </div>
-                    </SwiperSlide>
-                ))}
+                                </StoreImageBox>
+                            </div>
+                        </SwiperSlide>
+                    ))}
             </Swiper>
         </ProductionLayout>
     );

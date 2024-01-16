@@ -42,9 +42,9 @@ export default function MemberList({ data }) {
                     data.map((item) => (
                         <SwiperSlide key={uuidv4()}>
                             <MemberItem
-                                image={item.profileImage}
-                                name={item.member}
-                                description={item.role}
+                                image={item.image}
+                                name={item.name}
+                                description={item.description}
                                 link={item.link}
                             />
                         </SwiperSlide>
