@@ -17,20 +17,9 @@ export default function DetailContainer() {
             });
     }, []);
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
     return (
         <div>
-            <button onClick={openModal}>앱 소개</button>
-            {modalOpen && (
-                <AppIntroComponent appData={appData} onClose={closeModal} />
-            )}
+            <AppIntroComponent appData={appData} />
         </div>
     );
 }

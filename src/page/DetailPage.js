@@ -9,6 +9,7 @@ import DetailContainer from '../container/product/DetailContainer';
 import 'swiper/css/virtual';
 
 export default function DetailPage() {
+    const id = '27';
     return (
         <div>
             <DetailContainer />

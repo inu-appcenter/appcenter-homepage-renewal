@@ -1,36 +1,58 @@
 import styled from 'styled-components';
 import productList from '../../resource/string/productList';
+import Modal from 'react-modal'; // react-modal 라이브러리 import
+import { useState, useEffect } from 'react';
 
 export default function AppIntroComponent({ appData, onClose }) {
+    const [modalOpen, setModalOpen] = useState(true);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
     return (
-        <ModalContainer>
-            <figure>
-                <AppImage src={appData.images[1]} loading='lazy' alt='' />
-            </figure>
-            <AppTitle>{appData.title}</AppTitle>
-            <AppDescription>{appData.subTitle}</AppDescription>
-            <InstallBtn onClick={onClose}>설치</InstallBtn>
-            <DetailInfo>{appData.body}</DetailInfo>
-            <DetailImage src={appData.images[2]} loading='lazy' alt='' />
-            <DetailImage src={appData.images[3]} loading='lazy' alt='' />
-            <DetailImage src={appData.images[4]} loading='lazy' alt='' />
-        </ModalContainer>
+        <div>
+            <button
+                onClick={() => {
+                    openModal();
+                }}
+            >
+                눌러!
+            </button>
+            <ModalContainer
+                isOpen={modalOpen}
+                onRequestClose={closeModal}
+                contentLabel='Product Modal'
+            >
+                <div>
+                    <figure></figure>
+                    <AppTitle>{appData.title}</AppTitle>
+                    <AppDescription>{appData.subTitle}</AppDescription>
+                    <InstallBtn onClick={onClose}>설치</InstallBtn>
+                    <DetailInfo>{appData.body}</DetailInfo>
+                </div>
+            </ModalContainer>
+        </div>
     );
 }
 
 const DetailImage = styled.img`
-    position: relative;
+    position: absolute;
     border-radius: 8px;
-    left: -10px;
-    top: 4rem;
+    left: 0.5rem;
+    top: 16rem;
     width: 200px;
     height: 400px;
     z-index: 2;
     & + & {
-        left: 0rem;
+        left: 13.7rem;
     }
     & + & + & {
-        left: 10px;
+        left: 27rem;
     }
 `;
 
@@ -54,7 +76,7 @@ const InstallBtn = styled.button`
     top: 1.2rem;
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled(Modal)`
     background: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 8px;
@@ -64,6 +86,7 @@ const ModalContainer = styled.div`
     width: 100%;
     margin: auto;
     position: relative;
+    transform: translate(-50%, -50%);
 `;
 
 const AppImage = styled.img`

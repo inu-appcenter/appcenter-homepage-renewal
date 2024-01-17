@@ -28,7 +28,6 @@ export default function ManagePage() {
     const [selectedMemberId, setSelectedMemberId] = useState(null);
     const contextMenuRef = useRef(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
-    const [token, setToken] = useState('');
 
     //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
     const [editedName, setEditedName] = useState('');
