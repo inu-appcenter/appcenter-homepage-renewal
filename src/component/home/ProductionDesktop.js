@@ -87,12 +87,12 @@ export default function ProductionDesktop() {
                 >
                     {data &&
                         data.map((item) => (
-                            <SwiperSlide key={uuidv4()}>
+                            <SwiperSlide key={item.id}>
                                 <div className='card'>
                                     <TransparentAspectRatio ratio={'1'}>
                                         <figure>
                                             <img
-                                                src={item.images[1]}
+                                                src={item.images[0]}
                                                 loading='lazy'
                                                 alt=''
                                             />
@@ -204,7 +204,7 @@ const DetailInfo = styled.div`
 const InstallBtn = styled.button`
     position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: #1673e0;
     border-radius: 5px;
     color: white;
     width: 6rem;
@@ -215,7 +215,7 @@ const InstallBtn = styled.button`
 
     transition: 0.3s ease-in-out;
     &:hover {
-        background-color: #3b3bf7;
+        background-color: #00489b;
     }
 `;
 
