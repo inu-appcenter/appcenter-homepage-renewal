@@ -56,7 +56,7 @@ export default function ProductionDesktop() {
             )
             .then((res) => {
                 setAppData(res.data);
-                console.log(appData.images);
+                console.log(appData);
                 const imageObject = appData.images;
                 const firstKey = Object.keys(imageObject)[0];
                 const firstValue = imageObject[firstKey];
@@ -124,6 +124,7 @@ export default function ProductionDesktop() {
                                             rel='noreferrer'
                                             key={item.id}
                                             onClick={() => onClick(item.id)}
+                                            modalOpen={modalOpen}
                                         >
                                             자세히 보기
                                         </StoreButton>
@@ -145,14 +146,24 @@ export default function ProductionDesktop() {
                         </figure>
                         <AppTitle>{appData.title}</AppTitle>
                         <AppDescription>{appData.subTitle}</AppDescription>
-                        <InstallBtn
-                            href='https://www.naver.com/'
-                            target='_blank'
-                            rel='noreferrer'
-                            key={uuidv4()}
-                        >
-                            설치
-                        </InstallBtn>
+                        {appData.appleStoreLink && (
+                            <InstallBtn
+                                href={appData.appleStoreLink}
+                                target='_blank'
+                                rel='noreferrer'
+                            >
+                                iOS
+                            </InstallBtn>
+                        )}
+                        {appData.androidStoreLink && (
+                            <InstallBtn
+                                href={appData.androidStoreLink}
+                                target='_blank'
+                                rel='noreferrer'
+                            >
+                                Android
+                            </InstallBtn>
+                        )}
                         <DetailInfo>{appData.body}</DetailInfo>
                         <DetailImage src={imageData[1]} />
                         <DetailImage src={imageData[2]} />
@@ -194,6 +205,11 @@ const StoreButton = styled(Button)`
     border: 1px solid ${(props) => props.theme.color.primary};
     border-radius: 27.5px;
     padding: 10px 20px;
+
+    ${({ modalOpen }) =>
+        modalOpen &&
+        `   opacity: 0.1;
+`}
 `;
 const TransparentAspectRatio = styled(AspectRatio)`
     background-color: transparent;
@@ -204,7 +220,7 @@ const TransparentAspectRatio = styled(AspectRatio)`
 
     ${({ modalOpen }) =>
         modalOpen &&
-        `   opacity: 0.1;
+        `   opacity: 0.05;
 `}
 `;
 
@@ -246,6 +262,10 @@ const InstallBtn = styled.button`
     transition: 0.3s ease-in-out;
     &:hover {
         background-color: #00489b;
+    }
+
+    & + & {
+        top: 3.8rem;
     }
 `;
 
@@ -290,9 +310,4 @@ const AppDescription = styled.p`
     position: relative;
     top: -2rem;
     left: 8rem;
-`;
-
-const AppDemoImage = styled.img`
-    width: 100%;
-    border-radius: 8px;
 `;
