@@ -11,8 +11,8 @@ export default function ManageRolePage() {
 
     // 새 멤버를 추가할 때 사용합니다.
     const [newRole, setNewRole] = useState({
-        role_id: '',
-        role_name: '',
+        roleId: '',
+        roleName: '',
         description: '',
     });
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
@@ -55,9 +55,9 @@ export default function ManageRolePage() {
     };
 
     useEffect(() => {
-        const RoleToEdit = data.find((item) => item.role_id === selectedRoleId);
+        const RoleToEdit = data.find((item) => item.roleId === selectedRoleId);
         if (RoleToEdit) {
-            setEditedRoleName(RoleToEdit.role_name);
+            setEditedRoleName(RoleToEdit.roleName);
             setEditedDesc(RoleToEdit.description);
         }
     }, [selectedRoleId]);
@@ -78,8 +78,8 @@ export default function ManageRolePage() {
             setData([...data, result.data]);
 
             setNewRole({
-                role_id: '',
-                role_name: '',
+                roleId: '',
+                roleName: '',
                 description: '',
             });
         } catch (error) {
@@ -93,6 +93,7 @@ export default function ManageRolePage() {
                 .get('https://server.inuappcenter.kr/roles/all-roles')
                 .then((res) => {
                     setData(res.data);
+                    console.log(data);
                 });
         };
         fetchData();
@@ -124,7 +125,7 @@ export default function ManageRolePage() {
 
         // 수정할 데이터를 가져옵니다.
         const updatedData = {
-            role_name: editedRoleName,
+            roleName: editedRoleName,
             description: editedDesc,
         };
 
@@ -165,7 +166,7 @@ export default function ManageRolePage() {
 
             // 삭제한 데이터를 data 상태에서 제거합니다.
             setData((prevData) =>
-                prevData.filter((item) => item.role_id !== selectedRoleId)
+                prevData.filter((item) => item.roleId !== selectedRoleId)
             );
         } catch (error) {
             console.error('Error deleting member:', error);
@@ -189,20 +190,20 @@ export default function ManageRolePage() {
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
-                            key={content.role_id}
+                            key={content.roleId}
                             onContextMenu={(e) => {
                                 e.preventDefault();
-                                setSelectedRoleId(content.role_id);
+                                setSelectedRoleId(content.roleId);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
-                                console.log(content.role_id);
+                                console.log(content.roleId);
                             }}
                         >
-                            <td>{content.role_id}</td>
-                            <td>{content.role_name}</td>
+                            <td>{content.roleId}</td>
+                            <td>{content.roleName}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -222,9 +223,9 @@ export default function ManageRolePage() {
                 <AddMember
                     type='text'
                     placeholder='역할'
-                    value={newRole.role_name}
+                    value={newRole.roleName}
                     onChange={(e) =>
-                        setNewRole({ ...newRole, role_name: e.target.value })
+                        setNewRole({ ...newRole, roleName: e.target.value })
                     }
                 />
                 <AddMember

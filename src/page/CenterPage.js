@@ -53,14 +53,6 @@ export default function AdminPage() {
                         </DetailText>
                     </InfoBox>
                 </Link>
-                <Link to='/../QnA'>
-                    <InfoBox>
-                        <DetailText type='title'>{'질문 관리'}</DetailText>
-                        <DetailText type='top'>
-                            {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
-                        </DetailText>
-                    </InfoBox>
-                </Link>
             </BoxContainer>
             <BoxContainer>
                 <Link to='/../role'>
@@ -77,13 +69,11 @@ export default function AdminPage() {
                         {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
                     </DetailText>
                 </InfoBox>
-                <Link to='/../product'>
+                <Link to='/../QnA'>
                     <InfoBox>
-                        <DetailText type='title'>{'앱 관리'}</DetailText>
+                        <DetailText type='title'>{'질문 관리'}</DetailText>
                         <DetailText type='top'>
-                            {
-                                '홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'
-                            }
+                            {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
                         </DetailText>
                     </InfoBox>
                 </Link>

@@ -15,9 +15,10 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 export default function ProductionDesktop() {
     //서버에서 불러온 데이터를 저장해줌
     const [data, setData] = useState([]);
-    const [itemId, setItemId] = useState(2);
+    const [itemId, setItemId] = useState(34);
     const [modalOpen, setModalOpen] = useState(false);
     const [appData, setAppData] = useState([]);
+    const [imageData, setImageData] = useState([]);
     const breakPoint = {
         680: {
             slidesPerView: 3,
@@ -55,7 +56,23 @@ export default function ProductionDesktop() {
             )
             .then((res) => {
                 setAppData(res.data);
-                console.log(appData);
+                console.log(appData.images);
+                const imageObject = appData.images;
+                const firstKey = Object.keys(imageObject)[0];
+                const firstValue = imageObject[firstKey];
+                const secondKey = Object.keys(imageObject)[1];
+                const secondValue = imageObject[secondKey];
+                const thirdKey = Object.keys(imageObject)[2];
+                const thirdValue = imageObject[thirdKey];
+                const fourthKey = Object.keys(imageObject)[3];
+                const fourthValue = imageObject[fourthKey];
+
+                setImageData([
+                    firstValue,
+                    secondValue,
+                    thirdValue,
+                    fourthValue,
+                ]);
             });
     }, [itemId]);
 
@@ -89,10 +106,13 @@ export default function ProductionDesktop() {
                         data.map((item) => (
                             <SwiperSlide key={item.id}>
                                 <div className='card'>
-                                    <TransparentAspectRatio ratio={'1'}>
+                                    <TransparentAspectRatio
+                                        ratio={'1'}
+                                        modalOpen={modalOpen}
+                                    >
                                         <figure>
                                             <img
-                                                src={item.images[0]}
+                                                src={item.images[1]}
                                                 loading='lazy'
                                                 alt=''
                                             />
@@ -120,7 +140,9 @@ export default function ProductionDesktop() {
                     contentLabel='Product Modal'
                 >
                     <div>
-                        <figure></figure>
+                        <figure>
+                            <AppImage src={imageData[0]} />
+                        </figure>
                         <AppTitle>{appData.title}</AppTitle>
                         <AppDescription>{appData.subTitle}</AppDescription>
                         <InstallBtn
@@ -132,6 +154,9 @@ export default function ProductionDesktop() {
                             설치
                         </InstallBtn>
                         <DetailInfo>{appData.body}</DetailInfo>
+                        <DetailImage src={imageData[1]} />
+                        <DetailImage src={imageData[2]} />
+                        <DetailImage src={imageData[3]} />
                     </div>
                 </ModalContainer>
             </div>
@@ -176,6 +201,11 @@ const TransparentAspectRatio = styled(AspectRatio)`
     .MuiAspectRatio-content {
         background-color: transparent;
     }
+
+    ${({ modalOpen }) =>
+        modalOpen &&
+        `   opacity: 0.1;
+`}
 `;
 
 const DetailImage = styled.img`
@@ -185,7 +215,7 @@ const DetailImage = styled.img`
     top: 16rem;
     width: 200px;
     height: 400px;
-    z-index: 2;
+    z-index: 5;
     & + & {
         left: 13.7rem;
     }

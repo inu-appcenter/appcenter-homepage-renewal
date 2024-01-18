@@ -16,8 +16,10 @@ import ManageGenPage from './page/ManageGenPage';
 import ManageRolePage from './page/ManageRolePage';
 import ProductPage from './page/ProductPage';
 import QnAPage from './page/QnAPage';
+import Modal from 'react-modal';
 
 function App() {
+    Modal.setAppElement('#root'); //App.js에 Modal을 사용하기 위한 설정
     return (
         <Routes>
             <Route path='/' element={<Navigate to={'home'} />} />
