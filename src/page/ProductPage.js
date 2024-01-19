@@ -12,7 +12,7 @@ export default function ProductPage() {
 
     // 새 멤버를 추가할 때 사용합니다.
     const [newMember, setNewMember] = useState({
-        member_id: '',
+        id: '',
         name: '',
         description: '',
         profileImage: '',
@@ -25,7 +25,7 @@ export default function ProductPage() {
         x: 0,
         y: 0,
     });
-    const [selectedMemberId, setSelectedMemberId] = useState(null);
+    const [selectedProductId, setselectedProductId] = useState(null);
     const contextMenuRef = useRef(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
@@ -39,7 +39,7 @@ export default function ProductPage() {
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 3;
 
     // 페이지당 데이터를 분할하는 함수입니다.
     const paginateData = (data, currentPage, itemsPerPage) => {
@@ -57,16 +57,14 @@ export default function ProductPage() {
         setCurrentPage(pageNumber);
     };
 
-    const openEditModal = (selectedMemberId) => {
+    const openEditModal = (selectedProductId) => {
         // 수정할 때 해당 memberId의 데이터를 가져와서 모달에 미리 채워넣을 수 있습니다.
         setContextMenuVisible(false);
         setEditModalOpen(true);
     };
 
     useEffect(() => {
-        const memberToEdit = data.find(
-            (item) => item.member_id === selectedMemberId
-        );
+        const memberToEdit = data.find((item) => item.id === selectedProductId);
         if (memberToEdit) {
             setEditedName(memberToEdit.name);
             setEditedDescription(memberToEdit.description);
@@ -75,7 +73,7 @@ export default function ProductPage() {
             setEditedEmail(memberToEdit.email);
             setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
         }
-    }, [selectedMemberId]);
+    }, [selectedProductId]);
 
     const closeEditModal = () => {
         setEditModalOpen(false);
@@ -93,7 +91,7 @@ export default function ProductPage() {
             setData([...data, result.data]);
 
             setNewMember({
-                member_id: '',
+                id: '',
                 name: '',
                 description: '',
                 profileImage: '',
@@ -110,7 +108,9 @@ export default function ProductPage() {
         const fetchData = async () => {
             isLoading(true);
             const viewData = await axios
-                .get('https://server.inuappcenter.kr/members/all-members')
+                .get(
+                    'https://server.inuappcenter.kr/introduction-board/public/all-boards-contents'
+                )
                 .then((res) => {
                     isLoading(false);
                     setData(res.data);
@@ -139,7 +139,7 @@ export default function ProductPage() {
     }, []);
 
     const handleEdit = async () => {
-        if (selectedMemberId === null) {
+        if (selectedProductId === null) {
             return; // 선택된 항목이 없으면 무시
         }
 
@@ -154,21 +154,21 @@ export default function ProductPage() {
         };
 
         try {
-            // member_id를 사용하여 수정 요청을 보냅니다.
+            // id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/members?id=${selectedMemberId}`,
+                `https://server.inuappcenter.kr/members?id=${selectedProductId}`,
                 updatedData
             );
             console.log(
                 'Member with ID',
-                selectedMemberId,
+                selectedProductId,
                 'has been updated.'
             );
             console.log(response);
             // 업데이트된 데이터를 data 상태에서 업데이트합니다.
             setData((prevData) =>
                 prevData.map((item) =>
-                    item.member_id === selectedMemberId
+                    item.id === selectedProductId
                         ? { ...item, ...updatedData }
                         : item
                 )
@@ -181,24 +181,24 @@ export default function ProductPage() {
     };
 
     const handleDelete = async () => {
-        if (selectedMemberId === null) {
+        if (selectedProductId === null) {
             return; // 선택된 항목이 없으면 무시
         }
 
         try {
-            // member_id를 사용하여 삭제 요청을 보냅니다.
+            // id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/members/${selectedMemberId}`
+                `https://server.inuappcenter.kr/introduction-board/${selectedProductId}`
             );
             console.log(
                 'Member with ID',
-                selectedMemberId,
+                selectedProductId,
                 'has been deleted.'
             );
 
             // 삭제한 데이터를 data 상태에서 제거합니다.
             setData((prevData) =>
-                prevData.filter((item) => item.member_id !== selectedMemberId)
+                prevData.filter((item) => item.id !== selectedProductId)
             );
         } catch (error) {
             console.error('Error deleting member:', error);
@@ -213,52 +213,36 @@ export default function ProductPage() {
                 <HiBars3 className='menu' size={'24px'} />
             </NavBar>
             <IntroBox>
-                <Text type='title'>{'동아리원 관리'}</Text>
+                <Text type='title'>{'앱 관리'}</Text>
                 <Text type='top'>
-                    {'동아리원 추가, 삭제, 수정을 할 수 있어요'}
+                    {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
                 </Text>
             </IntroBox>
-            <MemberList>동아리원 목록</MemberList>
+            <MemberList>앱 목록</MemberList>
             <MemberTable>
                 {loading && <div>loading...</div>}
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
-                            key={content.member_id}
+                            key={content.id}
                             onContextMenu={(e) => {
                                 e.preventDefault();
-                                setSelectedMemberId(content.member_id);
+                                setselectedProductId(content.id);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
-                                console.log(content.member_id);
+                                console.log(content.id);
                             }}
                         >
-                            <td>{content.member_id}</td>
-                            <td>{content.name}</td>
-                            <td>{content.email}</td>
-                            <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    Visit Blog
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
-                            </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.description}</td>
+                            <AppTd>
+                                <figure>
+                                    <AppImage src={content.images[1]} />
+                                </figure>
+                            </AppTd>
+                            <td>{content.title}</td>
+                            <td>{content.subTitle}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -272,73 +256,6 @@ export default function ProductPage() {
                     onPageChange={handlePageChange}
                 />
             </PaginationContainer>
-            <Addtitle>동아리원 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='이름'
-                    value={newMember.name}
-                    onChange={(e) =>
-                        setNewMember({ ...newMember, name: e.target.value })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='이메일'
-                    value={newMember.email}
-                    onChange={(e) =>
-                        setNewMember({ ...newMember, email: e.target.value })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='블로그 URL'
-                    value={newMember.blogLink}
-                    onChange={(e) =>
-                        setNewMember({ ...newMember, blogLink: e.target.value })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='Git URL'
-                    value={newMember.gitRepositoryLink}
-                    onChange={(e) =>
-                        setNewMember({
-                            ...newMember,
-                            gitRepositoryLink: e.target.value,
-                        })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='프로필 이미지'
-                    value={newMember.profileImage}
-                    onChange={(e) =>
-                        setNewMember({
-                            ...newMember,
-                            profileImage: e.target.value,
-                        })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='설명'
-                    value={newMember.description}
-                    onChange={(e) =>
-                        setNewMember({
-                            ...newMember,
-                            description: e.target.value,
-                        })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -352,7 +269,9 @@ export default function ProductPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-
+            <div>
+                <Regisbutton onClick={addData}>등록</Regisbutton>
+            </div>
             {/* 수정 팝업 모달 */}
             <ModalContainer
                 isOpen={isEditModalOpen}
@@ -405,6 +324,18 @@ export default function ProductPage() {
     );
 }
 
+const AppTd = styled.td`
+    width: 200px;
+`;
+
+const AppImage = styled.img`
+    width: 7rem;
+    height: 7rem;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+`;
+
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -418,6 +349,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
+    border: 2px solid #5858fa;
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
@@ -472,6 +404,11 @@ const ModalButton = styled.button`
 `;
 
 const MenuItem = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    border-bottom: 1px solid #ccc;
     padding: 5px 10px;
     cursor: pointer;
     user-select: none;
@@ -482,7 +419,12 @@ const MenuItem = styled.div`
 
 const ContextMenu = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
     background-color: white;
+    border-radius: 8px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -490,6 +432,9 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
+    top: 51rem;
+    left: 47rem;
     border: none;
     background-color: #5858fa;
     border-radius: 5px;

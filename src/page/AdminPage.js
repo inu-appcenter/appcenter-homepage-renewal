@@ -2,13 +2,31 @@ import styled, { css } from 'styled-components';
 import { HiBars3 } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import logo from '../resource/img/navbar_logo/logo_black.png';
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function AdminPage() {
+    const [login, setLogin] = useState(false);
+
+    const onClick = async () => {
+        const response = await axios
+            .post('https://server.inuappcenter.kr/sign/sign-in', {
+                id: 'appcenter',
+                password: '1q2w3e4r!Appcenter',
+            })
+            .then((res) => {
+                axios.defaults.headers.common['X-AUTH-TOKEN'] = res.data.token;
+            })
+            .then(setLogin(true));
+    };
+
     return (
         <>
             <NavBar>
                 <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
+                <button className='menu' onClick={onClick}>
+                    로그인
+                </button>
             </NavBar>
             <IntroBox>
                 <Text type='title'>{'홈페이지 대시보드'}</Text>

@@ -100,7 +100,7 @@ export default function ProductionDesktop() {
                         delay: 0,
                         disableOnInteraction: false,
                     }}
-                    speed={2000}
+                    speed={4000}
                 >
                     {data &&
                         data.map((item) => (

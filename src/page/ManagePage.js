@@ -418,6 +418,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
+    border: 2px solid #5858fa;
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
@@ -472,6 +473,11 @@ const ModalButton = styled.button`
 `;
 
 const MenuItem = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    border-bottom: 1px solid #ccc;
     padding: 5px 10px;
     cursor: pointer;
     user-select: none;
@@ -482,7 +488,12 @@ const MenuItem = styled.div`
 
 const ContextMenu = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
     background-color: white;
+    border-radius: 8px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
