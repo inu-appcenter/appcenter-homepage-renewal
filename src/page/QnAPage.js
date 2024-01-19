@@ -12,10 +12,10 @@ export default function QnAPage() {
 
     // 새 멤버를 추가할 때 사용합니다.
     const [newQna, setNewQna] = useState({
-        id: 0,
+        answer: '',
+        id: '',
         part: '',
         question: '',
-        answer: '',
     });
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
@@ -76,16 +76,15 @@ export default function QnAPage() {
                 'https://server.inuappcenter.kr/faqs',
                 newQna
             );
-            console.log('Success:', result.data);
 
-            // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
+            // POST 요청 성공 시, 새로운 질문을 data 상태 변수에 추가합니다.
+            setData([...data, newQna]);
 
             setNewQna({
-                id: 0,
+                answer: '',
+                id: '',
                 part: '',
                 question: '',
-                answer: '',
             });
         } catch (error) {
             console.error('Error adding data:', error);
@@ -105,6 +104,7 @@ export default function QnAPage() {
                 });
         };
         fetchData();
+        console.log(newQna);
     }, []);
 
     useEffect(() => {
