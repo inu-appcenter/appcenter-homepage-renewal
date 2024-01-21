@@ -255,6 +255,7 @@ export default function ProductPage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton onClick={addData}>등록</Regisbutton>
             </PaginationContainer>
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
@@ -269,9 +270,6 @@ export default function ProductPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-            <div>
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </div>
             {/* 수정 팝업 모달 */}
             <ModalContainer
                 isOpen={isEditModalOpen}
@@ -433,15 +431,14 @@ const ContextMenu = styled.div`
 
 const Regisbutton = styled.button`
     position: absolute;
-    top: 51rem;
-    left: 47rem;
     border: none;
     background-color: #5858fa;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 1rem 3.5rem 0 auto;
+    margin-left: 30rem;
+    margin-top: 0.6rem;
 
     &:hover {
         transition: 0.1s ease-in;
