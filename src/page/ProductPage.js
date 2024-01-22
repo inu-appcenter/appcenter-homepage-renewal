@@ -5,10 +5,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
 import logo from '../resource/img/navbar_logo/logo_black.png';
+import RegisModal from '../container/product/RegisModal';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
     const [loading, isLoading] = useState(false);
+
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    const dispatch = useDispatch();
 
     // 새 멤버를 추가할 때 사용합니다.
     const [newMember, setNewMember] = useState({
@@ -79,29 +85,8 @@ export default function ProductPage() {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                'https://server.inuappcenter.kr/members',
-                newMember
-            );
-            console.log('Success:', result.data);
-
-            // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
-
-            setNewMember({
-                id: '',
-                name: '',
-                description: '',
-                profileImage: '',
-                blogLink: '',
-                email: '',
-                gitRepositoryLink: '',
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
     };
 
     useEffect(() => {
@@ -255,8 +240,16 @@ export default function ProductPage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
+            {regisModalOpen && <RegisModal regisModalOpen={regisModalOpen} />}
+
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu

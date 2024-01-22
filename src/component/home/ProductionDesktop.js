@@ -3,13 +3,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
-import productList from '../../resource/string/productList';
 import 'swiper/css/virtual';
-import { v4 as uuidv4 } from 'uuid';
 import { Button } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import DetailContainer from '../../container/product/DetailContainer';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 
 export default function ProductionDesktop() {
