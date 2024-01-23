@@ -12,10 +12,11 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 export default function ProductionDesktop() {
     //서버에서 불러온 데이터를 저장해줌
     const [data, setData] = useState([]);
-    const [itemId, setItemId] = useState(34);
+    const [itemId, setItemId] = useState(14);
     const [modalOpen, setModalOpen] = useState(false);
     const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
+    const [firstImage, setFirstImage] = useState('');
     const breakPoint = {
         680: {
             slidesPerView: 3,
@@ -40,11 +41,10 @@ export default function ProductionDesktop() {
                 )
                 .then((res) => {
                     setData(res.data);
-                    console.log(data);
                 });
         };
         fetchData();
-    }, [data.length]);
+    }, []);
 
     useEffect(() => {
         axios
@@ -53,16 +53,17 @@ export default function ProductionDesktop() {
             )
             .then((res) => {
                 setAppData(res.data);
-                console.log(appData);
                 const imageObject = appData.images;
-                const firstKey = Object.keys(imageObject)[0];
-                const firstValue = imageObject[firstKey];
-                const secondKey = Object.keys(imageObject)[1];
-                const secondValue = imageObject[secondKey];
-                const thirdKey = Object.keys(imageObject)[2];
-                const thirdValue = imageObject[thirdKey];
-                const fourthKey = Object.keys(imageObject)[3];
-                const fourthValue = imageObject[fourthKey];
+                const secondKey = imageObject && Object.keys(imageObject)[1];
+                const secondValue = secondKey && imageObject[secondKey];
+                const thirdKey = imageObject && Object.keys(imageObject)[2];
+                const thirdValue = thirdKey && imageObject[thirdKey];
+                const fourthKey = imageObject && Object.keys(imageObject)[3];
+                const fourthValue = fourthKey && imageObject[fourthKey];
+                const firstKey = imageObject && Object.keys(imageObject)[0];
+                const firstValue = firstKey && imageObject[firstKey];
+
+                console.log(appData);
 
                 setImageData([
                     firstValue,
@@ -77,7 +78,6 @@ export default function ProductionDesktop() {
         setItemId(id);
         setModalOpen(true);
         console.log(itemId);
-        console.log(modalOpen);
     };
 
     const closeModal = () => {
@@ -109,7 +109,13 @@ export default function ProductionDesktop() {
                                     >
                                         <figure>
                                             <img
-                                                src={item.images[1]}
+                                                src={
+                                                    item.images[
+                                                        Object.keys(
+                                                            item.images
+                                                        )[0]
+                                                    ]
+                                                }
                                                 loading='lazy'
                                                 alt=''
                                             />

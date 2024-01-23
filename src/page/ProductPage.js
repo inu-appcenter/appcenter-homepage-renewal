@@ -223,7 +223,13 @@ export default function ProductPage() {
                         >
                             <AppTd>
                                 <figure>
-                                    <AppImage src={content.images[1]} />
+                                    <AppImage
+                                        src={
+                                            content.images[
+                                                Object.keys(content.images)[0]
+                                            ]
+                                        }
+                                    />
                                 </figure>
                             </AppTd>
                             <td>{content.title}</td>
@@ -317,6 +323,10 @@ export default function ProductPage() {
 
 const AppTd = styled.td`
     width: 200px;
+    ${({ regisModalOpen }) =>
+        regisModalOpen &&
+        `   opacity: 0.1;
+`}
 `;
 
 const AppImage = styled.img`
@@ -439,25 +449,6 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
     width: 700px;
     border-collapse: collapse;
@@ -484,35 +475,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 
