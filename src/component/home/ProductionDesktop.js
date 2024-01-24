@@ -223,7 +223,7 @@ const TransparentAspectRatio = styled(AspectRatio)`
 
     ${({ modalOpen }) =>
         modalOpen &&
-        `   opacity: 0.05;
+        `   opacity: 0.01;
 `}
 `;
 
@@ -234,7 +234,7 @@ const DetailImage = styled.img`
     top: 16rem;
     width: 200px;
     height: 400px;
-    z-index: 5;
+    opacity: 1;
     & + & {
         left: 13.7rem;
     }

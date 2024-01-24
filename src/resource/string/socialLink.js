@@ -1,7 +1,7 @@
 import facebook_icon from '../../resource/img/facebook_icon.svg';
 import kakaotalk_icon from '../../resource/img/kakaotalk_icon.svg';
 import gmail_icon from '../../resource/img/gmail_icon.svg';
-import admin_icon from '../../resource/img/admin.svg';
+import admin_icon from '../../resource/img/admin_icon.png';
 
 export const socialLink = {
     facebook: {

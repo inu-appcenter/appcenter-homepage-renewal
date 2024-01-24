@@ -2,20 +2,20 @@ import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RMopen, RMclose } from '../../modules/ProductSlice';
+import { MODopen, MODclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
 
-export default function RegisModal() {
+export default function ModifyModal(id) {
     const [data, setData] = useState([]);
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
 
-    const [upload, setUpload] = useState();
-    const [uploadImage, setUploadImage] = useState();
+    const [upload, setUpload] = useState([]);
+    const [uploadImage, setUploadImage] = useState([]);
 
     // 입력받은 데이터를 저장
-    const [newProduct, setNewProduct] = useState({
+    const [updateProduct, setUpdateProduct] = useState({
         body: '',
         title: '',
         subTitle: '',
@@ -27,81 +27,9 @@ export default function RegisModal() {
 
     // 상태관리 관련
     const dispatch = useDispatch();
-    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
-
-    // 서버에 데이터를 저장하는 함수
-    const addData = async () => {
-        try {
-            const formData = new FormData();
-            console.log(upload);
-            console.log(uploadImage);
-
-            formData.append('title', newProduct.title);
-            formData.append('subTitle', newProduct.subTitle);
-            formData.append('androidStoreLink', newProduct.androidStoreLink);
-            formData.append('appleStoreLink', newProduct.appleStoreLink);
-            formData.append('body', newProduct.body);
-
-            formData.append('multipartFiles', upload);
-
-            uploadImage.forEach((image) => {
-                formData.append('multipartFiles', image);
-                console.log(image);
-            });
-
-            console.log(uploadImage);
-
-            console.log(formData.get('multipartFiles'));
-
-            for (let key of formData.keys()) {
-                console.log(key);
-            }
-
-            for (let value of formData.values()) {
-                console.log(value);
-            }
-
-            const result = await axios.post(
-                'https://server.inuappcenter.kr/introduction-board',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                }
-            );
-
-            console.log(result.data);
-
-            for (let key of formData.keys()) {
-                console.log(key);
-            }
-
-            for (let value of formData.values()) {
-                console.log(value);
-            }
-
-            setData([...data, result.data]);
-
-            setNewProduct({
-                body: '',
-                title: '',
-                subTitle: '',
-                androidStoreLink: '',
-                appleStoreLink: '',
-                email: '',
-                gitRepositoryLink: '',
-            });
-
-            dispatch(RMclose());
-            setUpload([]);
-            setUploadImage([]);
-
-            // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
-    };
+    const modifyModalOpen = useSelector(
+        (state) => state.product.modifyModalOpen
+    );
 
     const openScroll = useCallback(() => {
         document.body.style.removeProperty('overflow');
@@ -109,13 +37,37 @@ export default function RegisModal() {
 
     // 모달을 닫아주고 스크롤을 풀어줌.
     const closeModal = () => {
-        dispatch(RMclose());
+        dispatch(MODclose());
         openScroll();
+    };
+
+    const handleEdit = async () => {
+        // 수정할 데이터를 가져옵니다.
+        const updatedData = {};
+
+        try {
+            // member_id를 사용하여 수정 요청을 보냅니다.
+            const response = await axios.patch(
+                `https://server.inuappcenter.kr/introduction-board?id=${id}`,
+                updatedData
+            );
+            console.log('Member with ID', id, 'has been updated.');
+            console.log(response);
+            // 업데이트된 데이터를 data 상태에서 업데이트합니다.
+            setData((prevData) =>
+                prevData.map((item) =>
+                    item.member_id === id ? { ...item, ...updatedData } : item
+                )
+            );
+        } catch (error) {
+            console.error('Error updating member:', error);
+        }
+        MODclose();
     };
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
-        setUpload(files[0]);
+        setUpload(e.target.files);
         const uploadFile = files[0];
         const reader = new FileReader();
         reader.readAsDataURL(uploadFile);
@@ -124,6 +76,9 @@ export default function RegisModal() {
         };
 
         setShowImages(uploadImgUrl); // 이미지 미리보기
+
+        setUpload('');
+        console.log(uploadImgUrl);
     };
 
     const handleAddImages = (e) => {
@@ -147,12 +102,13 @@ export default function RegisModal() {
 
         setShowImages(imageUrlLists);
         setUploadImage(realImageLists);
+        console.log(showImages);
     };
 
     return (
         <div>
             <ModalContainer
-                isOpen={regisModalOpen}
+                isOpen={modifyModalOpen}
                 onRequestClose={closeModal}
                 contentLabel='Product Modal'
             >
@@ -178,8 +134,8 @@ export default function RegisModal() {
                             type='text'
                             placeholder='앱 제목'
                             onChange={(e) =>
-                                setNewProduct({
-                                    ...newProduct,
+                                setUpdateProduct({
+                                    ...updateProduct,
                                     title: e.target.value,
                                 })
                             }
@@ -190,8 +146,8 @@ export default function RegisModal() {
                             type='text'
                             placeholder='부 제목'
                             onChange={(e) =>
-                                setNewProduct({
-                                    ...newProduct,
+                                setUpdateProduct({
+                                    ...updateProduct,
                                     subTitle: e.target.value,
                                 })
                             }
@@ -202,8 +158,8 @@ export default function RegisModal() {
                             type='text'
                             placeholder='안드로이드'
                             onChange={(e) =>
-                                setNewProduct({
-                                    ...newProduct,
+                                setUpdateProduct({
+                                    ...updateProduct,
                                     androidStoreLink: e.target.value,
                                 })
                             }
@@ -212,8 +168,8 @@ export default function RegisModal() {
                             type='text'
                             placeholder='iOS'
                             onChange={(e) =>
-                                setNewProduct({
-                                    ...newProduct,
+                                setUpdateProduct({
+                                    ...updateProduct,
                                     appleStoreLink: e.target.value,
                                 })
                             }
@@ -224,8 +180,8 @@ export default function RegisModal() {
                             type='text'
                             placeholder='앱에 대한 자세한 설명..'
                             onChange={(e) =>
-                                setNewProduct({
-                                    ...newProduct,
+                                setUpdateProduct({
+                                    ...updateProduct,
                                     body: e.target.value,
                                 })
                             }
@@ -250,7 +206,7 @@ export default function RegisModal() {
                 <NavBar>
                     <Regisbutton
                         onClick={() => {
-                            addData();
+                            handleEdit();
                         }}
                     >
                         등록

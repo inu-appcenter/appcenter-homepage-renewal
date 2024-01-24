@@ -6,26 +6,20 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
 import logo from '../resource/img/navbar_logo/logo_black.png';
 import RegisModal from '../container/product/RegisModal';
-import { RMopen } from '../modules/ProductSlice';
+import { RMopen, MODopen } from '../modules/ProductSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import ModifyModal from '../container/product/ModifyModal';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
     const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const modifyModalOpen = useSelector((state) => state.product.modifyModalOpen);
     const dispatch = useDispatch();
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newMember, setNewMember] = useState({
-        id: '',
-        name: '',
-        description: '',
-        profileImage: '',
-        blogLink: '',
-        email: '',
-        gitRepositoryLink: '',
-    });
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -33,7 +27,7 @@ export default function ProductPage() {
     });
     const [selectedProductId, setselectedProductId] = useState(null);
     const contextMenuRef = useRef(null);
-    const [isEditModalOpen, setEditModalOpen] = useState(false);
+    const [productId, setProductId] = useState('');
 
     //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
     const [editedName, setEditedName] = useState('');
@@ -66,7 +60,7 @@ export default function ProductPage() {
     const openEditModal = (selectedProductId) => {
         // 수정할 때 해당 memberId의 데이터를 가져와서 모달에 미리 채워넣을 수 있습니다.
         setContextMenuVisible(false);
-        setEditModalOpen(true);
+        dispatch(MODopen());
     };
 
     useEffect(() => {
@@ -81,13 +75,14 @@ export default function ProductPage() {
         }
     }, [selectedProductId]);
 
-    const closeEditModal = () => {
-        setEditModalOpen(false);
-    };
-
     const addData = () => {
         dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -99,6 +94,7 @@ export default function ProductPage() {
                 .then((res) => {
                     isLoading(false);
                     setData(res.data);
+                    console.log(res.data);
                 });
         };
         fetchData();
@@ -161,8 +157,6 @@ export default function ProductPage() {
         } catch (error) {
             console.error('Error updating member:', error);
         }
-        setEditModalOpen(false);
-        setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
 
     const handleDelete = async () => {
@@ -218,6 +212,7 @@ export default function ProductPage() {
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
+                                setProductId(content.id);
                                 console.log(content.id);
                             }}
                         >
@@ -255,7 +250,9 @@ export default function ProductPage() {
                 </Regisbutton>
             </PaginationContainer>
             {regisModalOpen && <RegisModal regisModalOpen={regisModalOpen} />}
-
+            {modifyModalOpen && (
+                <ModifyModal modifyModalOpen={modifyModalOpen} id={productId} />
+            )}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -269,54 +266,6 @@ export default function ProductPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-            {/* 수정 팝업 모달 */}
-            <ModalContainer
-                isOpen={isEditModalOpen}
-                onRequestClose={closeEditModal}
-                contentLabel='Edit Member Modal'
-            >
-                <ModalTitle>회원 수정</ModalTitle>
-                <ModalLabel>이름</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedName}
-                    onChange={(e) => setEditedName(e.target.value)}
-                />
-                <ModalLabel>설명</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedDescription}
-                    onChange={(e) => setEditedDescription(e.target.value)}
-                />
-                <ModalLabel>프로필 이미지</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedProfileImage}
-                    onChange={(e) => setEditedProfileImage(e.target.value)}
-                />
-                <ModalLabel>블로그 URL</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedBlogLink}
-                    onChange={(e) => setEditedBlogLink(e.target.value)}
-                />
-                <ModalLabel>이메일</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedEmail}
-                    onChange={(e) => setEditedEmail(e.target.value)}
-                />
-                <ModalLabel>Git URL</ModalLabel>
-                <ModalInput
-                    type='text'
-                    value={editedGitRepositoryLink}
-                    onChange={(e) => setEditedGitRepositoryLink(e.target.value)}
-                />
-                <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
-                    <ModalButton onClick={closeEditModal}>취소</ModalButton>
-                </ModalButtonWrapper>
-            </ModalContainer>
         </>
     );
 }
@@ -435,7 +384,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: grey;
     border-radius: 5px;
     color: white;
     width: 5rem;

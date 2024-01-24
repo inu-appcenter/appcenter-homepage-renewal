@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     regisModalOpen: false,
+    modifyModalOpen: false,
     message: '',
 };
 
@@ -16,7 +17,14 @@ export const ProductSlice = createSlice({
         RMclose(state) {
             state.regisModalOpen = false;
         },
+        MODopen: (state, action) => {
+            state.modifyModalOpen = true;
+            state.message = action.payload;
+        },
+        MODclose(state) {
+            state.modifyModalOpen = false;
+        },
     },
 });
 
-export const { RMopen, RMclose } = ProductSlice.actions;
+export const { RMopen, RMclose, MODopen, MODclose } = ProductSlice.actions;
