@@ -250,9 +250,7 @@ export default function ProductPage() {
                 </Regisbutton>
             </PaginationContainer>
             {regisModalOpen && <RegisModal regisModalOpen={regisModalOpen} />}
-            {modifyModalOpen && (
-                <ModifyModal modifyModalOpen={modifyModalOpen} id={productId} />
-            )}
+            {modifyModalOpen && <ModifyModal id={productId} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu

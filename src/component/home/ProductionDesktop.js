@@ -12,7 +12,7 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 export default function ProductionDesktop() {
     //서버에서 불러온 데이터를 저장해줌
     const [data, setData] = useState([]);
-    const [itemId, setItemId] = useState(14);
+    const [itemId, setItemId] = useState(1);
     const [modalOpen, setModalOpen] = useState(false);
     const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
@@ -44,7 +44,7 @@ export default function ProductionDesktop() {
                 });
         };
         fetchData();
-    }, []);
+    }, [data.length]);
 
     useEffect(() => {
         axios
@@ -53,17 +53,18 @@ export default function ProductionDesktop() {
             )
             .then((res) => {
                 setAppData(res.data);
-                const imageObject = appData.images;
+                const imageObject = res.data.images;
+                const firstKey = imageObject && Object.keys(imageObject)[0];
+                const firstValue = firstKey && imageObject[firstKey];
                 const secondKey = imageObject && Object.keys(imageObject)[1];
                 const secondValue = secondKey && imageObject[secondKey];
                 const thirdKey = imageObject && Object.keys(imageObject)[2];
                 const thirdValue = thirdKey && imageObject[thirdKey];
                 const fourthKey = imageObject && Object.keys(imageObject)[3];
                 const fourthValue = fourthKey && imageObject[fourthKey];
-                const firstKey = imageObject && Object.keys(imageObject)[0];
-                const firstValue = firstKey && imageObject[firstKey];
 
-                console.log(appData);
+                console.log(res.data);
+                console.log(imageObject);
 
                 setImageData([
                     firstValue,
@@ -77,7 +78,7 @@ export default function ProductionDesktop() {
     const onClick = (id) => {
         setItemId(id);
         setModalOpen(true);
-        console.log(itemId);
+        console.log(id);
     };
 
     const closeModal = () => {
