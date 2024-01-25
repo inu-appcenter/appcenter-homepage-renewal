@@ -5,6 +5,7 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { RMopen, RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
+import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
 
 export default function RegisModal() {
     const [data, setData] = useState([]);
@@ -21,13 +22,23 @@ export default function RegisModal() {
         subTitle: '',
         androidStoreLink: '',
         appleStoreLink: '',
-        email: '',
-        gitRepositoryLink: '',
     });
 
     // 상태관리 관련
     const dispatch = useDispatch();
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+
+    const onClick = (index) => {
+        return () => {
+            const newShowImages = [...showImages];
+            const newUploadImage = [...uploadImage];
+            newShowImages.splice(index, 1);
+            newUploadImage.splice(index, 1);
+            setShowImages(newShowImages);
+            setUploadImage(newUploadImage);
+            console.log(newUploadImage);
+        };
+    };
 
     // 서버에 데이터를 저장하는 함수
     const addData = async () => {
@@ -48,8 +59,6 @@ export default function RegisModal() {
                 formData.append('multipartFiles', image);
                 console.log(image);
             });
-
-            console.log(uploadImage);
 
             console.log(formData.get('multipartFiles'));
 
@@ -89,13 +98,11 @@ export default function RegisModal() {
                 subTitle: '',
                 androidStoreLink: '',
                 appleStoreLink: '',
-                email: '',
-                gitRepositoryLink: '',
             });
 
             dispatch(RMclose());
-            setUpload([]);
-            setUploadImage([]);
+            setUpload();
+            setUploadImage();
 
             // POST 요청 성공 시, 새로운 동아리원을 data 상태 변수에 추가
         } catch (error) {
@@ -122,14 +129,14 @@ export default function RegisModal() {
         reader.onloadend = () => {
             setUploadImgUrl(reader.result);
         };
-
-        setShowImages(uploadImgUrl); // 이미지 미리보기
     };
 
     const handleAddImages = (e) => {
         const imageLists = e.target.files;
+        console.log(e.target.files[0]);
         let imageUrlLists = [...showImages];
         let realImageLists = [...showImages];
+        console.log(realImageLists);
 
         for (let i = 0; i < imageLists.length; i++) {
             const realImage = imageLists[i];
@@ -144,6 +151,8 @@ export default function RegisModal() {
             alert('이미지는 최대 3개까지만 등록 가능합니다.');
             return;
         }
+
+        console.log(realImageLists);
 
         setShowImages(imageUrlLists);
         setUploadImage(realImageLists);
@@ -243,8 +252,13 @@ export default function RegisModal() {
                         />
                     </div>
                     {showImages &&
-                        showImages.map((image, key) => (
-                            <DetailImage src={image} />
+                        showImages.map((image, index) => (
+                            <ImageBox>
+                                <DetailImage src={image} />
+                                <DeleteBtn onClick={onClick(index)}>
+                                    <img src={DELETE} />
+                                </DeleteBtn>
+                            </ImageBox>
                         ))}
                 </div>
                 <NavBar>
@@ -260,6 +274,30 @@ export default function RegisModal() {
         </div>
     );
 }
+
+const ImageBox = styled.span`
+    position: relative;
+`;
+
+const DetailImage = styled.img`
+    position: relative;
+    border-radius: 8px;
+    width: 205px;
+    height: 400px;
+    z-index: 0;
+
+    margin-left: 0.01rem;
+    margin-right: 0.72rem;
+`;
+
+const DeleteBtn = styled.button`
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    border-radius: 15px;
+    left: 10.8rem;
+    z-index: 1;
+`;
 
 const NavBar = styled.div`
     position: absolute;
@@ -301,22 +339,22 @@ const Regisbutton = styled.button`
 
 const InstallBtn = styled.input`
     border: none;
-    width: 20%;
+    width: 27%;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
 
     & + & {
-        margin-left: 1.5rem;
+        margin-left: 1rem;
     }
 `;
 
 const PhotoImg = styled.img`
     position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 3rem;
-    top: 2rem;
+    width: 30px;
+    height: 30px;
+    left: 1rem;
+    top: 6rem;
 `;
 
 const TitleInput = styled.input`
@@ -327,7 +365,7 @@ const TitleInput = styled.input`
 `;
 
 const SubTitleInput = styled.input`
-    width: 70%;
+    width: 67%;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
@@ -347,16 +385,6 @@ const InfoInput = styled.textarea`
 
 const ImageInput = styled.input`
     display: none;
-`;
-
-const DetailImage = styled.img`
-    border-radius: 8px;
-    width: 205px;
-    height: 400px;
-    z-index: 5;
-
-    margin-left: 0.01rem;
-    margin-right: 0.72rem;
 `;
 
 const DetailInfo = styled.div`

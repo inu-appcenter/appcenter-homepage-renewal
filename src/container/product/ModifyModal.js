@@ -5,14 +5,19 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { MODopen, MODclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
+import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
 
-export default function ModifyModal(id) {
+export default function ModifyModal(props) {
+    const { id } = props;
     const [data, setData] = useState([]);
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
+    const [appData, setAppData] = useState([]);
+    const [imageData, setImageData] = useState([]);
 
     const [upload, setUpload] = useState([]);
     const [uploadImage, setUploadImage] = useState([]);
+    const [detailImageData, setDetailImageData] = useState();
 
     // 입력받은 데이터를 저장
     const [updateProduct, setUpdateProduct] = useState({
@@ -21,8 +26,6 @@ export default function ModifyModal(id) {
         subTitle: '',
         androidStoreLink: '',
         appleStoreLink: '',
-        email: '',
-        gitRepositoryLink: '',
     });
 
     // 상태관리 관련
@@ -48,7 +51,7 @@ export default function ModifyModal(id) {
         try {
             // member_id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/introduction-board?id=${id}`,
+                `https://server.inuappcenter.kr/introduction-board?board_id=${id}`,
                 updatedData
             );
             console.log('Member with ID', id, 'has been updated.');
@@ -65,6 +68,42 @@ export default function ModifyModal(id) {
         MODclose();
     };
 
+    useEffect(() => {
+        console.log(id);
+        axios
+            .get(
+                `https://server.inuappcenter.kr/introduction-board/public/${id}`
+            )
+            .then((res) => {
+                setAppData(res.data);
+                const imageObject = res.data.images;
+                const firstKey = imageObject && Object.keys(imageObject)[0];
+                const firstValue = firstKey && imageObject[firstKey];
+                const secondKey = imageObject && Object.keys(imageObject)[1];
+                const secondValue = secondKey && imageObject[secondKey];
+                const thirdKey = imageObject && Object.keys(imageObject)[2];
+                const thirdValue = thirdKey && imageObject[thirdKey];
+                const fourthKey = imageObject && Object.keys(imageObject)[3];
+                const fourthValue = fourthKey && imageObject[fourthKey];
+
+                console.log(res.data);
+
+                setImageData([firstValue]);
+                setDetailImageData([secondValue, thirdValue, fourthValue]);
+            });
+    }, []);
+
+    const onClick = (index) => {
+        return () => {
+            const newShowImages = [...showImages];
+            const newUploadImage = [...uploadImage];
+            newShowImages.splice(index, 1);
+            newUploadImage.splice(index, 1);
+            setShowImages(newShowImages);
+            setUploadImage(newUploadImage);
+        };
+    };
+
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
         setUpload(e.target.files);
@@ -75,25 +114,24 @@ export default function ModifyModal(id) {
             setUploadImgUrl(reader.result);
         };
 
-        setShowImages(uploadImgUrl); // 이미지 미리보기
-
         setUpload('');
         console.log(uploadImgUrl);
     };
 
     const handleAddImages = (e) => {
         const imageLists = e.target.files;
+        console.log(imageLists);
         let imageUrlLists = [...showImages];
         let realImageLists = [...showImages];
 
         for (let i = 0; i < imageLists.length; i++) {
             const realImage = imageLists[i];
-            realImageLists.push(realImage);
+            realImageLists.shift(realImage);
         }
 
         for (let i = 0; i < imageLists.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageLists[i]);
-            imageUrlLists.push(currentImageUrl);
+            imageUrlLists.shift(currentImageUrl);
         }
         if (imageUrlLists.length > 3) {
             alert('이미지는 최대 3개까지만 등록 가능합니다.');
@@ -129,10 +167,15 @@ export default function ModifyModal(id) {
                             <AppImage src={uploadImgUrl} img='img' />
                         </figure>
                     )}
+                    {imageData && !uploadImgUrl && (
+                        <figure>
+                            <AppImage src={imageData[0]} img='img' />
+                        </figure>
+                    )}
                     <AppTitle>
                         <TitleInput
                             type='text'
-                            placeholder='앱 제목'
+                            value={appData.title}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -144,7 +187,7 @@ export default function ModifyModal(id) {
                     <AppDescription>
                         <SubTitleInput
                             type='text'
-                            placeholder='부 제목'
+                            value={appData.subTitle}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -156,7 +199,7 @@ export default function ModifyModal(id) {
                     <LinkBox>
                         <InstallBtn
                             type='text'
-                            placeholder='안드로이드'
+                            value={appData.androidStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -166,7 +209,7 @@ export default function ModifyModal(id) {
                         />
                         <InstallBtn
                             type='text'
-                            placeholder='iOS'
+                            value={appData.appleStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -178,7 +221,7 @@ export default function ModifyModal(id) {
                     <DetailInfo>
                         <InfoInput
                             type='text'
-                            placeholder='앱에 대한 자세한 설명..'
+                            value={appData.body}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -202,6 +245,16 @@ export default function ModifyModal(id) {
                         showImages.map((image, key) => (
                             <DetailImage src={image} />
                         ))}
+
+                    {detailImageData &&
+                        detailImageData.map((image, index) => (
+                            <ImageBox>
+                                <DetailImage src={image} />
+                                <DeleteBtn onClick={onClick(index)}>
+                                    <img src={DELETE} />
+                                </DeleteBtn>
+                            </ImageBox>
+                        ))}
                 </div>
                 <NavBar>
                     <Regisbutton
@@ -209,13 +262,26 @@ export default function ModifyModal(id) {
                             handleEdit();
                         }}
                     >
-                        등록
+                        수정
                     </Regisbutton>
                 </NavBar>
             </ModalContainer>
         </div>
     );
 }
+
+const ImageBox = styled.span`
+    position: relative;
+`;
+
+const DeleteBtn = styled.button`
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    border-radius: 15px;
+    left: 10.8rem;
+    z-index: 1;
+`;
 
 const NavBar = styled.div`
     position: absolute;
@@ -257,22 +323,22 @@ const Regisbutton = styled.button`
 
 const InstallBtn = styled.input`
     border: none;
-    width: 20%;
+    width: 27%;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
 
     & + & {
-        margin-left: 1.5rem;
+        margin-left: 1rem;
     }
 `;
 
 const PhotoImg = styled.img`
     position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 3rem;
-    top: 2rem;
+    width: 30px;
+    height: 30px;
+    left: 1rem;
+    top: 6rem;
 `;
 
 const TitleInput = styled.input`
@@ -283,7 +349,7 @@ const TitleInput = styled.input`
 `;
 
 const SubTitleInput = styled.input`
-    width: 70%;
+    width: 67%;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
