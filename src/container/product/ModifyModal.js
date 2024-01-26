@@ -12,9 +12,11 @@ export default function ModifyModal(props) {
     const [data, setData] = useState([]);
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
-    const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
+    const [photoIds, setPhotoids] = useState([]);
 
+    const [headKey, setHeadKeys] = useState([]);
+    const [belowKey, setBelowKeys] = useState([]);
     const [upload, setUpload] = useState([]);
     const [uploadImage, setUploadImage] = useState([]);
     const [detailImageData, setDetailImageData] = useState();
@@ -46,26 +48,38 @@ export default function ModifyModal(props) {
 
     const handleEdit = async () => {
         // 수정할 데이터를 가져옵니다.
-        const updatedData = {};
+        const formData = new FormData();
+        const newPhotoId = [...photoIds];
+
+        formData.append('title', updateProduct.title);
+        formData.append('subTitle', updateProduct.subTitle);
+        formData.append('androidStoreLink', updateProduct.androidStoreLink);
+        formData.append('appleStoreLink', updateProduct.appleStoreLink);
+        formData.append('body', updateProduct.body);
+
+        uploadImgUrl && formData.append('multipartFiles', imageData[0]);
+
+        uploadImgUrl && newPhotoId.push(headKey[0]);
+        const photoIdParam = newPhotoId.join(',');
 
         try {
-            // member_id를 사용하여 수정 요청을 보냅니다.
+            // id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/introduction-board?board_id=${id}`,
-                updatedData
+                `https://server.inuappcenter.kr/introduction-board/${photoIdParam}?board_id=${id}`,
+                formData
             );
             console.log('Member with ID', id, 'has been updated.');
             console.log(response);
             // 업데이트된 데이터를 data 상태에서 업데이트합니다.
             setData((prevData) =>
                 prevData.map((item) =>
-                    item.member_id === id ? { ...item, ...updatedData } : item
+                    item.id === id ? { ...item, ...formData } : item
                 )
             );
         } catch (error) {
             console.error('Error updating member:', error);
         }
-        MODclose();
+        dispatch(MODclose());
     };
 
     useEffect(() => {
@@ -75,7 +89,7 @@ export default function ModifyModal(props) {
                 `https://server.inuappcenter.kr/introduction-board/public/${id}`
             )
             .then((res) => {
-                setAppData(res.data);
+                setUpdateProduct(res.data);
                 const imageObject = res.data.images;
                 const firstKey = imageObject && Object.keys(imageObject)[0];
                 const firstValue = firstKey && imageObject[firstKey];
@@ -88,7 +102,14 @@ export default function ModifyModal(props) {
 
                 console.log(res.data);
 
+                // 썸네일 키
+                setHeadKeys([firstKey]);
+                // 디테일 키
+                setBelowKeys([secondKey, thirdKey, fourthKey]);
+
+                // 썸네일 이미지
                 setImageData([firstValue]);
+                // 디테일 이미지
                 setDetailImageData([secondValue, thirdValue, fourthValue]);
             });
     }, []);
@@ -96,7 +117,7 @@ export default function ModifyModal(props) {
     const onClick = (index) => {
         return () => {
             const newShowImages = [...showImages];
-            const newUploadImage = [...uploadImage];
+            const newUploadImage = [...detailImageData];
             newShowImages.splice(index, 1);
             newUploadImage.splice(index, 1);
             setShowImages(newShowImages);
@@ -106,32 +127,32 @@ export default function ModifyModal(props) {
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
-        setUpload(e.target.files);
+        setImageData(files);
+
         const uploadFile = files[0];
         const reader = new FileReader();
         reader.readAsDataURL(uploadFile);
         reader.onloadend = () => {
             setUploadImgUrl(reader.result);
         };
-
-        setUpload('');
-        console.log(uploadImgUrl);
     };
 
     const handleAddImages = (e) => {
         const imageLists = e.target.files;
         console.log(imageLists);
+        // 미리보기 이미지
         let imageUrlLists = [...showImages];
-        let realImageLists = [...showImages];
+        // 실제 이미지
+        let realImageLists = [...uploadImage];
 
         for (let i = 0; i < imageLists.length; i++) {
             const realImage = imageLists[i];
-            realImageLists.shift(realImage);
+            realImageLists.push(realImage);
         }
 
         for (let i = 0; i < imageLists.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageLists[i]);
-            imageUrlLists.shift(currentImageUrl);
+            imageUrlLists.push(currentImageUrl);
         }
         if (imageUrlLists.length > 3) {
             alert('이미지는 최대 3개까지만 등록 가능합니다.');
@@ -175,7 +196,7 @@ export default function ModifyModal(props) {
                     <AppTitle>
                         <TitleInput
                             type='text'
-                            value={appData.title}
+                            value={updateProduct.title}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -187,7 +208,7 @@ export default function ModifyModal(props) {
                     <AppDescription>
                         <SubTitleInput
                             type='text'
-                            value={appData.subTitle}
+                            value={updateProduct.subTitle}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -199,7 +220,7 @@ export default function ModifyModal(props) {
                     <LinkBox>
                         <InstallBtn
                             type='text'
-                            value={appData.androidStoreLink}
+                            value={updateProduct.androidStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -209,7 +230,7 @@ export default function ModifyModal(props) {
                         />
                         <InstallBtn
                             type='text'
-                            value={appData.appleStoreLink}
+                            value={updateProduct.appleStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -221,7 +242,7 @@ export default function ModifyModal(props) {
                     <DetailInfo>
                         <InfoInput
                             type='text'
-                            value={appData.body}
+                            value={updateProduct.body}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -241,11 +262,6 @@ export default function ModifyModal(props) {
                             onChange={handleAddImages}
                         />
                     </div>
-                    {showImages &&
-                        showImages.map((image, key) => (
-                            <DetailImage src={image} />
-                        ))}
-
                     {detailImageData &&
                         detailImageData.map((image, index) => (
                             <ImageBox>

@@ -98,7 +98,7 @@ export default function ProductPage() {
                 });
         };
         fetchData();
-    }, []);
+    }, [regisModalOpen, modifyModalOpen]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
