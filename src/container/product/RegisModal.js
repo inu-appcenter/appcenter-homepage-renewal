@@ -4,6 +4,7 @@ import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { RMopen, RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
 import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
 
@@ -12,8 +13,8 @@ export default function RegisModal() {
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
 
-    const [upload, setUpload] = useState();
-    const [uploadImage, setUploadImage] = useState();
+    const [upload, setUpload] = useState([]);
+    const [uploadImage, setUploadImage] = useState([]);
 
     // 입력받은 데이터를 저장
     const [newProduct, setNewProduct] = useState({
@@ -28,7 +29,7 @@ export default function RegisModal() {
     const dispatch = useDispatch();
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
 
-    const onClick = (index) => {
+    const deleteProduct = (index) => {
         return () => {
             const newShowImages = [...showImages];
             const newUploadImage = [...uploadImage];
@@ -53,10 +54,16 @@ export default function RegisModal() {
             formData.append('appleStoreLink', newProduct.appleStoreLink);
             formData.append('body', newProduct.body);
 
-            formData.append('multipartFiles', upload);
+            formData.append(
+                'multipartFiles',
+                new Blob([upload], { type: 'image/png' })
+            );
 
             uploadImage.forEach((image) => {
-                formData.append('multipartFiles', image);
+                formData.append(
+                    'multipartFiles',
+                    new Blob([image], { type: 'image/png' })
+                );
                 console.log(image);
             });
 
@@ -68,6 +75,17 @@ export default function RegisModal() {
 
             for (let value of formData.values()) {
                 console.log(value);
+            }
+
+            let imageSum = 0;
+            imageSum += upload.size;
+            for (const image of uploadImage) {
+                imageSum += image.size;
+            }
+
+            if (imageSum > 15 * 1024 * 1024) {
+                alert('이미지 용량이 15MB를 초과합니다.');
+                return;
             }
 
             const result = await axios.post(
@@ -135,7 +153,7 @@ export default function RegisModal() {
         const imageLists = e.target.files;
         console.log(e.target.files[0]);
         let imageUrlLists = [...showImages];
-        let realImageLists = [...showImages];
+        let realImageLists = [...uploadImage];
         console.log(realImageLists);
 
         for (let i = 0; i < imageLists.length; i++) {
@@ -255,7 +273,10 @@ export default function RegisModal() {
                         showImages.map((image, index) => (
                             <ImageBox>
                                 <DetailImage src={image} />
-                                <DeleteBtn onClick={onClick(index)}>
+                                <DeleteBtn
+                                    onClick={deleteProduct(index)}
+                                    regisModalOpen={regisModalOpen}
+                                >
                                     <img src={DELETE} />
                                 </DeleteBtn>
                             </ImageBox>
@@ -297,6 +318,8 @@ const DeleteBtn = styled.button`
     border-radius: 15px;
     left: 10.8rem;
     z-index: 1;
+
+    ${({ regisModalOpen }) => !regisModalOpen && `display: none`}
 `;
 
 const NavBar = styled.div`

@@ -5,19 +5,24 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { MODopen, MODclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
-import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
+import EDIT from '../../resource/img/product/edit_note_FILL0_wght400_GRAD0_opsz24.png';
+import { set } from 'lodash';
 
 export default function ModifyModal(props) {
     const { id } = props;
     const [data, setData] = useState([]);
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
-    const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
+    const [photoIds, setPhotoids] = useState([]);
+    const [isMod, setIsMod] = useState(false);
 
+    const [headKey, setHeadKeys] = useState([]);
+    const [belowKey, setBelowKeys] = useState([]);
     const [upload, setUpload] = useState([]);
     const [uploadImage, setUploadImage] = useState([]);
-    const [detailImageData, setDetailImageData] = useState();
+    const [detailImageData, setDetailImageData] = useState([]);
+    const [modifyImageData, setModifyImageData] = useState([]);
 
     // 입력받은 데이터를 저장
     const [updateProduct, setUpdateProduct] = useState({
@@ -44,28 +49,65 @@ export default function ModifyModal(props) {
         openScroll();
     };
 
+    // 특정 인덱스 요소만 변경
+    const updateElementAtIndex = (index, newValue) => {
+        setDetailImageData((prevArray) => {
+            // 이전 배열 복사
+            const newArray = [...prevArray];
+            // 특정 인덱스의 요소 변경
+            newArray[index] = newValue;
+            return newArray;
+        });
+    };
+
+    const updateURLElementAtIndex = (index, newValue) => {
+        setShowImages((prevArray) => {
+            // 이전 배열 복사
+            const newArray = [...prevArray];
+            // 특정 인덱스의 요소 변경
+            newArray[index] = newValue;
+            return newArray;
+        });
+    };
+
     const handleEdit = async () => {
         // 수정할 데이터를 가져옵니다.
-        const updatedData = {};
+        const formData = new FormData();
+        const newPhotoId = [...photoIds];
+
+        formData.append('title', updateProduct.title);
+        formData.append('subTitle', updateProduct.subTitle);
+        formData.append('androidStoreLink', updateProduct.androidStoreLink);
+        formData.append('appleStoreLink', updateProduct.appleStoreLink);
+        formData.append('body', updateProduct.body);
+
+        uploadImgUrl && formData.append('multipartFiles', imageData[0]);
+
+        isMod &&
+            modifyImageData.map((item) =>
+                formData.append('multipartFiles', item)
+            );
+
+        const photoIdParam = newPhotoId.join(',');
 
         try {
-            // member_id를 사용하여 수정 요청을 보냅니다.
+            // id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/introduction-board?board_id=${id}`,
-                updatedData
+                `https://server.inuappcenter.kr/introduction-board/${photoIdParam}?board_id=${id}`,
+                formData
             );
             console.log('Member with ID', id, 'has been updated.');
             console.log(response);
             // 업데이트된 데이터를 data 상태에서 업데이트합니다.
             setData((prevData) =>
                 prevData.map((item) =>
-                    item.member_id === id ? { ...item, ...updatedData } : item
+                    item.id === id ? { ...item, ...formData } : item
                 )
             );
         } catch (error) {
             console.error('Error updating member:', error);
         }
-        MODclose();
+        dispatch(MODclose());
     };
 
     useEffect(() => {
@@ -75,7 +117,7 @@ export default function ModifyModal(props) {
                 `https://server.inuappcenter.kr/introduction-board/public/${id}`
             )
             .then((res) => {
-                setAppData(res.data);
+                setUpdateProduct(res.data);
                 const imageObject = res.data.images;
                 const firstKey = imageObject && Object.keys(imageObject)[0];
                 const firstValue = firstKey && imageObject[firstKey];
@@ -86,9 +128,16 @@ export default function ModifyModal(props) {
                 const fourthKey = imageObject && Object.keys(imageObject)[3];
                 const fourthValue = fourthKey && imageObject[fourthKey];
 
-                console.log(res.data);
+                console.log(secondValue, thirdValue, fourthValue);
 
+                // 썸네일 키
+                setHeadKeys([firstKey]);
+                // 디테일 키
+                setBelowKeys([secondKey, thirdKey, fourthKey]);
+
+                // 썸네일 이미지
                 setImageData([firstValue]);
+                // 디테일 이미지
                 setDetailImageData([secondValue, thirdValue, fourthValue]);
             });
     }, []);
@@ -96,7 +145,7 @@ export default function ModifyModal(props) {
     const onClick = (index) => {
         return () => {
             const newShowImages = [...showImages];
-            const newUploadImage = [...uploadImage];
+            const newUploadImage = [...detailImageData];
             newShowImages.splice(index, 1);
             newUploadImage.splice(index, 1);
             setShowImages(newShowImages);
@@ -106,7 +155,10 @@ export default function ModifyModal(props) {
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
-        setUpload(e.target.files);
+        const modifyIds = [...photoIds];
+        setImageData(files);
+        modifyIds.push(headKey[0]);
+
         const uploadFile = files[0];
         const reader = new FileReader();
         reader.readAsDataURL(uploadFile);
@@ -114,33 +166,27 @@ export default function ModifyModal(props) {
             setUploadImgUrl(reader.result);
         };
 
-        setUpload('');
-        console.log(uploadImgUrl);
+        setPhotoids(modifyIds);
+        console.log(e.target);
     };
 
-    const handleAddImages = (e) => {
+    const handleAddImages = (index) => (e) => {
+        setIsMod(true);
         const imageLists = e.target.files;
+        const modifyList = [...modifyImageData];
+        const modifyIds = [...photoIds];
         console.log(imageLists);
-        let imageUrlLists = [...showImages];
-        let realImageLists = [...showImages];
 
-        for (let i = 0; i < imageLists.length; i++) {
-            const realImage = imageLists[i];
-            realImageLists.shift(realImage);
-        }
+        const realImage = imageLists[0];
+        modifyList.push(realImage);
+        modifyIds.push(belowKey[index]);
 
-        for (let i = 0; i < imageLists.length; i++) {
-            const currentImageUrl = URL.createObjectURL(imageLists[i]);
-            imageUrlLists.shift(currentImageUrl);
-        }
-        if (imageUrlLists.length > 3) {
-            alert('이미지는 최대 3개까지만 등록 가능합니다.');
-            return;
-        }
+        const currentImageUrl = URL.createObjectURL(imageLists[0]);
+        updateURLElementAtIndex(index, currentImageUrl);
 
-        setShowImages(imageUrlLists);
-        setUploadImage(realImageLists);
-        console.log(showImages);
+        setModifyImageData(modifyList);
+        setPhotoids(modifyIds);
+        console.log(modifyList);
     };
 
     return (
@@ -175,7 +221,7 @@ export default function ModifyModal(props) {
                     <AppTitle>
                         <TitleInput
                             type='text'
-                            value={appData.title}
+                            value={updateProduct.title}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -187,7 +233,7 @@ export default function ModifyModal(props) {
                     <AppDescription>
                         <SubTitleInput
                             type='text'
-                            value={appData.subTitle}
+                            value={updateProduct.subTitle}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -199,7 +245,7 @@ export default function ModifyModal(props) {
                     <LinkBox>
                         <InstallBtn
                             type='text'
-                            value={appData.androidStoreLink}
+                            value={updateProduct.androidStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -209,7 +255,7 @@ export default function ModifyModal(props) {
                         />
                         <InstallBtn
                             type='text'
-                            value={appData.appleStoreLink}
+                            value={updateProduct.appleStoreLink}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -221,7 +267,7 @@ export default function ModifyModal(props) {
                     <DetailInfo>
                         <InfoInput
                             type='text'
-                            value={appData.body}
+                            value={updateProduct.body}
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -230,31 +276,39 @@ export default function ModifyModal(props) {
                             }
                         />
                     </DetailInfo>
-                    <div>
-                        <label htmlFor='input_file'>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[0]} />
+                        <Imagelabel htmlFor='input_file1'>
                             <img src={IMAGE} />
-                        </label>
+                        </Imagelabel>
                         <ImageInput
                             type='file'
-                            multiple
-                            id='input_file'
-                            onChange={handleAddImages}
+                            id='input_file1'
+                            onChange={handleAddImages(0)}
                         />
-                    </div>
-                    {showImages &&
-                        showImages.map((image, key) => (
-                            <DetailImage src={image} />
-                        ))}
-
-                    {detailImageData &&
-                        detailImageData.map((image, index) => (
-                            <ImageBox>
-                                <DetailImage src={image} />
-                                <DeleteBtn onClick={onClick(index)}>
-                                    <img src={DELETE} />
-                                </DeleteBtn>
-                            </ImageBox>
-                        ))}
+                    </ImageBox>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[1]} />
+                        <Imagelabel htmlFor='input_file2'>
+                            <img src={IMAGE} />
+                        </Imagelabel>
+                        <ImageInput
+                            type='file'
+                            id='input_file2'
+                            onChange={handleAddImages(1)}
+                        />
+                    </ImageBox>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[2]} />
+                        <Imagelabel htmlFor='input_file3'>
+                            <img src={IMAGE} />
+                        </Imagelabel>
+                        <ImageInput
+                            type='file'
+                            id='input_file3'
+                            onChange={handleAddImages(2)}
+                        />
+                    </ImageBox>
                 </div>
                 <NavBar>
                     <Regisbutton
@@ -270,8 +324,10 @@ export default function ModifyModal(props) {
     );
 }
 
-const ImageBox = styled.span`
-    position: relative;
+const Imagelabel = styled.label`
+    position: absolute;
+    left: 11rem;
+    top: rem;
 `;
 
 const DeleteBtn = styled.button`
@@ -281,6 +337,10 @@ const DeleteBtn = styled.button`
     border-radius: 15px;
     left: 10.8rem;
     z-index: 1;
+`;
+
+const ImageBox = styled.span`
+    position: relative;
 `;
 
 const NavBar = styled.div`
