@@ -5,7 +5,8 @@ import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { MODopen, MODclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
-import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
+import EDIT from '../../resource/img/product/edit_note_FILL0_wght400_GRAD0_opsz24.png';
+import { set } from 'lodash';
 
 export default function ModifyModal(props) {
     const { id } = props;
@@ -14,12 +15,14 @@ export default function ModifyModal(props) {
     const [showImages, setShowImages] = useState([]);
     const [imageData, setImageData] = useState([]);
     const [photoIds, setPhotoids] = useState([]);
+    const [isMod, setIsMod] = useState(false);
 
     const [headKey, setHeadKeys] = useState([]);
     const [belowKey, setBelowKeys] = useState([]);
     const [upload, setUpload] = useState([]);
     const [uploadImage, setUploadImage] = useState([]);
-    const [detailImageData, setDetailImageData] = useState();
+    const [detailImageData, setDetailImageData] = useState([]);
+    const [modifyImageData, setModifyImageData] = useState([]);
 
     // 입력받은 데이터를 저장
     const [updateProduct, setUpdateProduct] = useState({
@@ -46,6 +49,27 @@ export default function ModifyModal(props) {
         openScroll();
     };
 
+    // 특정 인덱스 요소만 변경
+    const updateElementAtIndex = (index, newValue) => {
+        setDetailImageData((prevArray) => {
+            // 이전 배열 복사
+            const newArray = [...prevArray];
+            // 특정 인덱스의 요소 변경
+            newArray[index] = newValue;
+            return newArray;
+        });
+    };
+
+    const updateURLElementAtIndex = (index, newValue) => {
+        setShowImages((prevArray) => {
+            // 이전 배열 복사
+            const newArray = [...prevArray];
+            // 특정 인덱스의 요소 변경
+            newArray[index] = newValue;
+            return newArray;
+        });
+    };
+
     const handleEdit = async () => {
         // 수정할 데이터를 가져옵니다.
         const formData = new FormData();
@@ -59,7 +83,11 @@ export default function ModifyModal(props) {
 
         uploadImgUrl && formData.append('multipartFiles', imageData[0]);
 
-        uploadImgUrl && newPhotoId.push(headKey[0]);
+        isMod &&
+            modifyImageData.map((item) =>
+                formData.append('multipartFiles', item)
+            );
+
         const photoIdParam = newPhotoId.join(',');
 
         try {
@@ -100,7 +128,7 @@ export default function ModifyModal(props) {
                 const fourthKey = imageObject && Object.keys(imageObject)[3];
                 const fourthValue = fourthKey && imageObject[fourthKey];
 
-                console.log(res.data);
+                console.log(secondValue, thirdValue, fourthValue);
 
                 // 썸네일 키
                 setHeadKeys([firstKey]);
@@ -127,7 +155,9 @@ export default function ModifyModal(props) {
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
+        const modifyIds = [...photoIds];
         setImageData(files);
+        modifyIds.push(headKey[0]);
 
         const uploadFile = files[0];
         const reader = new FileReader();
@@ -135,33 +165,28 @@ export default function ModifyModal(props) {
         reader.onloadend = () => {
             setUploadImgUrl(reader.result);
         };
+
+        setPhotoids(modifyIds);
+        console.log(e.target);
     };
 
-    const handleAddImages = (e) => {
+    const handleAddImages = (index) => (e) => {
+        setIsMod(true);
         const imageLists = e.target.files;
+        const modifyList = [...modifyImageData];
+        const modifyIds = [...photoIds];
         console.log(imageLists);
-        // 미리보기 이미지
-        let imageUrlLists = [...showImages];
-        // 실제 이미지
-        let realImageLists = [...uploadImage];
 
-        for (let i = 0; i < imageLists.length; i++) {
-            const realImage = imageLists[i];
-            realImageLists.push(realImage);
-        }
+        const realImage = imageLists[0];
+        modifyList.push(realImage);
+        modifyIds.push(belowKey[index]);
 
-        for (let i = 0; i < imageLists.length; i++) {
-            const currentImageUrl = URL.createObjectURL(imageLists[i]);
-            imageUrlLists.push(currentImageUrl);
-        }
-        if (imageUrlLists.length > 3) {
-            alert('이미지는 최대 3개까지만 등록 가능합니다.');
-            return;
-        }
+        const currentImageUrl = URL.createObjectURL(imageLists[0]);
+        updateURLElementAtIndex(index, currentImageUrl);
 
-        setShowImages(imageUrlLists);
-        setUploadImage(realImageLists);
-        console.log(showImages);
+        setModifyImageData(modifyList);
+        setPhotoids(modifyIds);
+        console.log(modifyList);
     };
 
     return (
@@ -251,26 +276,39 @@ export default function ModifyModal(props) {
                             }
                         />
                     </DetailInfo>
-                    <div>
-                        <label htmlFor='input_file'>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[0]} />
+                        <Imagelabel htmlFor='input_file1'>
                             <img src={IMAGE} />
-                        </label>
+                        </Imagelabel>
                         <ImageInput
                             type='file'
-                            multiple
-                            id='input_file'
-                            onChange={handleAddImages}
+                            id='input_file1'
+                            onChange={handleAddImages(0)}
                         />
-                    </div>
-                    {detailImageData &&
-                        detailImageData.map((image, index) => (
-                            <ImageBox>
-                                <DetailImage src={image} />
-                                <DeleteBtn onClick={onClick(index)}>
-                                    <img src={DELETE} />
-                                </DeleteBtn>
-                            </ImageBox>
-                        ))}
+                    </ImageBox>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[1]} />
+                        <Imagelabel htmlFor='input_file2'>
+                            <img src={IMAGE} />
+                        </Imagelabel>
+                        <ImageInput
+                            type='file'
+                            id='input_file2'
+                            onChange={handleAddImages(1)}
+                        />
+                    </ImageBox>
+                    <ImageBox>
+                        <DetailImage src={detailImageData[2]} />
+                        <Imagelabel htmlFor='input_file3'>
+                            <img src={IMAGE} />
+                        </Imagelabel>
+                        <ImageInput
+                            type='file'
+                            id='input_file3'
+                            onChange={handleAddImages(2)}
+                        />
+                    </ImageBox>
                 </div>
                 <NavBar>
                     <Regisbutton
@@ -286,8 +324,10 @@ export default function ModifyModal(props) {
     );
 }
 
-const ImageBox = styled.span`
-    position: relative;
+const Imagelabel = styled.label`
+    position: absolute;
+    left: 11rem;
+    top: rem;
 `;
 
 const DeleteBtn = styled.button`
@@ -297,6 +337,10 @@ const DeleteBtn = styled.button`
     border-radius: 15px;
     left: 10.8rem;
     z-index: 1;
+`;
+
+const ImageBox = styled.span`
+    position: relative;
 `;
 
 const NavBar = styled.div`
