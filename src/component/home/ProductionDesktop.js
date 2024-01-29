@@ -7,6 +7,7 @@ import 'swiper/css/virtual';
 import { Button } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import CloseButton from '../../resource/img/product/close_button.png';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 
 export default function ProductionDesktop() {
@@ -79,10 +80,13 @@ export default function ProductionDesktop() {
         setItemId(id);
         setModalOpen(true);
         console.log(id);
+        // 모달이 오픈되어있을 때 스크롤 막아줌
+        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
         setModalOpen(false);
+        document.body.style.removeProperty('overflow');
     };
 
     return (
@@ -109,7 +113,7 @@ export default function ProductionDesktop() {
                                         modalOpen={modalOpen}
                                     >
                                         <figure>
-                                            <img
+                                            <ThumbNail
                                                 src={
                                                     item.images[
                                                         Object.keys(
@@ -145,8 +149,11 @@ export default function ProductionDesktop() {
                     contentLabel='Product Modal'
                 >
                     <div>
+                        <CloseImg src={CloseButton} onClick={closeModal} />
                         <figure>
-                            <AppImage src={imageData[0]} />
+                            {imageData[0] && (
+                                <AppImage src={imageData[0]} alt='' />
+                            )}
                         </figure>
                         <AppTitle>{appData.title}</AppTitle>
                         <AppDescription>{appData.subTitle}</AppDescription>
@@ -169,15 +176,47 @@ export default function ProductionDesktop() {
                             </InstallBtn>
                         )}
                         <DetailInfo>{appData.body}</DetailInfo>
-                        <DetailImage src={imageData[1]} />
-                        <DetailImage src={imageData[2]} />
-                        <DetailImage src={imageData[3]} />
+                        {imageData[1] && <DetailImage src={imageData[1]} />}
+                        {imageData[2] && <DetailImage src={imageData[2]} />}
+                        {imageData[3] && <DetailImage src={imageData[3]} />}
                     </div>
+                    <NavBar />
                 </ModalContainer>
             </div>
         </>
     );
 }
+
+const ThumbNail = styled.img`
+    border-radius: 12px;
+`;
+
+const CloseImg = styled.img`
+    position: absolute;
+    left: 40.5rem;
+    top: -0.6rem;
+    border: 1px solid black;
+    border-radius: 50%;
+
+    &: hover {
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+`;
+
+const NavBar = styled.div`
+    position: absolute;
+    display: flex;
+    width: 42rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    align-items: center;
+
+    top: 41.2rem;
+    left: -0.5rem;
+`;
 
 const ProductionLayout = styled.div`
     display: flex;
@@ -194,6 +233,12 @@ const ProductionLayout = styled.div`
     .swiper-slide {
         overflow: hidden;
     }
+
+    ${({ modalOpen }) =>
+        modalOpen &&
+        `   opacity: 0.01;
+            backdrop-filter: blur(5px);
+`}
 `;
 const StoreImageBox = styled.div`
     margin-top: 12px;
@@ -225,6 +270,7 @@ const TransparentAspectRatio = styled(AspectRatio)`
     ${({ modalOpen }) =>
         modalOpen &&
         `   opacity: 0.01;
+            backdrop-filter: blur(5px);
 `}
 `;
 
@@ -233,14 +279,14 @@ const DetailImage = styled.img`
     border-radius: 8px;
     left: 0.5rem;
     top: 16rem;
-    width: 200px;
+    width: 207px;
     height: 400px;
     opacity: 1;
     & + & {
-        left: 13.7rem;
+        left: 14rem;
     }
     & + & + & {
-        left: 27rem;
+        left: 27.5rem;
     }
 `;
 
@@ -260,7 +306,7 @@ const InstallBtn = styled.button`
     width: 6rem;
     height: 2rem;
     margin: 1rem 3.5rem 0 auto;
-    left: 32rem;
+    left: 33rem;
     top: 1.2rem;
 
     transition: 0.3s ease-in-out;
@@ -279,13 +325,12 @@ const ModalContainer = styled(Modal)`
     left: 50%;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    max-width: 620px;
     height: 250px;
     width: 100%;
-    position: relative;
     transform: translate(-50%, -50%);
-    z-index: 100;
+    z-index: 1;
 `;
 
 const AppImage = styled.img`

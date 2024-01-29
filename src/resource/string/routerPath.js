@@ -93,6 +93,10 @@ export const routerPath = {
                 url: 'server',
                 title: 'Server',
             },
+            web: {
+                url: 'web',
+                title: 'Web',
+            },
         },
     },
 };
@@ -116,4 +120,5 @@ export const AbsolutePath = {
     ios: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
     server: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
     design: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
+    web: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
 };

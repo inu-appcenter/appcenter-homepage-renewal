@@ -19,8 +19,6 @@ export default function ModifyModal(props) {
 
     const [headKey, setHeadKeys] = useState([]);
     const [belowKey, setBelowKeys] = useState([]);
-    const [upload, setUpload] = useState([]);
-    const [uploadImage, setUploadImage] = useState([]);
     const [detailImageData, setDetailImageData] = useState([]);
     const [modifyImageData, setModifyImageData] = useState([]);
 
@@ -49,17 +47,6 @@ export default function ModifyModal(props) {
         openScroll();
     };
 
-    // 특정 인덱스 요소만 변경
-    const updateElementAtIndex = (index, newValue) => {
-        setDetailImageData((prevArray) => {
-            // 이전 배열 복사
-            const newArray = [...prevArray];
-            // 특정 인덱스의 요소 변경
-            newArray[index] = newValue;
-            return newArray;
-        });
-    };
-
     const updateURLElementAtIndex = (index, newValue) => {
         setShowImages((prevArray) => {
             // 이전 배열 복사
@@ -84,11 +71,21 @@ export default function ModifyModal(props) {
         uploadImgUrl && formData.append('multipartFiles', imageData[0]);
 
         isMod &&
-            modifyImageData.map((item) =>
-                formData.append('multipartFiles', item)
-            );
+            modifyImageData.forEach((image) => {
+                formData.append('multipartFiles', image);
+            });
 
         const photoIdParam = newPhotoId.join(',');
+        console.log(modifyImageData);
+        console.log(photoIdParam);
+
+        for (let key of formData.keys()) {
+            console.log(key);
+        }
+
+        for (let value of formData.values()) {
+            console.log(value);
+        }
 
         try {
             // id를 사용하여 수정 요청을 보냅니다.
@@ -104,6 +101,8 @@ export default function ModifyModal(props) {
                     item.id === id ? { ...item, ...formData } : item
                 )
             );
+
+            setPhotoids([]);
         } catch (error) {
             console.error('Error updating member:', error);
         }
@@ -128,8 +127,6 @@ export default function ModifyModal(props) {
                 const fourthKey = imageObject && Object.keys(imageObject)[3];
                 const fourthValue = fourthKey && imageObject[fourthKey];
 
-                console.log(secondValue, thirdValue, fourthValue);
-
                 // 썸네일 키
                 setHeadKeys([firstKey]);
                 // 디테일 키
@@ -139,19 +136,9 @@ export default function ModifyModal(props) {
                 setImageData([firstValue]);
                 // 디테일 이미지
                 setDetailImageData([secondValue, thirdValue, fourthValue]);
+                setShowImages([secondValue, thirdValue, fourthValue]);
             });
     }, []);
-
-    const onClick = (index) => {
-        return () => {
-            const newShowImages = [...showImages];
-            const newUploadImage = [...detailImageData];
-            newShowImages.splice(index, 1);
-            newUploadImage.splice(index, 1);
-            setShowImages(newShowImages);
-            setUploadImage(newUploadImage);
-        };
-    };
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
@@ -198,26 +185,26 @@ export default function ModifyModal(props) {
             >
                 <div>
                     <div>
-                        <label htmlFor='input_img'>
+                        <Photolabel htmlFor='input_img'>
                             <PhotoImg src={IMAGE} />
-                        </label>
+                        </Photolabel>
                         <ImageInput
                             type='file'
                             id='input_img'
                             onChange={onchangeImageUpload}
                             uploadImgUrl={uploadImgUrl}
                         />
+                        {uploadImgUrl && (
+                            <figure>
+                                <AppImage src={uploadImgUrl} img='img' />
+                            </figure>
+                        )}
+                        {imageData && !uploadImgUrl && (
+                            <figure>
+                                <AppImage src={imageData[0]} img='img' />
+                            </figure>
+                        )}
                     </div>
-                    {uploadImgUrl && (
-                        <figure>
-                            <AppImage src={uploadImgUrl} img='img' />
-                        </figure>
-                    )}
-                    {imageData && !uploadImgUrl && (
-                        <figure>
-                            <AppImage src={imageData[0]} img='img' />
-                        </figure>
-                    )}
                     <AppTitle>
                         <TitleInput
                             type='text'
@@ -277,10 +264,10 @@ export default function ModifyModal(props) {
                         />
                     </DetailInfo>
                     <ImageBox>
-                        <DetailImage src={detailImageData[0]} />
                         <Imagelabel htmlFor='input_file1'>
                             <img src={IMAGE} />
                         </Imagelabel>
+                        <DetailImage src={showImages[0]} />
                         <ImageInput
                             type='file'
                             id='input_file1'
@@ -288,10 +275,10 @@ export default function ModifyModal(props) {
                         />
                     </ImageBox>
                     <ImageBox>
-                        <DetailImage src={detailImageData[1]} />
                         <Imagelabel htmlFor='input_file2'>
                             <img src={IMAGE} />
                         </Imagelabel>
+                        <DetailImage src={showImages[1]} />
                         <ImageInput
                             type='file'
                             id='input_file2'
@@ -299,10 +286,10 @@ export default function ModifyModal(props) {
                         />
                     </ImageBox>
                     <ImageBox>
-                        <DetailImage src={detailImageData[2]} />
                         <Imagelabel htmlFor='input_file3'>
                             <img src={IMAGE} />
                         </Imagelabel>
+                        <DetailImage src={showImages[2]} />
                         <ImageInput
                             type='file'
                             id='input_file3'
@@ -324,10 +311,47 @@ export default function ModifyModal(props) {
     );
 }
 
+const Photolabel = styled.label`
+    position: absolute;
+    height: 110px;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 8px;
+    left: 1.4rem;
+    top: -1.6rem;
+    opacity: 0.4;
+    z-index: 1;
+
+    &:hover {
+        transition: 0.2s ease-in;
+        opacity: 1;
+    }
+`;
+
+const PhotoImg = styled.img`
+    display: flex;
+    opacity: 1;
+    margin-left: auto;
+    z-index: 1;
+`;
+
 const Imagelabel = styled.label`
     position: absolute;
-    left: 11rem;
-    top: rem;
+    left: 11.1rem;
+    top: -24rem;
+    height: 24px;
+    z-index: 1;
+    opacity: 1;
+
+    &:hover {
+        transition: 0.2s ease-in;
+        opacity: 1;
+    }
+
+    &:hover + img {
+        transition: 0.2s ease-in;
+        opacity: 0.4;
+    }
 `;
 
 const DeleteBtn = styled.button`
@@ -352,7 +376,7 @@ const NavBar = styled.div`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     align-items: center;
 
-    top: 42.5rem;
+    top: 41rem;
     left: -1rem;
 `;
 
@@ -393,23 +417,17 @@ const InstallBtn = styled.input`
     }
 `;
 
-const PhotoImg = styled.img`
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 1rem;
-    top: 6rem;
-`;
-
 const TitleInput = styled.input`
-    width: 40%;
+    width: 67%;
+    height: 1.5rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
 `;
 
 const SubTitleInput = styled.input`
-    width: 67%;
+    width: 45%;
+    height: 0.8rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
@@ -433,9 +451,10 @@ const ImageInput = styled.input`
 
 const DetailImage = styled.img`
     border-radius: 8px;
-    width: 205px;
+    width: 202px;
     height: 400px;
     z-index: 5;
+    border: 1px solid black;
 
     margin-left: 0.01rem;
     margin-right: 0.72rem;
@@ -472,9 +491,11 @@ const AppImage = styled.img`
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 20px;
-
     top: -1.5rem;
     left: 1.5rem;
+    z-index: 0;
+
+    transition: opacity 0.3s ease-in-out;
 `;
 
 const AppTitle = styled.h2`

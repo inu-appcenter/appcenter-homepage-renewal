@@ -15,9 +15,11 @@ export default function AdminPage() {
                 password: '1q2w3e4r!Appcenter',
             })
             .then((res) => {
-                axios.defaults.headers.common['X-AUTH-TOKEN'] = res.data.token;
-            })
-            .then(setLogin(true));
+                const { token } = res.data;
+                axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
+
+                window.localStorage.setItem('token', token);
+            });
     };
 
     return (

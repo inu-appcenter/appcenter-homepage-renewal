@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
 import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
+import CloseButton from '../../resource/img/product/close_button.png';
 
 export default function RegisModal() {
     const [data, setData] = useState([]);
@@ -184,10 +185,11 @@ export default function RegisModal() {
                 contentLabel='Product Modal'
             >
                 <div>
+                    <CloseImg src={CloseButton} onClick={closeModal} />
                     <div>
-                        <label htmlFor='input_img'>
+                        <Photolabel htmlFor='input_img'>
                             <PhotoImg src={IMAGE} />
-                        </label>
+                        </Photolabel>
                         <ImageInput
                             type='file'
                             id='input_img'
@@ -281,6 +283,14 @@ export default function RegisModal() {
                                 </DeleteBtn>
                             </ImageBox>
                         ))}
+
+                    {showImages.length === 0 && (
+                        <ImageBox>
+                            <DetailImage />
+                            <DetailImage />
+                            <DetailImage />
+                        </ImageBox>
+                    )}
                 </div>
                 <NavBar>
                     <Regisbutton
@@ -296,6 +306,38 @@ export default function RegisModal() {
     );
 }
 
+const CloseImg = styled.img`
+    position: absolute;
+    left: 42.2rem;
+    top: -0.5rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    z-index: 1;
+
+    &: hover {
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+`;
+
+const Photolabel = styled.label`
+    position: absolute;
+    height: 110px;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 8px;
+    left: 1.4rem;
+    top: -1.6rem;
+    opacity: 0.4;
+    z-index: 1;
+
+    &:hover {
+        transition: 0.2s ease-in;
+        opacity: 1;
+    }
+`;
+
 const ImageBox = styled.span`
     position: relative;
 `;
@@ -303,7 +345,8 @@ const ImageBox = styled.span`
 const DetailImage = styled.img`
     position: relative;
     border-radius: 8px;
-    width: 205px;
+    border: 1px groove black;
+    width: 202px;
     height: 400px;
     z-index: 0;
 
@@ -373,22 +416,22 @@ const InstallBtn = styled.input`
 `;
 
 const PhotoImg = styled.img`
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 1rem;
-    top: 6rem;
+    display: flex;
+    margin-left: auto;
+    z-index: 0;
 `;
 
 const TitleInput = styled.input`
-    width: 40%;
+    width: 67%;
+    height: 1.5rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;
 `;
 
 const SubTitleInput = styled.input`
-    width: 67%;
+    width: 45%;
+    height: 0.8rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     border: 0.5px solid silver;

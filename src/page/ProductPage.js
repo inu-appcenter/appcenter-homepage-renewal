@@ -119,46 +119,6 @@ export default function ProductPage() {
         };
     }, []);
 
-    const handleEdit = async () => {
-        if (selectedProductId === null) {
-            return; // 선택된 항목이 없으면 무시
-        }
-
-        // 수정할 데이터를 가져옵니다.
-        const updatedData = {
-            name: editedName,
-            description: editedDescription,
-            profileImage: editedProfileImage,
-            blogLink: editedBlogLink,
-            email: editedEmail,
-            gitRepositoryLink: editedGitRepositoryLink,
-        };
-
-        try {
-            // id를 사용하여 수정 요청을 보냅니다.
-            const response = await axios.patch(
-                `https://server.inuappcenter.kr/members?id=${selectedProductId}`,
-                updatedData
-            );
-            console.log(
-                'Member with ID',
-                selectedProductId,
-                'has been updated.'
-            );
-            console.log(response);
-            // 업데이트된 데이터를 data 상태에서 업데이트합니다.
-            setData((prevData) =>
-                prevData.map((item) =>
-                    item.id === selectedProductId
-                        ? { ...item, ...updatedData }
-                        : item
-                )
-            );
-        } catch (error) {
-            console.error('Error updating member:', error);
-        }
-    };
-
     const handleDelete = async () => {
         if (selectedProductId === null) {
             return; // 선택된 항목이 없으면 무시
