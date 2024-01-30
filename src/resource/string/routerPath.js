@@ -29,9 +29,13 @@ export const routerPath = {
             },
         },
     },
-    product2: {
+    product: {
         url: 'product',
         title: 'Product',
+    },
+    login: {
+        url: 'login',
+        title: 'Login',
     },
     dashboard: {
         url: 'admin',
@@ -104,7 +108,8 @@ export const routerPath = {
 export const AbsolutePath = {
     home: `/${routerPath.home.url}`,
     qna: `/${routerPath.qna.url}`,
-    product2: `/${routerPath.product2.url}`,
+    product: `/${routerPath.product.url}`,
+    login: `/${routerPath.login.url}`,
     dashboard: `/${routerPath.dashboard.url}`,
     center: `/${routerPath.center.url}`,
     manage: `/${routerPath.center.url}/${routerPath.manage.url}`,

@@ -6,29 +6,13 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function AdminPage() {
-    const [login, setLogin] = useState(false);
-
-    const onClick = async () => {
-        const response = await axios
-            .post('https://server.inuappcenter.kr/sign/sign-in', {
-                id: 'appcenter',
-                password: '1q2w3e4r!Appcenter',
-            })
-            .then((res) => {
-                const { token } = res.data;
-                axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
-
-                window.localStorage.setItem('token', token);
-            });
-    };
-
     return (
         <>
             <NavBar>
-                <img src={logo} alt='logo' />
-                <button className='menu' onClick={onClick}>
-                    로그인
-                </button>
+                <LogoImg src={logo} alt='logo' />
+                <Link to='/../login'>
+                    <LoginBtn className='menu'>로그인</LoginBtn>
+                </Link>
             </NavBar>
             <IntroBox>
                 <Text type='title'>{'홈페이지 대시보드'}</Text>
@@ -62,6 +46,11 @@ export default function AdminPage() {
         </>
     );
 }
+const LogoImg = styled.img`
+    margin-right: auto;
+`;
+
+const LoginBtn = styled.button``;
 
 const MenuText = styled.div`
     text-align: left;

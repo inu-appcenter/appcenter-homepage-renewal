@@ -16,6 +16,7 @@ import ManageGenPage from './page/ManageGenPage';
 import ManageRolePage from './page/ManageRolePage';
 import ProductPage from './page/ProductPage';
 import QnAPage from './page/QnAPage';
+import LoginPage from './page/LoginPage';
 import Modal from 'react-modal';
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
                 element={<ManageGenPage />}
             />
             <Route path={routerPath.role.url} element={<ManageRolePage />} />
-            <Route path={routerPath.product2.url} element={<ProductPage />} />
+            <Route path={routerPath.product.url} element={<ProductPage />} />
+            <Route path={routerPath.login.url} element={<LoginPage />} />
         </Routes>
     );
 }

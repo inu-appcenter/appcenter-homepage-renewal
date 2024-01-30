@@ -2,11 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { MODopen, MODclose } from '../../modules/ProductSlice';
+import { MODclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
-import EDIT from '../../resource/img/product/edit_note_FILL0_wght400_GRAD0_opsz24.png';
-import { set } from 'lodash';
+import CloseButton from '../../resource/img/product/close_button.png';
 
 export default function ModifyModal(props) {
     const { id } = props;
@@ -184,16 +183,17 @@ export default function ModifyModal(props) {
                 contentLabel='Product Modal'
             >
                 <div>
+                    <CloseImg src={CloseButton} onClick={closeModal} />
                     <div>
-                        <Photolabel htmlFor='input_img'>
-                            <PhotoImg src={IMAGE} />
-                        </Photolabel>
                         <ImageInput
                             type='file'
                             id='input_img'
                             onChange={onchangeImageUpload}
                             uploadImgUrl={uploadImgUrl}
                         />
+                        <Photolabel htmlFor='input_img'>
+                            <PhotoImg src={IMAGE} />
+                        </Photolabel>
                         {uploadImgUrl && (
                             <figure>
                                 <AppImage src={uploadImgUrl} img='img' />
@@ -311,20 +311,35 @@ export default function ModifyModal(props) {
     );
 }
 
+const CloseImg = styled.img`
+    position: absolute;
+    left: 42.2rem;
+    top: -0.5rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    z-index: 1;
+
+    &: hover {
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+`;
+
 const Photolabel = styled.label`
     position: absolute;
     height: 110px;
     width: 110px;
-    border: 2px solid black;
+    border: 1.5px solid black;
     border-radius: 8px;
     left: 1.4rem;
     top: -1.6rem;
-    opacity: 0.4;
+    opacity: 1;
     z-index: 1;
 
-    &:hover {
+    &:hover + figure img {
         transition: 0.2s ease-in;
-        opacity: 1;
+        opacity: 0.4;
     }
 `;
 
@@ -354,15 +369,6 @@ const Imagelabel = styled.label`
     }
 `;
 
-const DeleteBtn = styled.button`
-    position: absolute;
-    border: none;
-    background-color: transparent;
-    border-radius: 15px;
-    left: 10.8rem;
-    z-index: 1;
-`;
-
 const ImageBox = styled.span`
     position: relative;
 `;
@@ -375,6 +381,7 @@ const NavBar = styled.div`
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     align-items: center;
+    background-color: white;
 
     top: 41rem;
     left: -1rem;
@@ -454,7 +461,7 @@ const DetailImage = styled.img`
     width: 202px;
     height: 400px;
     z-index: 5;
-    border: 1px solid black;
+    border: 1.5px solid black;
 
     margin-left: 0.01rem;
     margin-right: 0.72rem;
@@ -477,7 +484,6 @@ const ModalContainer = styled(Modal)`
     max-width: 650px;
     height: 250px;
     width: 100%;
-    position: relative;
     transform: translate(-50%, -50%);
     z-index: 100;
     background-color: rgba(255, 255, 255, 1);
