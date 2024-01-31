@@ -1,19 +1,14 @@
 import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
-import logo from '../resource/img/navbar_logo/logo_black.png';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import axios from 'axios';
+import InOut from '../component/common/InOut';
 
 export default function AdminPage() {
     return (
         <>
-            <NavBar>
-                <LogoImg src={logo} alt='logo' />
-                <Link to='/../login'>
-                    <LoginBtn className='menu'>로그인</LoginBtn>
-                </Link>
-            </NavBar>
+            <InOut />
             <IntroBox>
                 <Text type='title'>{'홈페이지 대시보드'}</Text>
                 <Text type='top'>{'환영합니다.'}</Text>
@@ -50,7 +45,15 @@ const LogoImg = styled.img`
     margin-right: auto;
 `;
 
-const LoginBtn = styled.button``;
+const LoginBtn = styled.button`
+    border: none;
+    background-color: transparent;
+    &:hover {
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        opacity: 0.5;
+    }
+`;
 
 const MenuText = styled.div`
     text-align: left;

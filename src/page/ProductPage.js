@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
 import RegisModal from '../container/product/RegisModal';
 import { RMopen, MODopen } from '../modules/ProductSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import ModifyModal from '../container/product/ModifyModal';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
@@ -147,16 +147,8 @@ export default function ProductPage() {
     };
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'앱 관리'}</Text>
-                <Text type='top'>
-                    {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
-                </Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[5]} />
             <MemberList>앱 목록</MemberList>
             <MemberTable>
                 {loading && <div>loading...</div>}
@@ -250,67 +242,6 @@ const PaginationContainer = styled.div`
     margin-top: 20px; /* 조정 가능한 마진 값 */
 `;
 
-const ModalContainer = styled(Modal)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 2px solid #5858fa;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
-const ModalTitle = styled.h2`
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-`;
-
-const ModalLabel = styled.label`
-    font-size: 1rem;
-    margin-bottom: 5px;
-`;
-
-const ModalInput = styled.input`
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-`;
-
-const ModalButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-`;
-
-const ModalButton = styled.button`
-    background-color: #5858fa;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-
-    & + & {
-        margin: 0 10px;
-    }
-
-    &:hover {
-        background-color: #8181f7;
-    }
-`;
-
 const MenuItem = styled.div`
     display: flex;
     align-items: center;
@@ -397,49 +328,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;

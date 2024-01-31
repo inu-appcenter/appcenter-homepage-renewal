@@ -28,6 +28,7 @@
     "react-router-dom": "^6.6.2",
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
     "shx": "^0.3.4",
     "styled-components": "^5.3.6",
     "swiper": "^9.0.1",

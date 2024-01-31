@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
 
 export default function ManageGenPage() {
     const [data, setData] = useState([]);
@@ -182,16 +183,8 @@ export default function ManageGenPage() {
 
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'기수 관리'}</Text>
-                <Text type='top'>
-                    {'기수에 역할과 동아리원을 추가, 삭제, 수정을 할 수 있어요'}
-                </Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
             <MemberTable>
                 <tbody>
@@ -524,49 +517,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;

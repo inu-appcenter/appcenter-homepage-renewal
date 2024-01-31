@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
 import logo from '../resource/img/navbar_logo/logo_black.png';
+import InOut from '../component/common/InOut';
 
 export default function DetailPage() {
     const [data, setData] = useState([]);
@@ -208,10 +209,7 @@ export default function DetailPage() {
     };
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
+            <InOut />
             <IntroBox>
                 <Text type='title'>{'동아리원 관리'}</Text>
                 <Text type='top'>

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Login() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+    const dispatch = useDispatch();
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -34,6 +38,10 @@ export default function Login() {
 
                 window.localStorage.setItem('token', token);
                 navigate('/admin');
+                dispatch({
+                    type: 'login/setLogin',
+                    payload: { isLoggedIn: true },
+                });
             })
             .catch((err) => {
                 alert('아이디 또는 비밀번호가 틀렸습니다.');

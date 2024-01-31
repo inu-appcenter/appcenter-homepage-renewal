@@ -1,31 +1,11 @@
 import styled, { css } from 'styled-components';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import logo from '../resource/img/navbar_logo/logo_black.png';
-import { useState } from 'react';
+import InOut from '../component/common/InOut';
 
 export default function AdminPage() {
-    const [login, setLogin] = useState(false);
-
-    const onClick = async () => {
-        const response = await axios
-            .post('https://server.inuappcenter.kr/sign/sign-in', {
-                id: 'appcenter',
-                password: '1q2w3e4r!Appcenter',
-            })
-            .then((res) => {
-                axios.defaults.headers.common['X-AUTH-TOKEN'] = res.data.token;
-            })
-            .then(setLogin(true));
-    };
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <button className='menu' onClick={onClick}>
-                    로그인
-                </button>
-            </NavBar>
+            <InOut />
             <IntroBox>
                 <Text type='title'>{'앱센터 동아리원 관리'}</Text>
                 <Text type='top'>
@@ -106,23 +86,6 @@ const InfoBox = styled.div`
 
     &:hover {
         background-color: #bdbdbd;
-    }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-        border: none;
-        background-color: #fff;
-        size: 1.5rem;
     }
 `;
 
