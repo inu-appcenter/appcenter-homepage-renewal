@@ -1,28 +1,27 @@
 import { MENU } from '../../../constants/menu.ts';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { PartParam } from '../../../types/common.ts';
+import { Link, useLocation } from 'react-router-dom';
 
 const Nav = () => {
   const { pathname, hash } = useLocation();
-  const { part } = useParams<PartParam>();
 
   const isChildrenActive = (path: string) => {
-    return pathname.replace('/' + part ?? '', '') === path;
+    return path.split('/').at(1) === pathname.split('/').at(1);
   };
+
   return (
-    <ul className='bg-primary-700'>
+    <ul className='flex justify-between'>
       {MENU.map(({ path, label, children }) => (
         <li
           key={path}
-          className={`${isChildrenActive(path) || pathname === path ? 'text-secondary-300' : 'text-white'} font-semibold`}
+          className={`relative group ${isChildrenActive(path) || pathname === path ? 'text-secondary-300' : 'text-white'} text-xl font-semibold`}
         >
           <Link to={path}>{label}</Link>
           {children && (
-            <ul>
+            <ul className='absolute top-full left-1/2 transform -translate-x-1/2 p-4 rounded-2xl bg-primary-700 hidden group-hover:flex flex-col gap-y-3 flex-1'>
               {children.map(({ path, label }) => (
                 <li
                   key={path}
-                  className={`${pathname + hash === path ? 'text-secondary-300' : 'text-white'} font-semibold`}
+                  className={`text-center w-24 ${pathname + hash === path ? 'text-secondary-300' : 'text-white'} font-semibold`}
                 >
                   <Link to={path}>{label}</Link>
                 </li>
