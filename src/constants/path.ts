@@ -1,8 +1,8 @@
-import {Part} from "../types/common.ts";
+import {Part, Section} from "../types/common.ts";
 
 export const PATH = {
     ROOT: '/',
-    HOME: '/home',
+    HOME:(section?:Section)=> `/home#${section ?? ''}`,
     TEAM:(part?:Part)=> `/team/${part ?? ':part'}`,
     JOIN: '/join',
     FAQ: '/faq',

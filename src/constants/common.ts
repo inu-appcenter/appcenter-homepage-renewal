@@ -2,26 +2,44 @@ export const PART = {
     android: {
         id:'android',
         value: 'android',
-        text: 'Android',
+        label: 'Android',
     },
     design: {
         id:'design',
         value: 'design',
-        text: 'Design',
+        label: 'Design',
     },
     ios: {
         id:'ios',
         value: 'ios',
-        text: 'iOS',
+        label: 'iOS',
     },
     server: {
         id:'server',
         value: 'server',
-        text: 'Server',
+        label: 'Server',
     },
     web:{
         id:'web',
         value: 'web',
-        text: 'Web',
+        label: 'Web',
     }
-}
+} as const;
+
+export const SECTION = {
+    about: {
+        id:'about',
+        value: 'about',
+        label: 'About Us',
+    },
+    team: {
+        id:'team',
+        value: 'team',
+        label: 'Our Team',
+    },
+    product:{
+        id:'product',
+        value: 'product',
+        label: 'Product'
+    }
+} as const;
