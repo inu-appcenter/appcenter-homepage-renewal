@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { socialLink } from '../../resource/string/socialLink';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
@@ -23,6 +24,14 @@ export default function Footer() {
                         alt='카카오톡 플러스친구 @인천대앱센터'
                     />
                 </a>
+                <Link to='../admin'>
+                    <a>
+                        <img
+                            src={socialLink.admin.icon}
+                            alt='인천대앱센터 관리자 페이지'
+                        />
+                    </a>
+                </Link>
             </SocialIcons>
             <Copyright>© 2023 INU Appcenter. All rights reserved.</Copyright>
         </FooterWrapper>

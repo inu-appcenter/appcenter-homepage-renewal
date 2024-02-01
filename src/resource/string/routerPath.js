@@ -29,6 +29,42 @@ export const routerPath = {
             },
         },
     },
+    product: {
+        url: 'product',
+        title: 'Product',
+    },
+    login: {
+        url: 'login',
+        title: 'Login',
+    },
+    dashboard: {
+        url: 'admin',
+        title: 'Admin',
+    },
+    detail: {
+        url: 'detail',
+        title: 'Detail',
+    },
+    manage: {
+        url: 'manage',
+        title: 'Manage',
+    },
+    generation: {
+        url: 'generation',
+        title: 'Generation',
+    },
+    role: {
+        url: 'role',
+        title: 'Role',
+    },
+    center: {
+        url: 'center',
+        title: 'Center',
+    },
+    qna: {
+        url: 'qna',
+        title: 'QnA',
+    },
     join: {
         url: 'join',
         title: 'Join Us',
@@ -61,12 +97,25 @@ export const routerPath = {
                 url: 'server',
                 title: 'Server',
             },
+            web: {
+                url: 'web',
+                title: 'Web',
+            },
         },
     },
 };
 
 export const AbsolutePath = {
     home: `/${routerPath.home.url}`,
+    qna: `/${routerPath.qna.url}`,
+    product: `/${routerPath.product.url}`,
+    login: `/${routerPath.login.url}`,
+    dashboard: `/${routerPath.dashboard.url}`,
+    center: `/${routerPath.center.url}`,
+    manage: `/${routerPath.center.url}/${routerPath.manage.url}`,
+    detail: `/${routerPath.detail.url}`,
+    generation: `/${routerPath.generation.url}`,
+    role: `/${routerPath.role.url}`,
     ourTeam: `/${routerPath.ourTeam.url}`,
     join: `/${routerPath.join.url}`,
     faq: `/${routerPath.faq.url}`,
@@ -76,4 +125,5 @@ export const AbsolutePath = {
     ios: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.ios.url}`,
     server: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.server.url}`,
     design: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.design.url}`,
+    web: `/${routerPath.faqDetail.url}/${routerPath.faqDetail.child.web.url}`,
 };

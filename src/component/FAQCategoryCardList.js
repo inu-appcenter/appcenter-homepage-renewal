@@ -32,10 +32,11 @@ const CardWrap = styled.div`
     }
 `;
 
+// partname을 Web으로 바꾸면 원래대로
 const Card = styled(Link)`
     display: grid;
     background-color: ${(props) =>
-        props.partname !== 'Web'
+        props.partname !== 'dominion'
             ? props.theme.color.primaryLight
             : 'rgba(128,128,128,0.4)'};
     border-radius: 30px;
@@ -58,12 +59,13 @@ const Card = styled(Link)`
     }
 `;
 
+// partname을 Web으로 바꾸면 원래대로
 const TitleText = styled.p`
     justify-self: flex-start;
     padding: 8px 16px;
     margin: 0;
     color: ${(props) =>
-        props.partname !== 'Web'
+        props.partname !== 'dominion'
             ? props.theme.color.primary
             : 'rgba(128,128,128,0.8)'};
     font-weight: 700;
@@ -71,17 +73,19 @@ const TitleText = styled.p`
     background: ${(props) => props.theme.color.white};
 `;
 
+// partname을 Web으로 바꾸면 원래대로
 const QuestionText = styled.p`
     justify-self: center;
     margin: 0;
-    color: ${(props) => (props.partname !== 'Web' ? 'black' : '#898989')};
+    color: ${(props) => (props.partname !== 'dominion' ? 'black' : '#898989')};
     font-weight: 600;
 `;
 
+// partname을 Web으로 바꾸면 원래대로
 const PlusButton = styled.button`
     justify-self: flex-end;
     color: ${(props) =>
-        props.partname !== 'Web'
+        props.partname !== 'dominion'
             ? props.theme.color.primary
             : 'rgba(128,128,128,0.8)'};
     font-weight: 700;

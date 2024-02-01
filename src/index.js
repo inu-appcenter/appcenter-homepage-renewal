@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { useEffect } from 'react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StyledEngineProvider } from '@mui/material';
@@ -12,6 +13,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import { dataApi } from './apis/dataApi';
 import logger from 'redux-logger';
 import rootReducer from './modules/rootReducer';
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://server.inuappcenter.kr/";
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

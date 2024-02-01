@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import axios from 'axios';
 import { partInfo } from '../../resource/string/partInfo';
-import faqList from '../../resource/data/faqList';
 import { PageTitle } from '../../component/common/PageTitle';
 
 export function FAQDetailListContainer() {
@@ -10,6 +10,29 @@ export function FAQDetailListContainer() {
     const [pageInfo, setPageInfo] = useState(
         partInfo.find((v) => location.pathname === v.fullUrl)
     );
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const viewData = await axios
+                .get(
+                    'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
+                )
+                .then((res) => {
+                    setData(
+                        res.data.filter(
+                            (item) => item.part === pageInfo.partName
+                        )
+                    );
+                    console.log(
+                        res.data.filter(
+                            (item) => item.part === pageInfo.partName
+                        )
+                    );
+                });
+        };
+        fetchData();
+    }, [location]);
 
     useEffect(() => {
         setPageInfo(partInfo.find((v) => location.pathname === v.fullUrl));
@@ -21,12 +44,13 @@ export function FAQDetailListContainer() {
                 <PageTitle title={pageInfo.partName} />
             </TitleWrapper>
             <FAQDetailListBox>
-                {faqList[pageInfo.partName].map((item, index) => (
-                    <FAQDetailListItem key={index}>
-                        <p className='question'>{item.question}</p>
-                        <p className='answer'>{item.answer}</p>
-                    </FAQDetailListItem>
-                ))}
+                {data &&
+                    data.map((item, index) => (
+                        <FAQDetailListItem key={index}>
+                            <p className='question'>{item.question}</p>
+                            <p className='answer'>{item.answer}</p>
+                        </FAQDetailListItem>
+                    ))}
             </FAQDetailListBox>
         </>
     );
