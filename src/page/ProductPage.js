@@ -239,7 +239,7 @@ const AppImage = styled.img`
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* 조정 가능한 마진 값 */
+    margin-top: 20px;
 `;
 
 const MenuItem = styled.div`

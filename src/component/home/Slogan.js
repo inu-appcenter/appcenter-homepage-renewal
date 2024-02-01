@@ -44,7 +44,7 @@ const Text = styled.div`
     margin-bottom: ${viewWidthCalc(24)};
     white-space: pre-line;
     word-break: keep-all;
-    ${(props) =>
+    ${(props =
         props.type === 'title'
             ? css`
                   font-size: ${(props) =>
@@ -85,5 +85,5 @@ const Text = styled.div`
                       font-size: ${(props) =>
                           props.theme.fontSize.mobile.caption};
                   }
-              `}
+              `)}
 `;

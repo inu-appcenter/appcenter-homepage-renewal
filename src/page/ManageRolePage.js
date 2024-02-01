@@ -275,29 +275,6 @@ export default function ManageRolePage() {
     );
 }
 
-const AddBox = styled.div`
-    display: flex;
-    font-size: 13px;
-    margin: 0 auto;
-
-    width: 340px;
-    height: 40px;
-
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-`;
-
-const AddInfo = styled.div`
-    padding-right: 4.5rem;
-    padding-left: 5rem;
-
-    :nth-child(2) {
-        padding-left: 4rem;
-    }
-`;
-
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;

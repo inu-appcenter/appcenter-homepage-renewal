@@ -20,11 +20,6 @@ export default function Login() {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your login logic here
-    };
-
     // id : 'appcenter', pw : '1q2w3e4r!Appcenter'
     const onClick = async () => {
         const response = await axios

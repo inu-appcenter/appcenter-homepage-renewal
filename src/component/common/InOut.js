@@ -11,7 +11,7 @@ export default function InOut() {
     const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
     const dispatch = useDispatch();
 
-    // 로그인 여부 확인
+    // 로그인 여부 확인. 로컬 스토리지에 키가 있으면 로그인 상태로 설정
     useEffect(() => {
         const storedToken = window.localStorage.getItem('token');
 
@@ -33,6 +33,12 @@ export default function InOut() {
 
         alert('로그아웃 되었습니다.');
     };
+
+    // 프로젝트 종료시 로그아웃
+    window.addEventListener('beforeunload', function (e) {
+        onLogout();
+    });
+
     return (
         <NavBar>
             <LogoImg src={logo} alt='logo' />
