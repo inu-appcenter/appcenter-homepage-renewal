@@ -1,63 +1,28 @@
 {
-  "name": "appcenter-homepage-renewal",
-  "version": "0.1.0",
+  "name": "inu-appcenter-home",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/joy": "^5.0.0-alpha.66",
-    "@mui/material": "^5.11.4",
-    "@reduxjs/toolkit": "^1.9.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "dayjs": "^1.11.7",
-    "gh-pages": "^5.0.0",
-    "google-map-react": "^2.2.0",
-    "qs": "^6.11.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-horizontal-scrolling-menu": "^3.2.3",
-    "react-redux": "^8.0.5",
-    "react-router-dom": "^6.6.2",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.1",
-    "shx": "^0.3.4",
-    "styled-components": "^5.3.6",
-    "swiper": "^9.0.1",
-    "uuid": "^9.0.0",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "shx cp build/index.html build/404.html && gh-pages -d build",
-    "predeploy": "npm run build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "homepage": "http://home.inuappcenter.kr/",
   "devDependencies": {
-    "prettier": "^2.8.8",
-    "redux-logger": "^3.0.6"
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
   }
 }
