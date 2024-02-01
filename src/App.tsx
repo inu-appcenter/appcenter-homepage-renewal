@@ -1,4 +1,5 @@
 import AppRouter from "./router/AppRouter.tsx";
+import './index.css'
 
 function App() {
 
