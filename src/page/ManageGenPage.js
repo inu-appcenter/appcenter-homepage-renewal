@@ -6,17 +6,18 @@ import Pagination from '../component/manage/Pagenation';
 import InOut from '../component/common/InOut';
 import IntroBox from '../component/admin/IntroBox';
 import { introInfo } from '../resource/data/adminInfo';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import GenRegis from '../container/product/GenRegis';
 
 export default function ManageGenPage() {
     const [data, setData] = useState([]);
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newRole, setNewRole] = useState({
-        role_id: '',
-        member_id: '',
-        part: '',
-        year: 15,
-    });
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const dispatch = useDispatch();
+
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -70,27 +71,14 @@ export default function ManageGenPage() {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                `https://server.inuappcenter.kr/groups?member_id=${newRole.member_id}&role_id=${newRole.role_id}`,
-                newRole
-            );
-            console.log('Success:', result.data);
-
-            // POST 요청 성공 시, 새로운 역할을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
-
-            setNewRole({
-                role_id: '',
-                member_id: '',
-                part: '',
-                year: 16,
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -103,7 +91,7 @@ export default function ManageGenPage() {
                 });
         };
         fetchData();
-    }, []);
+    }, [regisModalOpen, data.length]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -237,44 +225,15 @@ export default function ManageGenPage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
-            <Addtitle>편성 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='동아리원_id'
-                    value={newRole.member_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, member_id: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='역할_id'
-                    value={newRole.role_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, role_id: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='파트명'
-                    value={newRole.part}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, part: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='number'
-                    placeholder='기수'
-                    value={newRole.year}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, year: e.target.value })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
+
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -288,7 +247,7 @@ export default function ManageGenPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-
+            {regisModalOpen && <GenRegis regisModalOpen={regisModalOpen} />}
             {/* 수정 팝업 모달 */}
             <ModalContainer
                 isOpen={isEditModalOpen}
@@ -412,13 +371,15 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: grey;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 2rem -3.5rem 0 auto;
+    margin-left: 37rem;
+    margin-top: 0.6rem;
 
     &:hover {
         transition: 0.1s ease-in;

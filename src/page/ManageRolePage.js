@@ -6,16 +6,18 @@ import Pagination from '../component/manage/Pagenation';
 import InOut from '../component/common/InOut';
 import IntroBox from '../component/admin/IntroBox';
 import { introInfo } from '../resource/data/adminInfo';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import RoleRegis from '../container/product/RoleRegis';
 
 export default function ManageRolePage() {
     const [data, setData] = useState([]);
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newRole, setNewRole] = useState({
-        roleId: '',
-        roleName: '',
-        description: '',
-    });
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const dispatch = useDispatch();
+
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -67,26 +69,14 @@ export default function ManageRolePage() {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                'https://server.inuappcenter.kr/roles',
-                newRole
-            );
-            console.log('Success:', result.data);
-
-            // POST 요청 성공 시, 새로운 역할을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
-
-            setNewRole({
-                roleId: '',
-                roleName: '',
-                description: '',
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,7 +88,7 @@ export default function ManageRolePage() {
                 });
         };
         fetchData();
-    }, [data.length, isEditModalOpen]);
+    }, [data.length, isEditModalOpen, regisModalOpen]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -211,28 +201,15 @@ export default function ManageRolePage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
-            <Addtitle>역할 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='역할'
-                    value={newRole.roleName}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, roleName: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='설명'
-                    value={newRole.description}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, description: e.target.value })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
+            {regisModalOpen && <RoleRegis regisModalOpen={regisModalOpen} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -288,9 +265,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    border: 2px solid grey;
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -309,7 +286,7 @@ const ModalLabel = styled.label`
 `;
 
 const ModalInput = styled.input`
-    width: 100%;
+    width: 70%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -324,7 +301,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: grey;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -371,16 +348,15 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: grey;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 1rem 0 0 auto;
-    position: absolute;
-    left: 29rem;
-    top: 2rem;
+    margin-left: 37rem;
+    margin-top: 0.6rem;
 
     &:hover {
         transition: 0.1s ease-in;

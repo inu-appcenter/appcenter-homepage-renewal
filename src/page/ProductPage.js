@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Pagination from '../component/manage/Pagenation';
-import RegisModal from '../container/product/RegisModal';
 import { RMopen, MODopen } from '../modules/ProductSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
@@ -10,6 +9,7 @@ import ModifyModal from '../container/product/ModifyModal';
 import InOut from '../component/common/InOut';
 import IntroBox from '../component/admin/IntroBox';
 import { introInfo } from '../resource/data/adminInfo';
+import ProductRegis from '../container/product/ProductRegis';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
@@ -201,7 +201,7 @@ export default function ProductPage() {
                     등록
                 </Regisbutton>
             </PaginationContainer>
-            {regisModalOpen && <RegisModal regisModalOpen={regisModalOpen} />}
+            {regisModalOpen && <ProductRegis regisModalOpen={regisModalOpen} />}
             {modifyModalOpen && <ModifyModal id={productId} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (

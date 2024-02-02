@@ -9,7 +9,7 @@ import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.p
 import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
 import CloseButton from '../../resource/img/product/close_button.png';
 
-export default function RegisModal() {
+export default function ProductRegis() {
     const [data, setData] = useState([]);
     const [uploadImgUrl, setUploadImgUrl] = useState('');
     const [showImages, setShowImages] = useState([]);
