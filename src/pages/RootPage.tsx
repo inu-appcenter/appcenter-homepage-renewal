@@ -1,15 +1,15 @@
-import {Outlet} from "react-router-dom";
-import HomeHeader from "../components/common/header/HomeHeader.tsx";
+import { Outlet } from 'react-router-dom';
+import CommonHeader from '../components/common/header/CommonHeader.tsx';
 
 const RootPage = () => {
-    return(
-        <>
-            <HomeHeader/>
-            <main>
-                <Outlet/>
-            </main>
-        </>
-    )
-}
+  return (
+    <>
+      <CommonHeader />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
+};
 
 export default RootPage;

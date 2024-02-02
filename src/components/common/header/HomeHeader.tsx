@@ -1,9 +1,9 @@
-import Nav from './Nav.tsx';
+import CommonHeader from './CommonHeader.tsx';
 
 const HomeHeader = () => {
   return (
-    <div className='py-11 px-48 bg-primary-700'>
-      <Nav />
+    <div>
+      <CommonHeader />
     </div>
   );
 };
