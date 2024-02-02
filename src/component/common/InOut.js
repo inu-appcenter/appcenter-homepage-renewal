@@ -13,7 +13,7 @@ export default function InOut() {
 
     // 로그인 여부 확인. 로컬 스토리지에 키가 있으면 로그인 상태로 설정
     useEffect(() => {
-        const storedToken = window.localStorage.getItem('token');
+        const storedToken = window.sessionStorage.getItem('token');
 
         if (storedToken) {
             axios.defaults.headers.common['X-AUTH-TOKEN'] = storedToken;
@@ -25,19 +25,14 @@ export default function InOut() {
     }, []);
 
     const onLogout = () => {
-        window.localStorage.removeItem('token');
+        window.sessionStorage.removeItem('token');
         dispatch({
             type: 'login/setLogin',
             payload: { isLoggedIn: false },
         });
-
+        window.location.reload();
         alert('로그아웃 되었습니다.');
     };
-
-    // 프로젝트 종료시 로그아웃
-    window.addEventListener('beforeunload', function (e) {
-        onLogout();
-    });
 
     return (
         <NavBar>
