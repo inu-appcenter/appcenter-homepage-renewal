@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import CommonHeader from '../components/common/header/CommonHeader.tsx';
+import Header from '../components/common/header/Header.tsx';
 
 const RootPage = () => {
   return (
     <>
-      <CommonHeader />
+      <Header />
       <main>
         <Outlet />
       </main>
