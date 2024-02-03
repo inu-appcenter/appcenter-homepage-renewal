@@ -45,13 +45,13 @@ export const interviewAnswer = [
 const Interview = () => {
   return (
     <div className='flex flex-col justify-center h-svh'>
-      <div className='flex gap-20'>
-        <h2 className='pl-8 text-primary-700 font-semibold text-4xl before:content-["Q."] before:relative -indent-8'>
+      <div className='flex gap-16'>
+        <h2 className='mt-8 pl-8 text-primary-700 font-semibold text-4xl before:content-["Q."] before:relative -indent-8'>
           앱센터 활동을 하면서 <br />
           어떤 점이 좋았나요?
         </h2>
         <Swiper
-          className='w-2/4'
+          className='w-1/2'
           effect='cards'
           pagination={{
             clickable: true,
@@ -66,7 +66,7 @@ const Interview = () => {
           {interviewAnswer.map((item) => (
             <SwiperSlide
               key={item.key}
-              className='flex flex-col gap-y-2 p-10 rounded-4xl bg-primary-200'
+              className='flex flex-col gap-y-2 p-10 h-fit rounded-4xl bg-primary-200'
             >
               <p className='font-medium'>{item.answer}</p>
               <p className='text-sm font-semibold text-primary-700'>

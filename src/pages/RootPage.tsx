@@ -5,7 +5,7 @@ const RootPage = () => {
   return (
     <>
       <Header />
-      <main className='max-w-screen-lg mx-auto'>
+      <main className='max-w-screen-xl mx-auto'>
         <Outlet />
       </main>
     </>
