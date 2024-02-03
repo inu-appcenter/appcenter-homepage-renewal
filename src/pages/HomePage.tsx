@@ -1,4 +1,4 @@
-import AboutUsSection from '../components/home/AboutUsSection.tsx';
+import AboutUsSection from '../components/home/aboutUs/AboutUsSection.tsx';
 
 const HomePage = () => {
   return (
