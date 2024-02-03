@@ -1,7 +1,11 @@
+import AboutUsSection from '../components/home/AboutUsSection.tsx';
+
 const HomePage = () => {
-   return(
-       <div>홈페이지</div>
-   )
-}
+  return (
+    <>
+      <AboutUsSection />
+    </>
+  );
+};
 
 export default HomePage;

@@ -13,7 +13,7 @@ const Nav = () => {
       {MENU.map(({ path, label, children }) => (
         <li
           key={path}
-          className={`relative group ${isChildrenActive(path) || pathname === path ? 'text-secondary-300' : 'text-white'} text-xl font-semibold`}
+          className={`relative group ${isChildrenActive(path) || pathname === path ? 'text-secondary-300' : 'text-white'} text-lg font-semibold`}
         >
           <Link to={path}>{label}</Link>
           {children && (
