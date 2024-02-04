@@ -107,7 +107,7 @@ export default function ManageRegis() {
                         })
                     }
                 />
-                <ModalLabel>프로필 이미지</ModalLabel>
+                <ModalLabel>프로필 이미지 URL</ModalLabel>
                 <ModalInput
                     type='text'
                     placeholder='프로필 이미지'
@@ -176,6 +176,10 @@ const ModalInput = styled.input`
     border-radius: 4px;
     font-size: 1rem;
     text-align: center;
+
+    &: (6) {
+        width: 80%;
+    }
 `;
 
 const ModalButtonWrapper = styled.div`

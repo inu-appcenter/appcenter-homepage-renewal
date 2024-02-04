@@ -7,11 +7,9 @@ export default function AdminPage() {
         <>
             <InOut />
             <IntroBox>
-                <Text type='title'>{'앱센터 동아리원 관리'}</Text>
+                <Text type='title'>{'앱센터 동아리 관리'}</Text>
                 <Text type='top'>
-                    {
-                        '동아리원 편성, 기수 관리, 동아리원 정보등을 관리할 수 있어요'
-                    }
+                    {'동아리원 정보와 기수, 역할, 질문을 관리할 수 있어요'}
                 </Text>
             </IntroBox>
             <BoxContainer>
@@ -43,12 +41,6 @@ export default function AdminPage() {
                         </DetailText>
                     </InfoBox>
                 </Link>
-                <InfoBox>
-                    <DetailText type='title'>{'전체'}</DetailText>
-                    <DetailText type='top'>
-                        {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
-                    </DetailText>
-                </InfoBox>
                 <Link to='/../QnA'>
                     <InfoBox>
                         <DetailText type='title'>{'질문 관리'}</DetailText>
@@ -74,7 +66,7 @@ const InfoBox = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     width: 250px;
-    height: 300px;
+    height: 250px;
     padding: 20px;
     background-color: #fff;
     border: none;
@@ -124,7 +116,7 @@ const Text = styled.div`
     text-transform: uppercase;
     color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
     font-weight: ${(props) =>
-        props.type === 'top' ? 600 : props.type === 'title' ? 700 : 400};
+        props.type === 'top' ? 600 : props.type === 'title' ? 500 : 400};
     margin-bottom: 3px;
     white-space: pre-line;
 
