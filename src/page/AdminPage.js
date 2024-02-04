@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
 import InOut from '../component/common/InOut';
+import Phone from '../resource/img/phone.svg';
+import Face from '../resource/img/face.svg';
+import Camera from '../resource/img/camera.svg';
 
 export default function AdminPage() {
     return (
@@ -16,43 +19,62 @@ export default function AdminPage() {
             <IntroFunc>대시보드 기능</IntroFunc>
             <Link to='/../center'>
                 <MenuBox>
-                    <MenuText type='title'>{'앱센터 동아리원 관리'}</MenuText>
-                    <MenuText type='top'>
-                        {
-                            '동아리원 편성, 기수 관리, 동아리원 정보등을 관리할 수 있어요'
-                        }
-                    </MenuText>
+                    <PhotoBox>
+                        <PhotoImg src={Face} />
+                    </PhotoBox>
+                    <TextBox>
+                        <MenuText type='title'>{'앱센터 동아리 관리'}</MenuText>
+                        <MenuText type='top'>
+                            {
+                                '동아리원 정보와 기수, 역할, 질문을 관리할 수 있어요'
+                            }
+                        </MenuText>
+                    </TextBox>
                 </MenuBox>
             </Link>
             <Link to='/../product'>
                 <MenuBox>
-                    <MenuText type='title'>{'앱 관리'}</MenuText>
-                    <MenuText type='top'>
-                        {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
-                    </MenuText>
+                    <PhotoBox>
+                        <PhotoImg src={Phone} />
+                    </PhotoBox>
+                    <TextBox>
+                        <MenuText type='title'>{'앱 관리'}</MenuText>
+                        <MenuText type='top'>
+                            {
+                                '홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'
+                            }
+                        </MenuText>
+                    </TextBox>
                 </MenuBox>
             </Link>
             <MenuBox>
-                <MenuText type='title'>{'사진 게시판 관리'}</MenuText>
-                <MenuText type='top'>
-                    {'활동 사진에 게재된 사진들을 관리할 수 있어요'}
-                </MenuText>
+                <PhotoBox>
+                    <PhotoImg src={Camera} />
+                </PhotoBox>
+                <TextBox>
+                    <MenuText type='title'>{'사진 게시판 관리'}</MenuText>
+                    <MenuText type='top'>
+                        {'활동 사진에 게재된 사진들을 관리할 수 있어요'}
+                    </MenuText>
+                </TextBox>
             </MenuBox>
         </>
     );
 }
-const LogoImg = styled.img`
-    margin-right: auto;
+const PhotoBox = styled.div`
+    background-color: white;
+    margin-bottom: auto;
 `;
 
-const LoginBtn = styled.button`
-    border: none;
-    background-color: transparent;
-    &:hover {
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
-        opacity: 0.5;
-    }
+const TextBox = styled.div`
+    flex-direction: column;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+`;
+
+const PhotoImg = styled.img`
+    width: 40px;
+    height: 40px;
 `;
 
 const MenuText = styled.div`
@@ -62,8 +84,8 @@ const MenuText = styled.div`
     text-transform: uppercase;
     color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
     font-weight: ${(props) =>
-        props.type === 'top' ? 400 : props.type === 'title' ? 500 : 300};
-    margin-bottom: 3px;
+        props.type === 'top' ? 400 : props.type === 'title' ? 300 : 300};
+    margin: auto 0;
     white-space: pre-line;
 
     ${(props) =>
@@ -85,6 +107,7 @@ const IntroFunc = styled.div`
 `;
 
 const MenuBox = styled.div`
+    display: flex;
     padding: 2.5rem 0 0 1.4rem;
     width: 600px;
     height: 8rem;
@@ -93,6 +116,7 @@ const MenuBox = styled.div`
     top: 20px;
     border-radius: 20px;
     align-items: center;
+    box-sizing: border-box;
 
     &:hover {
         background-color: #bdbdbd;
@@ -133,7 +157,7 @@ const Text = styled.div`
     text-transform: uppercase;
     color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
     font-weight: ${(props) =>
-        props.type === 'top' ? 600 : props.type === 'title' ? 900 : 600};
+        props.type === 'top' ? 600 : props.type === 'title' ? 600 : 600};
     margin-bottom: 3px;
     white-space: pre-line;
 
