@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import InOut from '../component/common/InOut';
+import Generation from '../resource/img/groups_FILL0_wght400_GRAD0_opsz24.svg';
+import Member from '../resource/img/person_FILL0_wght400_GRAD0_opsz24.svg';
+import Role from '../resource/img/group_FILL0_wght400_GRAD0_opsz24.svg';
+import Question from '../resource/img/quiz_FILL0_wght400_GRAD0_opsz24.svg';
 
 export default function AdminPage() {
     return (
@@ -15,19 +19,23 @@ export default function AdminPage() {
             <BoxContainer>
                 <Link to='/../manage'>
                     <InfoBox>
+                        <PhotoBox>
+                            <PhotoImg src={Member} />
+                        </PhotoBox>
                         <DetailText type='title'>{'동아리원 관리'}</DetailText>
                         <DetailText type='top'>
-                            {'동아리를 추가, 삭제, 수정을 할 수 있어요'}
+                            {'동아리원을 추가, 삭제, 수정을 할 수 있어요'}
                         </DetailText>
                     </InfoBox>
                 </Link>
                 <Link to='/../generation'>
                     <InfoBox>
+                        <PhotoBox>
+                            <PhotoImg src={Generation} />
+                        </PhotoBox>
                         <DetailText type='title'>{'기수 관리'}</DetailText>
                         <DetailText type='top'>
-                            {
-                                '동아리원을 기수에 추가, 삭제, 수정을 할 수 있어요'
-                            }
+                            {'기수에 동아리원을 역할과 함께 편성할 수 있어요'}
                         </DetailText>
                     </InfoBox>
                 </Link>
@@ -35,14 +43,22 @@ export default function AdminPage() {
             <BoxContainer>
                 <Link to='/../role'>
                     <InfoBox>
+                        <PhotoBox>
+                            <PhotoImg src={Role} />
+                        </PhotoBox>
                         <DetailText type='title'>{'역할 관리'}</DetailText>
                         <DetailText type='top'>
-                            {'역할군을 관리할 수 있어요'}
+                            {
+                                '센터장, 파트장, 파트원과 같은 역할을 추가할 수 있어요'
+                            }
                         </DetailText>
                     </InfoBox>
                 </Link>
                 <Link to='/../QnA'>
                     <InfoBox>
+                        <PhotoBox>
+                            <PhotoImg src={Question} />
+                        </PhotoBox>
                         <DetailText type='title'>{'질문 관리'}</DetailText>
                         <DetailText type='top'>
                             {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
@@ -53,6 +69,19 @@ export default function AdminPage() {
         </>
     );
 }
+
+const PhotoBox = styled.div`
+    display: flex;
+    background-color: white;
+    margin-bottom: auto;
+    width: 17%;
+    border-radius: 8px;
+`;
+
+const PhotoImg = styled.img`
+    width: 40px;
+    height: 40px;
+`;
 
 const BoxContainer = styled.div`
     display: flex;
@@ -66,7 +95,7 @@ const InfoBox = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     width: 250px;
-    height: 250px;
+    height: 200px;
     padding: 20px;
     background-color: #fff;
     border: none;

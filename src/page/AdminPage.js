@@ -62,8 +62,11 @@ export default function AdminPage() {
     );
 }
 const PhotoBox = styled.div`
+    width: 7%;
+    height: 50%;
     background-color: white;
     margin-bottom: auto;
+    border-radius: 8px;
 `;
 
 const TextBox = styled.div`
@@ -91,7 +94,8 @@ const MenuText = styled.div`
     ${(props) =>
         props.type === 'title'
             ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
+                  font-size: ${(props) =>
+                      props.theme.fontSize.smallTablet.title};
               `
             : css`
                   font-size: ${(props) => props.theme.fontSize.tablet.caption};

@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     regisModalOpen: false,
     modifyModalOpen: false,
+    memberModalOpen: false,
+    roleModalOpen: false,
     message: '',
 };
 
@@ -24,7 +26,30 @@ export const ProductSlice = createSlice({
         MODclose(state) {
             state.modifyModalOpen = false;
         },
+        MemberModalopen: (state, action) => {
+            state.memberModalOpen = true;
+            state.message = action.payload;
+        },
+        MemberModalclose(state) {
+            state.memberModalOpen = false;
+        },
+        RoleModalopen: (state, action) => {
+            state.roleModalOpen = true;
+            state.message = action.payload;
+        },
+        RoleModalclose(state) {
+            state.roleModalOpen = false;
+        },
     },
 });
 
-export const { RMopen, RMclose, MODopen, MODclose } = ProductSlice.actions;
+export const {
+    RMopen,
+    RMclose,
+    MODopen,
+    MODclose,
+    MemberModalopen,
+    MemberModalclose,
+    RoleModalopen,
+    RoleModalclose,
+} = ProductSlice.actions;

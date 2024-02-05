@@ -64,7 +64,7 @@ export default function QnARegis() {
                 <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='파트'
+                    placeholder=''
                     value={newQna.part}
                     onChange={(e) =>
                         setNewQna({ ...newQna, part: e.target.value })
@@ -103,10 +103,10 @@ const ModalContainer = styled(Modal)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: #f7f7f8;
     border-radius: 8px;
-    border: 2px solid grey;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 500px;
     margin: 0 auto;
     position: absolute;
@@ -118,21 +118,29 @@ const ModalContainer = styled(Modal)`
 const ModalTitle = styled.h2`
     font-size: 1.5rem;
     margin-bottom: 15px;
+    margin-right: auto;
+    margin-top: 0;
+    font-weight: 400;
 `;
 
 const ModalLabel = styled.label`
     font-size: 1rem;
     margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: 75px;
 `;
 
 const ModalInput = styled.input`
     width: 70%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;
-    text-align: center;
+
+    &: (6) {
+        width: 80%;
+    }
 `;
 
 const ModalButtonWrapper = styled.div`
