@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -13,7 +13,6 @@ import ManageRegis from '../container/product/ManageRegis';
 
 export default function ManagePage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -74,6 +73,7 @@ export default function ManagePage() {
             setEditedEmail(memberToEdit.email);
             setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedMemberId]);
 
     const closeEditModal = () => {
@@ -91,12 +91,11 @@ export default function ManagePage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
             const viewData = await axios
                 .get('https://server.inuappcenter.kr/members/all-members')
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -185,6 +184,7 @@ export default function ManagePage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert('삭제에 실패했습니다.');
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -211,27 +211,53 @@ export default function ManagePage() {
                             }}
                         >
                             <td>{content.name}</td>
-                            <td>{content.email}</td>
                             <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    Visit Blog
-                                </a>
+                                {content.email ? (
+                                    <>{content.email}</>
+                                ) : (
+                                    'no Email'
+                                )}
                             </td>
                             <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
+                                {content.blogLink ? (
+                                    <a
+                                        href={content.blogLink}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        Visit Blog
+                                    </a>
+                                ) : (
+                                    'no Blog'
+                                )}
                             </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.description}</td>
+                            <td>
+                                {content.gitRepositoryLink ? (
+                                    <a
+                                        href={content.gitRepositoryLink}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        github
+                                    </a>
+                                ) : (
+                                    'no Github'
+                                )}
+                            </td>
+                            <td>
+                                {content.profileImage ? (
+                                    <>{content.profileImage}</>
+                                ) : (
+                                    'no profileImage'
+                                )}
+                            </td>
+                            <td>
+                                {content.description ? (
+                                    <>{content.description}</>
+                                ) : (
+                                    'no description'
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -279,7 +305,7 @@ export default function ManagePage() {
                     value={editedName}
                     onChange={(e) => setEditedName(e.target.value)}
                 />
-                <ModalLabel>설명</ModalLabel>
+                <ModalLabel>자기 소개</ModalLabel>
                 <ModalInput
                     type='text'
                     value={editedDescription}
@@ -310,8 +336,8 @@ export default function ManagePage() {
                     onChange={(e) => setEditedGitRepositoryLink(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
@@ -367,7 +393,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -416,7 +442,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -430,38 +456,23 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 900px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        border-right: 1px solid black;
+        border-radius: 8px;
+        overflow: hidden;
+        white-space: nowrap;
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
@@ -475,35 +486,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

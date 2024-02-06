@@ -25,7 +25,7 @@ export default function Footer() {
                     />
                 </a>
                 <Link to='../admin'>
-                    <a>
+                    <a href='#!'>
                         <img
                             src={socialLink.admin.icon}
                             alt='인천대앱센터 관리자 페이지'

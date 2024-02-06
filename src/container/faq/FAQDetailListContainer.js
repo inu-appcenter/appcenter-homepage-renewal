@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { partInfo } from '../../resource/string/partInfo';
 import { PageTitle } from '../../component/common/PageTitle';
@@ -19,6 +19,7 @@ export function FAQDetailListContainer() {
                     'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
                 )
                 .then((res) => {
+                    console.log(viewData);
                     setData(
                         res.data.filter(
                             (item) => item.part === pageInfo.partName
@@ -32,6 +33,7 @@ export function FAQDetailListContainer() {
                 });
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
     useEffect(() => {

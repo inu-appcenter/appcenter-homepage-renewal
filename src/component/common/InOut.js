@@ -22,6 +22,7 @@ export default function InOut() {
             type: 'login/setLogin',
             payload: { isLoggedIn: storedToken ? true : false },
         });
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onLogout = () => {
@@ -44,7 +45,7 @@ export default function InOut() {
             ) : (
                 <Link to='/../login'>
                     <LoginBtn className='menu'>
-                        <img src={LoginImg} />
+                        <img src={LoginImg} alt='' />
                     </LoginBtn>
                 </Link>
             )}

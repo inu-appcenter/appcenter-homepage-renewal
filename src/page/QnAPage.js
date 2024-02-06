@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -66,6 +66,7 @@ export default function QnAPage() {
             setEditedQuestion(QnaToEdit.question);
             setEditedAnswer(QnaToEdit.answer);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedQnaId]);
 
     const closeEditModal = () => {
@@ -91,6 +92,7 @@ export default function QnAPage() {
                 .then((res) => {
                     isLoading(false);
                     setData(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -315,7 +317,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -364,7 +366,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -375,29 +377,6 @@ const Regisbutton = styled.button`
     &:hover {
         transition: 0.1s ease-in;
         background-color: #8181f7;
-    }
-`;
-
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-    :nth-child(3) {
-        width: 350px;
-        margin-left: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
     }
 `;
 
@@ -435,35 +414,6 @@ const MemberTable = styled.table`
         &:hover {
             background-color: #f2f2f2;
         }
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

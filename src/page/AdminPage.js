@@ -1,12 +1,10 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import axios from 'axios';
 import InOut from '../component/common/InOut';
 import Phone from '../resource/img/phone.svg';
 import Face from '../resource/img/face.svg';
 import Camera from '../resource/img/camera.svg';
+import Question from '../resource/img/quiz_FILL0_wght400_GRAD0_opsz24.svg';
 
 export default function AdminPage() {
     return (
@@ -58,15 +56,28 @@ export default function AdminPage() {
                     </MenuText>
                 </TextBox>
             </MenuBox>
+            <Link to='/../QnA'>
+                <MenuBox>
+                    <PhotoBox>
+                        <PhotoImg src={Question} />
+                    </PhotoBox>
+                    <TextBox>
+                        <MenuText type='title'>{'질문 관리'}</MenuText>
+                        <MenuText type='top'>
+                            {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
+                        </MenuText>
+                    </TextBox>
+                </MenuBox>
+            </Link>
         </>
     );
 }
 const PhotoBox = styled.div`
     width: 7%;
-    height: 50%;
+    height: 73%;
     background-color: white;
-    margin-bottom: auto;
-    border-radius: 8px;
+    margin-bottom: 2.2rem;
+    border-radius: 12px;
 `;
 
 const TextBox = styled.div`
@@ -87,15 +98,14 @@ const MenuText = styled.div`
     text-transform: uppercase;
     color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
     font-weight: ${(props) =>
-        props.type === 'top' ? 400 : props.type === 'title' ? 300 : 300};
+        props.type === 'top' ? 400 : props.type === 'title' ? 600 : 300};
     margin: auto 0;
     white-space: pre-line;
 
     ${(props) =>
         props.type === 'title'
             ? css`
-                  font-size: ${(props) =>
-                      props.theme.fontSize.smallTablet.title};
+                  font-size: 30px;};
               `
             : css`
                   font-size: ${(props) => props.theme.fontSize.tablet.caption};
@@ -114,7 +124,7 @@ const MenuBox = styled.div`
     display: flex;
     padding: 2.5rem 0 0 1.4rem;
     width: 600px;
-    height: 8rem;
+    height: 6rem;
     background-color: #f2f2f2;
     margin: 0 auto 1.5rem auto;
     top: 20px;
@@ -125,19 +135,6 @@ const MenuBox = styled.div`
     &:hover {
         background-color: #bdbdbd;
         transition: 0.3s ease-in-out;
-    }
-`;
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 55px auto 10px auto;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

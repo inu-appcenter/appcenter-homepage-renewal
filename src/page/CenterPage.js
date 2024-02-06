@@ -4,7 +4,6 @@ import InOut from '../component/common/InOut';
 import Generation from '../resource/img/groups_FILL0_wght400_GRAD0_opsz24.svg';
 import Member from '../resource/img/person_FILL0_wght400_GRAD0_opsz24.svg';
 import Role from '../resource/img/group_FILL0_wght400_GRAD0_opsz24.svg';
-import Question from '../resource/img/quiz_FILL0_wght400_GRAD0_opsz24.svg';
 
 export default function AdminPage() {
     return (
@@ -51,17 +50,6 @@ export default function AdminPage() {
                             {
                                 '센터장, 파트장, 파트원과 같은 역할을 추가할 수 있어요'
                             }
-                        </DetailText>
-                    </InfoBox>
-                </Link>
-                <Link to='/../QnA'>
-                    <InfoBox>
-                        <PhotoBox>
-                            <PhotoImg src={Question} />
-                        </PhotoBox>
-                        <DetailText type='title'>{'질문 관리'}</DetailText>
-                        <DetailText type='top'>
-                            {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
                         </DetailText>
                     </InfoBox>
                 </Link>

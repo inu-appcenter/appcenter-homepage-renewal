@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Pagination from '../component/manage/Pagenation';
@@ -29,14 +29,6 @@ export default function ProductPage() {
     const contextMenuRef = useRef(null);
     const [productId, setProductId] = useState('');
 
-    //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
-    const [editedName, setEditedName] = useState('');
-    const [editedDescription, setEditedDescription] = useState('');
-    const [editedProfileImage, setEditedProfileImage] = useState('');
-    const [editedBlogLink, setEditedBlogLink] = useState('');
-    const [editedEmail, setEditedEmail] = useState('');
-    const [editedGitRepositoryLink, setEditedGitRepositoryLink] = useState('');
-
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
@@ -63,18 +55,6 @@ export default function ProductPage() {
         dispatch(MODopen());
     };
 
-    useEffect(() => {
-        const memberToEdit = data.find((item) => item.id === selectedProductId);
-        if (memberToEdit) {
-            setEditedName(memberToEdit.name);
-            setEditedDescription(memberToEdit.description);
-            setEditedProfileImage(memberToEdit.profileImage);
-            setEditedBlogLink(memberToEdit.blogLink);
-            setEditedEmail(memberToEdit.email);
-            setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
-        }
-    }, [selectedProductId]);
-
     const addData = () => {
         dispatch(RMopen());
         scrollLock();
@@ -94,7 +74,7 @@ export default function ProductPage() {
                 .then((res) => {
                     isLoading(false);
                     setData(res.data);
-                    console.log(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -141,6 +121,7 @@ export default function ProductPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert('삭제에 실패했습니다.');
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -273,7 +254,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;

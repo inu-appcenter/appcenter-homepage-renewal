@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RMopen, RMclose } from '../../modules/ProductSlice';
+import { RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 
 export default function QnARegis() {
     const [data, setData] = useState([]);
@@ -28,16 +27,16 @@ export default function QnARegis() {
                 newQna
             );
 
+            console.log('Success:', result.data);
             // POST 요청 성공 시, 새로운 질문을 data 상태 변수에 추가합니다.
             setData([...data, newQna]);
-
             setNewQna({
                 answer: '',
                 id: '',
                 part: '',
                 question: '',
             });
-            dispatch(RMclose());
+            closeModal();
         } catch (error) {
             console.error('Error adding data:', error);
         }
@@ -150,7 +149,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;

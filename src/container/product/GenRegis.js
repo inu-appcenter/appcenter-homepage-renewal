@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import {
-    RMopen,
     RMclose,
     MemberModalopen,
     RoleModalopen,
 } from '../../modules/ProductSlice';
 import { setMemberId, setRoleId } from '../../modules/idSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 import FindMemId from '../admin/FindMemId';
 import FindRole from '../admin/FindRole';
 
@@ -85,10 +83,12 @@ export default function GenRegis() {
 
     useEffect(() => {
         setNewRole({ ...newRole, member_id: memberId });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [memberModalOpen]);
 
     useEffect(() => {
         setNewRole({ ...newRole, role_id: roleId });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roleModalOpen]);
 
     return (
@@ -195,7 +195,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;

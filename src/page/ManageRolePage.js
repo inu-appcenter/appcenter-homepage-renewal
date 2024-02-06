@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -63,6 +63,7 @@ export default function ManageRolePage() {
             setEditedRoleName(RoleToEdit.roleName);
             setEditedDesc(RoleToEdit.description);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedRoleId]);
 
     const closeEditModal = () => {
@@ -84,7 +85,7 @@ export default function ManageRolePage() {
                 .get('https://server.inuappcenter.kr/roles/all-roles')
                 .then((res) => {
                     setData(res.data);
-                    console.log(data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -161,6 +162,7 @@ export default function ManageRolePage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert('삭제에 실패했습니다.');
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -244,8 +246,8 @@ export default function ManageRolePage() {
                     onChange={(e) => setEditedDesc(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
@@ -301,7 +303,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -350,7 +352,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -361,29 +363,6 @@ const Regisbutton = styled.button`
     &:hover {
         transition: 0.1s ease-in;
         background-color: #8181f7;
-    }
-`;
-
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 0.5rem;
-        width: 100px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-
-    & + & {
-        margin-right: 10px;
-    }
-
-    ::placeholder {
-        text-align: center;
     }
 `;
 
@@ -413,37 +392,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    justify-content: center;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 3.9rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

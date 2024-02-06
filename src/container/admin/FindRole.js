@@ -1,16 +1,14 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RoleModalopen, RoleModalclose } from '../../modules/ProductSlice';
+import { RoleModalclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRoleId } from '../../modules/idSlice';
-import _ from 'lodash';
 
 export default function FindRole() {
     const dispatch = useDispatch();
     const roleModalopen = useSelector((state) => state.product.roleModalOpen);
-    const roleId = useSelector((state) => state.id.role_id);
 
     const [data, setData] = useState([]);
 
@@ -165,12 +163,6 @@ const ModalInput = styled.input`
     border-radius: 4px;
     font-size: 1rem;
     margin-right: auto;
-`;
-
-const ModalButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
 `;
 
 const ModalButton = styled.button`

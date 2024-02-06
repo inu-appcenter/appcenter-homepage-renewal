@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RMopen, RMclose } from '../../modules/ProductSlice';
+import { RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 
 export default function RoleRegis() {
     const [data, setData] = useState([]);
@@ -138,7 +137,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;

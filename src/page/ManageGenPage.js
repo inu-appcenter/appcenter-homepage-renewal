@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -65,6 +65,7 @@ export default function ManageGenPage() {
             setEditedRole(memberToEdit.role);
             setEditedGen(memberToEdit.generation);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedGroupId]);
 
     const closeEditModal = () => {
@@ -88,6 +89,7 @@ export default function ManageGenPage() {
                 )
                 .then((res) => {
                     setData(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -164,6 +166,7 @@ export default function ManageGenPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert('삭제에 실패했습니다.');
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -193,26 +196,6 @@ export default function ManageGenPage() {
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
-                            <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    blog
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
-                            </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.email}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -261,14 +244,15 @@ export default function ManageGenPage() {
                     value={editedRole}
                     onChange={(e) => setEditedRole(e.target.value)}
                 />
+                <ModalLabel>기수</ModalLabel>
                 <ModalInput
                     type='number'
                     value={editedGen}
                     onChange={(e) => setEditedGen(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
@@ -288,9 +272,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    border: 2px solid grey;
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -324,7 +308,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -373,7 +357,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -387,38 +371,23 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 80px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 80px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 600px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        border-right: 1px solid black;
+        border-radius: 8px;
+        overflow: hidden;
+        white-space: nowrap;
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
@@ -432,37 +401,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    justify-content: center;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

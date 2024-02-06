@@ -17,7 +17,7 @@ export default function ProductionDesktop() {
     const [modalOpen, setModalOpen] = useState(false);
     const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
-    const [firstImage, setFirstImage] = useState('');
+
     const breakPoint = {
         680: {
             slidesPerView: 3,
@@ -42,6 +42,7 @@ export default function ProductionDesktop() {
                 )
                 .then((res) => {
                     setData(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();

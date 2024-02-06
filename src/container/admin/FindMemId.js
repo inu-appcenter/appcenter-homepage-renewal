@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { MemberModalopen, MemberModalclose } from '../../modules/ProductSlice';
+import { MemberModalclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMemberId } from '../../modules/idSlice';
-import _ from 'lodash';
 
 export default function FindMemId() {
     const dispatch = useDispatch();
@@ -170,12 +169,6 @@ const ModalInput = styled.input`
     border-radius: 4px;
     font-size: 1rem;
     margin-right: auto;
-`;
-
-const ModalButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
 `;
 
 const ModalButton = styled.button`

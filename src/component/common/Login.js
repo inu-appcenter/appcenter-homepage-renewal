@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import LoginLogo from '../../resource/img/Login_logo.png';
 
 export default function Login() {
@@ -10,7 +10,6 @@ export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
     const dispatch = useDispatch();
 
     const handleUsernameChange = (e) => {
@@ -32,6 +31,7 @@ export default function Login() {
                 const { token } = res.data;
                 axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
 
+                console.log(response);
                 window.sessionStorage.setItem('token', token);
                 dispatch({
                     type: 'login/setLogin',
@@ -55,6 +55,7 @@ export default function Login() {
                 payload: { isLoggedIn: false },
             });
             alert('자동 로그아웃 되었습니다.');
+            console.log(timer);
             window.location.reload();
         }, 25 * 60 * 1000);
     };
@@ -129,6 +130,7 @@ const Label = styled.label`
     display: block;
     margin-bottom: 5px;
     margin-right: 2px;
+    color: white;
 
     &:nth-child(1) {
         margin-left: 8px;
