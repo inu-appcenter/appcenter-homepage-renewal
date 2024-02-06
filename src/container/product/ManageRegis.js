@@ -71,7 +71,7 @@ export default function ManageRegis() {
                 <ModalLabel>이름</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='이름'
+                    placeholder='이름을 입력해주세요'
                     value={newMember.name}
                     onChange={(e) =>
                         setNewMember({ ...newMember, name: e.target.value })
@@ -80,7 +80,7 @@ export default function ManageRegis() {
                 <ModalLabel>이메일</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='이메일'
+                    placeholder='이메일을 입력해주세요'
                     value={newMember.email}
                     onChange={(e) =>
                         setNewMember({ ...newMember, email: e.target.value })
@@ -89,7 +89,7 @@ export default function ManageRegis() {
                 <ModalLabel>블로그 URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='블로그 URL'
+                    placeholder='블로그 링크를 입력해주세요'
                     value={newMember.blogLink}
                     onChange={(e) =>
                         setNewMember({ ...newMember, blogLink: e.target.value })
@@ -98,7 +98,7 @@ export default function ManageRegis() {
                 <ModalLabel>Git URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='Git URL'
+                    placeholder='Github 링크를 입력해주세요'
                     value={newMember.gitRepositoryLink}
                     onChange={(e) =>
                         setNewMember({
@@ -110,7 +110,7 @@ export default function ManageRegis() {
                 <ModalLabel>프로필 이미지 URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='프로필 이미지'
+                    placeholder='Github의 프로필 이미지 링크를 입력해주세요'
                     value={newMember.profileImage}
                     onChange={(e) =>
                         setNewMember({
@@ -120,9 +120,9 @@ export default function ManageRegis() {
                     }
                 />
                 <ModalLabel>설명</ModalLabel>
-                <ModalInput
+                <InfoInput
                     type='text'
-                    placeholder='설명'
+                    placeholder='자기소개를 입력해주세요'
                     value={newMember.description}
                     onChange={(e) =>
                         setNewMember({
@@ -140,6 +140,20 @@ export default function ManageRegis() {
         </>
     );
 }
+
+const InfoInput = styled.textarea`
+    height: 8rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    word-break: break-all;
+    resize: none;
+
+    width: 70%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 1rem;
+`;
 
 const ModalContainer = styled(Modal)`
     display: flex;
@@ -180,10 +194,6 @@ const ModalInput = styled.input`
     border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;
-
-    &: (6) {
-        width: 80%;
-    }
 `;
 
 const ModalButtonWrapper = styled.div`

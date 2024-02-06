@@ -64,7 +64,7 @@ export default function QnARegis() {
                 <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder=''
+                    placeholder='파트를 입력해주세요.'
                     value={newQna.part}
                     onChange={(e) =>
                         setNewQna({ ...newQna, part: e.target.value })
@@ -73,7 +73,7 @@ export default function QnARegis() {
                 <ModalLabel>질문</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='질문'
+                    placeholder='질문을 입력해주세요.'
                     value={newQna.question}
                     onChange={(e) =>
                         setNewQna({ ...newQna, question: e.target.value })
@@ -82,7 +82,7 @@ export default function QnARegis() {
                 <ModalLabel>답변</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='답변'
+                    placeholder='답변을 입력해주세요.'
                     value={newQna.answer}
                     onChange={(e) =>
                         setNewQna({ ...newQna, answer: e.target.value })

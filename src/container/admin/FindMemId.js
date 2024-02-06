@@ -4,6 +4,7 @@ import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { MemberModalopen, MemberModalclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { setMemberId } from '../../modules/idSlice';
 import _ from 'lodash';
 
 export default function FindMemId() {
@@ -11,7 +12,6 @@ export default function FindMemId() {
     const memberModalOpen = useSelector(
         (state) => state.product.memberModalOpen
     );
-
     const [data, setData] = useState([]);
 
     const [newMember, setNewMember] = useState('');
@@ -44,6 +44,12 @@ export default function FindMemId() {
         }
     };
 
+    const setId = (id) => {
+        console.log(id);
+        dispatch(setMemberId(id));
+        closeModal();
+    };
+
     return (
         <>
             <ModalContainer
@@ -51,56 +57,73 @@ export default function FindMemId() {
                 onRequestClose={closeModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>편성 추가</ModalTitle>
-                <ModalLabel>동아리원</ModalLabel>
+                <ModalTitle>이름으로 동아리원 찾기</ModalTitle>
+                <ModalName>이름</ModalName>
                 <ModalInput
                     type='text'
-                    placeholder='눌러서 동아리원 찾기'
+                    placeholder='이름을 입력해주세요'
                     value={newMember}
                     onChange={(e) => setNewMember(e.target.value)}
                 />
+                <ModalButton onClick={findData}>검색</ModalButton>
                 <ModalTemplate>
-                    <ModalHeader type='name'>이름</ModalHeader>
-                    <ModalHeader>번호</ModalHeader>
+                    <ModalHeader type='name'>번호</ModalHeader>
+                    <ModalHeader>이름</ModalHeader>
                     <ModalHeader type='email'>이메일</ModalHeader>
                 </ModalTemplate>
                 <>
                     {data.map((member, index) => (
-                        <LabelWrapper>
+                        <LabelWrapper onClick={() => setId(member.member_id)}>
+                            <ModalLabel type='name'>
+                                {member.member_id}
+                            </ModalLabel>
                             <ModalLabel>{member.name}</ModalLabel>
-                            <ModalLabel>{member.member_id}</ModalLabel>
-                            <ModalLabel>{member.email}</ModalLabel>
+                            <ModalLabel type='email'>{member.email}</ModalLabel>
                         </LabelWrapper>
                     ))}
                 </>
-                <ModalButtonWrapper>
-                    <ModalButton onClick={findData}>검색</ModalButton>
-                    <ModalButton onClick={closeModal}>취소</ModalButton>
-                </ModalButtonWrapper>
             </ModalContainer>
             ;
         </>
     );
 }
+const ModalName = styled.div`
+    margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: 0.5rem;
+`;
+
 const ModalHeader = styled.div`
     position: absolute;
 
     ${(props) =>
         props.type === 'name'
-            ? 'left: 10.2rem;'
+            ? 'left: 5.3rem;'
             : props.type === 'email'
-            ? 'left: 23.2rem;'
-            : ''}
+            ? 'left: 15rem;'
+            : 'left: 10rem;'}
 `;
 
 const LabelWrapper = styled.div`
     display: flex;
     margin-top: 1rem;
+    width: 70%;
+    height: 18px;
+    &:hover {
+        background-color: #f2f2f2;
+        transition: 0.5s ease-in-out;
+    }
 `;
 
 const ModalTemplate = styled.div`
     display: flex;
-    margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: 3rem;
+    width: 70%;
+    height: 40px;
+    background-color: white;
+    align-items: center;
+    border-radius: 10px;
 `;
 const ModalContainer = styled(Modal)`
     display: flex;
@@ -111,7 +134,7 @@ const ModalContainer = styled(Modal)`
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -129,9 +152,14 @@ const ModalTitle = styled.h2`
 
 const ModalLabel = styled.label`
     font-size: 1rem;
-    margin-bottom: 5px;
-    margin-right: auto;
-    margin-left: 75px;
+    position: absolute;
+
+    ${(props) =>
+        props.type === 'name'
+            ? 'left: 5.8rem;'
+            : props.type === 'email'
+            ? 'left: 14.7rem;'
+            : 'left: 9.7rem;'}
 `;
 
 const ModalInput = styled.input`
@@ -141,16 +169,13 @@ const ModalInput = styled.input`
     border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;
-
-    &: (6) {
-        width: 80%;
-    }
+    margin-right: auto;
 `;
 
 const ModalButtonWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 2rem;
 `;
 
 const ModalButton = styled.button`
@@ -163,9 +188,13 @@ const ModalButton = styled.button`
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 
-    & + & {
-        margin: 0 10px;
-    }
+    position: absolute;
+    left: 20.3rem;
+    top: 5.4rem;
+
+    box-sizing: border-box;
+    width: 110px;
+    height: 38px;
 
     &:hover {
         background-color: #8181f7;

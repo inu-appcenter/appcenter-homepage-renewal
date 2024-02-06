@@ -58,10 +58,11 @@ export default function RoleRegis() {
                 contentLabel='Edit Role Modal'
             >
                 <ModalTitle>역할 등록</ModalTitle>
-                <ModalLabel>역할</ModalLabel>
+                <ModalLabel>역할 이름</ModalLabel>
                 <ModalInput
                     type='text'
                     value={newRole.roleName}
+                    placeholder='역할 이름을 입력해주세요'
                     onChange={(e) =>
                         setNewRole({ ...newRole, roleName: e.target.value })
                     }
@@ -70,6 +71,7 @@ export default function RoleRegis() {
                 <ModalInput
                     type='text'
                     value={newRole.description}
+                    placeholder='설명을 입력해주세요'
                     onChange={(e) =>
                         setNewRole({ ...newRole, description: e.target.value })
                     }

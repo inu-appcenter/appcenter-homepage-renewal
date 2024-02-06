@@ -8,9 +8,11 @@ import {
     MemberModalopen,
     RoleModalopen,
 } from '../../modules/ProductSlice';
+import { setMemberId, setRoleId } from '../../modules/idSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import FindMemId from '../admin/FindMemId';
+import FindRole from '../admin/FindRole';
 
 export default function GenRegis() {
     const [data, setData] = useState([]);
@@ -23,12 +25,15 @@ export default function GenRegis() {
     );
     const roleModalOpen = useSelector((state) => state.product.roleModalOpen);
 
+    const memberId = useSelector((state) => state.id.member_id);
+    const roleId = useSelector((state) => state.id.role_id);
+
     // 새 멤버 추가 입력받을 상태 변수
     const [newRole, setNewRole] = useState({
         role_id: '',
         member_id: '',
         part: '',
-        year: 15,
+        year: '',
     });
 
     const addData = async () => {
@@ -46,16 +51,22 @@ export default function GenRegis() {
                 role_id: '',
                 member_id: '',
                 part: '',
-                year: 16,
+                year: 15,
             });
             dispatch(RMclose());
+            dispatch(setMemberId(''));
+            dispatch(setRoleId(''));
         } catch (error) {
+            console.log(memberId);
+            console.log(newRole);
             console.error('Error adding data:', error);
         }
     };
 
     // 모달을 닫아주고 스크롤을 풀어줌.
     const closeModal = () => {
+        dispatch(setMemberId(''));
+        dispatch(setRoleId(''));
         dispatch(RMclose());
         openScroll();
     };
@@ -68,6 +79,18 @@ export default function GenRegis() {
         dispatch(MemberModalopen());
     };
 
+    const openRoleModal = () => {
+        dispatch(RoleModalopen());
+    };
+
+    useEffect(() => {
+        setNewRole({ ...newRole, member_id: memberId });
+    }, [memberModalOpen]);
+
+    useEffect(() => {
+        setNewRole({ ...newRole, role_id: roleId });
+    }, [roleModalOpen]);
+
     return (
         <>
             <ModalContainer
@@ -75,15 +98,12 @@ export default function GenRegis() {
                 onRequestClose={closeModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>편성 추가</ModalTitle>
+                <ModalTitle>기수 편성</ModalTitle>
                 <ModalLabel>동아리원</ModalLabel>
                 <ModalInput
                     type='text'
                     placeholder='눌러서 동아리원 찾기'
-                    value={newRole.member_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, member_id: e.target.value })
-                    }
+                    value={memberId}
                     onClick={() => openMemberModal()}
                 />
                 {memberModalOpen && <FindMemId />}
@@ -91,15 +111,14 @@ export default function GenRegis() {
                 <ModalInput
                     type='text'
                     placeholder='눌러서 역할 찾기'
-                    value={newRole.role_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, role_id: e.target.value })
-                    }
+                    value={roleId}
+                    onClick={() => openRoleModal()}
                 />
-                <ModalLabel>파트명</ModalLabel>
+                {roleModalOpen && <FindRole />}
+                <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='파트명'
+                    placeholder='파트를 입력해주세요'
                     value={newRole.part}
                     onChange={(e) =>
                         setNewRole({ ...newRole, part: e.target.value })
@@ -107,8 +126,8 @@ export default function GenRegis() {
                 />
                 <ModalLabel>기수</ModalLabel>
                 <ModalInput
-                    type='number'
-                    placeholder='기수'
+                    type='text'
+                    placeholder='기수를 입력해주세요'
                     value={newRole.year}
                     onChange={(e) =>
                         setNewRole({ ...newRole, year: e.target.value })

@@ -37,6 +37,7 @@ export default function Login() {
                     type: 'login/setLogin',
                     payload: { isLoggedIn: true },
                 });
+                startLogoutTimer();
                 navigate(-1);
             })
             .catch((err) => {
@@ -44,6 +45,18 @@ export default function Login() {
                 setUsername('');
                 setPassword('');
             });
+    };
+
+    const startLogoutTimer = () => {
+        const timer = setTimeout(() => {
+            window.sessionStorage.removeItem('token');
+            dispatch({
+                type: 'login/setLogin',
+                payload: { isLoggedIn: false },
+            });
+            alert('자동 로그아웃 되었습니다.');
+            window.location.reload();
+        }, 25 * 60 * 1000);
     };
 
     return (
