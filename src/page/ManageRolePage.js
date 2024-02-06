@@ -367,18 +367,22 @@ const Regisbutton = styled.button`
 `;
 
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 600px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        border-right: 1px solid black;
+        border-radius: 8px;
+        overflow: hidden;
+        white-space: nowrap;
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
