@@ -60,7 +60,7 @@ jobs:
                   tags: ${{ steps.meta.outputs.tags }}
 
             - name: Deploy
-              uses: appleboy/ssh-action@v1.0.3
+              uses: appleboy/ssh-action@latest
               with:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}

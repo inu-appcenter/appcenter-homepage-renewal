@@ -277,6 +277,7 @@ const MemberTable = styled.table`
     td {
         padding: 5px;
         text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     }
 
     th {
