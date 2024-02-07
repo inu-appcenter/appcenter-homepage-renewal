@@ -22,7 +22,7 @@ export default function Login() {
 
     // id : 'appcenter', pw : '1q2w3e4r!Appcenter'
     const onClick = async () => {
-        const response = await axios
+        const response = await axios //eslint-disable-line no-unused-vars
             .post('https://server.inuappcenter.kr/sign/sign-in', {
                 id: username,
                 password: password,
@@ -31,33 +31,19 @@ export default function Login() {
                 const { token } = res.data;
                 axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
 
-                console.log(response);
                 window.sessionStorage.setItem('token', token);
                 dispatch({
                     type: 'login/setLogin',
                     payload: { isLoggedIn: true },
                 });
-                startLogoutTimer();
-                navigate(-1);
+                navigate('/admin');
             })
             .catch((err) => {
+                console.log(err);
                 alert('아이디 또는 비밀번호가 틀렸습니다.');
                 setUsername('');
                 setPassword('');
             });
-    };
-
-    const startLogoutTimer = () => {
-        const timer = setTimeout(() => {
-            window.sessionStorage.removeItem('token');
-            dispatch({
-                type: 'login/setLogin',
-                payload: { isLoggedIn: false },
-            });
-            alert('자동 로그아웃 되었습니다.');
-            console.log(timer);
-            window.location.reload();
-        }, 25 * 60 * 1000);
     };
 
     return (
@@ -84,7 +70,7 @@ export default function Login() {
                             placeholder='비밀번호를 입력해주세요'
                         />
                     </Label>
-                    <Button onClick={onClick}>로그인</Button>
+                    <Button onClick={() => onClick()}>로그인</Button>
                 </InfoBox>
             </LoginBox>
         </Container>

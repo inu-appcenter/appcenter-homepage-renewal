@@ -23,9 +23,7 @@ export default function AdminPage() {
                     <TextBox>
                         <MenuText type='title'>{'앱센터 동아리 관리'}</MenuText>
                         <MenuText type='top'>
-                            {
-                                '동아리원 정보와 기수, 역할, 질문을 관리할 수 있어요'
-                            }
+                            {'동아리원 정보와 기수, 역할을 관리할 수 있어요'}
                         </MenuText>
                     </TextBox>
                 </MenuBox>

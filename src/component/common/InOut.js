@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 export default function InOut() {
     const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // 로그인 여부 확인. 로컬 스토리지에 키가 있으면 로그인 상태로 설정
     useEffect(() => {
@@ -31,13 +33,15 @@ export default function InOut() {
             type: 'login/setLogin',
             payload: { isLoggedIn: false },
         });
-        window.location.reload();
         alert('로그아웃 되었습니다.');
+        navigate('/home');
     };
 
     return (
         <NavBar>
-            <LogoImg src={logo} alt='logo' />
+            <Link to='/../home'>
+                <LogoImg src={logo} alt='logo' />
+            </Link>
             {isLoggedIn ? (
                 <LoginBtn className='menu'>
                     <img src={LogOutImg} onClick={onLogout} alt='logout' />
@@ -55,6 +59,7 @@ export default function InOut() {
 
 const LogoImg = styled.img`
     margin-right: auto;
+    width: 25px;
 `;
 
 const LoginBtn = styled.button`
@@ -70,7 +75,7 @@ const LoginBtn = styled.button`
 const NavBar = styled.div`
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
     height: 25px;
     width: 730px;

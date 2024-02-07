@@ -18,6 +18,6 @@ export const socialLink = {
     },
     admin: {
         icon: admin_icon,
-        address: '/admin',
+        address: '/login',
     },
 };
