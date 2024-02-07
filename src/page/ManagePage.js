@@ -91,11 +91,10 @@ export default function ManagePage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get('https://server.inuappcenter.kr/members/all-members')
                 .then((res) => {
                     setData(res.data);
-                    console.log(viewData);
                 });
         };
         fetchData();
@@ -195,6 +194,14 @@ export default function ManagePage() {
             <IntroBox introInfo={introInfo[0]} />
             <MemberList>동아리원 목록</MemberList>
             <MemberTable>
+                <MemberBar>
+                    <Cartegories type='first'>이름</Cartegories>
+                    <Cartegories type='second'>이메일</Cartegories>
+                    <Cartegories type='third'>블로그</Cartegories>
+                    <Cartegories type='fourth'>깃허브</Cartegories>
+                    <Cartegories type='fifth'>프로필 이미지</Cartegories>
+                    <Cartegories type='sixth'>설명</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -213,7 +220,13 @@ export default function ManagePage() {
                             <td>{content.name}</td>
                             <td>
                                 {content.email ? (
-                                    <>{content.email}</>
+                                    <a
+                                        href={content.email}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        Email
+                                    </a>
                                 ) : (
                                     'no Email'
                                 )}
@@ -225,7 +238,7 @@ export default function ManagePage() {
                                         target='_blank'
                                         rel='noopener noreferrer'
                                     >
-                                        Visit Blog
+                                        Blog
                                     </a>
                                 ) : (
                                     'no Blog'
@@ -246,14 +259,26 @@ export default function ManagePage() {
                             </td>
                             <td>
                                 {content.profileImage ? (
-                                    <>{content.profileImage}</>
+                                    <a
+                                        href={content.profileImage}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        profileImage
+                                    </a>
                                 ) : (
                                     'no profileImage'
                                 )}
                             </td>
                             <td>
                                 {content.description ? (
-                                    <>{content.description}</>
+                                    <a
+                                        href={content.description}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        description
+                                    </a>
                                 ) : (
                                     'no description'
                                 )}
@@ -343,6 +368,38 @@ export default function ManagePage() {
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    font-size: 0.9rem;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 60px;'
+            : props.type === 'second'
+            ? 'left:11rem; width: 80px;'
+            : props.type === 'third'
+            ? 'left: 15rem; width: 90px;'
+            : props.type === 'fourth'
+            ? 'left: 19.5rem; width: 90px;'
+            : props.type === 'fifth'
+            ? 'left: 25rem; width: 120px;'
+            : 'left: 32.3rem; width: 120px;'}
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -457,14 +514,16 @@ const Regisbutton = styled.button`
 `;
 
 const MemberTable = styled.table`
-    width: 900px;
-    margin: 20px auto 20px auto;
+    width: 500px;
+    margin: 20px auto;
 
     td {
+        width: 90px;
         padding: 6px;
         text-align: center;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
         border-radius: 4px;
+        text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
 

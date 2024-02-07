@@ -13,7 +13,6 @@ import ProductRegis from '../container/product/ProductRegis';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -66,15 +65,12 @@ export default function ProductPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/introduction-board/public/all-boards-contents'
                 )
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
-                    console.log(viewData);
                 });
         };
         fetchData();
@@ -132,7 +128,11 @@ export default function ProductPage() {
             <IntroBox introInfo={introInfo[5]} />
             <MemberList>앱 목록</MemberList>
             <MemberTable>
-                {loading && <div>loading...</div>}
+                <MemberBar>
+                    <Cartegories type='first'>썸네일</Cartegories>
+                    <Cartegories type='second'>제목</Cartegories>
+                    <Cartegories>부제목</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -200,6 +200,31 @@ export default function ProductPage() {
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 250px;'
+            : props.type === 'second'
+            ? 'left:20rem; width: 340px;'
+            : 'left: 41rem; width: 170px;'}
+`;
 
 const AppTd = styled.td`
     width: 200px;

@@ -13,7 +13,6 @@ import QnARegis from '../container/product/QnARegis';
 
 export default function QnAPage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -84,15 +83,12 @@ export default function QnAPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
                 )
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
-                    console.log(viewData);
                 });
         };
         fetchData();
@@ -180,7 +176,11 @@ export default function QnAPage() {
             <IntroBox introInfo={introInfo[4]} />
             <MemberList>질문 및 답변 목록</MemberList>
             <MemberTable>
-                {loading && <div>loading...</div>}
+                <MemberBar>
+                    <Cartegories type='first'>파트</Cartegories>
+                    <Cartegories type='second'>질문</Cartegories>
+                    <Cartegories>답변</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -267,6 +267,31 @@ export default function QnAPage() {
         </>
     );
 }
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem;'
+            : props.type === 'second'
+            ? 'left:12rem; width: 250px;'
+            : 'left: 26rem; width: 410px;'}
+`;
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -389,6 +414,7 @@ const MemberTable = styled.table`
     td {
         padding: 5px;
         text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 
         :nth-child(2) {
             width: 200px;

@@ -83,13 +83,12 @@ export default function ManageGenPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/groups/public/all-groups-members'
                 )
                 .then((res) => {
                     setData(res.data);
-                    console.log(viewData);
                 });
         };
         fetchData();
@@ -178,6 +177,11 @@ export default function ManageGenPage() {
             <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
             <MemberTable>
+                <MemberBar>
+                    <Cartegories type='first'>이름</Cartegories>
+                    <Cartegories type='second'>역할 이름</Cartegories>
+                    <Cartegories>기수</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -258,6 +262,31 @@ export default function ManageGenPage() {
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 250px;'
+            : props.type === 'second'
+            ? 'left:20rem; width: 340px;'
+            : 'left: 38rem; width: 120px;'}
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
