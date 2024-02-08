@@ -168,23 +168,15 @@ export default function ManagePage() {
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
-            await axios.delete(
-                `https://server.inuappcenter.kr/members/${selectedMemberId}`
-            );
-            console.log(
-                'Member with ID',
-                selectedMemberId,
-                'has been deleted.'
-            );
-
-            // 삭제한 데이터를 data 상태에서 제거합니다.
-            setData((prevData) =>
-                prevData.filter((item) => item.member_id !== selectedMemberId)
-            );
-        } catch (error) {
-            console.error('Error deleting member:', error);
-            alert(error);
-        }
+            await axios
+                .delete(
+                    `https://server.inuappcenter.kr/members/${selectedMemberId}`
+                )
+                .then((res) => {
+                    alert(res.data.msg);
+                    console.log(res.data.msg);
+                });
+        } catch (error) {}
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
@@ -194,15 +186,15 @@ export default function ManagePage() {
             <IntroBox introInfo={introInfo[0]} />
             <MemberList>동아리원 목록</MemberList>
             <MemberTable>
-                <MemberBar>
-                    <Cartegories type='first'>이름</Cartegories>
-                    <Cartegories type='second'>이메일</Cartegories>
-                    <Cartegories type='third'>블로그</Cartegories>
-                    <Cartegories type='fourth'>깃허브</Cartegories>
-                    <Cartegories type='fifth'>프로필 이미지</Cartegories>
-                    <Cartegories type='sixth'>자기 소개</Cartegories>
-                </MemberBar>
                 <tbody>
+                    <MemberBar>
+                        <Cartegories type='first'>이름</Cartegories>
+                        <Cartegories type='second'>이메일</Cartegories>
+                        <Cartegories type='third'>블로그</Cartegories>
+                        <Cartegories type='fourth'>깃허브</Cartegories>
+                        <Cartegories type='fifth'>프로필 이미지</Cartegories>
+                        <Cartegories type='sixth'>자기 소개</Cartegories>
+                    </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
                             key={content.member_id}
@@ -222,7 +214,7 @@ export default function ManagePage() {
                                 {content.email ? (
                                     <div>{content.email}</div>
                                 ) : (
-                                    <div>no Email</div>
+                                    <div>없음</div>
                                 )}
                             </td>
                             <td>
@@ -232,10 +224,10 @@ export default function ManagePage() {
                                         target='_blank'
                                         rel='noopener noreferrer'
                                     >
-                                        Blog
+                                        블로그 링크
                                     </a>
                                 ) : (
-                                    'no Blog'
+                                    <div>없음</div>
                                 )}
                             </td>
                             <td>
@@ -245,26 +237,30 @@ export default function ManagePage() {
                                         target='_blank'
                                         rel='noopener noreferrer'
                                     >
-                                        github
+                                        깃허브 링크
                                     </a>
                                 ) : (
-                                    'no Github'
+                                    <div>없음</div>
                                 )}
                             </td>
                             <td>
                                 {content.profileImage ? (
-                                    <a href={content.profileImage} alt=''>
-                                        profileImage
+                                    <a
+                                        href={content.profileImage}
+                                        alt=''
+                                        type='link'
+                                    >
+                                        이미지 링크
                                     </a>
                                 ) : (
-                                    <div>no profileImage</div>
+                                    <div type='link'>없음</div>
                                 )}
                             </td>
                             <td>
                                 {content.description ? (
                                     <div>{content.description}</div>
                                 ) : (
-                                    <div>no description</div>
+                                    <div>없음</div>
                                 )}
                             </td>
                         </tr>
@@ -375,14 +371,14 @@ const Cartegories = styled.div`
         props.type === 'first'
             ? 'left: 8rem; width: 60px;'
             : props.type === 'second'
-            ? 'left:11.5rem; width: 200px;'
+            ? 'left:11rem; width: 180px;'
             : props.type === 'third'
-            ? 'left: 22.7rem; width: 90px;'
+            ? 'left: 21rem; width: 183px;'
             : props.type === 'fourth'
-            ? 'left: 27.3rem; width: 90px;'
+            ? 'left: 32.4rem; width: 150px;'
             : props.type === 'fifth'
-            ? 'left: 32rem; width: 220px;'
-            : 'left: 44.5rem; width: 200px;'}
+            ? 'left: 45em; width: 220px;'
+            : 'left: 51rem; width: 190px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -518,7 +514,7 @@ const MemberTable = styled.table`
     }
 
     div {
-        width: 180px;
+        width: 150px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;

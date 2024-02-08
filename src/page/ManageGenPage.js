@@ -120,9 +120,11 @@ export default function ManageGenPage() {
 
         // 수정할 데이터를 가져옵니다.
         const updatedData = {
-            role: editedRole,
-            generation: editedGen,
+            part: editedRole,
+            year: editedGen,
         };
+
+        console.log(updatedData);
 
         try {
             // group_id를 사용하여 수정 요청을 보냅니다.
@@ -155,7 +157,7 @@ export default function ManageGenPage() {
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/groups?${selectedGroupId}`
+                `https://server.inuappcenter.kr/groups/${selectedGroupId}`
             );
             console.log('Member with ID', selectedGroupId, 'has been deleted.');
 
@@ -241,7 +243,7 @@ export default function ManageGenPage() {
                 onRequestClose={closeEditModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>역할 수정</ModalTitle>
+                <ModalTitle>기수 수정</ModalTitle>
                 <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'

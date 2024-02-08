@@ -21,29 +21,33 @@ export default function Login() {
     };
 
     // id : 'appcenter', pw : '1q2w3e4r!Appcenter'
-    const onClick = async () => {
-        const response = await axios //eslint-disable-line no-unused-vars
-            .post('https://server.inuappcenter.kr/sign/sign-in', {
-                id: username,
-                password: password,
-            })
-            .then((res) => {
-                const { token } = res.data;
-                axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
+    const onSubmit = async (e) => {
+        e.preventDefault(); // 기본 form submit 방지
 
-                window.sessionStorage.setItem('token', token);
-                dispatch({
-                    type: 'login/setLogin',
-                    payload: { isLoggedIn: true },
-                });
-                navigate('/admin');
-            })
-            .catch((err) => {
-                console.log(err);
-                alert('아이디 또는 비밀번호가 틀렸습니다.');
-                setUsername('');
-                setPassword('');
+        try {
+            const response = await axios.post(
+                'https://server.inuappcenter.kr/sign/sign-in',
+                {
+                    id: username,
+                    password: password,
+                }
+            );
+
+            const { token } = response.data;
+            axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
+
+            window.sessionStorage.setItem('token', token);
+            dispatch({
+                type: 'login/setLogin',
+                payload: { isLoggedIn: true },
             });
+            navigate('/admin');
+        } catch (error) {
+            console.error(error);
+            alert('아이디 또는 비밀번호가 틀렸습니다.');
+            setUsername('');
+            setPassword('');
+        }
     };
 
     return (
@@ -51,27 +55,29 @@ export default function Login() {
             <LoginBox>
                 <LoginImg src={LoginLogo} alt='' />
                 <Title>홈페이지 대시보드</Title>
-                <InfoBox>
-                    <Label>
-                        ID :
-                        <Input
-                            type='id'
-                            value={username}
-                            onChange={handleUsernameChange}
-                            placeholder='아이디를 입력해주세요'
-                        />
-                    </Label>
-                    <Label>
-                        PW :
-                        <Input
-                            type='password'
-                            value={password}
-                            onChange={handlePasswordChange}
-                            placeholder='비밀번호를 입력해주세요'
-                        />
-                    </Label>
-                    <Button onClick={() => onClick()}>로그인</Button>
-                </InfoBox>
+                <form onSubmit={onSubmit}>
+                    <InfoBox>
+                        <Label>
+                            ID :
+                            <Input
+                                type='id'
+                                value={username}
+                                onChange={handleUsernameChange}
+                                placeholder='아이디를 입력해주세요'
+                            />
+                        </Label>
+                        <Label>
+                            PW :
+                            <Input
+                                type='password'
+                                value={password}
+                                onChange={handlePasswordChange}
+                                placeholder='비밀번호를 입력해주세요'
+                            />
+                        </Label>
+                        <Button type='submit'>로그인</Button>
+                    </InfoBox>
+                </form>
             </LoginBox>
         </Container>
     );

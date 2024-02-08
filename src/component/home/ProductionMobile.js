@@ -48,7 +48,7 @@ export default function ProductionMobile() {
                             <div className='card'>
                                 <TransparentAspectRatio ratio={'1'}>
                                     <figure>
-                                        <img
+                                        <AppImage
                                             src={
                                                 item.images[
                                                     Object.keys(item.images)[0]
@@ -96,6 +96,10 @@ export default function ProductionMobile() {
         </ProductionLayout>
     );
 }
+
+const AppImage = styled.img`
+    border-radius: 8px;
+`;
 
 const ProductionLayout = styled.div`
     display: flex;

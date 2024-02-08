@@ -150,15 +150,20 @@ export default function ManageRolePage() {
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
-            await axios.delete(
-                `https://server.inuappcenter.kr/roles/${selectedRoleId} `
-            );
-            console.log('Member with ID', selectedRoleId, 'has been deleted.');
-
-            // 삭제한 데이터를 data 상태에서 제거합니다.
-            setData((prevData) =>
-                prevData.filter((item) => item.roleId !== selectedRoleId)
-            );
+            await axios
+                .delete(
+                    `https://server.inuappcenter.kr/roles/${selectedRoleId} `
+                )
+                .then((res) => {
+                    alert(res.data.msg);
+                    console.log(res.data.msg);
+                    // 삭제한 데이터를 data 상태에서 제거합니다.
+                    setData((prevData) =>
+                        prevData.filter(
+                            (item) => item.roleId !== selectedRoleId
+                        )
+                    );
+                });
         } catch (error) {
             console.error('Error deleting member:', error);
             alert(error);

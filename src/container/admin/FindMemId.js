@@ -26,7 +26,8 @@ export default function FindMemId() {
         document.body.style.removeProperty('overflow');
     }, []);
 
-    const findData = async () => {
+    const findData = async (e) => {
+        e.preventDefault();
         try {
             const newMemberEncode = encodeURIComponent(newMember);
             const result = await axios.get(
@@ -56,15 +57,17 @@ export default function FindMemId() {
                 onRequestClose={closeModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>이름으로 동아리원 찾기</ModalTitle>
-                <ModalName>이름</ModalName>
-                <ModalInput
-                    type='text'
-                    placeholder='이름을 입력해주세요'
-                    value={newMember}
-                    onChange={(e) => setNewMember(e.target.value)}
-                />
-                <ModalButton onClick={findData}>검색</ModalButton>
+                <MemberForm onSubmit={findData}>
+                    <ModalTitle>이름으로 동아리원 찾기</ModalTitle>
+                    <ModalName>이름</ModalName>
+                    <ModalInput
+                        type='text'
+                        placeholder='이름을 입력해주세요'
+                        value={newMember}
+                        onChange={(e) => setNewMember(e.target.value)}
+                    />
+                    <ModalButton type='submit'>검색</ModalButton>
+                </MemberForm>
                 <ModalTemplate>
                     <ModalHeader type='name'>번호</ModalHeader>
                     <ModalHeader>이름</ModalHeader>
@@ -86,6 +89,11 @@ export default function FindMemId() {
         </>
     );
 }
+
+const MemberForm = styled.form`
+    width: 100%;
+`;
+
 const ModalName = styled.div`
     margin-bottom: 5px;
     margin-right: auto;
@@ -172,7 +180,7 @@ const ModalInput = styled.input`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;

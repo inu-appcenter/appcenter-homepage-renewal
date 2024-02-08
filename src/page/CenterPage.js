@@ -74,7 +74,7 @@ const PhotoImg = styled.img`
 const BoxContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 630px;
+    width: 650px;
     height: 400px;
     justify-content: flex-start;
     margin: 0 auto;

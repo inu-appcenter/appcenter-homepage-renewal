@@ -71,11 +71,11 @@ export default function AdminPage() {
     );
 }
 const PhotoBox = styled.div`
-    width: 7%;
-    height: 73%;
+    width: 8%;
+    height: 78%;
     background-color: white;
     margin-bottom: 2.2rem;
-    border-radius: 12px;
+    border-radius: 8px;
 `;
 
 const TextBox = styled.div`
@@ -85,8 +85,8 @@ const TextBox = styled.div`
 `;
 
 const PhotoImg = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
 `;
 
 const MenuText = styled.div`
@@ -96,17 +96,17 @@ const MenuText = styled.div`
     text-transform: uppercase;
     color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
     font-weight: ${(props) =>
-        props.type === 'top' ? 400 : props.type === 'title' ? 600 : 300};
+        props.type === 'top' ? 300 : props.type === 'title' ? 400 : 400};
     margin: auto 0;
     white-space: pre-line;
 
     ${(props) =>
         props.type === 'title'
             ? css`
-                  font-size: 30px;};
+                  font-size: ${(props) => props.theme.fontSize.mobile.title};
               `
             : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
+                  font-size: ${(props) => props.theme.fontSize.mobile.caption};
               `}
 `;
 

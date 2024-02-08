@@ -329,6 +329,7 @@ const ModalContainer = styled(Modal)`
     left: 50%;
     padding: 20px;
     border-radius: 8px;
+    background-color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     max-width: 620px;
     height: 250px;
