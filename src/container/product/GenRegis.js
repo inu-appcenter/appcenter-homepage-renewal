@@ -7,7 +7,12 @@ import {
     MemberModalopen,
     RoleModalopen,
 } from '../../modules/ProductSlice';
-import { setMemberId, setRoleId } from '../../modules/idSlice';
+import {
+    setMemberId,
+    setMemberName,
+    setRoleId,
+    setRoleName,
+} from '../../modules/idSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import FindMemId from '../admin/FindMemId';
 import FindRole from '../admin/FindRole';
@@ -25,6 +30,8 @@ export default function GenRegis() {
 
     const memberId = useSelector((state) => state.id.member_id);
     const roleId = useSelector((state) => state.id.role_id);
+    const memberName = useSelector((state) => state.id.memberName);
+    const roleName = useSelector((state) => state.id.roleName);
 
     // 새 멤버 추가 입력받을 상태 변수
     const [newRole, setNewRole] = useState({
@@ -53,6 +60,8 @@ export default function GenRegis() {
             });
             dispatch(RMclose());
             dispatch(setMemberId(''));
+            dispatch(setMemberName(''));
+            dispatch(setRoleName(''));
             dispatch(setRoleId(''));
         } catch (error) {
             console.log(memberId);
@@ -65,6 +74,8 @@ export default function GenRegis() {
     const closeModal = () => {
         dispatch(setMemberId(''));
         dispatch(setRoleId(''));
+        dispatch(setMemberName(''));
+        dispatch(setRoleName(''));
         dispatch(RMclose());
         openScroll();
     };
@@ -103,7 +114,7 @@ export default function GenRegis() {
                 <ModalInput
                     type='text'
                     placeholder='눌러서 동아리원 찾기'
-                    value={memberId}
+                    value={memberName}
                     onClick={() => openMemberModal()}
                 />
                 {memberModalOpen && <FindMemId />}
@@ -111,7 +122,7 @@ export default function GenRegis() {
                 <ModalInput
                     type='text'
                     placeholder='눌러서 역할 찾기'
-                    value={roleId}
+                    value={roleName}
                     onClick={() => openRoleModal()}
                 />
                 {roleModalOpen && <FindRole />}

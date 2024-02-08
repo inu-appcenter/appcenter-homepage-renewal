@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { RoleModalclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRoleId } from '../../modules/idSlice';
+import { setRoleId, setRoleName } from '../../modules/idSlice';
 
 export default function FindRole() {
     const dispatch = useDispatch();
@@ -43,9 +43,10 @@ export default function FindRole() {
         }
     };
 
-    const setId = (id) => {
+    const setId = (id, name) => {
         console.log(id);
         dispatch(setRoleId(id));
+        dispatch(setRoleName(name));
         closeModal();
     };
 
@@ -73,7 +74,11 @@ export default function FindRole() {
                 </ModalTemplate>
                 <>
                     {data.map((member, index) => (
-                        <LabelWrapper onClick={() => setId(member.roleId)}>
+                        <LabelWrapper
+                            onClick={() =>
+                                setId(member.roleId, member.roleName)
+                            }
+                        >
                             <ModalLabel type='name'>{member.roleId}</ModalLabel>
                             <ModalLabel>{member.roleName}</ModalLabel>
                         </LabelWrapper>

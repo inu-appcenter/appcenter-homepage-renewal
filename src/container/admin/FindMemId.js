@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import { MemberModalclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMemberId } from '../../modules/idSlice';
+import { setMemberId, setMemberName } from '../../modules/idSlice';
 
 export default function FindMemId() {
     const dispatch = useDispatch();
@@ -44,9 +44,10 @@ export default function FindMemId() {
         }
     };
 
-    const setId = (id) => {
+    const setId = (id, name) => {
         console.log(id);
         dispatch(setMemberId(id));
+        dispatch(setMemberName(name));
         closeModal();
     };
 
@@ -75,7 +76,9 @@ export default function FindMemId() {
                 </ModalTemplate>
                 <>
                     {data.map((member, index) => (
-                        <LabelWrapper onClick={() => setId(member.member_id)}>
+                        <LabelWrapper
+                            onClick={() => setId(member.member_id, member.name)}
+                        >
                             <ModalLabel type='name'>
                                 {member.member_id}
                             </ModalLabel>
