@@ -190,6 +190,7 @@ export default function ProductionDesktop() {
 
 const ThumbNail = styled.img`
     border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 `;
 
 const CloseImg = styled.img`
@@ -278,6 +279,8 @@ const TransparentAspectRatio = styled(AspectRatio)`
 const DetailImage = styled.img`
     position: absolute;
     border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
     left: 0.5rem;
     top: 16rem;
     width: 207px;
@@ -342,6 +345,8 @@ const AppImage = styled.img`
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
 
     top: -1.5rem;
     left: 1.5rem;

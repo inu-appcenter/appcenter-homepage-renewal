@@ -63,7 +63,7 @@ export default function ManageGenPage() {
         );
         if (memberToEdit) {
             setEditedRole(memberToEdit.role);
-            setEditedGen(memberToEdit.generation);
+            setEditedGen(memberToEdit.year);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedGroupId]);
@@ -165,7 +165,7 @@ export default function ManageGenPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
-            alert('삭제에 실패했습니다.');
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -177,12 +177,12 @@ export default function ManageGenPage() {
             <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
             <MemberTable>
-                <MemberBar>
-                    <Cartegories type='first'>이름</Cartegories>
-                    <Cartegories type='second'>역할 이름</Cartegories>
-                    <Cartegories>기수</Cartegories>
-                </MemberBar>
                 <tbody>
+                    <MemberBar>
+                        <Cartegories type='first'>이름</Cartegories>
+                        <Cartegories type='second'>역할 이름</Cartegories>
+                        <Cartegories>기수</Cartegories>
+                    </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
                             key={content.group_id}
@@ -282,10 +282,10 @@ const Cartegories = styled.div`
     position: absolute;
     ${(props) =>
         props.type === 'first'
-            ? 'left: 8rem; width: 250px;'
+            ? 'left: 8rem; width: 220px;'
             : props.type === 'second'
-            ? 'left:20rem; width: 340px;'
-            : 'left: 38rem; width: 120px;'}
+            ? 'left:18rem; width: 340px;'
+            : 'left: 35.7rem; width: 155px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -301,7 +301,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;

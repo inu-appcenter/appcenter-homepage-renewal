@@ -161,7 +161,7 @@ export default function ManageRolePage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
-            alert('삭제에 실패했습니다.');
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -294,7 +294,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;

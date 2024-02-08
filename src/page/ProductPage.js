@@ -117,7 +117,7 @@ export default function ProductPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
-            alert('삭제에 실패했습니다.');
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기

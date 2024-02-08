@@ -39,7 +39,7 @@ export default function InOut() {
 
     return (
         <NavBar>
-            <Link to='/../home'>
+            <Link to='/../admin'>
                 <LogoImg src={logo} alt='logo' />
             </Link>
             {isLoggedIn ? (

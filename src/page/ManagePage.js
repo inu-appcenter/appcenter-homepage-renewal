@@ -183,7 +183,7 @@ export default function ManagePage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
-            alert('삭제에 실패했습니다.');
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -200,7 +200,7 @@ export default function ManagePage() {
                     <Cartegories type='third'>블로그</Cartegories>
                     <Cartegories type='fourth'>깃허브</Cartegories>
                     <Cartegories type='fifth'>프로필 이미지</Cartegories>
-                    <Cartegories type='sixth'>설명</Cartegories>
+                    <Cartegories type='sixth'>자기 소개</Cartegories>
                 </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
@@ -220,15 +220,9 @@ export default function ManagePage() {
                             <td>{content.name}</td>
                             <td>
                                 {content.email ? (
-                                    <a
-                                        href={content.email}
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        Email
-                                    </a>
+                                    <div>{content.email}</div>
                                 ) : (
-                                    'no Email'
+                                    <div>no Email</div>
                                 )}
                             </td>
                             <td>
@@ -259,28 +253,18 @@ export default function ManagePage() {
                             </td>
                             <td>
                                 {content.profileImage ? (
-                                    <a
-                                        href={content.profileImage}
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
+                                    <a href={content.profileImage} alt=''>
                                         profileImage
                                     </a>
                                 ) : (
-                                    'no profileImage'
+                                    <div>no profileImage</div>
                                 )}
                             </td>
                             <td>
                                 {content.description ? (
-                                    <a
-                                        href={content.description}
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        description
-                                    </a>
+                                    <div>{content.description}</div>
                                 ) : (
-                                    'no description'
+                                    <div>no description</div>
                                 )}
                             </td>
                         </tr>
@@ -391,14 +375,14 @@ const Cartegories = styled.div`
         props.type === 'first'
             ? 'left: 8rem; width: 60px;'
             : props.type === 'second'
-            ? 'left:11rem; width: 80px;'
+            ? 'left:11.5rem; width: 200px;'
             : props.type === 'third'
-            ? 'left: 15rem; width: 90px;'
+            ? 'left: 22.7rem; width: 90px;'
             : props.type === 'fourth'
-            ? 'left: 19.5rem; width: 90px;'
+            ? 'left: 27.3rem; width: 90px;'
             : props.type === 'fifth'
-            ? 'left: 25rem; width: 120px;'
-            : 'left: 32.3rem; width: 120px;'}
+            ? 'left: 32rem; width: 220px;'
+            : 'left: 44.5rem; width: 200px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -414,7 +398,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;
@@ -531,6 +515,13 @@ const MemberTable = styled.table`
         font-weight: 700;
         padding: 5px;
         text-align: center;
+    }
+
+    div {
+        width: 180px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     a {
