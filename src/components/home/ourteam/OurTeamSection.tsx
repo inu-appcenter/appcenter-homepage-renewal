@@ -1,10 +1,15 @@
 import Title from '../../common/Title.tsx';
 import SectionLayout from '../SectionLayout.tsx';
+import OurTeamList from './OurTeamList.tsx';
 
 const OurTeamSection = () => {
   return (
     <SectionLayout>
-      <Title title='OUR TEAM' />
+      <Title
+        title='OUR TEAM'
+        subtitle='다른 분야가 모여 하나의 목표를 향해 나아갑니다.'
+      />
+      <OurTeamList />
     </SectionLayout>
   );
 };
