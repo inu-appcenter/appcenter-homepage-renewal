@@ -45,13 +45,13 @@ export const interviewAnswer = [
 const Interview = () => {
   return (
     <div className='flex flex-col justify-center'>
-      <div className='flex gap-16'>
+      <div className='flex gap-16 flex-wrap justify-center'>
         <h2 className='mt-8 pl-8 text-primary-700 font-semibold text-4xl before:content-["Q."] before:relative -indent-8'>
           앱센터 활동을 하면서 <br />
           어떤 점이 좋았나요?
         </h2>
         <Swiper
-          className='w-1/2'
+          className='px-4  w-full sm:w-2/3 lg:w-1/2'
           effect='cards'
           pagination={{
             clickable: true,
