@@ -1,5 +1,5 @@
 import Title from '../../common/Title.tsx';
-import SectionLayout from '../SectionLayout.tsx';
+import SectionLayout from '../../common/layouts/SectionLayout.tsx';
 import OurTeamList from './OurTeamList.tsx';
 
 const OurTeamSection = () => {

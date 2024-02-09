@@ -1,7 +1,7 @@
 import Title from '../../common/Title.tsx';
 import Slogan from './Slogan.tsx';
 import Interview from './Interview.tsx';
-import SectionLayout from '../SectionLayout.tsx';
+import SectionLayout from '../../common/layouts/SectionLayout.tsx';
 
 const AboutUsSection = () => {
   return (
