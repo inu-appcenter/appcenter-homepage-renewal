@@ -1,6 +1,6 @@
 const Slogan = () => {
   return (
-    <div className='flex flex-col justify-center items-center gap-y-6'>
+    <div className='flex flex-col justify-center items-center gap-y-6 text-[#1E4995]'>
       <p className='font-semibold'>INU APPCENTER</p>
       <h2 className='text-center text-secondary-300 font-bold text-5xl'>
         우리에게 필요한 것은 우리가 만든다
