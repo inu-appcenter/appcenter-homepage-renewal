@@ -35,7 +35,7 @@ const OurTeamList = () => {
   return (
     <div className='flex mt-12 flex-col gap-8'>
       {ourTeamList.map(({ label, description, path }) => (
-        <div className='flex justify-between items-center'>
+        <div key={path} className='flex justify-between items-center'>
           <div>
             <h4 className='text-4xl font-semibold mb-2 first-letter:text-primary-700'>
               {label}
