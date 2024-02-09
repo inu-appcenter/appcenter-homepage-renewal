@@ -33,7 +33,7 @@ const ourTeamList = [
 
 const OurTeamList = () => {
   return (
-    <div className='flex mt-12 flex-col gap-8 h-4/5'>
+    <div className='flex mt-12 flex-col gap-8'>
       {ourTeamList.map(({ label, description, path }) => (
         <div className='flex justify-between items-center'>
           <div>
