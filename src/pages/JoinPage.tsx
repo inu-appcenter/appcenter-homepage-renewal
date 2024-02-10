@@ -1,4 +1,4 @@
-import ScheduleSection from '../components/join/ScheduleSection.tsx';
+import ScheduleSection from '../components/join/schedule/ScheduleSection.tsx';
 
 const JoinPage = () => {
   return (
