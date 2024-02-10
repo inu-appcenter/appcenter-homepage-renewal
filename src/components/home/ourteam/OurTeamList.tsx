@@ -44,7 +44,7 @@ const OurTeamList = () => {
           </div>
           <Link
             to={path}
-            className='flex items-center justify-center p-3 bg-amber-300 rounded-full w-12 h-12'
+            className='flex items-center justify-center p-3 bg-amber-300 rounded-full w-12 h-12 hover:bg-secondary-400 transition'
           >
             <img src={ArrowRight} />
           </Link>
