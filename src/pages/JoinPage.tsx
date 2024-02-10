@@ -1,7 +1,11 @@
+import ScheduleSection from '../components/join/ScheduleSection.tsx';
+
 const JoinPage = () => {
-   return(
-       <div>JoinPage</div>
-   )
-}
+  return (
+    <>
+      <ScheduleSection />
+    </>
+  );
+};
 
 export default JoinPage;
