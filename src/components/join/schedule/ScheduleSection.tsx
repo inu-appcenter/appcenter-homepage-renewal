@@ -33,7 +33,7 @@ export type ScheduleInfoList = typeof scheduleInfoList;
 
 const ScheduleSection = () => {
   return (
-    <SectionLayout className='gap-y-16'>
+    <SectionLayout className='gap-y-16 md:h-auto'>
       <SectionTitle title='앱센터의 1년 일정' className='flex justify-center' />
       <ScheduleDesktop scheduleInfoList={scheduleInfoList} />
       <ScheduleMobile scheduleInfoList={scheduleInfoList} />
