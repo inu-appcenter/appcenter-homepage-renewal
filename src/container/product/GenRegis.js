@@ -220,6 +220,6 @@ const ModalButton = styled.button`
     }
 
     &:hover {
-        background-color: #8181f7;
+        background-color: grey;
     }
 `;

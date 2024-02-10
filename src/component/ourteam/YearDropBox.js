@@ -12,6 +12,7 @@ import styled from 'styled-components';
 const yearList = new Array(dayjs().get('year') - 2022 + 1)
     .fill(0)
     .map((_, i) => 2022 + i);
+
 export default function YearDropBox({ year, handleYearChange }) {
     const handleChange = (event) => {
         handleYearChange(event.target.value);

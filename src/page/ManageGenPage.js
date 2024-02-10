@@ -182,8 +182,10 @@ export default function ManageGenPage() {
                 <tbody>
                     <MemberBar>
                         <Cartegories type='first'>이름</Cartegories>
-                        <Cartegories type='second'>역할 이름</Cartegories>
-                        <Cartegories>기수</Cartegories>
+                        <Cartegories type='second'>역할명</Cartegories>
+                        <Cartegories type='third'>기수</Cartegories>
+                        <Cartegories type='fourth'>파트명</Cartegories>
+                        <Cartegories>이메일</Cartegories>
                     </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -202,6 +204,8 @@ export default function ManageGenPage() {
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
+                            <td>{content.part}</td>
+                            <td>{content.email}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -284,10 +288,14 @@ const Cartegories = styled.div`
     position: absolute;
     ${(props) =>
         props.type === 'first'
-            ? 'left: 8rem; width: 220px;'
+            ? 'left: 8rem; width: 90px;'
             : props.type === 'second'
-            ? 'left:18rem; width: 340px;'
-            : 'left: 35.7rem; width: 155px;'}
+            ? 'left:13rem; width: 100px;'
+            : props.type === 'third'
+            ? 'left: 18rem; width: 100px;'
+            : props.type === 'fourth'
+            ? 'left: 22.5rem; width: 120px;'
+            : 'left: 28.5rem; width: 270px;'}
 `;
 
 const PaginationContainer = styled.div`
