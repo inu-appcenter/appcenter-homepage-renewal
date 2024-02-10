@@ -55,6 +55,10 @@ export const MENU = [
     label: 'FAQ',
     children: [
       {
+        path: PATH.FAQ_DETAIL(PART.common.value),
+        label: PART.common.label,
+      },
+      {
         path: PATH.FAQ_DETAIL(PART.android.value),
         label: PART.android.label,
       },
