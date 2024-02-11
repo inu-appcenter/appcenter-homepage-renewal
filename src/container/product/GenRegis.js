@@ -16,11 +16,23 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import FindMemId from '../admin/FindMemId';
 import FindRole from '../admin/FindRole';
+import Container from './Container';
 
 export default function GenRegis() {
     const [data, setData] = useState([]);
 
-    // 상태관리 관련
+    const [part, setPart] = useState([]);
+    const [year, setYear] = useState([]);
+
+    // 새 멤버 추가 입력받을 상태 변수
+    const [newRole, setNewRole] = useState({
+        role_id: '',
+        member_id: '',
+        part: '',
+        year: '',
+    });
+
+    // redux 관련
     const dispatch = useDispatch();
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     const memberModalOpen = useSelector(
@@ -33,13 +45,29 @@ export default function GenRegis() {
     const memberName = useSelector((state) => state.id.memberName);
     const roleName = useSelector((state) => state.id.roleName);
 
-    // 새 멤버 추가 입력받을 상태 변수
-    const [newRole, setNewRole] = useState({
-        role_id: '',
-        member_id: '',
-        part: '',
-        year: '',
-    });
+    const getParts = async () => {
+        try {
+            const result = await axios.get(
+                'https://server.inuappcenter.kr/groups/public/all-parts'
+            );
+            setPart(result.data.parts);
+            console.log(result.data.parts);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const getYears = async () => {
+        try {
+            const result = await axios.get(
+                'https://server.inuappcenter.kr/groups/public/all-groups-years'
+            );
+            setYear(result.data.yearList);
+            console.log(result.data.yearList);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     const addData = async () => {
         try {
@@ -134,7 +162,9 @@ export default function GenRegis() {
                     onChange={(e) =>
                         setNewRole({ ...newRole, part: e.target.value })
                     }
+                    onClick={() => getParts()}
                 />
+                {part && <Container data={part} />}
                 <ModalLabel>기수</ModalLabel>
                 <ModalInput
                     type='text'
@@ -143,7 +173,9 @@ export default function GenRegis() {
                     onChange={(e) =>
                         setNewRole({ ...newRole, year: e.target.value })
                     }
+                    onClick={() => getYears()}
                 />
+                {year && <Container data={year} />}
                 <ModalButtonWrapper>
                     <ModalButton onClick={addData}>등록</ModalButton>
                     <ModalButton onClick={closeModal}>취소</ModalButton>
