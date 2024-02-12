@@ -5,7 +5,7 @@ const QUERY_KEY = {
 
   FAQS_PUBLIC_ALL: (topic?: keyof typeof PART) => ['faqs', topic],
 
-  GROUPS_PUBLIC_ALL: (year: number, part: keyof typeof PART) => [
+  GROUPS_PUBLIC_ALL: (year?: number, part?: keyof typeof PART) => [
     'groups',
     year,
     part,

@@ -9,7 +9,10 @@ export const objectToQueryString = (obj: QueryStringObject) => {
         return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
 
       return value
-        .map((v) => `${encodeURIComponent(key)}}=${encodeURIComponent(v)}`)
+        .map((v) => {
+          if (v !== 0 && !v) return;
+          return `${encodeURIComponent(key)}}=${encodeURIComponent(v)}`;
+        })
         .join('&');
     })
     .join('&');
