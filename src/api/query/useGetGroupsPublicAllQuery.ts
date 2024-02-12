@@ -7,8 +7,8 @@ const useGetGroupsPublicAllQuery = ({
   year,
   part,
 }: {
-  year: number;
-  part: keyof typeof PART;
+  year?: number;
+  part?: keyof typeof PART;
 }) => {
   return useSuspenseQuery({
     queryFn: () => getGroupsPublicAll(year, part),
