@@ -6,6 +6,7 @@ import TeamPage from '@pages/TeamPage.tsx';
 import JoinPage from '@pages/JoinPage.tsx';
 import FAQPage from '@pages/FAQPage.tsx';
 import FAQDetailPage from '@pages/FAQDetailPage.tsx';
+import teamPageLoader from '@router/loader/teamPageLoader.ts';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const AppRouter = () => {
         {
           path: PATH.TEAM(),
           element: <TeamPage />,
+          loader: teamPageLoader,
         },
         {
           path: PATH.JOIN,
