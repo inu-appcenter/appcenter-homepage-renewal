@@ -8,6 +8,9 @@ const API = {
 
   FAQS_PUBLIC_ALL: (obj: QueryStringObject) =>
     `faqs/public/all-faq-boards?${objectToQueryString(obj)}`,
+
+  GROUPS_PUBLIC_ALL: (obj: QueryStringObject) =>
+    `groups/public/all-groups-members?${objectToQueryString(obj)}`,
 };
 
 export default API;
