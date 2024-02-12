@@ -28,7 +28,7 @@
       "@constants/*": ["./src/constants/*"],
       "@pages/*": ["./src/pages/*"],
       "@router/*": ["./src/router/*"],
-      "@types/*": ["./src/types/*"],
+      "@type/*": ["./src/types/*"],
       "@/*": ["./src/*"]
     },
   },

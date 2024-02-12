@@ -5,3 +5,5 @@ export type PartParam = { part: Part };
 
 export type Section = keyof typeof SECTION;
 export type SectionParam = { section: Section };
+
+export type Primitive = number | string | boolean;
