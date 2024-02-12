@@ -1,4 +1,4 @@
-import { ScheduleInfoList } from './ScheduleSection.tsx';
+import { ScheduleInfoList } from '@components/join/schedule/ScheduleSection.tsx';
 
 type ScheduleDesktopProps = {
   scheduleInfoList: ScheduleInfoList;

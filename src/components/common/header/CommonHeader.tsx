@@ -1,5 +1,5 @@
-import Logo from './Logo.tsx';
-import Nav from './Nav.tsx';
+import Logo from '@components/common/header/Logo.tsx';
+import Nav from '@components/common/header/Nav.tsx';
 
 const CommonHeader = () => {
   return (

@@ -1,5 +1,5 @@
-import Title from '../components/common/Title.tsx';
-import PartFaqGrid from '../components/faq/PartFaqGrid.tsx';
+import Title from '@/components/common/Title.tsx';
+import PartFaqGrid from '@/components/faq/PartFaqGrid.tsx';
 
 const FAQPage = () => {
   return (

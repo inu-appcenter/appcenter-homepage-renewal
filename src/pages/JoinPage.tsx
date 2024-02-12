@@ -1,6 +1,6 @@
-import ScheduleSection from '../components/join/schedule/ScheduleSection.tsx';
-import JoinSection from '../components/join/join/JoinSection.tsx';
-import SectionLayout from '../components/common/layouts/SectionLayout.tsx';
+import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
+import ScheduleSection from '@components/join/schedule/ScheduleSection.tsx';
+import JoinSection from '@components/join/join/JoinSection.tsx';
 
 const JoinPage = () => {
   return (

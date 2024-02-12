@@ -1,7 +1,7 @@
-import Title from '../../common/Title.tsx';
-import Slogan from './Slogan.tsx';
-import Interview from './Interview.tsx';
-import SectionLayout from '../../common/layouts/SectionLayout.tsx';
+import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
+import Title from '@components/common/Title.tsx';
+import Slogan from '@components/home/aboutUs/Slogan.tsx';
+import Interview from '@components/home/aboutUs/Interview.tsx';
 
 const AboutUsSection = () => {
   return (

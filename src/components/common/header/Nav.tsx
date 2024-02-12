@@ -1,4 +1,4 @@
-import { MENU } from '../../../constants/menu.ts';
+import { MENU } from '@constants/menu.ts';
 import { Link, useLocation } from 'react-router-dom';
 
 const Nav = () => {

@@ -1,8 +1,8 @@
-import useGetIntroductionBoardPublicAllQuery from '../../../api/query/useGetIntroductionBoardPublicAllQuery.ts';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PlayStoreBadge from '../../../assets/svg/google-play-badge.svg';
-import AppStoreBadge from '../../../assets/svg/app-store-badge.svg';
+import PlayStoreBadge from '@assets/svg/google-play-badge.svg';
+import AppStoreBadge from '@assets/svg/app-store-badge.svg';
 import { Autoplay } from 'swiper/modules';
+import useGetIntroductionBoardPublicAllQuery from '@api/query/useGetIntroductionBoardPublicAllQuery.ts';
 
 const ProductListSwiper = () => {
   const { data } = useGetIntroductionBoardPublicAllQuery();

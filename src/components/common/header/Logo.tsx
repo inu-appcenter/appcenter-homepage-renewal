@@ -1,6 +1,6 @@
-import LogoDefault from '../../../assets/svg/navbar_logo.svg';
-import LogoSmall from '../../../assets/svg/navbar_logo_small.svg';
-import LogoMedium from '../../../assets/svg/navbar_logo_medium.svg';
+import LogoDefault from '@assets/svg/navbar_logo.svg';
+import LogoSmall from '@assets/svg/navbar_logo_small.svg';
+import LogoMedium from '@assets/svg/navbar_logo_medium.svg';
 
 const Logo = () => {
   return (

@@ -1,7 +1,7 @@
-import { PATH } from '../../../constants/path.ts';
-import { PART } from '../../../constants/common.ts';
 import { Link } from 'react-router-dom';
-import ArrowRight from '../../../assets/svg/arrow_right.svg';
+import ArrowRight from '@assets/svg/arrow_right.svg';
+import { PART } from '@constants/common.ts';
+import { PATH } from '@constants/path.ts';
 
 const ourTeamList = [
   {

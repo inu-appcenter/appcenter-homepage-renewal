@@ -1,5 +1,5 @@
-import { PART } from '../../constants/common.ts';
-import { PATH } from '../../constants/path.ts';
+import { PART } from '@constants/common.ts';
+import { PATH } from '@constants/path.ts';
 import { Link } from 'react-router-dom';
 
 const partFaqList = [
@@ -36,7 +36,7 @@ const partFaqList = [
 ];
 const PartFaqGrid = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+    <div className='self-center grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-screen-md'>
       {partFaqList.map(({ part, question, path }) => (
         <Link to={path}>
           <div

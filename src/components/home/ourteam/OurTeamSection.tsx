@@ -1,6 +1,6 @@
-import Title from '../../common/Title.tsx';
-import SectionLayout from '../../common/layouts/SectionLayout.tsx';
-import OurTeamList from './OurTeamList.tsx';
+import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
+import Title from '@components/common/Title.tsx';
+import OurTeamList from '@components/home/ourteam/OurTeamList.tsx';
 
 const OurTeamSection = () => {
   return (

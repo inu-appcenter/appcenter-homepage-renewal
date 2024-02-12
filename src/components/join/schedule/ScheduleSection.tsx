@@ -1,7 +1,7 @@
-import SectionLayout from '../../common/layouts/SectionLayout.tsx';
-import SectionTitle from '../SectionTitle.tsx';
-import ScheduleDesktop from './ScheduleDesktop.tsx';
-import ScheduleMobile from './ScheduleMobile.tsx';
+import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
+import SectionTitle from '@components/join/SectionTitle.tsx';
+import ScheduleDesktop from '@components/join/schedule/ScheduleDesktop.tsx';
+import ScheduleMobile from '@components/join/schedule/ScheduleMobile.tsx';
 
 const scheduleInfoList = [
   {

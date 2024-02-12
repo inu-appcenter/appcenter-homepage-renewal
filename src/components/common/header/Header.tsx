@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { PATH } from '../../../constants/path.ts';
-import CommonHeader from './CommonHeader.tsx';
+import { PATH } from '@constants/path.ts';
+import CommonHeader from '@components/common/header/CommonHeader.tsx';
 
 const Header = () => {
   const { pathname } = useLocation();
