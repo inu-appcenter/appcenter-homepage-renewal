@@ -10,7 +10,7 @@ const TeamSubTitle = () => {
 
   const { label, description } = useMemo(
     () =>
-      ourTeamList.find(({ label }) => label === PART[part ?? 'android'].label)!,
+      ourTeamList.find(({ label }) => label === PART[part ?? 'android'].label),
     [part]
   );
 
