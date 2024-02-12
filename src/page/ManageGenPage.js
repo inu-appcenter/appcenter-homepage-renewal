@@ -204,7 +204,7 @@ export default function ManageGenPage() {
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
-                            <td>{content.part}</td>
+                            <td>{content.part ?? <div>{content.part}</div>}</td>
                             <td>{content.email}</td>
                         </tr>
                     ))}

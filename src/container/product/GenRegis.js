@@ -130,6 +130,12 @@ export default function GenRegis() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roleModalOpen]);
 
+    useEffect(() => {
+        getParts();
+        getYears();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <>
             <ModalContainer
@@ -162,7 +168,6 @@ export default function GenRegis() {
                     onChange={(e) =>
                         setNewRole({ ...newRole, part: e.target.value })
                     }
-                    onClick={() => getParts()}
                 />
                 {part && <Container data={part} />}
                 <ModalLabel>기수</ModalLabel>
@@ -173,7 +178,6 @@ export default function GenRegis() {
                     onChange={(e) =>
                         setNewRole({ ...newRole, year: e.target.value })
                     }
-                    onClick={() => getYears()}
                 />
                 {year && <Container data={year} />}
                 <ModalButtonWrapper>

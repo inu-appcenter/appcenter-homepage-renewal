@@ -5,6 +5,8 @@ const initialState = {
     modifyModalOpen: false,
     memberModalOpen: false,
     roleModalOpen: false,
+    genPart: '',
+    genYear: '',
     message: '',
 };
 
@@ -40,6 +42,12 @@ export const ProductSlice = createSlice({
         RoleModalclose(state) {
             state.roleModalOpen = false;
         },
+        setGenPart(state, action) {
+            state.genPart = action.payload;
+        },
+        setGenYear(state, action) {
+            state.genYear = action.payload;
+        },
     },
 });
 
@@ -52,4 +60,6 @@ export const {
     MemberModalclose,
     RoleModalopen,
     RoleModalclose,
+    setGenPart,
+    setGenYear,
 } = ProductSlice.actions;
