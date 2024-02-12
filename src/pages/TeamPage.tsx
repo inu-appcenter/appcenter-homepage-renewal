@@ -10,7 +10,9 @@ const TeamPage = () => {
       <div className='mb-8'>
         <Title title='OUR TEAM' />
       </div>
-      <TeamSubTitle />
+      <div className='mb-4'>
+        <TeamSubTitle />
+      </div>
       <TeamEmoji />
       <Suspense>
         <TeamMemberList />

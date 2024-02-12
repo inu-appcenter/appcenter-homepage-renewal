@@ -1,16 +1,16 @@
 import FirstLetterPointText from '@components/common/FirstLetterPointText.tsx';
 import { useParams } from 'react-router-dom';
-import { PartParam } from '@type/common.ts';
+import { TeamParam } from '@type/common.ts';
 import { useMemo } from 'react';
 import { ourTeamList } from '@assets/text/team.ts';
 import { PART } from '@constants/common.ts';
 
 const TeamSubTitle = () => {
-  const { part } = useParams<PartParam>();
+  const { part } = useParams<TeamParam>();
 
   const { label, description } = useMemo(
     () =>
-      ourTeamList.find(({ label }) => label === PART[part ?? 'android'].label),
+      ourTeamList.find(({ label }) => label === PART[part ?? 'android'].label)!,
     [part]
   );
 

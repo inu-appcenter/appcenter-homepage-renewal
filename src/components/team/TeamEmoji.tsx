@@ -11,28 +11,29 @@ import SpeechBubble from '@components/common/SpeechBubble.tsx';
 const teamEmojiObject = {
   [PART.android.value]: {
     part: PART.android.value,
-    description: '안녕하세요! 안드로이드 파트 입니다.',
+    description: '안녕하세요! 안드로이드 파트입니다.',
     emoji: androidEmoji,
   },
   [PART.design.value]: {
     part: PART.design.value,
     description:
-      '안녕하세요! 아이디어가 넘치는 디자인 입니다! 함께 배우며 함께 성장하는 디자인팀으로 오세요!',
+      '안녕하세요! 아이디어가 넘치는 디자인 파트입니다!\n함께 배우며 함께 성장하는 디자인팀으로 오세요!',
     emoji: designEmoji,
   },
   [PART.ios.value]: {
     part: PART.ios.value,
-    description: '안녕하세요! iOS 파트 입니다.',
+    description: '안녕하세요! iOS 파트입니다.',
     emoji: iosEmoji,
   },
   [PART.server.value]: {
     part: PART.server.value,
-    description: '안녕하세요! 서버 파트 입니다.',
+    description: '안녕하세요! 서버 파트입니다.',
     emoji: serverEmoji,
   },
   [PART.web.value]: {
     part: PART.web.value,
-    description: '안녕하세요! 웹 파트 입니다.',
+    description:
+      '안녕하세요😊 앱센터 웹파트 입니다.\n우리 함께 앱센터를 웹센터로 만들어볼까요?',
     emoji: webEmoji,
   },
 };
@@ -44,7 +45,7 @@ const TeamEmoji = () => {
   return (
     <div className='flex justify-center gap-x-16'>
       <img src={emoji} width={160} />
-      <SpeechBubble>{description}</SpeechBubble>
+      <SpeechBubble className='w-96 whitespace-pre'>{description}</SpeechBubble>
     </div>
   );
 };
