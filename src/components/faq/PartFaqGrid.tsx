@@ -36,14 +36,14 @@ const partFaqList = [
 ];
 const PartFaqGrid = () => {
   return (
-    <div className='self-center grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-screen-md'>
+    <div className='self-center grid grid-cols-1 sm:grid-cols-2 gap-4 w-full'>
       {partFaqList.map(({ part, question, path }) => (
-        <Link to={path}>
+        <Link to={path} className=''>
           <div
             key={part}
-            className='flex flex-col gap-y-2 bg-primary-200 rounded-3xl px-6 py-6 md:py-4'
+            className='flex flex-col justify-between gap-y-2 bg-primary-200 rounded-3xl px-6 py-6 md:py-4 h-full'
           >
-            <p className='bg-white w-fit px-4 py-1 mb-4 rounded-2xl text-primary-700 font-semibold'>
+            <p className='bg-white w-fit px-4 py-1 mb-3 rounded-2xl text-primary-700 font-semibold'>
               {part}
             </p>
             <p className='pl-2 font-medium'>{question}</p>
