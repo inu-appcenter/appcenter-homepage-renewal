@@ -1,15 +1,11 @@
-import { PART } from '@constants/common.ts';
+import { Part } from '@type/common.ts';
 
 const QUERY_KEY = {
   INTRODUCTION_BOARD: (id?: string) => ['introduction-board', id],
 
-  FAQS_PUBLIC_ALL: (topic?: keyof typeof PART) => ['faqs', topic],
+  FAQS_PUBLIC_ALL: (topic?: Part) => ['faqs', topic],
 
-  GROUPS_PUBLIC_ALL: (year?: number, part?: keyof typeof PART) => [
-    'groups',
-    year,
-    part,
-  ],
+  GROUPS_PUBLIC_ALL: (year?: number, part?: Part) => ['groups', year, part],
 };
 
 export default QUERY_KEY;

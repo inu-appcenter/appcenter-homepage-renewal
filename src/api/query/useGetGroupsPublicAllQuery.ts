@@ -1,14 +1,14 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { PART } from '@constants/common.ts';
 import QUERY_KEY from '@api/constants/queryKey.ts';
 import { getGroupsPublicAll } from '@api/api/groups.ts';
+import { Team } from '@type/common.ts';
 
 const useGetGroupsPublicAllQuery = ({
   year,
   part,
 }: {
   year?: number;
-  part?: keyof typeof PART;
+  part?: Team;
 }) => {
   return useSuspenseQuery({
     queryFn: () => getGroupsPublicAll(year, part),

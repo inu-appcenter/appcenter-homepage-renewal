@@ -1,9 +1,9 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getFaqsPublicAll } from '@api/api/faqs.ts';
-import { PART } from '@constants/common.ts';
 import QUERY_KEY from '@api/constants/queryKey.ts';
+import { Part } from '@type/common.ts';
 
-const useGetFaqsPublicAllQuery = (topic: keyof typeof PART) => {
+const useGetFaqsPublicAllQuery = (topic: Part) => {
   return useSuspenseQuery({
     queryFn: () => getFaqsPublicAll(topic),
     queryKey: QUERY_KEY.FAQS_PUBLIC_ALL(topic),
