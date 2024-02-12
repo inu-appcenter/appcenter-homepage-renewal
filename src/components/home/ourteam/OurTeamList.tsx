@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import ArrowRight from '@assets/svg/arrow_right.svg';
 import { PART } from '@constants/common.ts';
 import { PATH } from '@constants/path.ts';
+import FirstLetterPointText from '@components/common/FirstLetterPointText.tsx';
 
 const ourTeamList = [
   {
@@ -37,9 +38,7 @@ const OurTeamList = () => {
       {ourTeamList.map(({ label, description, path }) => (
         <div key={path} className='flex justify-between items-center'>
           <div>
-            <h4 className='text-4xl font-semibold mb-2 first-letter:text-primary-700'>
-              {label}
-            </h4>
+            <FirstLetterPointText text={label} />
             <p className='text-xl font-medium text-gray-500'>{description}</p>
           </div>
           <Link
