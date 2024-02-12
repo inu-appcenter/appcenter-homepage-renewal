@@ -38,7 +38,7 @@ const PartFaqGrid = () => {
   return (
     <div className='self-center grid grid-cols-1 sm:grid-cols-2 gap-4 w-full'>
       {partFaqList.map(({ part, question, path }) => (
-        <Link to={path} className=''>
+        <Link to={path} key={path}>
           <div
             key={part}
             className='flex flex-col justify-between gap-y-2 bg-primary-200 rounded-3xl px-6 py-6 md:py-4 h-full'
