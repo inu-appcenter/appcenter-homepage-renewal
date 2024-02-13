@@ -13,3 +13,6 @@ type GroupsEntity = {
 };
 
 export type GroupsPublicAllResponse = GroupsEntity[];
+export type GroupsPublicAllYearsResponse = {
+  yearList: number[];
+}

@@ -11,6 +11,7 @@ const API = {
 
   GROUPS_PUBLIC_ALL: (obj: QueryStringObject) =>
     `groups/public/all-groups-members?${objectToQueryString(obj)}`,
+  GROUPS_PUBLIC_ALL_YEARS:'groups/public/all-groups-years'
 };
 
 export default API;
