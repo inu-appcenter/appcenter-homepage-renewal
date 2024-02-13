@@ -21,6 +21,10 @@ export default function ManageRegis() {
         blogLink: '',
         email: '',
         gitRepositoryLink: '',
+        behanceLink: '',
+        phoneNumber: '',
+        studentNumber: '',
+        department: '',
     });
 
     const addData = async () => {
@@ -42,6 +46,10 @@ export default function ManageRegis() {
                 blogLink: '',
                 email: '',
                 gitRepositoryLink: '',
+                behanceLink: '',
+                phoneNumber: '',
+                studentNumber: '',
+                department: '',
             });
             dispatch(RMclose());
         } catch (error) {
@@ -118,6 +126,54 @@ export default function ManageRegis() {
                         })
                     }
                 />
+                <ModalLabel>비헨스 URL</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='behance 링크를 입력해주세요'
+                    value={newMember.behanceLink}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            behanceLink: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>전화 번호</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='전화번호를 입력해주세요'
+                    value={newMember.phoneNumber}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            phoneNumber: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>학번</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='학번을 입력해주세요'
+                    value={newMember.studentNumber}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            studentNumber: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>학부</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='전공중인 학과, 학부를 입력해주세요'
+                    value={newMember.department}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            department: e.target.value,
+                        })
+                    }
+                />
                 <ModalLabel>설명</ModalLabel>
                 <InfoInput
                     type='text'
@@ -130,6 +186,7 @@ export default function ManageRegis() {
                         })
                     }
                 />
+
                 <ModalButtonWrapper>
                     <ModalButton onClick={addData}>등록</ModalButton>
                     <ModalButton onClick={closeModal}>취소</ModalButton>
@@ -141,7 +198,7 @@ export default function ManageRegis() {
 }
 
 const InfoInput = styled.textarea`
-    height: 8rem;
+    height: 4rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     word-break: break-all;
     resize: none;
@@ -189,7 +246,7 @@ const ModalLabel = styled.label`
 const ModalInput = styled.input`
     width: 70%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;

@@ -34,6 +34,10 @@ export default function ManagePage() {
     const [editedBlogLink, setEditedBlogLink] = useState('');
     const [editedEmail, setEditedEmail] = useState('');
     const [editedGitRepositoryLink, setEditedGitRepositoryLink] = useState('');
+    const [editedBehance, setEditedBehance] = useState('');
+    const [editedPhoneNumber, setEditedPhoneNumber] = useState('');
+    const [editedStudentNumber, setEditedStudentNumber] = useState('');
+    const [editedDepartment, setEditedDepartment] = useState('');
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
@@ -72,6 +76,10 @@ export default function ManagePage() {
             setEditedBlogLink(memberToEdit.blogLink);
             setEditedEmail(memberToEdit.email);
             setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
+            setEditedBehance(memberToEdit.behanceLink);
+            setEditedPhoneNumber(memberToEdit.phoneNumber);
+            setEditedStudentNumber(memberToEdit.studentNumber);
+            setEditedDepartment(memberToEdit.department);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedMemberId]);
@@ -132,6 +140,10 @@ export default function ManagePage() {
             blogLink: editedBlogLink,
             email: editedEmail,
             gitRepositoryLink: editedGitRepositoryLink,
+            behanceLink: editedBehance,
+            phoneNumber: editedPhoneNumber,
+            studentNumber: editedStudentNumber,
+            department: editedDepartment,
         };
 
         try {
@@ -193,7 +205,11 @@ export default function ManagePage() {
                         <Cartegories type='third'>블로그</Cartegories>
                         <Cartegories type='fourth'>깃허브</Cartegories>
                         <Cartegories type='fifth'>프로필 이미지</Cartegories>
-                        <Cartegories type='sixth'>자기 소개</Cartegories>
+                        <Cartegories type='sixth'>비헨스</Cartegories>
+                        <Cartegories type='seventh'>자기 소개</Cartegories>
+                        <Cartegories type='eighth'>전화 번호</Cartegories>
+                        <Cartegories type='ninth'>학번</Cartegories>
+                        <Cartegories>학부</Cartegories>
                     </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -214,7 +230,7 @@ export default function ManagePage() {
                                 {content.email ? (
                                     <div>{content.email}</div>
                                 ) : (
-                                    <div>없음</div>
+                                    <div>-</div>
                                 )}
                             </td>
                             <td>
@@ -224,10 +240,10 @@ export default function ManagePage() {
                                         target='_blank'
                                         rel='noopener noreferrer'
                                     >
-                                        블로그 링크
+                                        {content.blogLink}
                                     </a>
                                 ) : (
-                                    <div>없음</div>
+                                    <div>-</div>
                                 )}
                             </td>
                             <td>
@@ -237,10 +253,10 @@ export default function ManagePage() {
                                         target='_blank'
                                         rel='noopener noreferrer'
                                     >
-                                        깃허브 링크
+                                        {content.gitRepositoryLink}
                                     </a>
                                 ) : (
-                                    <div>없음</div>
+                                    <div>-</div>
                                 )}
                             </td>
                             <td>
@@ -250,17 +266,51 @@ export default function ManagePage() {
                                         alt=''
                                         type='link'
                                     >
-                                        이미지 링크
+                                        {content.profileImage}
                                     </a>
                                 ) : (
-                                    <div type='link'>없음</div>
+                                    <div type='link'>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.behanceLink ? (
+                                    <a
+                                        href={content.profileImage}
+                                        alt=''
+                                        type='link'
+                                    >
+                                        {content.behanceLink}
+                                    </a>
+                                ) : (
+                                    <div>-</div>
                                 )}
                             </td>
                             <td>
                                 {content.description ? (
                                     <div>{content.description}</div>
                                 ) : (
-                                    <div>없음</div>
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.phoneNumber ? (
+                                    <div>{content.phoneNumber}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.studentNumber ? (
+                                    <div>{content.studentNumber}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.department ? (
+                                    <div>{content.department}</div>
+                                ) : (
+                                    <div>-</div>
                                 )}
                             </td>
                         </tr>
@@ -340,6 +390,30 @@ export default function ManagePage() {
                     value={editedGitRepositoryLink}
                     onChange={(e) => setEditedGitRepositoryLink(e.target.value)}
                 />
+                <ModalLabel>Behance URL</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedBehance}
+                    onChange={(e) => setEditedBehance(e.target.value)}
+                />
+                <ModalLabel>전화 번호</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedPhoneNumber}
+                    onChange={(e) => setEditedPhoneNumber(e.target.value)}
+                />
+                <ModalLabel>학번</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedStudentNumber}
+                    onChange={(e) => setEditedStudentNumber(e.target.value)}
+                />
+                <ModalLabel>학부</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedDepartment}
+                    onChange={(e) => setEditedDepartment(e.target.value)}
+                />
                 <ModalButtonWrapper>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
                     <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
@@ -371,14 +445,22 @@ const Cartegories = styled.div`
         props.type === 'first'
             ? 'left: 8rem; width: 60px;'
             : props.type === 'second'
-            ? 'left:11rem; width: 180px;'
+            ? 'left:11rem; width: 150px;'
             : props.type === 'third'
-            ? 'left: 21rem; width: 183px;'
+            ? 'left: 19.5rem; width: 120px;'
             : props.type === 'fourth'
-            ? 'left: 32.4rem; width: 150px;'
+            ? 'left: 26.5rem; width: 120px;'
             : props.type === 'fifth'
-            ? 'left: 45em; width: 220px;'
-            : 'left: 51rem; width: 190px;'}
+            ? 'left: 37.5em; width: 120px;'
+            : props.type === 'sixth'
+            ? 'left: 45.5em; width: 120px;'
+            : props.type === 'seventh'
+            ? 'left: 53.5em; width: 150px;'
+            : props.type === 'eighth'
+            ? 'left: 63em; width: 150px;'
+            : props.type === 'ninth'
+            ? 'left: 72.5em; width: 150px;'
+            : 'left: 81.5em; width: 150px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -484,7 +566,7 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 37rem;
+    margin-left: 55rem;
     margin-top: 0.6rem;
 
     &:hover {
@@ -514,13 +596,15 @@ const MemberTable = styled.table`
     }
 
     div {
-        width: 150px;
+        width: 123px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
     }
 
     a {
+        display: block;
+        width:100px;
         color: #0078d4;
         text-decoration: none;
     }
