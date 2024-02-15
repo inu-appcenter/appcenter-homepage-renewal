@@ -24,6 +24,7 @@ export default function ManageGenPage() {
         y: 0,
     });
     const [selectedGroupId, setSelectedGroupId] = useState(null);
+    const [selectedRoleId, setSelectedRoleId] = useState(null);
     const contextMenuRef = useRef(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
@@ -113,6 +114,12 @@ export default function ManageGenPage() {
         };
     }, []);
 
+    const setRoleId = (content) => {
+        if (content === '센터장') setSelectedRoleId(1);
+        else if (content === '파트장') setSelectedRoleId(2);
+        else if (content === '파트원') setSelectedRoleId(3);
+    };
+
     const handleEdit = async () => {
         if (selectedGroupId === null) {
             return; // 선택된 항목이 없으면 무시
@@ -129,7 +136,7 @@ export default function ManageGenPage() {
         try {
             // group_id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/groups?id=${selectedGroupId}`,
+                `https://server.inuappcenter.kr/groups?groupId=${selectedGroupId}&roleId=${selectedRoleId}`,
                 updatedData
             );
             console.log('Member with ID', selectedGroupId, 'has been updated.');
@@ -193,12 +200,14 @@ export default function ManageGenPage() {
                             onContextMenu={(e) => {
                                 e.preventDefault();
                                 setSelectedGroupId(content.group_id);
+                                setRoleId(content.role);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
                                 console.log(content.group_id);
+                                console.log(content.role_id);
                             }}
                         >
                             <td>{content.member}</td>
@@ -401,7 +410,7 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 37rem;
+    margin-left: 40rem;
     margin-top: 0.6rem;
 
     &:hover {
