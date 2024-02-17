@@ -13,7 +13,7 @@ const TeamPage = () => {
       <div className='mb-4'>
         <TeamSubTitle />
       </div>
-      <div className="mb-4">
+      <div className='mb-4'>
         <TeamEmoji />
       </div>
       <Suspense>
