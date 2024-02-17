@@ -23,6 +23,7 @@ const TeamMemberList = () => {
     <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center justify-items-center'>
       {data.map(
         ({
+          group_id,
           member,
           profileImage,
           year,
@@ -31,7 +32,13 @@ const TeamMemberList = () => {
           gitRepositoryLink,
           blogLink,
         }) => (
-          <Card padding={4} rowGap={4} variant='outline' className='w-fit'>
+          <Card
+            key={group_id}
+            padding={4}
+            rowGap={4}
+            variant='outline'
+            className='w-fit'
+          >
             <CardBody padding={0}>
               <Image
                 src={profileImage ?? LogoSmall}
