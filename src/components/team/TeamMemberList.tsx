@@ -20,7 +20,7 @@ const TeamMemberList = () => {
   const { data } = useGetGroupsPublicAllQuery({ part: part });
 
   return (
-    <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center'>
+    <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center justify-items-center'>
       {data.map(
         ({
           member,
