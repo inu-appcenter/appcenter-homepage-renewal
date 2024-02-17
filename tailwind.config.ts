@@ -53,6 +53,9 @@ export default {
       boxShadow: {
         primary: '0 4px 4px rgba(54,113,217,.25)',
       },
+      gridTemplateColumns: {
+        'auto-fill-minmax': 'repeat(auto-fit, minmax(200px, 20%))',
+      },
     },
   },
   plugins: [],

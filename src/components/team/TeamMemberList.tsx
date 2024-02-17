@@ -20,7 +20,7 @@ const TeamMemberList = () => {
   const { data } = useGetGroupsPublicAllQuery({ part: part });
 
   return (
-    <div className='grid grid-cols-4'>
+    <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center'>
       {data.map(
         ({
           member,
@@ -36,7 +36,8 @@ const TeamMemberList = () => {
               <Image
                 src={profileImage ?? LogoSmall}
                 alt={`${member}의 프로필 사진`}
-                className='w-40 h-40 min-w-40 sm:w-48 sm:h-48 md:w-50 md:h-50'
+                aspectRatio={1}
+                width={200}
                 borderRadius='lg'
               />
               <Stack mt='6' spacing='3'>
