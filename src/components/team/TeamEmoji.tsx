@@ -7,6 +7,7 @@ import { PART } from '@constants/common.ts';
 import { useParams } from 'react-router-dom';
 import { TeamParam } from '@type/common.ts';
 import SpeechBubble from '@components/common/SpeechBubble.tsx';
+import { Image } from '@chakra-ui/react';
 
 const teamEmojiObject = {
   [PART.android.value]: {
@@ -43,9 +44,11 @@ const TeamEmoji = () => {
   const { description, emoji } = teamEmojiObject[part ?? 'android'];
 
   return (
-    <div className='flex justify-center gap-x-16'>
-      <img src={emoji} width={160} />
-      <SpeechBubble className='w-96 whitespace-pre'>{description}</SpeechBubble>
+    <div className='hidden sm:flex justify-center gap-x-16'>
+      <Image src={emoji} width={160} />
+      <SpeechBubble className='w-96 whitespace-pre-wrap '>
+        {description}
+      </SpeechBubble>
     </div>
   );
 };
