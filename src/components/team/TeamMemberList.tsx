@@ -1,5 +1,5 @@
 import useGetGroupsPublicAllQuery from '@api/query/useGetGroupsPublicAllQuery.ts';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { TeamParam } from '@type/common.ts';
 import {
   Badge,
@@ -16,8 +16,13 @@ import LogoSmall from '@assets/svg/navbar_logo_small.svg';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 const TeamMemberList = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const { part } = useParams<TeamParam>();
-  const { data } = useGetGroupsPublicAllQuery({ part: part });
+  const { data } = useGetGroupsPublicAllQuery({
+    part: part,
+    year: Number(queryParams.get('year')) ?? undefined,
+  });
 
   return (
     <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center justify-items-center'>
