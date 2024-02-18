@@ -21,7 +21,7 @@ const TeamYearDropdown = () => {
       >
         {queryParams.get('year')}기
       </MenuButton>
-      <MenuList minWidth={40}>
+      <MenuList minWidth={40} maxHeight={80} className='overflow-scroll'>
         {yearList.map((year) => (
           <Link key={year} to={PATH.TEAM('android') + `?year=${year}`}>
             <MenuItem>{year}기</MenuItem>
