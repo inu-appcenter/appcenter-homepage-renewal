@@ -40,6 +40,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:4.2.1"],\
           ["autoprefixer", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:10.4.17"],\
           ["axios", "npm:1.6.7"],\
+          ["dayjs", "npm:1.11.10"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-plugin-react-hooks", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:0.4.5"],\
@@ -4553,6 +4554,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dayjs", [\
+      ["npm:1.11.10", {\
+        "packageLocation": "./.yarn/cache/dayjs-npm-1.11.10-2b4382efc1-4de9af5063.zip/node_modules/dayjs/",\
+        "packageDependencies": [\
+          ["dayjs", "npm:1.11.10"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["debug", [\
       ["npm:4.3.4", {\
         "packageLocation": "./.yarn/cache/debug-npm-4.3.4-4513954577-cedbec4529.zip/node_modules/debug/",\
@@ -5476,6 +5486,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:4.2.1"],\
           ["autoprefixer", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:10.4.17"],\
           ["axios", "npm:1.6.7"],\
+          ["dayjs", "npm:1.11.10"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-plugin-react-hooks", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:29c81347b29c7af4c118c92df07777fe009857c4661d971b82a0ec9fc241e748d2a3ff76f8ca8da0e71ac6db5ae37a8afa52cafeeab13480e66a41d2e91f28aa#npm:0.4.5"],\
