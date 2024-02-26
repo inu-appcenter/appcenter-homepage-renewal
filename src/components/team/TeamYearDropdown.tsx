@@ -1,8 +1,9 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import useGetGroupsPublicAllYearsQuery from '@api/query/useGetGroupsPublicAllYearsQuery.ts';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { PATH } from '@constants/path.ts';
+import { TeamParam } from '@type/common.ts';
 
 const TeamYearDropdown = () => {
   const {
@@ -10,6 +11,7 @@ const TeamYearDropdown = () => {
   } = useGetGroupsPublicAllYearsQuery();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const { part } = useParams<TeamParam>();
 
   return (
     <Menu isLazy>
@@ -23,7 +25,7 @@ const TeamYearDropdown = () => {
       </MenuButton>
       <MenuList minWidth={40} maxHeight={80} className='overflow-scroll'>
         {yearList.map((year) => (
-          <Link key={year} to={PATH.TEAM('android') + `?year=${year}`}>
+          <Link key={year} to={PATH.TEAM(part) + `?year=${year}`}>
             <MenuItem>{year}기</MenuItem>
           </Link>
         ))}
