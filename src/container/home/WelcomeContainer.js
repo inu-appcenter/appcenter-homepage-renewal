@@ -29,6 +29,7 @@ const WelcomeWrapper = styled.div`
         height: 25rem;
     }
 `;
+
 const ContentsWrapper = styled.div`
     width: 750px;
     margin: 3rem auto;

@@ -4,11 +4,29 @@ import PartTitle from '../../component/ourteam/PartTitle';
 import { useGetTeamListQuery } from '../../apis/dataApi';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function PartContainer() {
     const part = useSelector((state) => state.ourTeam.part);
     const year = useSelector((state) => state.ourTeam.year);
     const { data } = useGetTeamListQuery({ year: year, team: part });
+
+    const [group, setGroup] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const viewData = await axios
+                .get(
+                    'https://server.inuappcenter.kr/groups/public/all-groups-members'
+                )
+                .then((res) => {
+                    setGroup(res.data);
+                    console.log(res.data);
+                });
+        };
+        fetchData();
+    }, [group]);
 
     return (
         <>

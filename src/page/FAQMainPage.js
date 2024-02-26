@@ -28,6 +28,7 @@ const FAQPageWrapper = styled.div`
         padding: 0 1rem;
     }
 `;
+
 const TitleWrapper = styled.div`
     padding-top: ${(props) => props.theme.padding.bigDesktop.contentTop};
     @media (max-width: 1800px) {

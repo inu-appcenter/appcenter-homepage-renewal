@@ -110,6 +110,7 @@ const StyledToolbar = styled(Toolbar)`
     flex-direction: column;
     padding: 0;
 `;
+
 const NavLogo = styled(Link)`
     display: flex;
     align-items: center;
