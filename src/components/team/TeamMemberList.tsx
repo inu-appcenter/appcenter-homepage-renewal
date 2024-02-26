@@ -25,7 +25,7 @@ const TeamMemberList = () => {
   });
 
   return (
-    <div className='grid grid-cols-auto-fill-minmax gap-4 justify-center justify-items-center'>
+    <div className='flex'>
       {data.map(
         ({
           group_id,
@@ -41,6 +41,7 @@ const TeamMemberList = () => {
             key={group_id}
             padding={4}
             rowGap={4}
+            border='none'
             variant='outline'
             className='w-fit'
           >
@@ -49,7 +50,7 @@ const TeamMemberList = () => {
                 src={profileImage ?? LogoSmall}
                 alt={`${member}의 프로필 사진`}
                 aspectRatio={1}
-                width={200}
+                width={150}
                 borderRadius='lg'
               />
               <Stack mt='6' spacing='3'>
