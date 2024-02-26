@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -63,8 +63,9 @@ export default function ManageGenPage() {
         );
         if (memberToEdit) {
             setEditedRole(memberToEdit.role);
-            setEditedGen(memberToEdit.generation);
+            setEditedGen(memberToEdit.year);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedGroupId]);
 
     const closeEditModal = () => {
@@ -82,7 +83,7 @@ export default function ManageGenPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/groups/public/all-groups-members'
                 )
@@ -119,9 +120,11 @@ export default function ManageGenPage() {
 
         // 수정할 데이터를 가져옵니다.
         const updatedData = {
-            role: editedRole,
-            generation: editedGen,
+            part: editedRole,
+            year: editedGen,
         };
+
+        console.log(updatedData);
 
         try {
             // group_id를 사용하여 수정 요청을 보냅니다.
@@ -154,7 +157,7 @@ export default function ManageGenPage() {
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/groups?${selectedGroupId}`
+                `https://server.inuappcenter.kr/groups/${selectedGroupId}`
             );
             console.log('Member with ID', selectedGroupId, 'has been deleted.');
 
@@ -164,6 +167,7 @@ export default function ManageGenPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -174,6 +178,13 @@ export default function ManageGenPage() {
             <InOut />
             <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
+            <MemberBar>
+                <Cartegories type='first'>이름</Cartegories>
+                <Cartegories type='second'>역할명</Cartegories>
+                <Cartegories type='third'>기수</Cartegories>
+                <Cartegories type='fourth'>파트명</Cartegories>
+                <Cartegories>이메일</Cartegories>
+            </MemberBar>
             <MemberTable>
                 <tbody>
                     {getCurrentPageData().map((content) => (
@@ -193,26 +204,8 @@ export default function ManageGenPage() {
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
-                            <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    blog
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
-                            </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.email}</td>
+                            <td>{content.part ?? <div>{content.part}</div>}</td>
+                            <td type='email'>{content.email}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -254,26 +247,47 @@ export default function ManageGenPage() {
                 onRequestClose={closeEditModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>역할 수정</ModalTitle>
+                <ModalTitle>기수 수정</ModalTitle>
                 <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
                     value={editedRole}
                     onChange={(e) => setEditedRole(e.target.value)}
                 />
+                <ModalLabel>기수</ModalLabel>
                 <ModalInput
                     type='number'
                     value={editedGen}
                     onChange={(e) => setEditedGen(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+    top: 20px;
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+`;
+
+const Cartegories = styled.div`
+    height: 20px;
+    width: 20%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -288,9 +302,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -324,7 +338,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -373,13 +387,13 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 37rem;
-    margin-top: 0.6rem;
+    margin-left: 38rem;
+    margin-top: 3rem;
 
     &:hover {
         transition: 0.1s ease-in;
@@ -387,43 +401,40 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 80px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 80px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 800px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        width: 160px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        ${(props) => (props.type === 'email' ? 'width: 150px;' : '')}
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
         color: #0078d4;
         text-decoration: none;
+    }
+
+    div {
+        width: 90px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     tr {
@@ -432,37 +443,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    justify-content: center;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

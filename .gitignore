@@ -11,6 +11,9 @@
 # production
 /build
 
+# git
+appcenter-homepage-renewal.git/
+
 # misc
 .DS_Store
 .env

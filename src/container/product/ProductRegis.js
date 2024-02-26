@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RMopen, RMclose } from '../../modules/ProductSlice';
+import { RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 import IMAGE from '../../resource/img/product/image_FILL0_wght400_GRAD0_opsz24.png';
 import DELETE from '../../resource/img/product/backspace_FILL0_wght400_GRAD0_opsz24.png';
 import CloseButton from '../../resource/img/product/close_button.png';
@@ -262,7 +261,7 @@ export default function ProductRegis() {
                     </DetailInfo>
                     <div>
                         <label htmlFor='input_file'>
-                            <img src={IMAGE} />
+                            <img src={IMAGE} alt='' />
                         </label>
                         <ImageInput
                             type='file'
@@ -279,7 +278,7 @@ export default function ProductRegis() {
                                     onClick={deleteProduct(index)}
                                     regisModalOpen={regisModalOpen}
                                 >
-                                    <img src={DELETE} />
+                                    <img src={DELETE} alt='' />
                                 </DeleteBtn>
                             </ImageBox>
                         ))}
@@ -312,7 +311,8 @@ const CloseImg = styled.img`
     top: -0.5rem;
     border: 1px solid black;
     border-radius: 50%;
-    z-index: 1;
+    z-index: 1000;
+    background-color: white;
 
     &: hover {
         transition: 0.3s ease-in-out;
@@ -350,6 +350,7 @@ const DetailImage = styled.img`
     height: 400px;
     z-index: 0;
 
+    margin-top: 1rem;
     margin-left: 0.01rem;
     margin-right: 0.72rem;
 `;
@@ -360,6 +361,7 @@ const DeleteBtn = styled.button`
     background-color: transparent;
     border-radius: 15px;
     left: 10.8rem;
+    margin-top: 1rem;
     z-index: 1;
 
     ${({ regisModalOpen }) => !regisModalOpen && `display: none`}
@@ -374,7 +376,7 @@ const NavBar = styled.div`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     align-items: center;
 
-    top: 42.5rem;
+    top: 43.5rem;
     left: -1rem;
 `;
 
@@ -390,7 +392,7 @@ const LinkBox = styled.div`
 
 const Regisbutton = styled.button`
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;

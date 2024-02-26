@@ -94,6 +94,7 @@ export default function ModifyModal(props) {
             );
             console.log('Member with ID', id, 'has been updated.');
             console.log(response);
+            console.log(data);
             // 업데이트된 데이터를 data 상태에서 업데이트합니다.
             setData((prevData) =>
                 prevData.map((item) =>
@@ -135,8 +136,10 @@ export default function ModifyModal(props) {
                 setImageData([firstValue]);
                 // 디테일 이미지
                 setDetailImageData([secondValue, thirdValue, fourthValue]);
+                console.log(detailImageData);
                 setShowImages([secondValue, thirdValue, fourthValue]);
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onchangeImageUpload = (e) => {
@@ -209,6 +212,7 @@ export default function ModifyModal(props) {
                         <TitleInput
                             type='text'
                             value={updateProduct.title}
+                            placeholder='제목을 입력해주세요.'
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -221,6 +225,7 @@ export default function ModifyModal(props) {
                         <SubTitleInput
                             type='text'
                             value={updateProduct.subTitle}
+                            placeholder='부제목을 입력해주세요.'
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -233,6 +238,7 @@ export default function ModifyModal(props) {
                         <InstallBtn
                             type='text'
                             value={updateProduct.androidStoreLink}
+                            placeholder='안드로이드 스토어 링크를 입력해주세요.'
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -243,6 +249,7 @@ export default function ModifyModal(props) {
                         <InstallBtn
                             type='text'
                             value={updateProduct.appleStoreLink}
+                            placeholder='애플 스토어 링크를 입력해주세요.'
                             onChange={(e) =>
                                 setUpdateProduct({
                                     ...updateProduct,
@@ -254,6 +261,7 @@ export default function ModifyModal(props) {
                     <DetailInfo>
                         <InfoInput
                             type='text'
+                            placeholder='내용을 입력해주세요.'
                             value={updateProduct.body}
                             onChange={(e) =>
                                 setUpdateProduct({
@@ -265,7 +273,7 @@ export default function ModifyModal(props) {
                     </DetailInfo>
                     <ImageBox>
                         <Imagelabel htmlFor='input_file1'>
-                            <img src={IMAGE} />
+                            <img src={IMAGE} alt='' />
                         </Imagelabel>
                         <DetailImage src={showImages[0]} />
                         <ImageInput
@@ -276,7 +284,7 @@ export default function ModifyModal(props) {
                     </ImageBox>
                     <ImageBox>
                         <Imagelabel htmlFor='input_file2'>
-                            <img src={IMAGE} />
+                            <img src={IMAGE} alt='' />
                         </Imagelabel>
                         <DetailImage src={showImages[1]} />
                         <ImageInput
@@ -287,7 +295,7 @@ export default function ModifyModal(props) {
                     </ImageBox>
                     <ImageBox>
                         <Imagelabel htmlFor='input_file3'>
-                            <img src={IMAGE} />
+                            <img src={IMAGE} alt='' />
                         </Imagelabel>
                         <DetailImage src={showImages[2]} />
                         <ImageInput
@@ -317,7 +325,7 @@ const CloseImg = styled.img`
     top: -0.5rem;
     border: 1px solid black;
     border-radius: 50%;
-    z-index: 1;
+    background-color: white;
 
     &: hover {
         transition: 0.3s ease-in-out;
@@ -399,7 +407,7 @@ const LinkBox = styled.div`
 
 const Regisbutton = styled.button`
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;

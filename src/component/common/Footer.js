@@ -24,8 +24,8 @@ export default function Footer() {
                         alt='카카오톡 플러스친구 @인천대앱센터'
                     />
                 </a>
-                <Link to='../admin'>
-                    <a>
+                <Link to='../login'>
+                    <a href='#!'>
                         <img
                             src={socialLink.admin.icon}
                             alt='인천대앱센터 관리자 페이지'

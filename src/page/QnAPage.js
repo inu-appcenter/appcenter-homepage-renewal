@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -13,7 +13,6 @@ import QnARegis from '../container/product/QnARegis';
 
 export default function QnAPage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -66,6 +65,7 @@ export default function QnAPage() {
             setEditedQuestion(QnaToEdit.question);
             setEditedAnswer(QnaToEdit.answer);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedQnaId]);
 
     const closeEditModal = () => {
@@ -83,13 +83,11 @@ export default function QnAPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
                 )
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
                 });
         };
@@ -168,6 +166,7 @@ export default function QnAPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -178,7 +177,11 @@ export default function QnAPage() {
             <IntroBox introInfo={introInfo[4]} />
             <MemberList>질문 및 답변 목록</MemberList>
             <MemberTable>
-                {loading && <div>loading...</div>}
+                <MemberBar>
+                    <Cartegories type='first'>파트</Cartegories>
+                    <Cartegories type='second'>질문</Cartegories>
+                    <Cartegories>답변</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -266,6 +269,31 @@ export default function QnAPage() {
     );
 }
 
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem;'
+            : props.type === 'second'
+            ? 'left:12rem; width: 250px;'
+            : 'left: 26rem; width: 410px;'}
+`;
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -279,7 +307,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;
@@ -315,7 +343,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -364,7 +392,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -378,29 +406,6 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-    :nth-child(3) {
-        width: 350px;
-        margin-left: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
     width: 700px;
     border-collapse: collapse;
@@ -410,6 +415,7 @@ const MemberTable = styled.table`
     td {
         padding: 5px;
         text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 
         :nth-child(2) {
             width: 200px;
@@ -435,35 +441,6 @@ const MemberTable = styled.table`
         &:hover {
             background-color: #f2f2f2;
         }
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

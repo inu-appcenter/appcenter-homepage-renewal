@@ -3,16 +3,7 @@ import { ourTeamSlice } from './ourTeamSlice';
 import { faqSlice } from './faqSlice';
 import { ProductSlice } from './ProductSlice';
 import { LoginSlice } from './LoginSlice';
-
-// redux-persist를 위해 localStorage를 불러옴
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['home', 'ourTeam', 'faq', 'product', 'login'],
-};
+import { idSlice } from './idSlice';
 
 const rootReducer = {
     home: homeSlice.reducer,
@@ -20,5 +11,6 @@ const rootReducer = {
     faq: faqSlice.reducer,
     product: ProductSlice.reducer,
     login: LoginSlice.reducer,
+    id: idSlice.reducer,
 };
 export default rootReducer;

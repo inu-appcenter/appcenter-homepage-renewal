@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -13,7 +13,6 @@ import ManageRegis from '../container/product/ManageRegis';
 
 export default function ManagePage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -35,6 +34,10 @@ export default function ManagePage() {
     const [editedBlogLink, setEditedBlogLink] = useState('');
     const [editedEmail, setEditedEmail] = useState('');
     const [editedGitRepositoryLink, setEditedGitRepositoryLink] = useState('');
+    const [editedBehance, setEditedBehance] = useState('');
+    const [editedPhoneNumber, setEditedPhoneNumber] = useState('');
+    const [editedStudentNumber, setEditedStudentNumber] = useState('');
+    const [editedDepartment, setEditedDepartment] = useState('');
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +76,12 @@ export default function ManagePage() {
             setEditedBlogLink(memberToEdit.blogLink);
             setEditedEmail(memberToEdit.email);
             setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
+            setEditedBehance(memberToEdit.behanceLink);
+            setEditedPhoneNumber(memberToEdit.phoneNumber);
+            setEditedStudentNumber(memberToEdit.studentNumber);
+            setEditedDepartment(memberToEdit.department);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedMemberId]);
 
     const closeEditModal = () => {
@@ -91,11 +99,9 @@ export default function ManagePage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get('https://server.inuappcenter.kr/members/all-members')
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
                 });
         };
@@ -134,6 +140,10 @@ export default function ManagePage() {
             blogLink: editedBlogLink,
             email: editedEmail,
             gitRepositoryLink: editedGitRepositoryLink,
+            behanceLink: editedBehance,
+            phoneNumber: editedPhoneNumber,
+            studentNumber: editedStudentNumber,
+            department: editedDepartment,
         };
 
         try {
@@ -170,22 +180,15 @@ export default function ManagePage() {
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
-            await axios.delete(
-                `https://server.inuappcenter.kr/members/${selectedMemberId}`
-            );
-            console.log(
-                'Member with ID',
-                selectedMemberId,
-                'has been deleted.'
-            );
-
-            // 삭제한 데이터를 data 상태에서 제거합니다.
-            setData((prevData) =>
-                prevData.filter((item) => item.member_id !== selectedMemberId)
-            );
-        } catch (error) {
-            console.error('Error deleting member:', error);
-        }
+            await axios
+                .delete(
+                    `https://server.inuappcenter.kr/members/${selectedMemberId}`
+                )
+                .then((res) => {
+                    alert(res.data.msg);
+                    console.log(res.data.msg);
+                });
+        } catch (error) {}
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
@@ -196,6 +199,18 @@ export default function ManagePage() {
             <MemberList>동아리원 목록</MemberList>
             <MemberTable>
                 <tbody>
+                    <MemberBar>
+                        <Cartegories type='first'>이름</Cartegories>
+                        <Cartegories type='second'>이메일</Cartegories>
+                        <Cartegories type='third'>블로그</Cartegories>
+                        <Cartegories type='fourth'>깃허브</Cartegories>
+                        <Cartegories type='fifth'>프로필 이미지</Cartegories>
+                        <Cartegories type='sixth'>비헨스</Cartegories>
+                        <Cartegories type='seventh'>자기 소개</Cartegories>
+                        <Cartegories type='eighth'>전화 번호</Cartegories>
+                        <Cartegories type='ninth'>학번</Cartegories>
+                        <Cartegories>학부</Cartegories>
+                    </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
                             key={content.member_id}
@@ -211,27 +226,93 @@ export default function ManagePage() {
                             }}
                         >
                             <td>{content.name}</td>
-                            <td>{content.email}</td>
                             <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    Visit Blog
-                                </a>
+                                {content.email ? (
+                                    <div>{content.email}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
                             </td>
                             <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
+                                {content.blogLink ? (
+                                    <a
+                                        href={content.blogLink}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        {content.blogLink}
+                                    </a>
+                                ) : (
+                                    <div>-</div>
+                                )}
                             </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.description}</td>
+                            <td>
+                                {content.gitRepositoryLink ? (
+                                    <a
+                                        href={content.gitRepositoryLink}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        {content.gitRepositoryLink}
+                                    </a>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.profileImage ? (
+                                    <a
+                                        href={content.profileImage}
+                                        alt=''
+                                        type='link'
+                                    >
+                                        {content.profileImage}
+                                    </a>
+                                ) : (
+                                    <div type='link'>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.behanceLink ? (
+                                    <a
+                                        href={content.profileImage}
+                                        alt=''
+                                        type='link'
+                                    >
+                                        {content.behanceLink}
+                                    </a>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.description ? (
+                                    <div>{content.description}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.phoneNumber ? (
+                                    <div>{content.phoneNumber}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.studentNumber ? (
+                                    <div>{content.studentNumber}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
+                            <td>
+                                {content.department ? (
+                                    <div>{content.department}</div>
+                                ) : (
+                                    <div>-</div>
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -279,7 +360,7 @@ export default function ManagePage() {
                     value={editedName}
                     onChange={(e) => setEditedName(e.target.value)}
                 />
-                <ModalLabel>설명</ModalLabel>
+                <ModalLabel>자기 소개</ModalLabel>
                 <ModalInput
                     type='text'
                     value={editedDescription}
@@ -309,14 +390,78 @@ export default function ManagePage() {
                     value={editedGitRepositoryLink}
                     onChange={(e) => setEditedGitRepositoryLink(e.target.value)}
                 />
+                <ModalLabel>Behance URL</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedBehance}
+                    onChange={(e) => setEditedBehance(e.target.value)}
+                />
+                <ModalLabel>전화 번호</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedPhoneNumber}
+                    onChange={(e) => setEditedPhoneNumber(e.target.value)}
+                />
+                <ModalLabel>학번</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedStudentNumber}
+                    onChange={(e) => setEditedStudentNumber(e.target.value)}
+                />
+                <ModalLabel>학부</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedDepartment}
+                    onChange={(e) => setEditedDepartment(e.target.value)}
+                />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    font-size: 0.9rem;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 60px;'
+            : props.type === 'second'
+            ? 'left:11rem; width: 150px;'
+            : props.type === 'third'
+            ? 'left: 20rem; width: 140px;'
+            : props.type === 'fourth'
+            ? 'left: 28.5rem; width: 140px;'
+            : props.type === 'fifth'
+            ? 'left: 41em; width: 150px;'
+            : props.type === 'sixth'
+            ? 'left: 51em; width: 140px;'
+            : props.type === 'seventh'
+            ? 'left: 59.5em; width: 150px;'
+            : props.type === 'eighth'
+            ? 'left: 69.5em; width: 150px;'
+            : props.type === 'ninth'
+            ? 'left: 79em; width: 150px;'
+            : 'left: 88em; width: 150px;'}
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -331,7 +476,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;
@@ -367,7 +512,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -416,12 +561,12 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 37rem;
+    margin-left: 55rem;
     margin-top: 0.6rem;
 
     &:hover {
@@ -430,43 +575,41 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
-    margin: 20px auto 20px auto;
+    width: 500px;
+    margin: 20px auto;
 
-    th,
     td {
+        width: 90px;
+        padding: 6px;
+        text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+    th {
+        font-weight: 700;
         padding: 5px;
         text-align: center;
     }
 
-    th {
-        font-weight: 700;
+    div {
+        width: 123px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     a {
+        display: block;
+        width:100px;
         color: #0078d4;
         text-decoration: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     tr {
@@ -475,35 +618,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 

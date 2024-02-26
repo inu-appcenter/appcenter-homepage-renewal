@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
-import { RMopen, RMclose } from '../../modules/ProductSlice';
+import { RMclose } from '../../modules/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 
 export default function ManageRegis() {
     const [data, setData] = useState([]);
@@ -22,6 +21,10 @@ export default function ManageRegis() {
         blogLink: '',
         email: '',
         gitRepositoryLink: '',
+        behanceLink: '',
+        phoneNumber: '',
+        studentNumber: '',
+        department: '',
     });
 
     const addData = async () => {
@@ -43,6 +46,10 @@ export default function ManageRegis() {
                 blogLink: '',
                 email: '',
                 gitRepositoryLink: '',
+                behanceLink: '',
+                phoneNumber: '',
+                studentNumber: '',
+                department: '',
             });
             dispatch(RMclose());
         } catch (error) {
@@ -71,7 +78,7 @@ export default function ManageRegis() {
                 <ModalLabel>이름</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='이름'
+                    placeholder='이름을 입력해주세요'
                     value={newMember.name}
                     onChange={(e) =>
                         setNewMember({ ...newMember, name: e.target.value })
@@ -80,7 +87,7 @@ export default function ManageRegis() {
                 <ModalLabel>이메일</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='이메일'
+                    placeholder='이메일을 입력해주세요'
                     value={newMember.email}
                     onChange={(e) =>
                         setNewMember({ ...newMember, email: e.target.value })
@@ -89,7 +96,7 @@ export default function ManageRegis() {
                 <ModalLabel>블로그 URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='블로그 URL'
+                    placeholder='블로그 링크를 입력해주세요'
                     value={newMember.blogLink}
                     onChange={(e) =>
                         setNewMember({ ...newMember, blogLink: e.target.value })
@@ -98,7 +105,7 @@ export default function ManageRegis() {
                 <ModalLabel>Git URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='Git URL'
+                    placeholder='Github 링크를 입력해주세요'
                     value={newMember.gitRepositoryLink}
                     onChange={(e) =>
                         setNewMember({
@@ -110,7 +117,7 @@ export default function ManageRegis() {
                 <ModalLabel>프로필 이미지 URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='프로필 이미지'
+                    placeholder='Github의 프로필 이미지 링크를 입력해주세요'
                     value={newMember.profileImage}
                     onChange={(e) =>
                         setNewMember({
@@ -119,10 +126,58 @@ export default function ManageRegis() {
                         })
                     }
                 />
-                <ModalLabel>설명</ModalLabel>
+                <ModalLabel>비헨스 URL</ModalLabel>
                 <ModalInput
                     type='text'
-                    placeholder='설명'
+                    placeholder='behance 링크를 입력해주세요'
+                    value={newMember.behanceLink}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            behanceLink: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>전화 번호</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='전화번호를 입력해주세요'
+                    value={newMember.phoneNumber}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            phoneNumber: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>학번</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='학번을 입력해주세요'
+                    value={newMember.studentNumber}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            studentNumber: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>학부</ModalLabel>
+                <ModalInput
+                    type='text'
+                    placeholder='전공중인 학과, 학부를 입력해주세요'
+                    value={newMember.department}
+                    onChange={(e) =>
+                        setNewMember({
+                            ...newMember,
+                            department: e.target.value,
+                        })
+                    }
+                />
+                <ModalLabel>설명</ModalLabel>
+                <InfoInput
+                    type='text'
+                    placeholder='자기소개를 입력해주세요'
                     value={newMember.description}
                     onChange={(e) =>
                         setNewMember({
@@ -131,6 +186,7 @@ export default function ManageRegis() {
                         })
                     }
                 />
+
                 <ModalButtonWrapper>
                     <ModalButton onClick={addData}>등록</ModalButton>
                     <ModalButton onClick={closeModal}>취소</ModalButton>
@@ -141,15 +197,29 @@ export default function ManageRegis() {
     );
 }
 
+const InfoInput = styled.textarea`
+    height: 4rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    word-break: break-all;
+    resize: none;
+
+    width: 70%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 1rem;
+`;
+
 const ModalContainer = styled(Modal)`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: #f7f7f8;
     border-radius: 8px;
-    border: 2px solid grey;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 500px;
     margin: 0 auto;
     position: absolute;
@@ -161,25 +231,25 @@ const ModalContainer = styled(Modal)`
 const ModalTitle = styled.h2`
     font-size: 1.5rem;
     margin-bottom: 15px;
+    margin-right: auto;
+    margin-top: 0;
+    font-weight: 400;
 `;
 
 const ModalLabel = styled.label`
     font-size: 1rem;
     margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: 75px;
 `;
 
 const ModalInput = styled.input`
     width: 70%;
     padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;
-    text-align: center;
-
-    &: (6) {
-        width: 80%;
-    }
 `;
 
 const ModalButtonWrapper = styled.div`
@@ -189,7 +259,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;

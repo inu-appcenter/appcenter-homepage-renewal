@@ -17,7 +17,7 @@ export default function ProductionDesktop() {
     const [modalOpen, setModalOpen] = useState(false);
     const [appData, setAppData] = useState([]);
     const [imageData, setImageData] = useState([]);
-    const [firstImage, setFirstImage] = useState('');
+
     const breakPoint = {
         680: {
             slidesPerView: 3,
@@ -42,6 +42,7 @@ export default function ProductionDesktop() {
                 )
                 .then((res) => {
                     setData(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();
@@ -189,6 +190,7 @@ export default function ProductionDesktop() {
 
 const ThumbNail = styled.img`
     border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 `;
 
 const CloseImg = styled.img`
@@ -277,6 +279,8 @@ const TransparentAspectRatio = styled(AspectRatio)`
 const DetailImage = styled.img`
     position: absolute;
     border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
     left: 0.5rem;
     top: 16rem;
     width: 207px;
@@ -295,6 +299,7 @@ const DetailInfo = styled.div`
     width: 70%;
     margin: 0 auto;
     top: -1rem;
+    
 `;
 
 const InstallBtn = styled.button`
@@ -325,6 +330,7 @@ const ModalContainer = styled(Modal)`
     left: 50%;
     padding: 20px;
     border-radius: 8px;
+    background-color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     max-width: 620px;
     height: 250px;
@@ -341,6 +347,8 @@ const AppImage = styled.img`
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
 
     top: -1.5rem;
     left: 1.5rem;
@@ -354,6 +362,10 @@ const AppTitle = styled.h2`
 `;
 
 const AppDescription = styled.p`
+    width: 60%;
+    text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     font-size: 16px;
     color: #666;
     position: relative;

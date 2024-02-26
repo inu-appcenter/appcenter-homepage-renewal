@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
@@ -63,6 +63,7 @@ export default function ManageRolePage() {
             setEditedRoleName(RoleToEdit.roleName);
             setEditedDesc(RoleToEdit.description);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedRoleId]);
 
     const closeEditModal = () => {
@@ -80,11 +81,10 @@ export default function ManageRolePage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get('https://server.inuappcenter.kr/roles/all-roles')
                 .then((res) => {
                     setData(res.data);
-                    console.log(data);
                 });
         };
         fetchData();
@@ -150,17 +150,23 @@ export default function ManageRolePage() {
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
-            await axios.delete(
-                `https://server.inuappcenter.kr/roles/${selectedRoleId} `
-            );
-            console.log('Member with ID', selectedRoleId, 'has been deleted.');
-
-            // 삭제한 데이터를 data 상태에서 제거합니다.
-            setData((prevData) =>
-                prevData.filter((item) => item.roleId !== selectedRoleId)
-            );
+            await axios
+                .delete(
+                    `https://server.inuappcenter.kr/roles/${selectedRoleId} `
+                )
+                .then((res) => {
+                    alert(res.data.msg);
+                    console.log(res.data.msg);
+                    // 삭제한 데이터를 data 상태에서 제거합니다.
+                    setData((prevData) =>
+                        prevData.filter(
+                            (item) => item.roleId !== selectedRoleId
+                        )
+                    );
+                });
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -172,6 +178,10 @@ export default function ManageRolePage() {
             <IntroBox introInfo={introInfo[2]} />
             <MemberList>역할 목록</MemberList>
             <MemberTable>
+                <MemberBar>
+                    <Cartegories type='first'>역할 ID</Cartegories>
+                    <Cartegories type='second'>역할 이름</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -244,13 +254,37 @@ export default function ManageRolePage() {
                     onChange={(e) => setEditedDesc(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
     );
 }
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 180px;'
+            : props.type === 'second'
+            ? 'left:18rem; width: 440px;'
+            : 'left: 39rem; width: 170px;'}
+`;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -265,7 +299,7 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid grey;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: 500px;
     margin: 0 auto;
@@ -301,7 +335,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: grey;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -350,7 +384,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -364,42 +398,22 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 0.5rem;
-        width: 100px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-
-    & + & {
-        margin-right: 10px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 600px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        white-space: nowrap;
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
@@ -413,37 +427,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    justify-content: center;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 3.9rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 
