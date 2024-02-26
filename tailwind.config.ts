@@ -56,6 +56,9 @@ export default {
       gridTemplateColumns: {
         'auto-fill-minmax': 'repeat(auto-fit, minmax(150px, 20%))',
       },
+      screens: {
+        xs: '475px',
+      },
     },
   },
   plugins: [],

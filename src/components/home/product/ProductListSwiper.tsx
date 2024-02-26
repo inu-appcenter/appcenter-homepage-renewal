@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PlayStoreBadge from '@assets/svg/google-play-badge.svg';
 import AppStoreBadge from '@assets/svg/app-store-badge.svg';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import useGetIntroductionBoardPublicAllQuery from '@api/query/useGetIntroductionBoardPublicAllQuery.ts';
 
 const ProductListSwiper = () => {
@@ -10,15 +10,28 @@ const ProductListSwiper = () => {
   return (
     <div>
       <Swiper
-        modules={[Autoplay]}
+        modules={[Autoplay, Pagination]}
+        pagination
+        navigation
         loop
         autoplay={{
           delay: 500,
           disableOnInteraction: false,
         }}
+        breakpoints={{
+          475: {
+            slidesPerView: 3,
+          },
+          640: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+        }}
         speed={2000}
-        slidesPerView={5}
-        spaceBetween={30}
+        slidesPerView={2}
+        spaceBetween={10}
       >
         {data.map(({ id, title, images, androidStoreLink, appleStoreLink }) => (
           <SwiperSlide key={id}>
