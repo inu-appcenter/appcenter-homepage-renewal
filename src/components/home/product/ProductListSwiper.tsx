@@ -13,7 +13,7 @@ const ProductListSwiper = () => {
         modules={[Autoplay]}
         loop
         autoplay={{
-          delay: 1000,
+          delay: 500,
           disableOnInteraction: false,
         }}
         speed={2000}
@@ -30,18 +30,22 @@ const ProductListSwiper = () => {
               />
               <div className='flex flex-col gap-y-1'>
                 {androidStoreLink && (
-                  <img
-                    className='px-4'
-                    alt={`${title} 플레이스토어 링크`}
-                    src={PlayStoreBadge}
-                  />
+                  <a href={androidStoreLink}>
+                    <img
+                      className='px-6 w-full'
+                      alt={`${title} 플레이스토어 링크`}
+                      src={PlayStoreBadge}
+                    />
+                  </a>
                 )}
                 {appleStoreLink && (
-                  <img
-                    className='px-4'
-                    alt={`${title} 앱스토어 링크`}
-                    src={AppStoreBadge}
-                  />
+                  <a href={appleStoreLink}>
+                    <img
+                      className='px-6 w-full'
+                      alt={`${title} 앱스토어 링크`}
+                      src={AppStoreBadge}
+                    />
+                  </a>
                 )}
               </div>
             </div>
