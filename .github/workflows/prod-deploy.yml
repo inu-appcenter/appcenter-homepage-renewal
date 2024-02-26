@@ -1,4 +1,4 @@
-name: Docker CD
+name: Cloudflare CD
 
 on:
   push:
@@ -20,9 +20,9 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: YOUR_ACCOUNT_ID
-          projectName: YOUR_PROJECT_NAME
-          directory: YOUR_BUILD_OUTPUT_DIRECTORY
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}}
+          projectName: inu-home-admin
+          directory: admin/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: deploy/admin
           workingDirectory: admin
