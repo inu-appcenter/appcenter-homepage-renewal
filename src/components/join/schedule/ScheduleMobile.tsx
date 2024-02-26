@@ -30,8 +30,11 @@ const ScheduleMobile: React.FC<ScheduleMobileProps> = ({
                 </p>
                 {scheduleList && (
                   <ul className='relative whitespace-nowrap ml-4'>
-                    {scheduleList.map((schedule) => (
-                      <li className='before:content-["•"] before:absolute before:-left-3'>
+                    {scheduleList.map((schedule, index) => (
+                      <li
+                        key={index}
+                        className='before:content-["•"] before:absolute before:-left-3'
+                      >
                         {schedule}
                       </li>
                     ))}
