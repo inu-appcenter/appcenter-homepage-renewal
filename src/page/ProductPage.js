@@ -222,8 +222,8 @@ const Cartegories = styled.div`
         props.type === 'first'
             ? 'left: 8rem; width: 250px;'
             : props.type === 'second'
-            ? 'left:20rem; width: 340px;'
-            : 'left: 41rem; width: 170px;'}
+            ? 'left:19.5rem; width: 340px;'
+            : 'left: 36.5rem; width: 250px;'}
 `;
 
 const AppTd = styled.td`
@@ -300,6 +300,7 @@ const MemberTable = styled.table`
 
     th,
     td {
+        width: 200px;
         padding: 5px;
         text-align: center;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);

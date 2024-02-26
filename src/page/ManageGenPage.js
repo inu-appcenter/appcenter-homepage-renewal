@@ -178,15 +178,15 @@ export default function ManageGenPage() {
             <InOut />
             <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
+            <MemberBar>
+                <Cartegories type='first'>이름</Cartegories>
+                <Cartegories type='second'>역할명</Cartegories>
+                <Cartegories type='third'>기수</Cartegories>
+                <Cartegories type='fourth'>파트명</Cartegories>
+                <Cartegories>이메일</Cartegories>
+            </MemberBar>
             <MemberTable>
                 <tbody>
-                    <MemberBar>
-                        <Cartegories type='first'>이름</Cartegories>
-                        <Cartegories type='second'>역할명</Cartegories>
-                        <Cartegories type='third'>기수</Cartegories>
-                        <Cartegories type='fourth'>파트명</Cartegories>
-                        <Cartegories>이메일</Cartegories>
-                    </MemberBar>
                     {getCurrentPageData().map((content) => (
                         <tr
                             key={content.group_id}
@@ -271,31 +271,22 @@ export default function ManageGenPage() {
 
 const MemberBar = styled.div`
     display: flex;
-
+    top: 20px;
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
     justify-content: center;
     align-items: center;
     height: 40px;
-    transform: translate(-8rem);
 `;
 
 const Cartegories = styled.div`
-    width: 80px;
     height: 20px;
+    width: 20%;
     border-radius: 8px;
     text-align: center;
     padding: 10px 0;
     background-color: #f2f2f2;
-    position: absolute;
-    ${(props) =>
-        props.type === 'first'
-            ? 'left: 8rem; width: 120px;'
-            : props.type === 'second'
-            ? 'left:15rem; width: 100px;'
-            : props.type === 'third'
-            ? 'left: 21rem; width: 120px;'
-            : props.type === 'fourth'
-            ? 'left: 28rem; width: 120px;'
-            : 'left: 34rem; width: 180px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -401,8 +392,8 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 37rem;
-    margin-top: 0.6rem;
+    margin-left: 38rem;
+    margin-top: 3rem;
 
     &:hover {
         transition: 0.1s ease-in;
@@ -411,11 +402,11 @@ const Regisbutton = styled.button`
 `;
 
 const MemberTable = styled.table`
-    width: 600px;
+    width: 800px;
     margin: 20px auto 20px auto;
 
     td {
-        width: 90px;
+        width: 160px;
         padding: 6px;
         text-align: center;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
@@ -426,9 +417,7 @@ const MemberTable = styled.table`
         overflow: hidden;
         white-space: nowrap;
 
-        ${(props) =>
-        props.type === 'email'
-            ? 'width: 150px;' : ''}
+        ${(props) => (props.type === 'email' ? 'width: 150px;' : '')}
 
     th {
         font-weight: 700;

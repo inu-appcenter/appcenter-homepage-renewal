@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import { RMopen, MODopen } from '../modules/ProductSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import { useCallback } from 'react';
-import ModifyModal from '../container/product/ModifyModal';
 import InOut from '../component/common/InOut';
 import IntroBox from '../component/admin/IntroBox';
 import { introInfo } from '../resource/data/adminInfo';
-import ProductRegis from '../container/product/ProductRegis';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import QnARegis from '../container/product/QnARegis';
 
-export default function ProductPage() {
+export default function QnAPage() {
     const [data, setData] = useState([]);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
-    const modifyModalOpen = useSelector((state) => state.product.modifyModalOpen);
     const dispatch = useDispatch();
 
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
@@ -24,13 +23,18 @@ export default function ProductPage() {
         x: 0,
         y: 0,
     });
-    const [selectedProductId, setselectedProductId] = useState(null);
+    const [selectedQnaId, setSelectedQnaId] = useState(null);
     const contextMenuRef = useRef(null);
-    const [productId, setProductId] = useState('');
+    const [isEditModalOpen, setEditModalOpen] = useState(false);
+
+    //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
+    const [editedPart, setEditedPart] = useState('');
+    const [editedQuestion, setEditedQuestion] = useState('');
+    const [editedAnswer, setEditedAnswer] = useState('');
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
+    const itemsPerPage = 10;
 
     // 페이지당 데이터를 분할하는 함수입니다.
     const paginateData = (data, currentPage, itemsPerPage) => {
@@ -48,10 +52,24 @@ export default function ProductPage() {
         setCurrentPage(pageNumber);
     };
 
-    const openEditModal = (selectedProductId) => {
+    const openEditModal = (selectedQnaId) => {
         // 수정할 때 해당 memberId의 데이터를 가져와서 모달에 미리 채워넣을 수 있습니다.
         setContextMenuVisible(false);
-        dispatch(MODopen());
+        setEditModalOpen(true);
+    };
+
+    useEffect(() => {
+        const QnaToEdit = data.find((item) => item.id === selectedQnaId);
+        if (QnaToEdit) {
+            setEditedPart(QnaToEdit.part);
+            setEditedQuestion(QnaToEdit.question);
+            setEditedAnswer(QnaToEdit.answer);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedQnaId]);
+
+    const closeEditModal = () => {
+        setEditModalOpen(false);
     };
 
     const addData = () => {
@@ -67,14 +85,14 @@ export default function ProductPage() {
         const fetchData = async () => {
             const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
-                    'https://server.inuappcenter.kr/introduction-board/public/all-boards-contents'
+                    'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
                 )
                 .then((res) => {
                     setData(res.data);
                 });
         };
         fetchData();
-    }, [regisModalOpen, modifyModalOpen]);
+    }, [regisModalOpen]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -95,25 +113,56 @@ export default function ProductPage() {
         };
     }, []);
 
+    const handleEdit = async () => {
+        if (selectedQnaId === null) {
+            return; // 선택된 항목이 없으면 무시
+        }
+
+        // 수정할 데이터를 가져옵니다.
+        const updatedData = {
+            part: editedPart,
+            question: editedQuestion,
+            answer: editedAnswer,
+        };
+
+        try {
+            // member_id를 사용하여 수정 요청을 보냅니다.
+            const response = await axios.patch(
+                `https://server.inuappcenter.kr/faqs?id=${selectedQnaId}`,
+                updatedData
+            );
+            console.log('Qna with ID', selectedQnaId, 'has been updated.');
+            console.log(response);
+            // 업데이트된 데이터를 data 상태에서 업데이트합니다.
+            setData((prevData) =>
+                prevData.map((item) =>
+                    item.id === selectedQnaId
+                        ? { ...item, ...updatedData }
+                        : item
+                )
+            );
+        } catch (error) {
+            console.error('Error updating member:', error);
+        }
+        setEditModalOpen(false);
+        setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
+    };
+
     const handleDelete = async () => {
-        if (selectedProductId === null) {
+        if (selectedQnaId === null) {
             return; // 선택된 항목이 없으면 무시
         }
 
         try {
-            // id를 사용하여 삭제 요청을 보냅니다.
+            // member_id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/introduction-board/${selectedProductId}`
+                `https://server.inuappcenter.kr/faqs/${selectedQnaId}`
             );
-            console.log(
-                'Member with ID',
-                selectedProductId,
-                'has been deleted.'
-            );
+            console.log('Member with ID', selectedQnaId, 'has been deleted.');
 
             // 삭제한 데이터를 data 상태에서 제거합니다.
             setData((prevData) =>
-                prevData.filter((item) => item.id !== selectedProductId)
+                prevData.filter((item) => item.id !== selectedQnaId)
             );
         } catch (error) {
             console.error('Error deleting member:', error);
@@ -125,13 +174,13 @@ export default function ProductPage() {
     return (
         <>
             <InOut />
-            <IntroBox introInfo={introInfo[5]} />
-            <MemberList>앱 목록</MemberList>
+            <IntroBox introInfo={introInfo[4]} />
+            <MemberList>질문 및 답변 목록</MemberList>
             <MemberTable>
                 <MemberBar>
-                    <Cartegories type='first'>썸네일</Cartegories>
-                    <Cartegories type='second'>제목</Cartegories>
-                    <Cartegories>부제목</Cartegories>
+                    <Cartegories type='first'>파트</Cartegories>
+                    <Cartegories type='second'>질문</Cartegories>
+                    <Cartegories>답변</Cartegories>
                 </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
@@ -139,29 +188,18 @@ export default function ProductPage() {
                             key={content.id}
                             onContextMenu={(e) => {
                                 e.preventDefault();
-                                setselectedProductId(content.id);
+                                setSelectedQnaId(content.id);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
-                                setProductId(content.id);
                                 console.log(content.id);
                             }}
                         >
-                            <AppTd>
-                                <figure>
-                                    <AppImage
-                                        src={
-                                            content.images[
-                                                Object.keys(content.images)[0]
-                                            ]
-                                        }
-                                    />
-                                </figure>
-                            </AppTd>
-                            <td>{content.title}</td>
-                            <td>{content.subTitle}</td>
+                            <td>{content.part}</td>
+                            <td>{content.question}</td>
+                            <td>{content.answer}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -182,8 +220,6 @@ export default function ProductPage() {
                     등록
                 </Regisbutton>
             </PaginationContainer>
-            {regisModalOpen && <ProductRegis regisModalOpen={regisModalOpen} />}
-            {modifyModalOpen && <ModifyModal id={productId} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -197,18 +233,41 @@ export default function ProductPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
+            {regisModalOpen && <QnARegis regisModalOpen={regisModalOpen} />}
+            {/* 수정 팝업 모달 */}
+            <ModalContainer
+                isOpen={isEditModalOpen}
+                onRequestClose={closeEditModal}
+                contentLabel='Edit Member Modal'
+            >
+                <ModalTitle>QnA 수정</ModalTitle>
+                <ModalLabel>파트</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedPart}
+                    onChange={(e) => setEditedPart(e.target.value)}
+                />
+                <ModalLabel>질문</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedQuestion}
+                    onChange={(e) => setEditedQuestion(e.target.value)}
+                />
+                <ModalLabel>답변</ModalLabel>
+                <ModalInput
+                    type='text'
+                    value={editedAnswer}
+                    onChange={(e) => setEditedAnswer(e.target.value)}
+                />
+
+                <ModalButtonWrapper>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
+                    <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                </ModalButtonWrapper>
+            </ModalContainer>
         </>
     );
 }
-
-const MemberBar = styled.div`
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    transform: translate(-8rem);
-`;
 
 const Cartegories = styled.div`
     width: 80px;
@@ -220,32 +279,86 @@ const Cartegories = styled.div`
     position: absolute;
     ${(props) =>
         props.type === 'first'
-            ? 'left: 8rem; width: 250px;'
+            ? 'left: 8rem;'
             : props.type === 'second'
-            ? 'left:19.5rem; width: 340px;'
-            : 'left: 36.5rem; width: 250px;'}
+            ? 'left:12rem; width: 250px;'
+            : 'left: 26rem; width: 410px;'}
 `;
 
-const AppTd = styled.td`
-    width: 200px;
-    ${({ regisModalOpen }) =>
-        regisModalOpen &&
-        `   opacity: 0.1;
-`}
-`;
+const MemberBar = styled.div`
+    display: flex;
 
-const AppImage = styled.img`
-    width: 7rem;
-    height: 7rem;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
 `;
 
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
+`;
+
+const ModalContainer = styled(Modal)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 500px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const ModalTitle = styled.h2`
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+`;
+
+const ModalLabel = styled.label`
+    font-size: 1rem;
+    margin-bottom: 5px;
+`;
+
+const ModalInput = styled.input`
+    width: 70%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+`;
+
+const ModalButtonWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+`;
+
+const ModalButton = styled.button`
+    background-color: #1e88e5;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    & + & {
+        margin: 0 10px;
+    }
+
+    &:hover {
+        background-color: #8181f7;
+    }
 `;
 
 const MenuItem = styled.div`
@@ -284,7 +397,7 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 30rem;
+    margin-left: 37rem;
     margin-top: 0.6rem;
 
     &:hover {
@@ -300,10 +413,17 @@ const MemberTable = styled.table`
 
     th,
     td {
-        width: 200px;
         padding: 5px;
         text-align: center;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+
+        :nth-child(2) {
+            width: 200px;
+        }
+
+        :nth-child(3) {
+            width: 400px;
+        }
     }
 
     th {
@@ -317,10 +437,10 @@ const MemberTable = styled.table`
 
     tr {
         border-radius: 20%;
-    }
 
-    tr:hover {
-        background-color: #f2f2f2;
+        &:hover {
+            background-color: #f2f2f2;
+        }
     }
 `;
 
