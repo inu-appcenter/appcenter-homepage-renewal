@@ -25,7 +25,7 @@ const TeamMemberList = () => {
   });
 
   return (
-    <div className='flex'>
+    <div className='flex flex-wrap justify-between'>
       {data.map(
         ({
           group_id,
@@ -51,6 +51,7 @@ const TeamMemberList = () => {
                 alt={`${member}의 프로필 사진`}
                 aspectRatio={1}
                 width={150}
+                height={150}
                 borderRadius='lg'
               />
               <Stack mt='6' spacing='3'>
