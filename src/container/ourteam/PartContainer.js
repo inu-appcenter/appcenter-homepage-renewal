@@ -22,7 +22,7 @@ export default function PartContainer() {
                 )
                 .then((res) => {
                     setGroup(res.data);
-                    console.log(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();

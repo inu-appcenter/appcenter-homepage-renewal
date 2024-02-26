@@ -1,20 +1,23 @@
-import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import RoleRegis from '../container/product/RoleRegis';
 
 export default function ManageRolePage() {
     const [data, setData] = useState([]);
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newRole, setNewRole] = useState({
-        roleId: '',
-        roleName: '',
-        description: '',
-    });
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const dispatch = useDispatch();
+
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -60,44 +63,32 @@ export default function ManageRolePage() {
             setEditedRoleName(RoleToEdit.roleName);
             setEditedDesc(RoleToEdit.description);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedRoleId]);
 
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                'https://server.inuappcenter.kr/roles',
-                newRole
-            );
-            console.log('Success:', result.data);
-
-            // POST 요청 성공 시, 새로운 역할을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
-
-            setNewRole({
-                roleId: '',
-                roleName: '',
-                description: '',
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get('https://server.inuappcenter.kr/roles/all-roles')
                 .then((res) => {
                     setData(res.data);
-                    console.log(data);
                 });
         };
         fetchData();
-    }, [data.length, isEditModalOpen]);
+    }, [data.length, isEditModalOpen, regisModalOpen]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -159,17 +150,23 @@ export default function ManageRolePage() {
 
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
-            await axios.delete(
-                `https://server.inuappcenter.kr/roles/${selectedRoleId} `
-            );
-            console.log('Member with ID', selectedRoleId, 'has been deleted.');
-
-            // 삭제한 데이터를 data 상태에서 제거합니다.
-            setData((prevData) =>
-                prevData.filter((item) => item.roleId !== selectedRoleId)
-            );
+            await axios
+                .delete(
+                    `https://server.inuappcenter.kr/roles/${selectedRoleId} `
+                )
+                .then((res) => {
+                    alert(res.data.msg);
+                    console.log(res.data.msg);
+                    // 삭제한 데이터를 data 상태에서 제거합니다.
+                    setData((prevData) =>
+                        prevData.filter(
+                            (item) => item.roleId !== selectedRoleId
+                        )
+                    );
+                });
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -177,16 +174,14 @@ export default function ManageRolePage() {
 
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'역할 관리'}</Text>
-                <Text type='top'>{'역할 추가, 삭제, 수정을 할 수 있어요'}</Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[2]} />
             <MemberList>역할 목록</MemberList>
             <MemberTable>
+                <MemberBar>
+                    <Cartegories type='first'>역할 ID</Cartegories>
+                    <Cartegories type='second'>역할 이름</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -216,28 +211,15 @@ export default function ManageRolePage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
-            <Addtitle>역할 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='역할'
-                    value={newRole.roleName}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, roleName: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='설명'
-                    value={newRole.description}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, description: e.target.value })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
+            {regisModalOpen && <RoleRegis regisModalOpen={regisModalOpen} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -272,35 +254,36 @@ export default function ManageRolePage() {
                     onChange={(e) => setEditedDesc(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
     );
 }
-
-const AddBox = styled.div`
+const MemberBar = styled.div`
     display: flex;
-    font-size: 13px;
-    margin: 0 auto;
 
-    width: 340px;
-    height: 40px;
-
-    border-radius: 8px;
-    align-items: center;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
 `;
 
-const AddInfo = styled.div`
-    padding-right: 4.5rem;
-    padding-left: 5rem;
-
-    :nth-child(2) {
-        padding-left: 4rem;
-    }
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 180px;'
+            : props.type === 'second'
+            ? 'left:18rem; width: 440px;'
+            : 'left: 39rem; width: 170px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -316,9 +299,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -337,7 +320,7 @@ const ModalLabel = styled.label`
 `;
 
 const ModalInput = styled.input`
-    width: 100%;
+    width: 70%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -352,7 +335,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -399,16 +382,15 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 1rem 0 0 auto;
-    position: absolute;
-    left: 29rem;
-    top: 2rem;
+    margin-left: 37rem;
+    margin-top: 0.6rem;
 
     &:hover {
         transition: 0.1s ease-in;
@@ -416,42 +398,22 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 0.5rem;
-        width: 100px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-
-    & + & {
-        margin-right: 10px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 600px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        white-space: nowrap;
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
@@ -468,37 +430,6 @@ const MemberTable = styled.table`
     }
 `;
 
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    justify-content: center;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 3.9rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
 const MemberList = styled.div`
     position: absolute;
     display: flex;
@@ -511,49 +442,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;

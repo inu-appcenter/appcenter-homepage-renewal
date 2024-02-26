@@ -21,7 +21,7 @@ export default function MemberList({ data }) {
                 )
                 .then((res) => {
                     setGroup(res.data);
-                    console.log(res.data);
+                    console.log(viewData);
                 });
         };
         fetchData();

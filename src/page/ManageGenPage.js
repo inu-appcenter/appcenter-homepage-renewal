@@ -1,21 +1,23 @@
-import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import GenRegis from '../container/product/GenRegis';
 
 export default function ManageGenPage() {
     const [data, setData] = useState([]);
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newRole, setNewRole] = useState({
-        role_id: '',
-        member_id: '',
-        part: '',
-        year: 15,
-    });
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const dispatch = useDispatch();
+
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -61,39 +63,27 @@ export default function ManageGenPage() {
         );
         if (memberToEdit) {
             setEditedRole(memberToEdit.role);
-            setEditedGen(memberToEdit.generation);
+            setEditedGen(memberToEdit.year);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedGroupId]);
 
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                `https://server.inuappcenter.kr/groups?member_id=${newRole.member_id}&role_id=${newRole.role_id}`,
-                newRole
-            );
-            console.log('Success:', result.data);
-
-            // POST 요청 성공 시, 새로운 역할을 data 상태 변수에 추가합니다.
-            setData([...data, result.data]);
-
-            setNewRole({
-                role_id: '',
-                member_id: '',
-                part: '',
-                year: 16,
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/groups/public/all-groups-members'
                 )
@@ -102,7 +92,7 @@ export default function ManageGenPage() {
                 });
         };
         fetchData();
-    }, []);
+    }, [regisModalOpen, data.length]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -130,9 +120,11 @@ export default function ManageGenPage() {
 
         // 수정할 데이터를 가져옵니다.
         const updatedData = {
-            role: editedRole,
-            generation: editedGen,
+            part: editedRole,
+            year: editedGen,
         };
+
+        console.log(updatedData);
 
         try {
             // group_id를 사용하여 수정 요청을 보냅니다.
@@ -165,7 +157,7 @@ export default function ManageGenPage() {
         try {
             // member_id를 사용하여 삭제 요청을 보냅니다.
             await axios.delete(
-                `https://server.inuappcenter.kr/groups?${selectedGroupId}`
+                `https://server.inuappcenter.kr/groups/${selectedGroupId}`
             );
             console.log('Member with ID', selectedGroupId, 'has been deleted.');
 
@@ -175,6 +167,7 @@ export default function ManageGenPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
@@ -182,17 +175,16 @@ export default function ManageGenPage() {
 
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'기수 관리'}</Text>
-                <Text type='top'>
-                    {'기수에 역할과 동아리원을 추가, 삭제, 수정을 할 수 있어요'}
-                </Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[1]} />
             <MemberList>편성 목록</MemberList>
+            <MemberBar>
+                <Cartegories type='first'>이름</Cartegories>
+                <Cartegories type='second'>역할명</Cartegories>
+                <Cartegories type='third'>기수</Cartegories>
+                <Cartegories type='fourth'>파트명</Cartegories>
+                <Cartegories>이메일</Cartegories>
+            </MemberBar>
             <MemberTable>
                 <tbody>
                     {getCurrentPageData().map((content) => (
@@ -212,26 +204,8 @@ export default function ManageGenPage() {
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
-                            <td>
-                                <a
-                                    href={content.blogLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    blog
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href={content.gitRepositoryLink}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    github
-                                </a>
-                            </td>
-                            <td>{content.profileImage}</td>
-                            <td>{content.email}</td>
+                            <td>{content.part ?? <div>{content.part}</div>}</td>
+                            <td type='email'>{content.email}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -244,44 +218,15 @@ export default function ManageGenPage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
-            <Addtitle>편성 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='동아리원_id'
-                    value={newRole.member_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, member_id: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='역할_id'
-                    value={newRole.role_id}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, role_id: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='text'
-                    placeholder='파트명'
-                    value={newRole.part}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, part: e.target.value })
-                    }
-                />
-                <AddMember
-                    type='number'
-                    placeholder='기수'
-                    value={newRole.year}
-                    onChange={(e) =>
-                        setNewRole({ ...newRole, year: e.target.value })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
+
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -295,38 +240,59 @@ export default function ManageGenPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-
+            {regisModalOpen && <GenRegis regisModalOpen={regisModalOpen} />}
             {/* 수정 팝업 모달 */}
             <ModalContainer
                 isOpen={isEditModalOpen}
                 onRequestClose={closeEditModal}
                 contentLabel='Edit Member Modal'
             >
-                <ModalTitle>역할 수정</ModalTitle>
+                <ModalTitle>기수 수정</ModalTitle>
                 <ModalLabel>파트</ModalLabel>
                 <ModalInput
                     type='text'
                     value={editedRole}
                     onChange={(e) => setEditedRole(e.target.value)}
                 />
+                <ModalLabel>기수</ModalLabel>
                 <ModalInput
                     type='number'
                     value={editedGen}
                     onChange={(e) => setEditedGen(e.target.value)}
                 />
                 <ModalButtonWrapper>
-                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                     <ModalButton onClick={closeEditModal}>취소</ModalButton>
+                    <ModalButton onClick={handleEdit}>수정 완료</ModalButton>
                 </ModalButtonWrapper>
             </ModalContainer>
         </>
     );
 }
 
+const MemberBar = styled.div`
+    display: flex;
+    top: 20px;
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+`;
+
+const Cartegories = styled.div`
+    height: 20px;
+    width: 20%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+`;
+
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* 조정 가능한 마진 값 */
+    margin-top: 20px;
 `;
 
 const ModalContainer = styled(Modal)`
@@ -336,9 +302,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -372,7 +338,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -419,13 +385,15 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 2rem -3.5rem 0 auto;
+    margin-left: 38rem;
+    margin-top: 3rem;
 
     &:hover {
         transition: 0.1s ease-in;
@@ -433,43 +401,40 @@ const Regisbutton = styled.button`
     }
 `;
 
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 80px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 80px;
-    }
-
-    & + & {
-        margin-right: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
-    }
-`;
-
 const MemberTable = styled.table`
-    width: 700px;
-    border-collapse: collapse;
+    width: 800px;
     margin: 20px auto 20px auto;
 
-    th,
     td {
-        padding: 5px;
+        width: 160px;
+        padding: 6px;
         text-align: center;
-    }
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        ${(props) => (props.type === 'email' ? 'width: 150px;' : '')}
 
     th {
         font-weight: 700;
+        padding: 5px;
+        text-align: center;
     }
 
     a {
         color: #0078d4;
         text-decoration: none;
+    }
+
+    div {
+        width: 90px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     tr {
@@ -478,37 +443,6 @@ const MemberTable = styled.table`
 
     tr:hover {
         background-color: #f2f2f2;
-    }
-`;
-
-const AddList = styled.div`
-    display: flex;
-    justify-content: center;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 400px;
-    margin: 0 auto;
-
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
     }
 `;
 
@@ -524,49 +458,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;

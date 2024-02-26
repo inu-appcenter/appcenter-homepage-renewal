@@ -1,22 +1,23 @@
-import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
+import { RMopen } from '../modules/ProductSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import QnARegis from '../container/product/QnARegis';
 
 export default function QnAPage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
-    // 새 멤버를 추가할 때 사용합니다.
-    const [newQna, setNewQna] = useState({
-        answer: '',
-        id: '',
-        part: '',
-        question: '',
-    });
+    const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
+    // prettier-ignore
+    const dispatch = useDispatch();
+
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -64,48 +65,34 @@ export default function QnAPage() {
             setEditedQuestion(QnaToEdit.question);
             setEditedAnswer(QnaToEdit.answer);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedQnaId]);
 
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
 
-    const addData = async () => {
-        try {
-            const result = await axios.post(
-                'https://server.inuappcenter.kr/faqs',
-                newQna
-            );
-
-            // POST 요청 성공 시, 새로운 질문을 data 상태 변수에 추가합니다.
-            setData([...data, newQna]);
-
-            setNewQna({
-                answer: '',
-                id: '',
-                part: '',
-                question: '',
-            });
-        } catch (error) {
-            console.error('Error adding data:', error);
-        }
+    const addData = () => {
+        dispatch(RMopen());
+        scrollLock();
     };
+
+    const scrollLock = useCallback(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/faqs/public/all-faq-boards'
                 )
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
                 });
         };
         fetchData();
-        console.log(newQna);
-    }, []);
+    }, [regisModalOpen]);
 
     useEffect(() => {
         const handleContextMenuClick = (e) => {
@@ -179,25 +166,22 @@ export default function QnAPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'질문 관리'}</Text>
-                <Text type='top'>
-                    {'질문과 답변을 추가, 삭제, 수정을 할 수 있어요'}
-                </Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[4]} />
             <MemberList>질문 및 답변 목록</MemberList>
             <MemberTable>
-                {loading && <div>loading...</div>}
+                <MemberBar>
+                    <Cartegories type='first'>파트</Cartegories>
+                    <Cartegories type='second'>질문</Cartegories>
+                    <Cartegories>답변</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -228,38 +212,14 @@ export default function QnAPage() {
                     itemsPerPage={itemsPerPage}
                     onPageChange={handlePageChange}
                 />
+                <Regisbutton
+                    onClick={() => {
+                        addData();
+                    }}
+                >
+                    등록
+                </Regisbutton>
             </PaginationContainer>
-            <Addtitle>질문 및 답변 추가</Addtitle>
-            <AddList>
-                {/* 사용자 입력을 받을 UI 요소들 */}
-                <AddMember
-                    type='text'
-                    placeholder='파트'
-                    value={newQna.part}
-                    onChange={(e) =>
-                        setNewQna({ ...newQna, part: e.target.value })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='질문'
-                    value={newQna.question}
-                    onChange={(e) =>
-                        setNewQna({ ...newQna, question: e.target.value })
-                    }
-                />
-
-                <AddMember
-                    type='text'
-                    placeholder='답변'
-                    value={newQna.answer}
-                    onChange={(e) =>
-                        setNewQna({ ...newQna, answer: e.target.value })
-                    }
-                />
-                <Regisbutton onClick={addData}>등록</Regisbutton>
-            </AddList>
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
                 <ContextMenu
@@ -273,7 +233,7 @@ export default function QnAPage() {
                     <MenuItem onClick={handleDelete}>삭제</MenuItem>
                 </ContextMenu>
             )}
-
+            {regisModalOpen && <QnARegis regisModalOpen={regisModalOpen} />}
             {/* 수정 팝업 모달 */}
             <ModalContainer
                 isOpen={isEditModalOpen}
@@ -309,10 +269,35 @@ export default function QnAPage() {
     );
 }
 
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem;'
+            : props.type === 'second'
+            ? 'left:12rem; width: 250px;'
+            : 'left: 26rem; width: 410px;'}
+`;
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* 조정 가능한 마진 값 */
+    margin-top: 20px;
 `;
 
 const ModalContainer = styled(Modal)`
@@ -322,9 +307,9 @@ const ModalContainer = styled(Modal)`
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
-    border: 2px solid #5858fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    max-width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -343,7 +328,7 @@ const ModalLabel = styled.label`
 `;
 
 const ModalInput = styled.input`
-    width: 100%;
+    width: 70%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -358,7 +343,7 @@ const ModalButtonWrapper = styled.div`
 `;
 
 const ModalButton = styled.button`
-    background-color: #5858fa;
+    background-color: #1e88e5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -405,40 +390,19 @@ const ContextMenu = styled.div`
 `;
 
 const Regisbutton = styled.button`
+    position: absolute;
     border: none;
-    background-color: #5858fa;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
     height: 2rem;
-    margin: 1rem 3.5rem 0 auto;
+    margin-left: 37rem;
+    margin-top: 0.6rem;
 
     &:hover {
         transition: 0.1s ease-in;
         background-color: #8181f7;
-    }
-`;
-
-const AddMember = styled.input`
-    border-radius: 5px;
-    width: 112px;
-    height: 22px;
-
-    :first-child {
-        margin-right: 5px;
-        width: 50px;
-    }
-
-    :nth-child(2) {
-        width: 200px;
-    }
-    :nth-child(3) {
-        width: 350px;
-        margin-left: 5px;
-    }
-
-    ::placeholder {
-        text-align: center;
     }
 `;
 
@@ -451,6 +415,7 @@ const MemberTable = styled.table`
     td {
         padding: 5px;
         text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 
         :nth-child(2) {
             width: 200px;
@@ -479,35 +444,6 @@ const MemberTable = styled.table`
     }
 `;
 
-const AddList = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto;
-    font-size: 1.6rem;
-    padding-left: 2.5rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const Addtitle = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 0 auto 1.5rem auto;
-    font-size: 1.6rem;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
 const MemberList = styled.div`
     position: absolute;
     display: flex;
@@ -520,49 +456,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;

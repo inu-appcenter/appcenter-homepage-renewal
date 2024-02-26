@@ -1,19 +1,18 @@
-import styled, { css } from 'styled-components';
-import { HiBars3 } from 'react-icons/hi2';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from 'react-modal'; // react-modal 라이브러리 import
 import Pagination from '../component/manage/Pagenation';
-import logo from '../resource/img/navbar_logo/logo_black.png';
-import RegisModal from '../container/product/RegisModal';
 import { RMopen, MODopen } from '../modules/ProductSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import ModifyModal from '../container/product/ModifyModal';
+import InOut from '../component/common/InOut';
+import IntroBox from '../component/admin/IntroBox';
+import { introInfo } from '../resource/data/adminInfo';
+import ProductRegis from '../container/product/ProductRegis';
 
 export default function ProductPage() {
     const [data, setData] = useState([]);
-    const [loading, isLoading] = useState(false);
 
     const regisModalOpen = useSelector((state) => state.product.regisModalOpen);
     // prettier-ignore
@@ -28,14 +27,6 @@ export default function ProductPage() {
     const [selectedProductId, setselectedProductId] = useState(null);
     const contextMenuRef = useRef(null);
     const [productId, setProductId] = useState('');
-
-    //* 수정 기능을 이용할 때 값을 저장하기 위해 사용합니다. */
-    const [editedName, setEditedName] = useState('');
-    const [editedDescription, setEditedDescription] = useState('');
-    const [editedProfileImage, setEditedProfileImage] = useState('');
-    const [editedBlogLink, setEditedBlogLink] = useState('');
-    const [editedEmail, setEditedEmail] = useState('');
-    const [editedGitRepositoryLink, setEditedGitRepositoryLink] = useState('');
 
     // 페이지네이션을 구현할때 사용합니다.
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,18 +54,6 @@ export default function ProductPage() {
         dispatch(MODopen());
     };
 
-    useEffect(() => {
-        const memberToEdit = data.find((item) => item.id === selectedProductId);
-        if (memberToEdit) {
-            setEditedName(memberToEdit.name);
-            setEditedDescription(memberToEdit.description);
-            setEditedProfileImage(memberToEdit.profileImage);
-            setEditedBlogLink(memberToEdit.blogLink);
-            setEditedEmail(memberToEdit.email);
-            setEditedGitRepositoryLink(memberToEdit.gitRepositoryLink);
-        }
-    }, [selectedProductId]);
-
     const addData = () => {
         dispatch(RMopen());
         scrollLock();
@@ -86,15 +65,12 @@ export default function ProductPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            isLoading(true);
-            const viewData = await axios
+            const viewData = await axios //eslint-disable-line no-unused-vars
                 .get(
                     'https://server.inuappcenter.kr/introduction-board/public/all-boards-contents'
                 )
                 .then((res) => {
-                    isLoading(false);
                     setData(res.data);
-                    console.log(res.data);
                 });
         };
         fetchData();
@@ -141,25 +117,22 @@ export default function ProductPage() {
             );
         } catch (error) {
             console.error('Error deleting member:', error);
+            alert(error);
         }
 
         setContextMenuVisible(false); // 컨텍스트 메뉴 닫기
     };
     return (
         <>
-            <NavBar>
-                <img src={logo} alt='logo' />
-                <HiBars3 className='menu' size={'24px'} />
-            </NavBar>
-            <IntroBox>
-                <Text type='title'>{'앱 관리'}</Text>
-                <Text type='top'>
-                    {'홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요'}
-                </Text>
-            </IntroBox>
+            <InOut />
+            <IntroBox introInfo={introInfo[5]} />
             <MemberList>앱 목록</MemberList>
             <MemberTable>
-                {loading && <div>loading...</div>}
+                <MemberBar>
+                    <Cartegories type='first'>썸네일</Cartegories>
+                    <Cartegories type='second'>제목</Cartegories>
+                    <Cartegories>부제목</Cartegories>
+                </MemberBar>
                 <tbody>
                     {getCurrentPageData().map((content) => (
                         <tr
@@ -209,7 +182,7 @@ export default function ProductPage() {
                     등록
                 </Regisbutton>
             </PaginationContainer>
-            {regisModalOpen && <RegisModal regisModalOpen={regisModalOpen} />}
+            {regisModalOpen && <ProductRegis regisModalOpen={regisModalOpen} />}
             {modifyModalOpen && <ModifyModal id={productId} />}
             {/* 컨텍스트 메뉴 */}
             {contextMenuVisible && (
@@ -227,6 +200,31 @@ export default function ProductPage() {
         </>
     );
 }
+
+const MemberBar = styled.div`
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    transform: translate(-8rem);
+`;
+
+const Cartegories = styled.div`
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    ${(props) =>
+        props.type === 'first'
+            ? 'left: 8rem; width: 250px;'
+            : props.type === 'second'
+            ? 'left:19.5rem; width: 340px;'
+            : 'left: 36.5rem; width: 250px;'}
+`;
 
 const AppTd = styled.td`
     width: 200px;
@@ -247,68 +245,7 @@ const AppImage = styled.img`
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* 조정 가능한 마진 값 */
-`;
-
-const ModalContainer = styled(Modal)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 2px solid #5858fa;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
-const ModalTitle = styled.h2`
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-`;
-
-const ModalLabel = styled.label`
-    font-size: 1rem;
-    margin-bottom: 5px;
-`;
-
-const ModalInput = styled.input`
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-`;
-
-const ModalButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-`;
-
-const ModalButton = styled.button`
-    background-color: #5858fa;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-
-    & + & {
-        margin: 0 10px;
-    }
-
-    &:hover {
-        background-color: #8181f7;
-    }
+    margin-top: 20px;
 `;
 
 const MenuItem = styled.div`
@@ -342,7 +279,7 @@ const ContextMenu = styled.div`
 const Regisbutton = styled.button`
     position: absolute;
     border: none;
-    background-color: grey;
+    background-color: #1e88e5;
     border-radius: 5px;
     color: white;
     width: 5rem;
@@ -363,8 +300,10 @@ const MemberTable = styled.table`
 
     th,
     td {
+        width: 200px;
         padding: 5px;
         text-align: center;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     }
 
     th {
@@ -397,49 +336,4 @@ const MemberList = styled.div`
     .menu {
         margin-left: auto;
     }
-`;
-
-const NavBar = styled.div`
-    position: absolute;
-    display: flex;
-    position: relative;
-    height: 25px;
-    width: 730px;
-    margin: 45px auto 0 auto;
-
-    .menu {
-        margin-left: auto;
-    }
-`;
-
-const IntroBox = styled.div`
-    position: relative;
-    width: 700px;
-    height: 130px;
-    background-color: #f2f2f2;
-    margin: 0 auto 2rem auto;
-    top: 20px;
-    border-radius: 20px;
-    padding-top: 50px;
-`;
-
-const Text = styled.div`
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: ${(props) => (props.type === 'title' ? '#424242' : '#848484')};
-    font-weight: ${(props) =>
-        props.type === 'top' ? 100 : props.type === 'title' ? 600 : 100};
-    margin-bottom: 3px;
-    white-space: pre-line;
-
-    ${(props) =>
-        props.type === 'title'
-            ? css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.title};
-              `
-            : css`
-                  font-size: ${(props) => props.theme.fontSize.tablet.caption};
-              `}
 `;
