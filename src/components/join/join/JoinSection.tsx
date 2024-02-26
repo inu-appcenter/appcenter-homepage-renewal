@@ -38,9 +38,12 @@ const JoinSection = () => {
           </div>
         ))}
       </div>
-      <a className='flex items-center gap-x-2 border border-primary-700 rounded-3xl px-4 py-2 text-primary-700 font-semibold text-lg hover:bg-primary-200 transition cursor-pointer'>
+      <a
+        href='https://join.inuappcenter.kr'
+        className='flex items-center gap-x-2 border border-primary-700 rounded-3xl px-4 py-2 text-primary-700 font-semibold text-lg hover:bg-primary-200 transition cursor-pointer'
+      >
         지원하러 가기
-        <img src={PaperPlain} width={20} />
+        <img src={PaperPlain} alt='앱센터 지원 공고 링크' width={20} />
       </a>
     </SectionLayout>
   );
