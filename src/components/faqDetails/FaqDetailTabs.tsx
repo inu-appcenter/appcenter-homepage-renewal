@@ -1,18 +1,10 @@
-import {
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Tab,
-  TabList,
-  Tabs,
-} from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { MENU } from '@constants/menu.ts';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PartParam } from '@type/common.ts';
 import { PART } from '@constants/common.ts';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import FilterTabs from '@components/common/FilterTabs.tsx';
 
 const FaqPartList = MENU.find(({ label }) => label === 'FAQ')?.children ?? [];
 
@@ -26,27 +18,8 @@ const FaqDetailTabs = () => {
   return (
     <>
       <div className='hidden sm:block'>
-        <Tabs>
-          <TabList
-            border='none'
-            justifyContent='space-between'
-            flexWrap='wrap'
-            className='hidden gap-4'
-          >
-            {FaqPartList.map(({ path, label }) => (
-              <Tab
-                key={path}
-                border='1px solid transparent'
-                color='grayscale.500'
-                className='font-bold rounded-3xl shadow-md aria-selected:text-primary-700'
-              >
-                <Link to={path}>{label}</Link>
-              </Tab>
-            ))}
-          </TabList>
-        </Tabs>
+        <FilterTabs tabList={FaqPartList} />
       </div>
-
       <div className='relative block sm:hidden w-40 self-end'>
         <Menu>
           <MenuButton
