@@ -299,6 +299,7 @@ const DetailInfo = styled.div`
     width: 70%;
     margin: 0 auto;
     top: -1rem;
+    
 `;
 
 const InstallBtn = styled.button`
@@ -361,6 +362,10 @@ const AppTitle = styled.h2`
 `;
 
 const AppDescription = styled.p`
+    width: 60%;
+    text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     font-size: 16px;
     color: #666;
     position: relative;

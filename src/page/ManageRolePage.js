@@ -282,8 +282,8 @@ const Cartegories = styled.div`
         props.type === 'first'
             ? 'left: 8rem; width: 180px;'
             : props.type === 'second'
-            ? 'left:19rem; width: 420px;'
-            : 'left: 41rem; width: 170px;'}
+            ? 'left:18rem; width: 440px;'
+            : 'left: 39rem; width: 170px;'}
 `;
 
 const PaginationContainer = styled.div`

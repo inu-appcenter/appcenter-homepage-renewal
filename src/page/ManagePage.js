@@ -447,20 +447,20 @@ const Cartegories = styled.div`
             : props.type === 'second'
             ? 'left:11rem; width: 150px;'
             : props.type === 'third'
-            ? 'left: 19.5rem; width: 120px;'
+            ? 'left: 20rem; width: 140px;'
             : props.type === 'fourth'
-            ? 'left: 26.5rem; width: 120px;'
+            ? 'left: 28.5rem; width: 140px;'
             : props.type === 'fifth'
-            ? 'left: 37.5em; width: 120px;'
+            ? 'left: 41em; width: 150px;'
             : props.type === 'sixth'
-            ? 'left: 45.5em; width: 120px;'
+            ? 'left: 51em; width: 140px;'
             : props.type === 'seventh'
-            ? 'left: 53.5em; width: 150px;'
+            ? 'left: 59.5em; width: 150px;'
             : props.type === 'eighth'
-            ? 'left: 63em; width: 150px;'
+            ? 'left: 69.5em; width: 150px;'
             : props.type === 'ninth'
-            ? 'left: 72.5em; width: 150px;'
-            : 'left: 81.5em; width: 150px;'}
+            ? 'left: 79em; width: 150px;'
+            : 'left: 88em; width: 150px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -607,6 +607,9 @@ const MemberTable = styled.table`
         width:100px;
         color: #0078d4;
         text-decoration: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     tr {

@@ -24,7 +24,6 @@ export default function ManageGenPage() {
         y: 0,
     });
     const [selectedGroupId, setSelectedGroupId] = useState(null);
-    const [selectedRoleId, setSelectedRoleId] = useState(null);
     const contextMenuRef = useRef(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
@@ -114,12 +113,6 @@ export default function ManageGenPage() {
         };
     }, []);
 
-    const setRoleId = (content) => {
-        if (content === '센터장') setSelectedRoleId(1);
-        else if (content === '파트장') setSelectedRoleId(2);
-        else if (content === '파트원') setSelectedRoleId(3);
-    };
-
     const handleEdit = async () => {
         if (selectedGroupId === null) {
             return; // 선택된 항목이 없으면 무시
@@ -136,7 +129,7 @@ export default function ManageGenPage() {
         try {
             // group_id를 사용하여 수정 요청을 보냅니다.
             const response = await axios.patch(
-                `https://server.inuappcenter.kr/groups?groupId=${selectedGroupId}&roleId=${selectedRoleId}`,
+                `https://server.inuappcenter.kr/groups?id=${selectedGroupId}`,
                 updatedData
             );
             console.log('Member with ID', selectedGroupId, 'has been updated.');
@@ -200,21 +193,19 @@ export default function ManageGenPage() {
                             onContextMenu={(e) => {
                                 e.preventDefault();
                                 setSelectedGroupId(content.group_id);
-                                setRoleId(content.role);
                                 setContextMenuPosition({
                                     x: e.clientX,
                                     y: e.clientY,
                                 });
                                 setContextMenuVisible(true);
                                 console.log(content.group_id);
-                                console.log(content.role_id);
                             }}
                         >
                             <td>{content.member}</td>
                             <td>{content.role}</td>
                             <td>{content.year}</td>
                             <td>{content.part ?? <div>{content.part}</div>}</td>
-                            <td>{content.email}</td>
+                            <td type='email'>{content.email}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -297,14 +288,14 @@ const Cartegories = styled.div`
     position: absolute;
     ${(props) =>
         props.type === 'first'
-            ? 'left: 8rem; width: 90px;'
+            ? 'left: 8rem; width: 120px;'
             : props.type === 'second'
-            ? 'left:13rem; width: 100px;'
+            ? 'left:15rem; width: 100px;'
             : props.type === 'third'
-            ? 'left: 18rem; width: 100px;'
+            ? 'left: 21rem; width: 120px;'
             : props.type === 'fourth'
-            ? 'left: 22.5rem; width: 120px;'
-            : 'left: 28.5rem; width: 270px;'}
+            ? 'left: 28rem; width: 120px;'
+            : 'left: 34rem; width: 180px;'}
 `;
 
 const PaginationContainer = styled.div`
@@ -410,7 +401,7 @@ const Regisbutton = styled.button`
     color: white;
     width: 5rem;
     height: 2rem;
-    margin-left: 40rem;
+    margin-left: 37rem;
     margin-top: 0.6rem;
 
     &:hover {
@@ -424,12 +415,20 @@ const MemberTable = styled.table`
     margin: 20px auto 20px auto;
 
     td {
+        width: 90px;
         padding: 6px;
         text-align: center;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
         border-radius: 4px;
         overflow: hidden;
         white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        ${(props) =>
+        props.type === 'email'
+            ? 'width: 150px;' : ''}
 
     th {
         font-weight: 700;
@@ -440,6 +439,13 @@ const MemberTable = styled.table`
     a {
         color: #0078d4;
         text-decoration: none;
+    }
+
+    div {
+        width: 90px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     tr {
