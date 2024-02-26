@@ -8,6 +8,10 @@ const Nav = () => {
     return path.split('/').at(1) === pathname.split('/').at(1);
   };
 
+  const isHash = (path: string) => {
+    return !!path.match(/#/);
+  };
+
   return (
     <ul className='flex justify-between w-full sm:basis-3/5 md:basis-2/5'>
       {MENU.map(({ path, label, children }) => (
@@ -23,7 +27,11 @@ const Nav = () => {
                   key={path}
                   className={`text-center w-24 ${pathname + hash === path ? 'text-secondary-300' : 'text-white'} font-semibold`}
                 >
-                  <Link to={path}>{label}</Link>
+                  {isHash(path) ? (
+                    <a href={path}>{label}</a>
+                  ) : (
+                    <Link to={path}>{label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
