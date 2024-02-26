@@ -15,6 +15,7 @@ const AppRouter = () => {
       element: <RootPage />,
       children: [
         {
+          index: true,
           path: PATH.HOME(),
           element: <HomePage />,
         },
