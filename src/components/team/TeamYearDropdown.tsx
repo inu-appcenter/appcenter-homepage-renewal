@@ -19,11 +19,23 @@ const TeamYearDropdown = () => {
         as={Button}
         rightIcon={<ChevronDownIcon />}
         minWidth={32}
-        className='text-start'
+        className='text-start border border-grayscale-100'
+        backgroundColor='transparent'
+        _active={{
+          bg: 'transparent',
+        }}
+        _hover={{
+          bg: 'transparent',
+        }}
       >
         {queryParams.get('year')}기
       </MenuButton>
-      <MenuList minWidth={40} maxHeight={80} className='overflow-scroll'>
+      <MenuList
+        borderColor='grayscale.100'
+        minWidth={40}
+        maxHeight={80}
+        className='overflow-scroll'
+      >
         {yearList.map((year) => (
           <Link key={year} to={PATH.TEAM(part) + `?year=${year}`}>
             <MenuItem>{year}기</MenuItem>
