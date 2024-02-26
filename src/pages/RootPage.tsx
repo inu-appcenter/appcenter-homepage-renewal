@@ -3,12 +3,12 @@ import { Outlet } from 'react-router-dom';
 
 const RootPage = () => {
   return (
-    <>
+    <div className='scroll-smooth h-svh overflow-y-scroll'>
       <Header />
-      <main className='scroll-smooth h-svh overflow-scroll max-w-screen-xl mx-auto'>
+      <main className='max-w-screen-xl mx-auto'>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 

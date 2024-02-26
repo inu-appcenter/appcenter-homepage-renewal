@@ -7,3 +7,13 @@
         @apply text-[14px] md:text-[16px] lg:text-[18px];
     }
 }
+
+/* Hide Scrollbar */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
