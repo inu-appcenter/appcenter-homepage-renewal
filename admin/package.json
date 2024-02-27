@@ -62,7 +62,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://home.inuappcenter.kr/",
+  "homepage": "https://admin.inuappcenter.kr/",
   "devDependencies": {
     "prettier": "^2.8.8",
     "redux-logger": "^3.0.6"
