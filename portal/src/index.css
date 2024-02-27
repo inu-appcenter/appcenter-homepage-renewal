@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply text-[14px] md:text-[16px] lg:text-[18px];
+    }
+}
+
+/* Hide Scrollbar */
+#root::-webkit-scrollbar {
+    display: none;
+}
+
+#root {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#root {
+    scroll-behavior: smooth;
+    height: 100svh;
+    overflow-y: scroll;
+
+}
