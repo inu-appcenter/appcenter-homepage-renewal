@@ -15,9 +15,11 @@ const Header = () => {
     <>
       <div className={containerClassName}>
         <CommonHeader />
-        <div className='flex w-full h-2/3 justify-center items-center'>
-          <Introduce />
-        </div>
+        {pathname === PATH.HOME() && (
+          <div className='flex w-full h-2/3 justify-center items-center'>
+            <Introduce />
+          </div>
+        )}
       </div>
     </>
   );
