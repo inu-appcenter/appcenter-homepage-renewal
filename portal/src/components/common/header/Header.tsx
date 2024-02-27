@@ -8,7 +8,7 @@ const Header = () => {
 
   const containerClassName =
     pathname === PATH.HOME()
-      ? 'h-[50svh] bg-gradient-to-t from-primary-400 to-blue-700 sm:h-[100svh] shadow-primary'
+      ? 'h-svh bg-gradient-to-t from-primary-400 to-blue-700  shadow-primary'
       : '';
 
   return (
