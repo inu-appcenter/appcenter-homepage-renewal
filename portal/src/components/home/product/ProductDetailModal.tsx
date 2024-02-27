@@ -44,7 +44,11 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             {Object.values(images)
               .slice(1)
               .map((image) => (
-                <Image className='rounded-2xl w-full sm:w-44' src={image} />
+                <Image
+                  key={image}
+                  className='rounded-2xl w-full sm:w-44'
+                  src={image}
+                />
               ))}
           </div>
         </div>

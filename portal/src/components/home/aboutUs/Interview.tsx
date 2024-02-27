@@ -44,7 +44,7 @@ export const interviewAnswer = [
 
 const Interview = () => {
   return (
-    <div className='flex flex-col justify-center'>
+    <div className='flex flex-col justify-center overflow-hidden'>
       <div className='flex gap-16 flex-wrap justify-center'>
         <h2 className='mt-8 pl-8 text-primary-700 font-bold text-4xl before:content-["Q."] before:relative -indent-8'>
           앱센터 활동을 하면서 <br />
