@@ -21,7 +21,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}}
-          projectName: appcenter-admin
+          projectName: inu-appcenter-admin
           directory: admin/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: deploy/admin
