@@ -1,5 +1,6 @@
 import { MENU } from '@constants/menu.ts';
 import { Link, useLocation } from 'react-router-dom';
+import { PATH } from '@constants/path.ts';
 
 const Nav = () => {
   const { pathname, hash } = useLocation();
@@ -21,7 +22,11 @@ const Nav = () => {
         >
           <Link to={path}>{label}</Link>
           {children && (
-            <ul className='z-10 absolute top-full left-1/2 transform -translate-x-1/2 p-4 flex flex-col gap-y-3 rounded-2xl bg-primary-700 pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity duration-150'>
+            <ul
+              className={`z-10 absolute top-full left-1/2 transform -translate-x-1/2 p-4 flex flex-col gap-y-3 rounded-2xl  ${
+                pathname !== PATH.HOME() ? 'bg-primary-700' : ''
+              } pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity duration-150`}
+            >
               {children.map(({ path, label }) => (
                 <li
                   key={path}

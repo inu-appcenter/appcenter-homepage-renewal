@@ -1,14 +1,14 @@
 import { useLocation } from 'react-router-dom';
 import { PATH } from '@constants/path.ts';
 import CommonHeader from '@components/common/header/CommonHeader.tsx';
-import Introduce from '@components/home/Introduce.tsx';
+import Slogan from '@components/home/Slogan.tsx';
 
 const Header = () => {
   const { pathname } = useLocation();
 
   const containerClassName =
     pathname === PATH.HOME()
-      ? 'h-[50svh] sm:h-[100svh] bg-primary-700 shadow-primary rounded-b-7xl sm:rounded-bl-[45vw]'
+      ? 'h-[50svh] bg-gradient-to-t from-primary-400 to-blue-700 sm:h-[100svh] shadow-primary'
       : '';
 
   return (
@@ -16,8 +16,8 @@ const Header = () => {
       <div className={containerClassName}>
         <CommonHeader />
         {pathname === PATH.HOME() && (
-          <div className='flex w-full h-2/3 justify-center items-center'>
-            <Introduce />
+          <div className='flex w-full h-2/3 px-32  justify-center items-center'>
+            <Slogan />
           </div>
         )}
       </div>
