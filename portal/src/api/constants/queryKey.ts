@@ -1,7 +1,7 @@
 import { Part } from '@type/common.ts';
 
 const QUERY_KEY = {
-  INTRODUCTION_BOARD: (id?: string) => ['introduction-board', id],
+  INTRODUCTION_BOARD: (id?: number) => ['introduction-board', id],
 
   FAQS_PUBLIC_ALL: (topic?: Part) => ['faqs', topic],
 

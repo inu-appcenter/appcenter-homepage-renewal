@@ -13,3 +13,9 @@ export type IntroductionBoardEntity = {
 };
 
 export type IntroductionBoardPublicAllListResponse = IntroductionBoardEntity[];
+
+export type IntroductionBoardPublicByIdRequest = Pick<
+  IntroductionBoardEntity,
+  'id'
+>;
+export type IntroductionBoardPublicByIdResponse = IntroductionBoardEntity;

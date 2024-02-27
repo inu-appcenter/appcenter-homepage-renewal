@@ -1,8 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PlayStoreBadge from '@assets/svg/google-play-badge.svg';
-import AppStoreBadge from '@assets/svg/app-store-badge.svg';
 import { Autoplay, Pagination } from 'swiper/modules';
 import useGetIntroductionBoardPublicAllQuery from '@api/query/useGetIntroductionBoardPublicAllQuery.ts';
+import ProductItem from '@components/home/product/ProductItem.tsx';
 
 const ProductListSwiper = () => {
   const { data } = useGetIntroductionBoardPublicAllQuery();
@@ -33,35 +32,9 @@ const ProductListSwiper = () => {
         slidesPerView={2}
         spaceBetween={10}
       >
-        {data.map(({ id, title, images, androidStoreLink, appleStoreLink }) => (
-          <SwiperSlide key={id}>
-            <div className='flex flex-col gap-y-3'>
-              <img
-                className='border border-solid rounded-2xl'
-                alt={title}
-                src={Object.values(images).at(0)}
-              />
-              <div className='flex flex-col gap-y-1'>
-                {androidStoreLink && (
-                  <a href={androidStoreLink}>
-                    <img
-                      className='px-6 w-full'
-                      alt={`${title} 플레이스토어 링크`}
-                      src={PlayStoreBadge}
-                    />
-                  </a>
-                )}
-                {appleStoreLink && (
-                  <a href={appleStoreLink}>
-                    <img
-                      className='px-6 w-full'
-                      alt={`${title} 앱스토어 링크`}
-                      src={AppStoreBadge}
-                    />
-                  </a>
-                )}
-              </div>
-            </div>
+        {data.map((product) => (
+          <SwiperSlide key={product.id}>
+            <ProductItem data={product} />
           </SwiperSlide>
         ))}
       </Swiper>
