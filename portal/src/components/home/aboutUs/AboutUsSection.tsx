@@ -7,7 +7,7 @@ const AboutUsSection = () => {
   return (
     <>
       <SectionLayout className='justify-between'>
-        <div className='flex flex-col gap-12'>
+        <div className='flex flex-col gap-8'>
           <Title title='ABOUT US' />
           <StaticBoxList />
         </div>
