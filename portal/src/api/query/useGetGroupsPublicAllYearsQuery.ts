@@ -1,6 +1,6 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
-import QUERY_KEY from '@api/constants/queryKey.ts';
-import { getGroupsPublicAllYears } from '@api/api/groups.ts';
+import {useSuspenseQuery} from '@tanstack/react-query';
+import QUERY_KEY from '../constants/queryKey.ts';
+import {getGroupsPublicAllYears} from '../api/groups.ts';
 
 const useGetGroupsPublicAllYearsQuery= () => {
   return useSuspenseQuery({
