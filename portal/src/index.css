@@ -16,9 +16,7 @@
 #root {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-}
 
-#root {
     scroll-behavior: smooth;
     height: 100svh;
     overflow-y: scroll;
