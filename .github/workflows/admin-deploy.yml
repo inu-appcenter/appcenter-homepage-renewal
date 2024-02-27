@@ -22,7 +22,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: inu-appcenter-admin
-          directory: admin/build
+          directory: build
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: deploy/admin
           workingDirectory: admin
