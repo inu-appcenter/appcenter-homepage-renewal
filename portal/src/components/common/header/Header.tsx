@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { PATH } from '@constants/path.ts';
 import CommonHeader from '@components/common/header/CommonHeader.tsx';
+import Introduce from '@components/home/Introduce.tsx';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -14,6 +15,9 @@ const Header = () => {
     <>
       <div className={containerClassName}>
         <CommonHeader />
+        <div className='flex w-full h-2/3 justify-center items-center'>
+          <Introduce />
+        </div>
       </div>
     </>
   );
