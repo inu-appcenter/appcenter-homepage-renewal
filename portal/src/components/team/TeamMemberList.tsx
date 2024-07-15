@@ -47,7 +47,7 @@ const TeamMemberList = () => {
           >
             <CardBody padding={0}>
               <Image
-                src={profileImage ?? LogoSmall}
+                src={profileImage || LogoSmall}
                 alt={`${member}의 프로필 사진`}
                 aspectRatio={1}
                 width={150}
