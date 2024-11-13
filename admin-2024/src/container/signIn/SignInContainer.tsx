@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignInContainer = ({ children }: { children: React.ReactNode }) => (
-  <div className='flex min-h-screen items-center justify-center bg-gradient-to-r from-blue-50 to-white p-4 dark:from-gray-900 dark:to-gray-800'>
+  <div className='mr-48 flex h-full w-full items-center justify-center'>
     {children}
   </div>
 );
