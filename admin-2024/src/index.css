@@ -6,6 +6,12 @@
   html {
     @apply text-[14px] md:text-[16px] lg:text-[18px];
   }
+
+  body {
+    @apply min-h-screen mb-6 bg-gradient-to-b from-white to-blue-50;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 :root {
