@@ -1,5 +1,4 @@
 import BtnBox from '@/components/common/BtnBox';
-import Header from '@/components/common/Header';
 import TitleBox from '@/components/common/TitleBox';
 import QnaPostModal from '@/components/qna/QnaPostModal';
 import QnaTable from '@/components/qna/QnaTable';
@@ -14,7 +13,6 @@ const QnAPage = () => {
 
   return (
     <>
-      <Header />
       <TitleBox
         title={CATEGORY.DASGBOARD.FAQ.title}
         description={CATEGORY.DASGBOARD.FAQ.description}

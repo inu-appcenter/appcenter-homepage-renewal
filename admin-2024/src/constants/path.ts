@@ -1,4 +1,5 @@
 export const PATH = {
+  ROOT : '/',
   SIGN_IN: '/signin',
   CLUB: '/club',
   PRODUCT: '/product',
