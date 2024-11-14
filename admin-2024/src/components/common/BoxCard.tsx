@@ -12,7 +12,7 @@ interface BoxCardProps {
 const BoxCard = ({ icon, title, description, onClick }: BoxCardProps) => {
   return (
     <Box
-      sx={{ width: 700, height: 100 }}
+      sx={{ width: 'w-full sm:min-w-[780px]', height: 100 }}
       className='flex cursor-pointer items-center justify-center rounded-lg border-gray-300 bg-white align-middle shadow-md transition-colors duration-300 hover:bg-[#e1e1e1]'
       onClick={onClick}
     >

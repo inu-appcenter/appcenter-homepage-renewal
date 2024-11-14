@@ -9,7 +9,7 @@ const TitleBox = ({ title, description }: TitleBoxProps) => {
   return (
     <Box
       sx={{ height: 165 }}
-      className='flex flex-col items-center justify-center rounded-3xl bg-[#2761DE]'
+      className='flex flex-col items-center justify-center rounded-3xl bg-[#2761DE] p-12'
     >
       <h1 className='text-4xl font-bold text-white'>{title}</h1>
       <br />
