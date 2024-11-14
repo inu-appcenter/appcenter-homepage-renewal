@@ -1,9 +1,11 @@
 export type SignInEntity = {
   id?: string;
-  pwd?: string;
+  password?: string;
 };
 
 /**
  * POST /sign/sign-in
  */
-export type PostSignIn = SignInEntity;
+export type SignInResDto = {
+  token: string;
+};
