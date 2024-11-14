@@ -62,7 +62,7 @@ const QnaTable = () => {
           </IconButton>
           <IconButton
             onClick={() => {
-              console.log(params.row);
+              setSelectedRow(params.row);
               setIsDeleteBtnClick(true);
             }}
           >

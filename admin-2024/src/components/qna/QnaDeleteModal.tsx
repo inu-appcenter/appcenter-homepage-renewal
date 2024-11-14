@@ -13,14 +13,17 @@ const QnaDeleteModal = ({
   selectedRow,
 }: QnaDeleteModalProps) => {
   const onDeleteClick = async () => {
-    try {
-      await deleteFaq(selectedRow?.id ?? 0);
-      setIsDeleteBtnClick(false);
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
+    if (selectedRow && selectedRow.id !== null) {
+      try {
+        await deleteFaq(selectedRow.id);
+        setIsDeleteBtnClick(false);
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
+
   return (
     <ModalBox>
       <p className='text-xl font-bold'>해당 QnA 를 삭제하겠습니까?</p>

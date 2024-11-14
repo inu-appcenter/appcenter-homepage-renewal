@@ -16,6 +16,7 @@ const QnaPatchModal = ({
   setIsPatchBtnClick,
   selectedRow,
 }: QnaPatchModalProps) => {
+  const [id, setId] = useState(selectedRow?.id || null);
   const [part, setPart] = useState(selectedRow?.part || 'Common');
   const [question, setQuestion] = useState(selectedRow?.question || '');
   const [answer, setAnswer] = useState(selectedRow?.answer || '');
@@ -53,7 +54,7 @@ const QnaPatchModal = ({
 
     if (isQuestionValid && isAnswerValid) {
       try {
-        await patchFaq({ part, question, answer });
+        await patchFaq(id, { part, question, answer });
         setIsPatchBtnClick(false);
         window.location.reload();
       } catch (error) {

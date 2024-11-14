@@ -12,11 +12,12 @@ export const postFaq = async (qnaData: QnaEntity) => {
 };
 
 // FaQ 한 개 수정
-export const patchFaq = async (qnaData: QnaEntity) => {
+export const patchFaq = async (id: number, qnaData: QnaEntity) => {
   return await getAPIResponseData<QnaEntity>({
     method: 'PATCH',
     url: API.FAQ,
     data: qnaData,
+    params: { id },
   });
 };
 
