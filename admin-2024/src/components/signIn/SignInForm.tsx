@@ -1,9 +1,8 @@
 import { postSignIn } from '@/apis/signIn';
 import SignInLogo from '@/assets/Signin_logo.png';
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormInput from './FormInput';
+import FormInput from '../common/FormInput';
 
 export default function SignInForm() {
   const navigate = useNavigate();
@@ -54,10 +53,7 @@ export default function SignInForm() {
       try {
         const response = await postSignIn({ id: id, password: pwd });
         const { token } = response;
-        axios.defaults.headers.common['X-AUTH-TOKEN'] = token;
-
-        window.sessionStorage.setItem('token', token);
-
+        sessionStorage.setItem('token', token);
         navigate('/');
       } catch (error) {
         console.error('로그인 오류 : ', error);

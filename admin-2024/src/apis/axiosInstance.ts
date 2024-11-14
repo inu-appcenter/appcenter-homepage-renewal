@@ -1,4 +1,5 @@
 import { BASE_URL } from '@/constants/api';
+import { PATH } from '@/constants/path';
 import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
@@ -12,7 +13,19 @@ const axiosInstance: AxiosInstance = axios.create({
 });
 
 // 요청 인터셉터
-// axiosInstance.interceptors.request.use();
+axiosInstance.interceptors.request.use(
+  function (config) {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      config.headers['X-AUTH-TOKEN'] = token;
+    }
+    return config;
+  },
+  function (error) {
+    // 요청 오류가 있는 작업 수행
+    return Promise.reject(error);
+  }
+);
 
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
@@ -31,6 +44,10 @@ axiosInstance.interceptors.response.use(
     if (statusCode === 400) {
       alert(errorData);
       return Promise.reject(error);
+    }
+    // 401 오류
+    else if (statusCode === 401) {
+      window.location.href = PATH.SIGN_IN;
     }
 
     return Promise.reject(error);

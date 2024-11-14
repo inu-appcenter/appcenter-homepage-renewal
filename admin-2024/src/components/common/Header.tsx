@@ -1,14 +1,12 @@
 import SignInLogo from '@/assets/Signin_logo.png';
 import { PATH } from '@/constants/path';
 import LogoutIcon from '@mui/icons-material/Logout';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
   const logOut = () => {
     window.sessionStorage.removeItem('token');
-    delete axios.defaults.headers.common['X-AUTH-TOKEN'];
     navigate(PATH.SIGN_IN);
   };
   return (
