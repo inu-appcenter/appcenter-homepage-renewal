@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/common/Header';
 import { PATH } from './constants/path';
 import ClubPage from './page/clubPage';
 import GenerationPage from './page/generationPage';
@@ -14,7 +13,6 @@ import SignInPage from './page/SignInPage';
 function App() {
   return (
     <BrowserRouter>
-      {location.pathname !== PATH.SIGN_IN && <Header />}
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path={PATH.SIGN_IN} element={<SignInPage />} />

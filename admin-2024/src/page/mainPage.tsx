@@ -1,4 +1,5 @@
 import BoxCard from '@/components/common/BoxCard';
+import Header from '@/components/common/Header';
 import TitleBox from '@/components/common/TitleBox';
 import { CATEGORY } from '@/constants/category';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ const MainPage = () => {
 
   return (
     <>
+      <Header />
       <TitleBox
         title={CATEGORY.WELCONE.title}
         description={CATEGORY.WELCONE.description}
