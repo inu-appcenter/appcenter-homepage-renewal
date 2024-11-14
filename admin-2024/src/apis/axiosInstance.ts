@@ -12,7 +12,7 @@ const axiosInstance: AxiosInstance = axios.create({
 });
 
 // 요청 인터셉터
-axiosInstance.interceptors.request.use();
+// axiosInstance.interceptors.request.use();
 
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
@@ -24,6 +24,15 @@ axiosInstance.interceptors.response.use(
   async function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
+    const statusCode = error.response?.status;
+    const errorData = error.response?.data;
+
+    // 400 오류
+    if (statusCode === 400) {
+      alert(errorData);
+      return Promise.reject(error);
+    }
+
     return Promise.reject(error);
   }
 );
