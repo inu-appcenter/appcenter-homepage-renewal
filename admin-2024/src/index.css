@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply min-h-screen mb-6 bg-gradient-to-b from-white to-blue-50;
+    @apply mb-6 min-h-screen bg-gradient-to-b from-white to-blue-50;
     display: flex;
     justify-content: center;
   }
