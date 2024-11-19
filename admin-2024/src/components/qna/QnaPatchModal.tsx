@@ -1,10 +1,11 @@
+import { getAlParts } from '@/apis/generation';
 import { patchFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
 import ModalBox from '@/components/common/ModalBox';
 import { QnaRes } from '@/types/qnaType';
 import { MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormArea from '../common/FormArea';
 
 interface QnaPatchModalProps {
@@ -17,7 +18,7 @@ const QnaPatchModal = ({
   selectedRow,
 }: QnaPatchModalProps) => {
   const [id, setId] = useState(selectedRow?.id || null);
-  const [part, setPart] = useState(selectedRow?.part || 'Common');
+  const [part, setPart] = useState('');
   const [question, setQuestion] = useState(selectedRow?.question || '');
   const [answer, setAnswer] = useState(selectedRow?.answer || '');
 
@@ -25,6 +26,20 @@ const QnaPatchModal = ({
   const [answerError, setAnswerError] = useState(false);
   const [questionErrorMsg, setQuestionErrorMsg] = useState('');
   const [answerErrorMsg, setAnswerErrorMsg] = useState('');
+
+  const [parts, setParts] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchParts = async () => {
+      try {
+        const parts = await getAlParts();
+        setParts(parts.parts);
+        if (selectedRow) setPart(selectedRow?.part);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchParts();
+  }, []);
 
   const validateInputs = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,11 +93,11 @@ const QnaPatchModal = ({
             value={part}
             onChange={(e) => setPart(e.target.value)}
           >
-            <MenuItem value='Common'>Common</MenuItem>
-            <MenuItem value='Web'>Web</MenuItem>
-            <MenuItem value='Android'>Android</MenuItem>
-            <MenuItem value='iOS'>iOS</MenuItem>
-            <MenuItem value='Design'>Design</MenuItem>
+            {parts.map((p) => (
+              <MenuItem key={p} value={p}>
+                {p}
+              </MenuItem>
+            ))}
           </Select>
         </div>
         <FormInput

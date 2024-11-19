@@ -1,9 +1,10 @@
+import { getAlParts } from '@/apis/generation';
 import { postFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
 import ModalBox from '@/components/common/ModalBox';
 import { MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormArea from '../common/FormArea';
 
 interface QnaPostModalProps {
@@ -11,7 +12,7 @@ interface QnaPostModalProps {
 }
 
 const QnaPostModal = ({ setIsPostBtnClick }: QnaPostModalProps) => {
-  const [part, setPart] = useState('Common');
+  const [part, setPart] = useState('');
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
@@ -19,6 +20,22 @@ const QnaPostModal = ({ setIsPostBtnClick }: QnaPostModalProps) => {
   const [answerError, setAnswerError] = useState(false);
   const [questionErrorMsg, setQuestionErrorMsg] = useState('');
   const [answerErrorMsg, setAnswerErrorMsg] = useState('');
+
+  const [parts, setParts] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchParts = async () => {
+      try {
+        const parts = await getAlParts();
+        setParts(parts.parts);
+        if (parts.parts.length > 0) {
+          setPart(parts.parts[0]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchParts();
+  }, []);
 
   const validateInputs = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,11 +89,11 @@ const QnaPostModal = ({ setIsPostBtnClick }: QnaPostModalProps) => {
             value={part}
             onChange={(e) => setPart(e.target.value)}
           >
-            <MenuItem value='Common'>Common</MenuItem>
-            <MenuItem value='Web'>Web</MenuItem>
-            <MenuItem value='Android'>Android</MenuItem>
-            <MenuItem value='iOS'>iOS</MenuItem>
-            <MenuItem value='Design'>Design</MenuItem>
+            {parts.map((p) => (
+              <MenuItem key={p} value={p}>
+                {p}
+              </MenuItem>
+            ))}
           </Select>
         </div>
 
