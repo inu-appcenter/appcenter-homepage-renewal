@@ -20,10 +20,7 @@ const FormArea: React.FC<FormAreaProps> = ({
   rows,
 }) => (
   <div>
-    <label
-      htmlFor={id}
-      className='block font-medium text-gray-700 dark:text-gray-300'
-    >
+    <label htmlFor={id} className='block font-medium text-gray-700'>
       {label}
     </label>
     <textarea

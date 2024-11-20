@@ -62,7 +62,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='w-full max-w-xl rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800'>
+    <div className='w-full max-w-xl rounded-lg bg-white p-6 shadow-lg'>
       <div className='mb-4 flex justify-center'>
         <img src={SignInLogo} alt='Sign In Logo' className='h-auto w-32' />
       </div>
