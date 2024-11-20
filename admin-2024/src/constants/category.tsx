@@ -2,6 +2,7 @@ import AppShortcutIcon from '@mui/icons-material/AppShortcut';
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import Groups2Icon from '@mui/icons-material/Groups2';
+import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import QuizIcon from '@mui/icons-material/Quiz';
@@ -9,13 +10,15 @@ import { PATH } from './path';
 
 const CATEGORY = {
   WELCONE: {
+    icon: <HomeIcon fontSize='medium' />,
     title: '홈페이지 대시보드',
     description: '🎊 환영합니다 🎊',
+    path: PATH.ROOT,
   },
   DASGBOARD: {
     CLUB: {
       icon: <FaceRetouchingNaturalIcon fontSize='large' />,
-      title: '앱센터 동아리 관리',
+      title: '동아리 관리',
       description: '동아리원 정보와 기수, 역할을 관리할 수 있어요',
       path: PATH.CLUB,
     },
