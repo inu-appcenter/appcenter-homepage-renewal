@@ -12,7 +12,7 @@ interface SquareCardProps {
 const SquareCard = ({ icon, title, description, onClick }: SquareCardProps) => {
   return (
     <Box
-      className='cursor-pointer rounded-lg border-gray-300 bg-white shadow-md transition-colors duration-300 hover:bg-[#e1e1e1]'
+      className='w-full cursor-pointer rounded-lg border-gray-300 bg-white shadow-md transition-colors duration-300 hover:bg-[#e1e1e1]'
       onClick={onClick}
     >
       <CardContent className='flex h-full w-full flex-col justify-between'>

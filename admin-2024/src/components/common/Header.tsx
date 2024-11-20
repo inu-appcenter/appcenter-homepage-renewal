@@ -1,7 +1,7 @@
-import SignInLogo from '@/assets/Signin_logo.png';
 import { PATH } from '@/constants/path';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import CustomDrawer from './Drawer';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -10,10 +10,8 @@ const Header = () => {
     navigate(PATH.SIGN_IN);
   };
   return (
-    <header className='mb-6 mt-6 flex flex-row items-center justify-between bg-white'>
-      <Link to='/'>
-        <img src={SignInLogo} alt='Sign In Logo' className='h-auto w-10' />
-      </Link>
+    <header className='m-auto mb-6 mt-6 flex flex-row items-center justify-between bg-white md:w-[700px] lg:w-[800px]'>
+      <CustomDrawer />
       <LogoutIcon
         fontSize='large'
         className='cursor-pointer'
