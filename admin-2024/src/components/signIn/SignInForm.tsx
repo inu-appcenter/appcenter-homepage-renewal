@@ -62,12 +62,12 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='w-full max-w-xl rounded-lg bg-white p-6 shadow-lg'>
+    <div className='rounded-lg bg-white p-6 shadow-lg'>
       <div className='mb-4 flex justify-center'>
         <img src={SignInLogo} alt='Sign In Logo' className='h-auto w-32' />
       </div>
       <h1 className='mb-4 text-center text-2xl font-bold'>홈페이지 대시보드</h1>
-      <form onSubmit={validateInputs} className='flex flex-col gap-4'>
+      <form onSubmit={validateInputs} className='flex flex-col gap-4 w-[360px]'>
         <FormInput
           id='id'
           label='Id'
