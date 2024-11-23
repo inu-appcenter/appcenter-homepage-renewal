@@ -3,6 +3,7 @@ import { patchFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
 import ModalBox from '@/components/common/ModalBox';
+import { THEME } from '@/constants/theme';
 import { QnaRes } from '@/types/qnaType';
 import { MenuItem, Select } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -118,10 +119,10 @@ const QnaPatchModal = ({
           rows={3}
         />
         <div className='flex flex-row justify-center gap-2'>
-          <BtnBox text='수정' color='#16cba7' />
+          <BtnBox text='수정' color={THEME.COLORS.GREEN} />
           <BtnBox
             text='취소'
-            color='#c5c5c5'
+            color={THEME.COLORS.GRAY}
             onClick={() => setIsPatchBtnClick(false)}
           />
         </div>

@@ -3,6 +3,7 @@ import { postFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
 import ModalBox from '@/components/common/ModalBox';
+import { THEME } from '@/constants/theme';
 import { MenuItem, Select } from '@mui/material';
 import { useEffect, useState } from 'react';
 import FormArea from '../common/FormArea';
@@ -120,7 +121,7 @@ const QnaPostModal = ({ setIsPostBtnClick }: QnaPostModalProps) => {
           <BtnBox text='등록' />
           <BtnBox
             text='취소'
-            color='#c5c5c5'
+            color={THEME.COLORS.GRAY}
             onClick={() => setIsPostBtnClick(false)}
           />
         </div>

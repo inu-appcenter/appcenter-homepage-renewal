@@ -1,3 +1,4 @@
+import { THEME } from '@/constants/theme';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
@@ -21,7 +22,7 @@ const CustomPagination = ({
         sx={{
           '& .MuiPaginationItem-root': {
             '&.Mui-selected': {
-              backgroundColor: '#2761DE',
+              backgroundColor: THEME.COLORS.BLUE,
               color: '#fff',
             },
           },
