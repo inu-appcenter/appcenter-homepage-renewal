@@ -1,5 +1,4 @@
 import { MemberEntity } from '@/types/memberType';
-import Paper from '@mui/material/Paper';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 interface MemTableProps {
@@ -8,121 +7,35 @@ interface MemTableProps {
 
 const MemTable = ({ members }: MemTableProps) => {
   const columns: GridColDef[] = [
-    {
-      field: 'name',
-      headerName: '이름',
-      flex: 2,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'phoneNumber',
-      headerName: '전화번호',
-      flex: 2,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'email',
-      headerName: '이메일',
-      flex: 3,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'gitRepositoryLink',
-      headerName: '깃허브',
-      flex: 3,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'profileImage',
-      headerName: '프로필',
-      flex: 1.5,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'blogLink',
-      headerName: '블로그',
-      flex: 1.5,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'behanceLink',
-      headerName: '비헨스',
-      flex: 1.5,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'description',
-      headerName: '소개말',
-      flex: 1.5,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'studentNumber',
-      headerName: '학번',
-      flex: 1,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: 'department',
-      headerName: '학부',
-      flex: 1.5,
-      renderCell: (params) => (
-        <div className='flex h-full w-full items-center whitespace-pre-wrap break-words'>
-          {params.value}
-        </div>
-      ),
-    },
+    { field: 'name', headerName: '이름', minWidth: 100 },
+    { field: 'phoneNumber', headerName: '전화번호', minWidth: 160 },
+    { field: 'email', headerName: '이메일', minWidth: 180 },
+    { field: 'gitRepositoryLink', headerName: '깃허브', minWidth: 200 },
+    { field: 'profileImage', headerName: '프로필', minWidth: 150 },
+    { field: 'blogLink', headerName: '블로그', minWidth: 150 },
+    { field: 'behanceLink', headerName: '비헨스', minWidth: 150 },
+    { field: 'description', headerName: '소개말', minWidth: 200 },
+    { field: 'studentNumber', headerName: '학번', minWidth: 120 },
+    { field: 'department', headerName: '학부', minWidth: 150 },
   ];
 
   return (
-    <Paper sx={{ width: '100%' }}>
-      <div className='w-full lg:min-w-[1020px]'>
-        <DataGrid
-          rows={members}
-          columns={columns}
-          getRowId={(row) => row.member_id}
-          getRowHeight={() => 'auto'}
-          checkboxSelection
-          hideFooter
-        />
-      </div>
-    </Paper>
+    <div className='flex w-[360px] self-center bg-white sm:w-[600px] md:w-[800px] lg:w-[1020px] 2xl:w-[1280px]'>
+      <DataGrid
+        rows={members}
+        columns={columns}
+        getRowId={(row) => row.member_id}
+        getRowHeight={() => 'auto'}
+        checkboxSelection
+        hideFooter
+        sx={{
+          '.MuiDataGrid-cell': {
+            display: 'flex',
+            alignItems: 'center',
+          },
+        }}
+      />
+    </div>
   );
 };
 
