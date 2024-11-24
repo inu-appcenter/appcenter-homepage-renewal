@@ -1,11 +1,12 @@
 import { MemberEntity } from '@/types/memberType';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 
 interface MemTableProps {
   members: MemberEntity[];
+  setSelectedRows: (selectedMembers: MemberEntity[]) => void;
 }
 
-const MemTable = ({ members }: MemTableProps) => {
+const MemTable = ({ members, setSelectedRows }: MemTableProps) => {
   const columns: GridColDef[] = [
     { field: 'name', headerName: '이름', minWidth: 100 },
     { field: 'phoneNumber', headerName: '전화번호', minWidth: 160 },
@@ -19,6 +20,13 @@ const MemTable = ({ members }: MemTableProps) => {
     { field: 'department', headerName: '학부', minWidth: 150 },
   ];
 
+  const handleSelectionChange = (selectionModel: GridRowSelectionModel) => {
+    const selectedMembers = members.filter((member) =>
+      selectionModel.includes(member.member_id)
+    );
+    setSelectedRows(selectedMembers);
+  };
+
   return (
     <div className='flex w-[360px] self-center bg-white sm:w-[600px] md:w-[800px] lg:w-[1020px] 2xl:w-[1280px]'>
       <DataGrid
@@ -28,6 +36,7 @@ const MemTable = ({ members }: MemTableProps) => {
         getRowHeight={() => 'auto'}
         checkboxSelection
         hideFooter
+        onRowSelectionModelChange={handleSelectionChange}
         sx={{
           '.MuiDataGrid-cell': {
             display: 'flex',

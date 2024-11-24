@@ -4,8 +4,17 @@ import MemTable from '@/components/member/MemTable';
 import { MemberEntity } from '@/types/memberType';
 import { useEffect, useState } from 'react';
 
-const MemberPagination = () => {
-  const [members, setMembers] = useState<MemberEntity[]>([]);
+interface MemberPaginationProps {
+  setSelectedRows: (selectedMembers: MemberEntity[]) => void;
+  members: MemberEntity[];
+  setMembers: (members: MemberEntity[]) => void;
+}
+
+const MemberPagination = ({
+  setSelectedRows,
+  members,
+  setMembers,
+}: MemberPaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -19,8 +28,14 @@ const MemberPagination = () => {
       }
     };
 
-    fetchMembers();
+    if (members.length === 0) {
+      fetchMembers();
+    }
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [members]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -36,7 +51,7 @@ const MemberPagination = () => {
 
   return (
     <>
-      <MemTable members={paginatedMembers} />
+      <MemTable members={paginatedMembers} setSelectedRows={setSelectedRows} />
       <CustomPagination
         totalPage={Math.ceil(members.length / pageSize)}
         onPageChange={handlePageChange}
