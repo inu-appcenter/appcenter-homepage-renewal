@@ -14,7 +14,7 @@ export const postMember = async (memData: MemberPlayload) => {
 // 동아리원(1명) 수정
 export const patchMember = async (memData: MemberPlayload) => {
   return await getAPIResponseData<MemberPlayload>({
-    method: 'POST',
+    method: 'PATCH',
     url: API.MEMBERS,
     data: memData,
   });
