@@ -10,6 +10,8 @@ import RolePage from '@/page/rolePage';
 import RootPage from '@/page/rootPage';
 import SignInPage from '@/page/SignInPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -24,37 +26,69 @@ const AppRouter = () => {
         },
         {
           path: PATH.CLUB,
-          element: <ClubPage />,
+          element: (
+            <PrivateRoute>
+              <ClubPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.MEMBER,
-          element: <MemberPage />,
+          element: (
+            <PrivateRoute>
+              <MemberPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.GENGERATION,
-          element: <GenerationPage />,
+          element: (
+            <PrivateRoute>
+              <GenerationPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.ROLE,
-          element: <RolePage />,
+          element: (
+            <PrivateRoute>
+              <RolePage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.PRODUCT,
-          element: <ProductPage />,
+          element: (
+            <PrivateRoute>
+              <ProductPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.PHOTO,
-          element: <PhotoPage />,
+          element: (
+            <PrivateRoute>
+              <PhotoPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: PATH.QNA,
-          element: <QnAPage />,
+          element: (
+            <PrivateRoute>
+              <QnAPage />
+            </PrivateRoute>
+          ),
         },
       ],
     },
     {
       path: PATH.SIGN_IN,
-      element: <SignInPage />,
+      element: (
+        <PublicRoute>
+          <SignInPage />
+        </PublicRoute>
+      ),
     },
   ]);
 
