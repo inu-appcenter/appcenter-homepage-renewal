@@ -1,10 +1,10 @@
 import { API } from '@/constants/api';
-import { MemberEntity, MemberPlayload } from '@/types/memberType';
+import { MemberEntity, MemberPayload } from '@/types/memberType';
 import getAPIResponseData from './getAPIResponseData';
 
 // 동아리원(1명) 등록
-export const postMember = async (memData: MemberPlayload) => {
-  return await getAPIResponseData<MemberPlayload>({
+export const postMember = async (memData: MemberPayload) => {
+  return await getAPIResponseData<MemberPayload>({
     method: 'POST',
     url: API.MEMBERS,
     data: memData,
@@ -12,8 +12,8 @@ export const postMember = async (memData: MemberPlayload) => {
 };
 
 // 동아리원(1명) 수정
-export const patchMember = async (memData: MemberPlayload) => {
-  return await getAPIResponseData<MemberPlayload>({
+export const patchMember = async (memData: MemberPayload) => {
+  return await getAPIResponseData<MemberPayload>({
     method: 'PATCH',
     url: API.MEMBERS,
     data: memData,
