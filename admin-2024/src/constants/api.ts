@@ -19,7 +19,7 @@ export const API = {
   // [Member] 동아리원 관리
   MEMBERS: `/members`,
   MEMBERS_ID: (id: number) => `/members/${id}`,
-  MEMBERS_NAME: (name: string) => `/members/${name}`,
+  MEMBERS_NAME: (name: string) => `/members/id/${name}`,
   ALL_MEMBERS: `/members/all-members`,
 
   // [Intro] 애플리케이션 소개 게시판
