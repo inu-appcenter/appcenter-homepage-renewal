@@ -68,8 +68,8 @@ const MemPostPatchModal = ({
         }
 
         // 기존 동아리원 수정
-        else if (!isPost && isPatch) {
-          await patchMember({
+        if (selectedRow?.member_id !== undefined) {
+          await patchMember(selectedRow.member_id, {
             name: name,
             email: email,
             blogLink: blog,
@@ -82,6 +82,7 @@ const MemPostPatchModal = ({
             studentNumber: studentId,
           });
         }
+
         setIsBtnClick(false);
         window.location.reload();
       } catch (error) {

@@ -12,11 +12,12 @@ export const postMember = async (memData: MemberPayload) => {
 };
 
 // 동아리원(1명) 수정
-export const patchMember = async (memData: MemberPayload) => {
+export const patchMember = async (id: number, memData: MemberPayload) => {
   return await getAPIResponseData<MemberPayload>({
     method: 'PATCH',
     url: API.MEMBERS,
     data: memData,
+    params: { id },
   });
 };
 
