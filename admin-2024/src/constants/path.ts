@@ -1,8 +1,8 @@
 export const PATH = {
-  ROOT : '/',
+  ROOT: '/',
   SIGN_IN: '/signin',
   CLUB: '/club',
-  PRODUCT: '/product',
+  INTRO: '/intro',
   PHOTO: '/photo',
   QNA: '/qna',
 

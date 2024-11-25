@@ -26,7 +26,7 @@ const CATEGORY = {
       icon: <AppShortcutIcon fontSize='large' />,
       title: '앱 관리',
       description: '홈페이지에 게재된 앱 정보와 목록을 관리할 수 있어요',
-      path: PATH.PRODUCT,
+      path: PATH.INTRO,
     },
     PHOTO_BOARD: {
       icon: <PhotoCameraIcon fontSize='large' />,

@@ -4,7 +4,7 @@ import GenerationPage from '@/page/generationPage';
 import MainPage from '@/page/mainPage';
 import MemberPage from '@/page/memberPage';
 import PhotoPage from '@/page/photoPage';
-import ProductPage from '@/page/productPage';
+import IntroPage from '@/page/introPage';
 import QnAPage from '@/page/qnaPage';
 import RolePage from '@/page/rolePage';
 import RootPage from '@/page/rootPage';
@@ -57,10 +57,10 @@ const AppRouter = () => {
           ),
         },
         {
-          path: PATH.PRODUCT,
+          path: PATH.INTRO,
           element: (
             <PrivateRoute>
-              <ProductPage />
+              <IntroPage />
             </PrivateRoute>
           ),
         },

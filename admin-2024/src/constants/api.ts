@@ -24,9 +24,11 @@ export const API = {
 
   // [Intro] 애플리케이션 소개 게시판
   INTRO_BOARD: `/introduction-board`,
-  INTRO_BOARD_ID: (id: number) => `/introduction-board/${id}`,
+  PATCH_INTRO_BOARD_ID: (photo_ids: number[]) =>
+    `/introduction-board/${photo_ids.join(',')}`,
   GET_INTRO_BOARD_ID: (id: number) => `/introduction-board/public/${id}`,
   ALL_INTRO_BOARD: `/introduction-board/public/all-boards-contents`,
+  DELETE_INTRO_BOARD_ID: (id: number) => `/introduction-board/${id}`,
 
   // [Group] 멤버 편성 관리
   GROUPS: `/groups`,
