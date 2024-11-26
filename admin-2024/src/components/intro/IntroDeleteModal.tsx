@@ -4,15 +4,15 @@ import { THEME } from '@/constants/theme';
 import { IntroductionEntity } from '@/types/introType';
 import BtnBox from '../common/BtnBox';
 
-interface MemDeleteModalProps {
+interface IntroDeleteModalProps {
   setIsDeleteBtnClick: React.Dispatch<React.SetStateAction<boolean>>;
   selectedRow: IntroductionEntity | null;
 }
 
-const MemDeleteModal = ({
+const IntroDeleteModal = ({
   setIsDeleteBtnClick,
   selectedRow,
-}: MemDeleteModalProps) => {
+}: IntroDeleteModalProps) => {
   const onDeleteClick = async () => {
     if (selectedRow && selectedRow.id !== null) {
       try {
@@ -42,4 +42,4 @@ const MemDeleteModal = ({
   );
 };
 
-export default MemDeleteModal;
+export default IntroDeleteModal;

@@ -19,7 +19,7 @@ const IntroPagination = ({
   const pageSize = 3;
 
   useEffect(() => {
-    const fetchMembers = async () => {
+    const fetchIntroductions = async () => {
       try {
         const response = await getAllIntroduction();
         setIntroductions(response);
@@ -29,7 +29,7 @@ const IntroPagination = ({
     };
 
     if (introductions.length === 0) {
-      fetchMembers();
+      fetchIntroductions();
     }
   }, []);
 
