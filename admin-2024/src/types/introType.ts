@@ -1,6 +1,8 @@
 export type IntroductionEntity = {
   id: number;
   body: string;
+  createdDate: string;
+  lastModifiedDate: string;
   title: string;
   subTitle: string;
   androidStoreLink: string;
