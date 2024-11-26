@@ -12,9 +12,11 @@ export const API = {
 
   // [Photo] 사진 게시판
   PHOTO_BOARD: `/photo-board`,
-  PHOTO_BOARD_ID: (id: number) => `/photo-board/${id}`,
-  GET_POHTO_BOARD_ID: (id: number) => `/photo-board/public/${id}`,
-  GET_ALL_POHOTO_BOARD: `/photo-board/public/all-boards-contents`,
+  PATCH_PHOTO_BOARD_ID: (photo_ids: number[]) =>
+    `/photo-board/${photo_ids.join(',')}`,
+  GET_PHOTO_BOARD_ID: (id: number) => `/photo-board/public/${id}`,
+  ALL_PHOTO_BOARD: `/photo-board/public/all-boards-contents`,
+  DELETE_PHOTO_BOARD_ID: (id: number) => `/photo-board/${id}`,
 
   // [Member] 동아리원 관리
   MEMBERS: `/members`,
