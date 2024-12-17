@@ -1,4 +1,4 @@
-import { getAlParts } from '@/apis/generation';
+import { getAllParts } from '@/apis/generation';
 import { postFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
@@ -26,7 +26,7 @@ const QnaPostModal = ({ setIsPostBtnClick }: QnaPostModalProps) => {
   useEffect(() => {
     const fetchParts = async () => {
       try {
-        const parts = await getAlParts();
+        const parts = await getAllParts();
         setParts(parts.parts);
         if (parts.parts.length > 0) {
           setPart(parts.parts[0]);

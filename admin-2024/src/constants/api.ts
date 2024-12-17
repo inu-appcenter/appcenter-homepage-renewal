@@ -38,7 +38,7 @@ export const API = {
   ALL_PARTS: `/groups/public/all-parts`,
   ALL_GROUPS_YEARS: `/groups/public/all-groups-years`,
   ALL_GROUPS_MEM: `/groups/public/all-groups-members`,
-  GROUPS_MEM_NAME: (name: string) => `/groups/member/${name}`,
+  GROUPS_MEM_NAME: (name: string) => `/groups/members/${name}`,
   DELETE_GROUPS_MEM: (id: number) => `/groups/${id}`,
   DELETE_GROUPS_MEMS: (id: number) => `/all-groups-members/${id}`,
 

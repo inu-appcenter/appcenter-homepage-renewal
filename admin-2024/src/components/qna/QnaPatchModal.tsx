@@ -1,4 +1,4 @@
-import { getAlParts } from '@/apis/generation';
+import { getAllParts } from '@/apis/generation';
 import { patchFaq } from '@/apis/qna';
 import BtnBox from '@/components/common/BtnBox';
 import FormInput from '@/components/common/FormInput';
@@ -31,7 +31,7 @@ const QnaPatchModal = ({
   useEffect(() => {
     const fetchParts = async () => {
       try {
-        const parts = await getAlParts();
+        const parts = await getAllParts();
         setParts(parts.parts);
         if (selectedRow) setPart(selectedRow?.part);
       } catch (error) {
