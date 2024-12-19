@@ -243,7 +243,7 @@ const IntroPostPatchModal = ({
                 <button
                   type='button'
                   onClick={() => handleDeleteNewImage(index)}
-                  className='absolute right-0 top-0 rounded-full bg-red-500 p-1 text-white'
+                  className='absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-sm text-white'
                 >
                   X
                 </button>

@@ -20,6 +20,7 @@ const RoleTable = () => {
       field: 'roleName',
       headerName: '역할',
       flex: 1,
+      headerAlign: 'center',
       renderCell: (params) => (
         <div className='flex h-full w-full items-center justify-center'>
           {params.value}
@@ -29,6 +30,7 @@ const RoleTable = () => {
     {
       field: 'actions',
       headerName: '수정·삭제',
+      headerAlign: 'center',
       flex: 1,
       renderCell: (params) => (
         <div className='flex h-full w-full items-center justify-center'>

@@ -27,7 +27,9 @@ const RoleDeleteModal = ({
 
   return (
     <ModalBox>
-      <p className='text-xl font-bold'>해당 역할을 삭제하겠습니까?</p>
+      <p className='text-xl font-bold'>
+        {selectedRow?.roleName} 역할을 삭제하겠습니까?
+      </p>
       <div className='flex flex-row justify-center gap-2'>
         <BtnBox text='삭제' color={THEME.COLORS.RED} onClick={onDeleteClick} />
         <BtnBox

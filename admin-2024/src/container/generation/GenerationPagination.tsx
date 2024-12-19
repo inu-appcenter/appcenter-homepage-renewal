@@ -32,7 +32,6 @@ const GenerationPagination = ({
         if (selectedPart !== 'All Part') {
           params.part = selectedPart;
         }
-        console.log(params);
         const response = await getAllGroupsMembers(params.year, params.part);
         setGroups(response);
       } catch (error) {

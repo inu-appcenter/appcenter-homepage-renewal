@@ -1,3 +1,5 @@
+import { getAllParts, getAllYears } from '@/apis/generation';
+import { getAllRoles } from '@/apis/role';
 import BtnBox from '@/components/common/BtnBox';
 import TitleBox from '@/components/common/TitleBox';
 import GenDeleteModal from '@/components/generation/GenDeleteModal';
@@ -7,11 +9,9 @@ import { CATEGORY } from '@/constants/category';
 import { THEME } from '@/constants/theme';
 import GenerationPagination from '@/container/generation/GenerationPagination';
 import { GroupEntity } from '@/types/generationType';
-import { useEffect, useState } from 'react';
-import { getAllParts, getAllYears } from '@/apis/generation';
-import { getAllRoles } from '@/apis/role';
 import { RoleEntity } from '@/types/roleType';
 import { MenuItem, Select } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const MemberPage = () => {
   const [selectedRows, setSelectedRows] = useState<GroupEntity[]>([]);
@@ -100,31 +100,43 @@ const MemberPage = () => {
               onClick={onDeleteBtnClick}
             />
           </div>
-          <Select
-            id='part'
-            className='h-10'
-            value={selectedPart}
-            onChange={(e) => setSelectedPart(e.target.value)}
-          >
-            {[...['All Part'], ...partList].map((p) => (
-              <MenuItem key={p} value={p}>
-                {p}
-              </MenuItem>
-            ))}
-          </Select>
-          <Select
-            id='year'
-            className='h-10'
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-          >
-            {[...['All Year'], ...yearList].map((p) => (
-              <MenuItem key={p} value={p}>
-                {p}
-              </MenuItem>
-            ))}
-          </Select>
-          <GenSearch onSearchResult={handleSearchResult} />
+          <div className='flex gap-6'>
+            <div className='flex gap-3'>
+              <Select
+                id='part'
+                className='h-8'
+                value={selectedPart}
+                onChange={(e) => setSelectedPart(e.target.value)}
+              >
+                {[...['All Part'], ...partList].map((p) => (
+                  <MenuItem key={p} value={p}>
+                    {p}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Select
+                id='year'
+                className='h-8'
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      overflow: 'auto',
+                    },
+                  },
+                }}
+              >
+                {[...['All Year'], ...yearList].map((p) => (
+                  <MenuItem key={p} value={p}>
+                    {p}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <GenSearch onSearchResult={handleSearchResult} />
+          </div>
         </div>
         <GenerationPagination
           setSelectedRows={setSelectedRows}

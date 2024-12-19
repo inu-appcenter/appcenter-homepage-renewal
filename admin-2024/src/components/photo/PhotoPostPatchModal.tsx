@@ -137,8 +137,8 @@ const PhotoPostPatchModal = ({
 
   return (
     <ModalBox>
-      {isPost && !isPatch && <p className='text-2xl font-bold'>앱 등록</p>}
-      {!isPost && isPatch && <p className='text-2xl font-bold'>앱 수정</p>}
+      {isPost && !isPatch && <p className='text-2xl font-bold'>사진 등록</p>}
+      {!isPost && isPatch && <p className='text-2xl font-bold'>사진 수정</p>}
       <form
         onSubmit={validateInputs}
         className='flex w-full max-w-lg flex-col gap-4'
@@ -191,7 +191,7 @@ const PhotoPostPatchModal = ({
                 <button
                   type='button'
                   onClick={() => handleDeleteNewImage(index)}
-                  className='absolute right-0 top-0 rounded-full bg-red-500 p-1 text-white'
+                  className='absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-sm text-white'
                 >
                   X
                 </button>

@@ -23,7 +23,7 @@ const GenTable = ({ groups, setSelectedRows }: GenTableProps) => {
   };
 
   return (
-    <div className='flex w-[360px] self-center bg-white sm:w-[600px] md:w-[800px] lg:w-[1020px] 2xl:w-[1280px]'>
+    <div className='flex w-[360px] self-center bg-white sm:w-[600px] md:w-[700px]  '>
       <DataGrid
         rows={groups}
         columns={columns}
@@ -37,6 +37,7 @@ const GenTable = ({ groups, setSelectedRows }: GenTableProps) => {
             display: 'flex',
             alignItems: 'center',
           },
+          width: 'fit-content',
         }}
       />
     </div>

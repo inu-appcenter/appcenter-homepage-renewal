@@ -48,7 +48,7 @@ const RolePostModal = ({ setIsPostBtnClick }: RolePostModalProps) => {
         className='flex w-full max-w-lg flex-col gap-4'
       >
         <FormInput
-          id='question'
+          id='role'
           label='역할'
           type='text'
           value={role}

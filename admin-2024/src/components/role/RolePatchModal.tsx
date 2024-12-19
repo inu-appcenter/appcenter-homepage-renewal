@@ -15,7 +15,7 @@ const RolePatchModal = ({
   setIsPatchBtnClick,
   selectedRow,
 }: RolePatchModalProps) => {
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState(selectedRow?.roleName || '');
 
   const [roleError, setRoleError] = useState(false);
   const [roleErrorMsg, setRoleErrorMsg] = useState('');
