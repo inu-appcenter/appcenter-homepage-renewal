@@ -1,4 +1,5 @@
 import { patchPhoto, postPhoto } from '@/apis/photo';
+import { deletePhoto } from '@/apis/image';
 import BtnBox from '@/components/common/BtnBox';
 // import FormInput from '@/components/common/FormInput';
 import ModalBox from '@/components/common/ModalBox';
@@ -38,6 +39,8 @@ const PhotoPostPatchModal = ({
   // 새로운 이미지 상태
   const [newImages, setNewImages] = useState<File[]>([]);
   const [newImagePreviews, setNewImagePreviews] = useState<string[]>([]);
+  // 삭제할 기존 이미지 상태
+  const [deletedImageIds, setDeletedImageIds] = useState<number[]>([]);
 
   const handleReplaceExistingImage = (index: number) => {
     const input = document.createElement('input');
@@ -85,6 +88,13 @@ const PhotoPostPatchModal = ({
     }
   };
 
+  const handleDeleteExistingImage = (photo_id: number) => {
+    setDeletedImageIds((prev) => [...prev, photo_id]);
+    setExistingImages((prev) =>
+      prev.filter((image) => image.photo_id !== photo_id)
+    );
+  };
+
   const handleDeleteNewImage = (index: number) => {
     setNewImages((prev) => prev.filter((_, i) => i !== index));
     setNewImagePreviews((prev) => prev.filter((_, i) => i !== index));
@@ -104,9 +114,14 @@ const PhotoPostPatchModal = ({
         }
       });
       newImages.forEach((file) => {
-        photoIds.push(-1); // 새로운 이미지의 photo_id는 -1
+        photoIds.push(-Math.floor(Math.random() * 1000000)); // 새로운 이미지의 photo_id는 음수 랜덤
         multipartFiles.push(file);
       });
+
+      // 기존 이미지 삭제
+      if (deletedImageIds.length > 0) {
+        await deletePhoto(deletedImageIds, selectedRow?.id || -1);
+      }
 
       // 앱 최초 등록
       if (isPost && !isPatch) {
@@ -163,6 +178,11 @@ const PhotoPostPatchModal = ({
                     alt={`이미지 ${image.photo_id}`}
                     className='h-24 w-24 cursor-pointer rounded object-cover'
                     onClick={() => handleReplaceExistingImage(index)}
+                  />
+                  <BtnBox
+                    text='삭제'
+                    color={THEME.COLORS.RED}
+                    onClick={() => handleDeleteExistingImage(image.photo_id)}
                   />
                   <span className='text-sm'>ID: {image.photo_id}</span>
                 </div>
