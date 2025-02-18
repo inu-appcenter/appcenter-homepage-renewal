@@ -19,12 +19,17 @@ export const ourTeamList = [
   },
   {
     label: PART.server.label,
-    description: '서버를 구현합니다.',
+    description: '서버를 구현합니다',
     path: PATH.TEAM(PART.server.value),
   },
   {
     label: PART.web.label,
     description: '웹환경에 맞춘 서비스를 구현합니다',
     path: PATH.TEAM(PART.web.value),
+  },
+  {
+    label: PART.basic.label,
+    description: '개발 기초에 대해 학습합니다',
+    path: PATH.TEAM(PART.basic.value),
   },
 ];

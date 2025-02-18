@@ -29,6 +29,11 @@ export const PART = {
     value: 'web',
     label: 'Web',
   },
+  basic: {
+    id: 'basic',
+    value: 'basic',
+    label: 'Basic',
+  },
 } as const;
 
 export const SECTION = {
@@ -46,5 +51,10 @@ export const SECTION = {
     id: 'product',
     value: 'product',
     label: 'Product',
+  },
+  contect: {
+    id: 'contect',
+    value: 'contect',
+    label: 'Contect Us',
   },
 } as const;

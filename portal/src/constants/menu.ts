@@ -44,6 +44,10 @@ export const MENU = [
         path: PATH.TEAM(PART.web.value),
         label: PART.web.label,
       },
+      {
+        path: PATH.TEAM(PART.basic.value),
+        label: PART.basic.label,
+      },
     ],
   },
   {

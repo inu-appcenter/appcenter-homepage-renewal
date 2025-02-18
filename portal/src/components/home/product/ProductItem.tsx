@@ -15,7 +15,7 @@ const ProductItem: React.FC<ProductItemProp> = ({ data }) => {
   const toggleModalOpen = () => setIsModalOpen((prev) => !prev);
 
   return (
-    <div className='flex flex-col gap-y-3 cursor-pointer'>
+    <div className='flex flex-col gap-y-3 cursor-pointer mb-10'>
       <Portal>
         <ProductDetailModal
           id={id}
