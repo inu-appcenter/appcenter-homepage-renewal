@@ -37,6 +37,11 @@ const teamEmojiObject = {
       '안녕하세요😊 앱센터 웹파트 입니다.\n우리 함께 앱센터를 웹센터로 만들어볼까요?',
     emoji: webEmoji,
   },
+  [PART.basic.value]: {
+    part: PART.basic.value,
+    description: '안녕하세요😊 베이직 파트입니다.',
+    emoji: webEmoji,
+  },
 };
 
 const TeamEmoji = () => {

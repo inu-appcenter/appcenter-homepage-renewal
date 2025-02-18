@@ -29,6 +29,11 @@ export const PART = {
     value: 'web',
     label: 'Web',
   },
+  basic: {
+    id: 'basic',
+    value: 'basic',
+    label: 'Basic',
+  },
 } as const;
 
 export const SECTION = {
