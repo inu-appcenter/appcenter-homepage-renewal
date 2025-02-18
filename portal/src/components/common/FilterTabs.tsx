@@ -20,7 +20,10 @@ type FilterTabsProps = {
 const FilterTabs: React.FC<FilterTabsProps> = ({ tabList }) => {
   const { part } = useParams<PartParam>();
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+
+  const currentIndex = tabList.findIndex(({ path }) =>
+    location.pathname.includes(path)
+  );
 
   const navigate = useNavigate();
   const handlePartClick = (path: string) => {
@@ -30,10 +33,13 @@ const FilterTabs: React.FC<FilterTabsProps> = ({ tabList }) => {
   return (
     <>
       <div className='hidden sm:block'>
-        <Tabs variant='soft-rounded'>
+        <Tabs
+          variant='soft-rounded'
+          index={currentIndex >= 0 ? currentIndex : 0}
+        >
           <TabList>
             {tabList.map(({ label, path }) => (
-              <Link key={path} to={`${path}?year=${queryParams.get('year')}`}>
+              <Link key={path} to={`${path}`}>
                 <Tab>{label}</Tab>
               </Link>
             ))}
