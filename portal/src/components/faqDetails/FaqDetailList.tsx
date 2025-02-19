@@ -15,7 +15,7 @@ const FaqDetailList = () => {
   const { data } = useGetFaqsPublicAllQuery(part ?? 'android');
 
   return (
-    <Accordion key={part} className='flex flex-col gap-4'>
+    <Accordion key={part} allowToggle className='flex flex-col gap-4'>
       {data.map(({ id, question, answer }) => (
         <AccordionItem key={id} className='p-4 bg-primary-200 rounded-3xl'>
           <h2 className='rounded-3xl bg-white'>
