@@ -82,6 +82,10 @@ export const MENU = [
         path: PATH.FAQ_DETAIL(PART.web.value),
         label: PART.web.label,
       },
+      {
+        path: PATH.FAQ_DETAIL(PART.basic.value),
+        label: PART.basic.label,
+      },
     ],
   },
 ];

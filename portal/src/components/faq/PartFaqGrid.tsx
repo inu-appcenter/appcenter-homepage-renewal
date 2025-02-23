@@ -33,6 +33,11 @@ const partFaqList = [
     question: 'React 할 줄 알아야 하나요?',
     path: PATH.FAQ_DETAIL(PART.web.value),
   },
+  {
+    part: PART.basic.label,
+    question: '무엇을 배우나요?',
+    path: PATH.FAQ_DETAIL(PART.basic.value),
+  },
 ];
 const PartFaqGrid = () => {
   return (
