@@ -6,7 +6,7 @@ import StaticBoxList from '@components/home/aboutUs/StaticBoxList.tsx';
 const AboutUsSection = () => {
   return (
     <>
-      <SectionLayout className='justify-between'>
+      <SectionLayout className='justify-between min-h-svh'>
         <div className='flex flex-col gap-8'>
           <Title title='ABOUT US' />
           <StaticBoxList />

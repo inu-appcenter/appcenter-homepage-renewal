@@ -5,7 +5,7 @@ import ProductListSwiper from './ProductListSwiper.tsx';
 
 const ProductSection = () => {
   return (
-    <SectionLayout className='gap-y-8 min-h-96'>
+    <SectionLayout className='gap-y-8 mb-60'>
       <Title title='PRODUCT' subtitle='앱센터에서 만든 앱들을 소개합니다' />
       <Suspense>
         <ProductListSwiper />

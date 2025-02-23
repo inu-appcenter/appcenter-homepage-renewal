@@ -5,7 +5,7 @@ import ContectUsList from '@components/home/contectUs/ContectUsLitst.tsx';
 const ContectUsSection = () => {
   return (
     <>
-      <SectionLayout className='justify-between'>
+      <SectionLayout className='justify-between mb-60'>
         <div className='flex flex-col gap-8'>
           <Title title='CONTECT US' />
           <ContectUsList />
