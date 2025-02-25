@@ -1,18 +1,18 @@
 import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
 import Title from '@components/common/Title.tsx';
-import ContectUsList from '@components/home/contectUs/ContectUsLitst.tsx';
+import ContactUsList from '@components/home/contactUs/ContactUsLitst.tsx';
 
-const ContectUsSection = () => {
+const ContactUsSection = () => {
   return (
     <>
       <SectionLayout className='justify-between mb-60'>
         <div className='flex flex-col gap-8'>
-          <Title title='CONTECT US' />
-          <ContectUsList />
+          <Title title='CONTACT US' />
+          <ContactUsList />
         </div>
       </SectionLayout>
     </>
   );
 };
 
-export default ContectUsSection;
+export default ContactUsSection;

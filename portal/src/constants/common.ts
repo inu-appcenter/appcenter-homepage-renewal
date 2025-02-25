@@ -52,9 +52,9 @@ export const SECTION = {
     value: 'product',
     label: 'Product',
   },
-  contect: {
-    id: 'contect',
-    value: 'contect',
-    label: 'Contect Us',
+  contact: {
+    id: 'contact',
+    value: 'contact',
+    label: 'Contact Us',
   },
 } as const;

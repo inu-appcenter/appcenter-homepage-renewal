@@ -1,7 +1,7 @@
 import ArrowRight from '@assets/svg/arrow_right.svg';
 import FirstLetterPointText from '@components/common/FirstLetterPointText.tsx';
 
-const ContectUsList = () => {
+const ContactUsList = () => {
   return (
     <div className='flex mt-12 flex-col gap-8'>
       <div className='flex justify-between items-center'>
@@ -32,4 +32,4 @@ const ContectUsList = () => {
   );
 };
 
-export default ContectUsList;
+export default ContactUsList;
