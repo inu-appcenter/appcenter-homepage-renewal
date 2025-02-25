@@ -5,11 +5,11 @@ import PaperPlain from '@assets/svg/paper-plane.svg';
 const joinStep = [
   {
     label: 'step1',
-    content: '3월 9월에 에브리타임 게시판에서 공고를 확인합니다.',
+    content: '3월, 9월에 에브리타임 게시판에서 공고를 확인합니다.',
   },
   {
     label: 'step2',
-    content: '공고에 올라온 구글폼 링크에서 원하는 파트를 지원합니다!',
+    content: '공고에 올라온 지원 링크에서 원하는 파트를 지원합니다!',
   },
   {
     label: 'step3',

@@ -1,6 +1,7 @@
 import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
 import Title from '@components/common/Title.tsx';
-import ContactUsList from '@components/home/contactUs/ContactUsList.tsx';
+import ContactUsList from '@components/home/contactUs/ContactUsLitst.tsx';
+
 
 const ContactUsSection = () => {
   return (

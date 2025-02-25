@@ -16,7 +16,7 @@ const HomePage = () => {
       <div id={SECTION.product.id}>
         <ProductSection />
       </div>
-      <div id={SECTION.contect.id}>
+      <div id={SECTION.contact.id}>
         <ContactUsSection />
       </div>
     </>
