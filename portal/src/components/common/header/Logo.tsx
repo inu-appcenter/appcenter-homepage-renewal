@@ -1,10 +1,17 @@
 import LogoDefault from '@assets/svg/navbar_logo.svg';
 import LogoSmall from '@assets/svg/navbar_logo_small.svg';
 import LogoMedium from '@assets/svg/navbar_logo_medium.svg';
+import { PATH } from "src/constants/path.ts"
+import {useNavigate} from "react-router-dom";
+
 
 const Logo = () => {
+    const navigate = useNavigate();
+    const handleClickLogo = ()=>{
+        navigate(PATH.ROOT);
+    }
   return (
-    <div>
+    <div onClick={handleClickLogo}>
       <img
         className='block sm:hidden w-[100px]'
         src={LogoMedium}
