@@ -8,7 +8,7 @@ const ContactUsList = () => {
         <div>
           <FirstLetterPointText text={'Kakao Talk 채널'} />
           <p className='text-xl font-medium text-gray-500'>
-            http://pf.kakao.com/_xgxaSLd
+            pf.kakao.com/_xgxaSLd
           </p>
         </div>
         <a
@@ -24,11 +24,11 @@ const ContactUsList = () => {
         <div>
           <FirstLetterPointText text={'Instagram'} />
           <p className='text-xl font-medium text-gray-500'>
-            https://www.instagram.com/inuappcen
+            instagram.com/inuappcenter
           </p>
         </div>
         <a
-            href={'https://www.instagram.com/inuappcen'}
+            href={'https://www.instagram.com/inuappcenter'}
             target='_blank'
             rel='noopener noreferrer'
             className='flex items-center justify-center p-3 bg-amber-300 rounded-full w-12 h-12 hover:bg-secondary-400 transition'
