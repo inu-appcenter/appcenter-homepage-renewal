@@ -16,9 +16,9 @@ const StaticBoxList = () => {
   return (
     <div className='grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-4'>
       <StaticBox label='창립된지' accent={`${dayjs().year() - 2009 + 1}년`} />
-      <StaticBox label='누적 멤버 수' accent='150+' />
-      <StaticBox label='현재 활성화된 서비스' accent='10+' />
-      <StaticBox label='전공취업 동아리 수상' accent='2년 연속' />
+      <StaticBox label='누적 멤버 수' accent='250+' />
+      <StaticBox label='출시한 서비스 수' accent='15+' />
+      <StaticBox label='전공취업 동아리 수상' accent='3년 연속' />
     </div>
   );
 };
