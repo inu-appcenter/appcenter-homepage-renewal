@@ -10,6 +10,11 @@ import SpeechBubble from '@components/common/SpeechBubble.tsx';
 import { Image } from '@chakra-ui/react';
 
 const teamEmojiObject = {
+  [PART.common.value]: {
+    part: PART.common.value,
+    description: '안녕하세요! 앱센터입니다.',
+    emoji: webEmoji,
+  },
   [PART.android.value]: {
     part: PART.android.value,
     description: '안녕하세요! 안드로이드 파트입니다.',

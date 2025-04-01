@@ -1,4 +1,5 @@
-import { PART } from '@constants/common.ts';
+// 주석: Our Team에서 Common 제거
+// import { PART } from '@constants/common.ts';
 import { Params, redirect } from 'react-router-dom';
 import { PATH } from '@constants/path.ts';
 import { PartParam } from '@type/common.ts';
@@ -12,7 +13,7 @@ const teamPageLoader = ({
   params: Params;
 }) => {
   const { part } = params as PartParam;
-  const teamList = Object.keys(PART).filter((part) => part !== 'common');
+  // const teamList = Object.keys(PART).filter((part) => part !== 'common');
 
   const { searchParams } = new URL(url);
   const currentGeneration = searchParams.get('year');
@@ -20,7 +21,7 @@ const teamPageLoader = ({
   if (!currentGeneration)
     return redirect(`${PATH.TEAM(part)}?year=${getCurrentGeneration()}`);
 
-  if (!teamList.includes(part)) return redirect(PATH.HOME());
+  // if (!teamList.includes(part)) return redirect(PATH.HOME());
   return null;
 };
 

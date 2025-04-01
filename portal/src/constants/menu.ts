@@ -21,9 +21,13 @@ export const MENU = [
     ],
   },
   {
-    path: PATH.TEAM(PART.android.value),
+    path: PATH.TEAM(PART.common.value),
     label: 'Our Team',
     children: [
+      {
+        path: PATH.TEAM(PART.common.value),
+        label: PART.common.label,
+      },
       {
         path: PATH.TEAM(PART.android.value),
         label: PART.android.label,

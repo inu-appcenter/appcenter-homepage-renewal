@@ -3,6 +3,11 @@ import { PATH } from '@constants/path.ts';
 
 export const ourTeamList = [
   {
+    label: PART.common.label,
+    description: '앱센터 운영진을 소개합니다',
+    path: PATH.TEAM(PART.common.value),
+  },
+  {
     label: PART.android.label,
     description: '안드로이드 운영체제에서 작동하는 앱을 구현합니다',
     path: PATH.TEAM(PART.android.value),
