@@ -23,10 +23,14 @@ const Nav = () => {
           <Link to={path}>{label}</Link>
           {children && (
             <ul
-              className={`z-10 absolute top-full left-1/2 transform -translate-x-1/2 p-4 flex flex-col gap-y-3 rounded-2xl  ${
-                pathname !== PATH.HOME() ? 'bg-primary-700' : ''
-              } pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity duration-150`}
+              className={`z-10 absolute top-full left-1/2 transform -translate-x-1/2 p-4 flex flex-col gap-y-3 rounded-2xl
+    ${pathname !== PATH.HOME() ? 'bg-blue-900' : 'bg-blue-800'}  /* 파란 계열 + 글씨 대비 */
+    shadow-lg
+    pointer-events-none group-hover:pointer-events-auto
+    opacity-0 group-hover:opacity-100 transition-opacity duration-150`}
             >
+
+
               {children.map(({ path, label }) => (
                 <li
                   key={path}

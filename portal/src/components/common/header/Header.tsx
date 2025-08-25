@@ -16,7 +16,7 @@ const Header = () => {
       <div className={containerClassName}>
         <CommonHeader />
         {pathname === PATH.HOME() && (
-          <div className='flex w-full h-2/3 px-32  justify-center items-center'>
+          <div className='flex w-full h-fit px-32  justify-center items-center'>
             <Slogan />
           </div>
         )}
