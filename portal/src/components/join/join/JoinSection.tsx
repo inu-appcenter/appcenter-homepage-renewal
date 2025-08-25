@@ -2,7 +2,6 @@ import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
 import SectionTitle from '@components/join/SectionTitle.tsx';
 import PaperPlain from '@assets/svg/paper-plane.svg';
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
 
 const joinStep = [
   {
