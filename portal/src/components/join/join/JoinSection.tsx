@@ -63,10 +63,17 @@ const JoinSection = () => {
         />
       </div>
 
-        <ApplyButton onClick={()=>{
-          window.open('https://forms.gle/wW6DPxgKAGB1FX676', '_blank')
-        }}>지원하러 가기<img src={PaperPlain} alt='앱센터 지원 공고 링크' width={20} />
-        </ApplyButton>
+      <ApplyButton
+        onClick={() => {
+          setTimeout(() => {
+            window.open('https://forms.gle/wW6DPxgKAGB1FX676', '_blank');
+          }, 400);
+        }}
+      >
+        지원하러 가기
+        <img src={PaperPlain} alt="앱센터 지원 공고 링크" width={20} />
+      </ApplyButton>
+
       폼 작성을 위해 Google 계정 로그인이 필요합니다.
     </SectionLayout>
   );
