@@ -43,7 +43,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <p className="font-semibold text-3xl">{title}</p>
                 <p className="text-grayscale-600">{subTitle}</p>
               </div>
-              <p>{body}</p>
+              <p className="whitespace-pre-line">{body}</p>
             </div>
             <div className="flex gap-4 flex-wrap">
               {Object.values(images)
