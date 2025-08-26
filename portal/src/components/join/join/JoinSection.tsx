@@ -1,7 +1,8 @@
 import SectionLayout from '@components/common/layouts/SectionLayout.tsx';
 import SectionTitle from '@components/join/SectionTitle.tsx';
 import PaperPlain from '@assets/svg/paper-plane.svg';
-import styled from "styled-components";
+import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
 
 const joinStep = [
   {
@@ -23,6 +24,12 @@ const joinStep = [
 ];
 
 const JoinSection = () => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    if (iframeRef.current) {
+      console.log("iframe 로드됨:", iframeRef.current.src);
+    }
+  }, []);
   return (
     <SectionLayout className='md:h-auto gap-y-8 items-center'>
       <SectionTitle title='앱센터 지원' className='flex justify-center' />
@@ -47,8 +54,17 @@ const JoinSection = () => {
       {/*  <img src={PaperPlain} alt='앱센터 지원 공고 링크' width={20} />*/}
       {/*</a>*/}
 
+      <div style={{ width: "100%", height: "600px", border: "2px solid #1773e0", borderRadius: "12px", overflow: "hidden" }}>
+        <iframe
+          ref={iframeRef}
+          src="https://join.inuappcenter.kr"
+          title="신입멤머 모집 공고"
+          style={{ width: "100%", height: "100%", border: "none" }}
+        />
+      </div>
+
         <ApplyButton onClick={()=>{
-          window.open('https://join.inuappcenter.kr', '_blank')
+          window.open('https://forms.gle/wW6DPxgKAGB1FX676', '_blank')
         }}>지원하러 가기<img src={PaperPlain} alt='앱센터 지원 공고 링크' width={20} />
         </ApplyButton>
     </SectionLayout>
