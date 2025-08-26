@@ -9,7 +9,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = ({
   children,
 }) => {
   return (
-    <div className={'relative flex flex-col p-8 ' + className}>{children}</div>
+    <div className={'relative flex flex-col p-4 ' + className}>{children}</div>
   );
 };
 
