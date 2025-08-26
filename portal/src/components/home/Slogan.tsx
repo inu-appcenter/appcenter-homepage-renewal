@@ -22,7 +22,9 @@ const Slogan = () => {
       <RecruitBox>
         <RecruitTitle>17.5기 모집 중!</RecruitTitle>
         <ApplyButton onClick={()=>{
-          navigate("/join");
+          setTimeout(() => {
+            navigate("/join");
+          }, 400);
         }}>지원하러 가기<img src={PaperPlain} alt='앱센터 지원 공고 링크' width={20} />
         </ApplyButton>
       </RecruitBox>
