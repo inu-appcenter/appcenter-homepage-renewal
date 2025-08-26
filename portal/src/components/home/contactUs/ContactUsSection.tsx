@@ -6,8 +6,8 @@ import ContactUsList from '@components/home/contactUs/ContactUsLitst.tsx';
 const ContactUsSection = () => {
   return (
     <>
-      <SectionLayout className='justify-between mb-60'>
-        <div className='flex flex-col gap-8'>
+      <SectionLayout className='justify-between mb-20'>
+        <div className='flex flex-col'>
           <Title title='CONTACT US' />
           <ContactUsList />
         </div>

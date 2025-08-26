@@ -7,7 +7,7 @@ const OurTeamSection = () => {
     <SectionLayout className='justify-center min-h-svh'>
       <Title
         title='OUR TEAM'
-        subtitle='다른 분야가 모여 하나의 목표를 향해 나아갑니다.'
+        subtitle='여러 분야가 모여 하나의 목표를 향해 나아갑니다.'
       />
       <OurTeamList />
     </SectionLayout>
